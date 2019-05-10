@@ -74,7 +74,7 @@
       </div>
 
       <!--Extra Data-->
-      <q-tabs align="justify" class="q-mt-lg shadow-1">
+      <q-tabs align="justify" class="q-mt-lg shadow-1" v-if="locale.success">
         <!-- Tabs titles-->
         <q-tab default slot="title" name="data" label="Data"/>
         <q-tab slot="title" name="links" label="Links"/>
@@ -108,6 +108,18 @@
               <q-input v-model="locale.formTemplate.price" stack-label="Price"/>
               <!--availability date-->
               <q-datetime v-model="locale.formTemplate.dateAvailable" stack-label="Availability Date"/>
+              <!--weight-->
+              <q-input v-model="locale.formTemplate.weight" stack-label="Weight"/>
+              <!--length-->
+              <q-input v-model="locale.formTemplate.length" stack-label="Length"/>
+              <!--width-->
+              <q-input v-model="locale.formTemplate.width" stack-label="Width"/>
+              <!--height-->
+              <q-input v-model="locale.formTemplate.height" stack-label="Height"/>
+              <!--minimum-->
+              <q-input v-model="locale.formTemplate.minimum" stack-label="Minimum Order"/>
+              <!--reference-->
+              <q-input v-model="locale.formTemplate.reference" stack-label="Reference"/>
             </div>
             <!--Right-->
             <div class="col-12 col-md-6"></div>
@@ -293,7 +305,7 @@
       padding 15px
       min-height 160px
 
-    .q-input, .q-select
+    .q-input, .q-select, .q-datetime-input
       padding-bottom 0px
 
       &:before
@@ -324,6 +336,18 @@
         height 36px
         padding 5px 3px
         line-height 1.8
+
+    .q-select, .q-datetime-input
+      .q-if-inner
+        border-right 0px
+      .q-icon
+        border 1px solid $grey-4
+        border-left  0px
+        height 36px
+        padding 5px 3px
+        margin 0px
+      .q-input-target
+        padding-left 4px
 
     .q-btn
       box-shadow none
