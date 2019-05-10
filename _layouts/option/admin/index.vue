@@ -91,7 +91,7 @@
 	//Services
 	import commerceServices from '@imagina/qcommerce/_services/index';
 	//Component
-	import formOption from '@imagina/qcommerce/_components/formOption'
+	import formOption from '@imagina/qcommerce/_components/option/admin/form'
 
 	export default {
 		components: {

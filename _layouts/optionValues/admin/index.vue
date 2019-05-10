@@ -105,7 +105,7 @@
   //Services
   import commerceServices from '@imagina/qcommerce/_services/index';
   //Component
-  import formOptionValue from '@imagina/qcommerce/_components/formOptionValue'
+  import formOptionValue from '@imagina/qcommerce/_components/optionValues/admin/form'
   import Treeselect from '@riophae/vue-treeselect'
   import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
