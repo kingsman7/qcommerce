@@ -200,7 +200,7 @@
       //Get data category to update
       getDataItem() {
         return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.ecommerce.productCategories'
+          let configName = 'apiRoutes.ecommerce.categories'
           let params = {//Params to request
             refresh: true,
             params: {include: 'parent', filter: {allTranslations: true}}
@@ -218,7 +218,7 @@
       //Get product categories
       getCategories() {
         return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.ecommerce.productCategories'
+          let configName = 'apiRoutes.ecommerce.categories'
           let params = {//Params to request
             refresh: true,
             params: {include: 'parent', filter: {allTranslations: true}},
@@ -239,7 +239,7 @@
         //Check validations
         if (!this.$v.$error) {
           this.loading = true
-          let configName = 'apiRoutes.ecommerce.productCategories'
+          let configName = 'apiRoutes.ecommerce.categories'
           commerceServices.crud.create(configName, this.locale.form).then(response => {
             this.$helper.alert.success('Category created ID: ' + response.data.id)
             this.initForm()
@@ -258,7 +258,7 @@
         //Check validations
         if (!this.$v.$error) {
           this.loading = true
-          let configname = 'apiRoutes.ecommerce.productCategories'
+          let configname = 'apiRoutes.ecommerce.categories'
           commerceServices.crud.update(configname, this.itemId, this.locale.form).then(response => {
             this.$helper.alert.success('Category updated ID: ' + this.itemId)
             this.initForm()

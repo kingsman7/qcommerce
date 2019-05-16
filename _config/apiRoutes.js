@@ -6,7 +6,9 @@ const urlBase = baseApiUrl + '/' + moduleName + '/' + moduleVersion
 export default {
 	version: moduleVersion,
 	products : urlBase + '/products',
-	productOptions : urlBase + '/options',
-	productOptionsValues : urlBase + '/option-values',
-	productCategories : urlBase + '/categories',
+	productOptions : urlBase + '/product-option',
+	productOptionValues : urlBase + '/product-option-values',
+	options : urlBase + '/options',
+	optionValues : urlBase + '/option-values',
+	categories : urlBase + '/categories',
 }

@@ -1,0 +1,19 @@
+{
+  "name": "@imagina/qcommerce",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imagina/qcommerce.git"
+  },
+  "author": "Imagina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imagina/qcommerce/issues"
+  },
+  "homepage": "https://github.com/imagina/qcommerce#readme"
+}

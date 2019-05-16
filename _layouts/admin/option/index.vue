@@ -91,7 +91,7 @@
 	//Services
 	import commerceServices from '@imagina/qcommerce/_services/index';
 	//Component
-	import formOption from '@imagina/qcommerce/_components/option/admin/form'
+	import formOption from '@imagina/qcommerce/_components/admin/option/form'
 
 	export default {
 		components: {
@@ -152,7 +152,7 @@
 				}
 
 				//Request
-				commerceServices.crud.index('apiRoutes.ecommerce.productOptions', params).then(response => {
+				commerceServices.crud.index('apiRoutes.ecommerce.options', params).then(response => {
 					this.table.data = response.data
 					this.table.pagination.page = response.meta.page.currentPage
 					this.table.pagination.rowsNumber = response.meta.page.total
@@ -167,7 +167,7 @@
 			deleteItem() {
 				this.loading = true
 				let idCategory = this.itemIdToDelete.id
-				commerceServices.crud.delete('apiRoutes.ecommerce.productOptions', idCategory).then(response => {
+				commerceServices.crud.delete('apiRoutes.ecommerce.options', idCategory).then(response => {
 					this.getDataTable(true)
 					this.$helper.alert.success('Option deleted')
 					this.dialogDeleteItem = false

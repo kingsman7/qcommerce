@@ -48,7 +48,7 @@
             <div class="input-title">Image</div>
             <upload-img
               v-model="locale.formTemplate.mediasSingle"
-              entity="Modules\Icommerce\Entities\Category"
+              entity="Modules\Icommerce\Entities\OptionValue"
               button-label="Choose File"
               :entity-id="itemId ? itemId : null"
               zone='mainimage'
@@ -164,7 +164,7 @@
       //Get data category to update
       getDataItem() {
         return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.ecommerce.productOptionsValues'
+          let configName = 'apiRoutes.ecommerce.optionValues'
           let params = {//Params to request
             refresh: true,
             params: {filter: {allTranslations: true}}
@@ -185,7 +185,7 @@
         //Check validations
         if (!this.$v.$error) {
           this.loading = true
-          let configName = 'apiRoutes.ecommerce.productOptionsValues'
+          let configName = 'apiRoutes.ecommerce.optionValues'
           commerceServices.crud.create(configName, this.locale.form).then(response => {
             this.$helper.alert.success('Value created ID: ' + response.data.id)
             this.initForm()
@@ -204,7 +204,7 @@
         //Check validations
         if (!this.$v.$error) {
           this.loading = true
-          let configname = 'apiRoutes.ecommerce.productOptionsValues'
+          let configname = 'apiRoutes.ecommerce.optionValues'
           commerceServices.crud.update(configname, this.itemId, this.locale.form).then(response => {
             this.$helper.alert.success('Value updated ID: ' + this.itemId)
             this.initForm()

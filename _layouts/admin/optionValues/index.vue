@@ -105,7 +105,7 @@
   //Services
   import commerceServices from '@imagina/qcommerce/_services/index';
   //Component
-  import formOptionValue from '@imagina/qcommerce/_components/optionValues/admin/form'
+  import formOptionValue from '@imagina/qcommerce/_components/admin/optionValues/form'
   import Treeselect from '@riophae/vue-treeselect'
   import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
@@ -174,7 +174,7 @@
           params.params.filter.optionId = this.optionId
 
           //Request
-          commerceServices.crud.index('apiRoutes.ecommerce.productOptionsValues', params).then(response => {
+          commerceServices.crud.index('apiRoutes.ecommerce.optionValues', params).then(response => {
             this.table.data = response.data
             this.table.pagination.page = response.meta.page.currentPage
             this.table.pagination.rowsNumber = response.meta.page.total
@@ -189,7 +189,7 @@
       //Get all options
       getOptions() {
         return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.ecommerce.productOptions'
+          let configName = 'apiRoutes.ecommerce.options'
           let params = {//Params to request
             refresh: true,
             params: {filter: {type: ['select', 'radio', 'checkbox']}},
@@ -214,7 +214,7 @@
       deleteItem() {
         this.loading = true
         let idCategory = this.itemIdToDelete.id
-        commerceServices.crud.delete('apiRoutes.ecommerce.productOptionsValues', idCategory).then(response => {
+        commerceServices.crud.delete('apiRoutes.ecommerce.optionValues', idCategory).then(response => {
           this.getDataTable(true)
           this.$helper.alert.success('Option deleted')
           this.dialogDeleteItem = false

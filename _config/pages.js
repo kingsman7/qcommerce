@@ -14,7 +14,7 @@ export default {
 		activated: true,
 		path: '/ecommerce/products',
 		name: 'ecommerce.products.index',
-		layout: require('@imagina/qcommerce/_layouts/products/admin/index').default,
+		layout: require('@imagina/qcommerce/_layouts/admin/products/index').default,
 		containerLayout: master,
 		title: 'Product List',
 		icon: 'fas fa-boxes',
@@ -26,9 +26,21 @@ export default {
 		activated: true,
 		path: '/ecommerce/products/create',
 		name: 'ecommerce.products.create',
-		layout: require('@imagina/qcommerce/_layouts/products/admin/form').default,
+		layout: require('@imagina/qcommerce/_layouts/admin/products/form').default,
 		containerLayout: master,
 		title: 'Product Create',
+		icon: 'fas fa-boxes',
+		middleware: [auth]
+	},
+	//Product Update
+	productEdit: {
+		permission: null,
+		activated: true,
+		path: '/ecommerce/products/:id',
+		name: 'ecommerce.products.edit',
+		layout: require('@imagina/qcommerce/_layouts/admin/products/form').default,
+		containerLayout: master,
+		title: 'Product Edit',
 		icon: 'fas fa-boxes',
 		middleware: [auth]
 	},
@@ -38,30 +50,30 @@ export default {
 		activated: true,
 		path: '/ecommerce/product-categories',
 		name: 'ecommerce.categories.index',
-		layout: require('@imagina/qcommerce/_layouts/category/admin/index').default,
+		layout: require('@imagina/qcommerce/_layouts/admin/category/index').default,
 		containerLayout: master,
 		title: 'Product Categories',
 		icon: 'fas fa-layer-group'
 	},
 	//Product options
-	productOptions: {
+	options: {
 		permission: null,
 		activated: true,
 		path: '/ecommerce/product-options',
-		name: 'ecommerce.products.options.index',
-		layout: require('@imagina/qcommerce/_layouts/option/admin/index').default,
+		name: 'ecommerce.options.index',
+		layout: require('@imagina/qcommerce/_layouts/admin/option/index').default,
 		containerLayout: master,
 		title: 'Product Options',
 		icon: 'fas fa-cogs',
 		middleware: [auth]
 	},
 	//Product options values
-	productOptionsValues: {
+	optionValues: {
 		permission: null,
 		activated: true,
 		path: '/ecommerce/product-options-values',
-		name: 'ecommerce.products.options.values.index',
-		layout: require('@imagina/qcommerce/_layouts/optionValues/admin/index').default,
+		name: 'ecommerce.options.values.index',
+		layout: require('@imagina/qcommerce/_layouts/admin/optionValues/index').default,
 		containerLayout: master,
 		title: 'Options Values',
 		icon: 'fas fa-stream',

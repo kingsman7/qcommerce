@@ -89,12 +89,12 @@
           <q-td slot="body-cell-actions" slot-scope="props" :props="props">
             <!--Edit button-->
             <q-btn color="primary" icon="fas fa-pen" size="sm"
-                   :to="'/product/'+props.row.id+'/edit'">
+                   :to="{name : 'ecommerce.products.edit' , params : {id : props.row.id}}">
               <q-tooltip :delay="300">Edit</q-tooltip>
             </q-btn>
             <!--Delete button-->
             <q-btn color="negative" icon="fas fa-trash-alt" size="sm"
-                   :to="'/product/'+props.row.id+'/edit'" class="q-ml-xs">
+                   @click="deleteItem(props.row.id)" class="q-ml-xs">
               <q-tooltip :delay="300">Delete</q-tooltip>
             </q-btn>
           </q-td>
@@ -141,8 +141,14 @@
               name: 'category', label: 'Category', field: 'category', align: 'left',
               format: val => (val && val.title) ? val.title : ''
             },
-            {name: 'status', label: 'Status', field: 'status', align: 'left'},
-            {name: 'Stock', label: 'Stock', field: 'stockStatus', align: 'left'},
+            {
+              name: 'status', label: 'Status', field: 'status', align: 'left',
+              format: val => val ? 'Enabled' : 'Disabled'
+            },
+            {
+              name: 'Stock', label: 'Stock', field: 'stockStatus', align: 'left',
+              format : val => val ? 'In Stock' : 'Out Stock'
+            },
             {name: 'slug', label: 'Slug', field: 'slug', align: 'left'},
             {
               name: 'price', label: 'Price', field: 'price', align: 'left',
@@ -195,7 +201,7 @@
           refresh: refresh,
           params: {
             include: 'category',
-            filter: Object.assign({},this.table.filter,this.table.filters),
+            filter: Object.assign({}, this.table.filter, this.table.filters),
             page: pagination.page,
             take: pagination.rowsPerPage,
           }
@@ -216,7 +222,7 @@
       //Get product categories
       getCategories() {
         return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.ecommerce.productCategories'
+          let configName = 'apiRoutes.ecommerce.categories'
           let params = {//Params to request
             refresh: true,
             params: {include: 'parent'},
@@ -225,7 +231,7 @@
           commerceServices.crud.index(configName, params).then(response => {
             this.table.options.categories = []
             let categories = this.$helper.array.tree(response.data)
-            categories.unshift({label: 'All Categories', id : 0})
+            categories.unshift({label: 'All Categories', id: 0})
             this.table.options.categories = categories
             resolve(true)
           }).catch(error => {
@@ -234,6 +240,19 @@
           })
         })
       },
+      //Delete Product
+      deleteItem(id) {
+        this.loading = true
+        let configName = 'apiRoutes.ecommerce.products'
+        commerceServices.crud.delete(configName, id, {params: {}}).then(response => {
+          this.$helper.alert.success('Product deleted')
+          this.getDataTable(true)
+          this.loading = false
+        }).catch(error => {
+          this.$helper.alert.error('Failed: ' + error)
+          this.loading = false
+        })
+      }
     }
   }
 </script>
