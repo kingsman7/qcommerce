@@ -28,6 +28,7 @@
 					<template slot="top-right" slot-scope="props">
 						<!--Button new record-->
 						<q-btn icon="fas fa-edit" color="primary" label="New Option"
+									 v-if="$auth.hasAccess('icommerce.options.create')"
 									 @click="formItemShow = true; itemIdToEdit = false"/>
 						<!--Button refresh data-->
 						<q-btn icon="fas fa-sync-alt" color="primary" class="q-ml-xs"
@@ -40,11 +41,13 @@
 					<q-td slot="body-cell-actions" slot-scope="props" :props="props">
 						<!--Edit button-->
 						<q-btn color="primary" icon="fas fa-pen" size="sm"
+									 v-if="$auth.hasAccess('icommerce.options.edit')"
 									 @click="itemIdToEdit = props.row.id; formItemShow = true">
 							<q-tooltip :delay="300">Edit</q-tooltip>
 						</q-btn>
 						<!--Delete button-->
 						<q-btn color="negative" icon="fas fa-trash-alt" size="sm" class="q-ml-xs"
+									 v-if="$auth.hasAccess('icommerce.options.destroy')"
 									 @click="itemIdToDelete = props.row; dialogDeleteItem = true">
 							<q-tooltip :delay="300">Delete</q-tooltip>
 						</q-btn>
@@ -152,7 +155,7 @@
 				}
 
 				//Request
-				commerceServices.crud.index('apiRoutes.ecommerce.options', params).then(response => {
+				commerceServices.crud.index('apiRoutes.eCommerce.options', params).then(response => {
 					this.table.data = response.data
 					this.table.pagination.page = response.meta.page.currentPage
 					this.table.pagination.rowsNumber = response.meta.page.total
@@ -167,7 +170,7 @@
 			deleteItem() {
 				this.loading = true
 				let idCategory = this.itemIdToDelete.id
-				commerceServices.crud.delete('apiRoutes.ecommerce.options', idCategory).then(response => {
+				commerceServices.crud.delete('apiRoutes.eCommerce.options', idCategory).then(response => {
 					this.getDataTable(true)
 					this.$helper.alert.success('Option deleted')
 					this.dialogDeleteItem = false

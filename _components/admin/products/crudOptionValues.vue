@@ -330,7 +330,7 @@
       //Get data
       getData() {
         return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.ecommerce.productOptionValues'
+          let configName = 'apiRoutes.eCommerce.productOptionValues'
           let params = {
             remember: false,
             params: {include: '', filter: {productOptionId: this.productOption.id}}
@@ -351,7 +351,7 @@
         //Check validations
         if (!this.$v.form.$error) {
           this.loading = true
-          let configName = 'apiRoutes.ecommerce.productOptionValues'
+          let configName = 'apiRoutes.eCommerce.productOptionValues'
           commerceServices.crud.create(configName, this.form).then(response => {
             this.$helper.alert.success('Product Option Value created ID: ' + response.data.id)
             this.initForm()
@@ -368,7 +368,7 @@
         //Check validations
         if (!this.$v.$error) {
           this.loading = true
-          let configname = 'apiRoutes.ecommerce.productOptionValues'
+          let configname = 'apiRoutes.eCommerce.productOptionValues'
           commerceServices.crud.update(configname, this.modal.itemId, this.form).then(response => {
             this.$helper.alert.success('Product Option Value updated ID: ' + this.itemId)
             this.initForm()
@@ -382,7 +382,7 @@
       //Delete Item
       deleteItem(itemId) {
         this.loading = true
-        let configName = 'apiRoutes.ecommerce.productOptionValues'
+        let configName = 'apiRoutes.eCommerce.productOptionValues'
         commerceServices.crud.delete(configName, itemId).then(response => {
           this.$helper.alert.success('Product Option Value deleted ID: ' + response.data.id)
           this.initForm()
@@ -402,7 +402,7 @@
       //Get option values
       getOptionValues(optionId, itemName = 'values') {
         return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.ecommerce.optionValues'
+          let configName = 'apiRoutes.eCommerce.optionValues'
           let params = {params: {filter: {optionId: optionId}}}
           commerceServices.crud.index(configName, params).then(response => {
             this.options[itemName] = []

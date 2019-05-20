@@ -3,7 +3,7 @@
   <q-modal id="formOptionValues" v-model="show" v-if="show" no-esc-dismiss no-backdrop-dismiss>
     <q-modal-layout style="max-width: 1245px">
       <!--Header-->
-      <q-toolbar slot="header">
+      <q-toolbar slot="header" color="primary">
         <q-toolbar-title v-if="!itemId">New Value</q-toolbar-title>
         <q-toolbar-title v-else>Update Value ID: {{itemId}}</q-toolbar-title>
         <q-btn flat v-close-overlay icon="fas fa-times"/>
@@ -164,7 +164,7 @@
       //Get data category to update
       getDataItem() {
         return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.ecommerce.optionValues'
+          let configName = 'apiRoutes.eCommerce.optionValues'
           let params = {//Params to request
             refresh: true,
             params: {filter: {allTranslations: true}}
@@ -185,7 +185,7 @@
         //Check validations
         if (!this.$v.$error) {
           this.loading = true
-          let configName = 'apiRoutes.ecommerce.optionValues'
+          let configName = 'apiRoutes.eCommerce.optionValues'
           commerceServices.crud.create(configName, this.locale.form).then(response => {
             this.$helper.alert.success('Value created ID: ' + response.data.id)
             this.initForm()
@@ -204,7 +204,7 @@
         //Check validations
         if (!this.$v.$error) {
           this.loading = true
-          let configname = 'apiRoutes.ecommerce.optionValues'
+          let configname = 'apiRoutes.eCommerce.optionValues'
           commerceServices.crud.update(configname, this.itemId, this.locale.form).then(response => {
             this.$helper.alert.success('Value updated ID: ' + this.itemId)
             this.initForm()

@@ -33,6 +33,7 @@
               <div class="col-12 col-md-6 q-mt-sm text-right">
                 <!--Button new record-->
                 <q-btn icon="fas fa-edit" color="primary" label="New Product"
+                       v-if="$auth.hasAccess('icommerce.products.create')"
                        :to="{name: 'ecommerce.products.create'}"/>
                 <!--Button refresh data-->
                 <q-btn icon="fas fa-sync-alt" color="primary" class="q-ml-xs"
@@ -89,11 +90,13 @@
           <q-td slot="body-cell-actions" slot-scope="props" :props="props">
             <!--Edit button-->
             <q-btn color="primary" icon="fas fa-pen" size="sm"
+                   v-if="$auth.hasAccess('icommerce.products.edit')"
                    :to="{name : 'ecommerce.products.edit' , params : {id : props.row.id}}">
               <q-tooltip :delay="300">Edit</q-tooltip>
             </q-btn>
             <!--Delete button-->
             <q-btn color="negative" icon="fas fa-trash-alt" size="sm"
+                   v-if="$auth.hasAccess('icommerce.products.destroy')"
                    @click="deleteItem(props.row.id)" class="q-ml-xs">
               <q-tooltip :delay="300">Delete</q-tooltip>
             </q-btn>
@@ -208,7 +211,7 @@
         }
 
         //Request
-        commerceServices.crud.index('apiRoutes.ecommerce.products', params).then(response => {
+        commerceServices.crud.index('apiRoutes.eCommerce.products', params).then(response => {
           this.table.data = response.data
           this.table.pagination.page = response.meta.page.currentPage
           this.table.pagination.rowsNumber = response.meta.page.total
@@ -222,7 +225,7 @@
       //Get product categories
       getCategories() {
         return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.ecommerce.categories'
+          let configName = 'apiRoutes.eCommerce.categories'
           let params = {//Params to request
             refresh: true,
             params: {include: 'parent'},
@@ -243,7 +246,7 @@
       //Delete Product
       deleteItem(id) {
         this.loading = true
-        let configName = 'apiRoutes.ecommerce.products'
+        let configName = 'apiRoutes.eCommerce.products'
         commerceServices.crud.delete(configName, id, {params: {}}).then(response => {
           this.$helper.alert.success('Product deleted')
           this.getDataTable(true)

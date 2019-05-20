@@ -143,7 +143,7 @@
       //Get Data from product
       getData() {
         this.loading = true
-        let configName = 'apiRoutes.ecommerce.products'
+        let configName = 'apiRoutes.eCommerce.products'
         let params = {remember: false, params: {include: 'productOptions', fields: 'id'}}
         commerceServices.crud.show(configName, this.productId, params).then(response => {
           this.productOptions = _cloneDeep(response.data.productOptions)//Set product Options
@@ -157,7 +157,7 @@
       //Get option values
       getOptionValues(optionId, itemName = 'values') {
         this.loading = true
-        let configName = 'apiRoutes.ecommerce.optionValues'
+        let configName = 'apiRoutes.eCommerce.optionValues'
         let params = {params: {filter: {optionId: optionId}}}
         commerceServices.crud.index(configName, params).then(response => {
           this.template[itemName] = []//Reset options of template
@@ -174,7 +174,7 @@
       createProductOption() {
         if (this.template.optionSelected) {
           this.loading = true
-          let configName = 'apiRoutes.ecommerce.productOptions'
+          let configName = 'apiRoutes.eCommerce.productOptions'
           let dataOption = {//Data to create option
             productId: this.productId,
             optionId: this.template.optionSelected.toString()
@@ -193,7 +193,7 @@
       //Update Product Option
       updateProductOption() {
         this.loading = true
-        let configName = 'apiRoutes.ecommerce.productOptions'//Config Name
+        let configName = 'apiRoutes.eCommerce.productOptions'//Config Name
         let form = _cloneDeep(this.template.form)//Get form
         if (!form.parentId) form.parentId = null//Set null as default parent
         if (!form.parentOptionValueId) form.parentOptionValueId = null//Set null as default parent option
@@ -221,7 +221,7 @@
             cancel: true
           }).then(response => {//If comfirn delete action
             this.loading = true
-            let configName = 'apiRoutes.ecommerce.productOptions'
+            let configName = 'apiRoutes.eCommerce.productOptions'
             //Request
             commerceServices.crud.delete(configName, optionId, {params: {}}).then(response => {
               this.template.currentOption = null//Set null current option
@@ -318,7 +318,7 @@
       //Search options to select
       searchOptions({action, searchQuery, callback}) {
         if (action === 'ASYNC_SEARCH') {
-          let configName = 'apiRoutes.ecommerce.options'
+          let configName = 'apiRoutes.eCommerce.options'
           let params = {params: {filter: {search: searchQuery}}}//Params
           //Request
           commerceServices.crud.index(configName, params).then(response => {

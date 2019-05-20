@@ -10,7 +10,7 @@ import access from '@imagina/quser/_router/middlewares/access'
 export default {
 	//Product List
 	products: {
-		permission: null,
+		permission: 'icommerce.products.index',
 		activated: true,
 		path: '/ecommerce/products',
 		name: 'ecommerce.products.index',
@@ -22,7 +22,7 @@ export default {
 	},
 	//Product Create
 	productCreate: {
-		permission: null,
+		permission: 'icommerce.products.create',
 		activated: true,
 		path: '/ecommerce/products/create',
 		name: 'ecommerce.products.create',
@@ -34,7 +34,7 @@ export default {
 	},
 	//Product Update
 	productEdit: {
-		permission: null,
+		permission: 'icommerce.products.edit',
 		activated: true,
 		path: '/ecommerce/products/:id',
 		name: 'ecommerce.products.edit',
@@ -46,7 +46,7 @@ export default {
 	},
 	//Categories list
 	categories: {
-		permission: null,
+		permission: 'icommerce.categories.index',
 		activated: true,
 		path: '/ecommerce/product-categories',
 		name: 'ecommerce.categories.index',
@@ -57,7 +57,7 @@ export default {
 	},
 	//Product options
 	options: {
-		permission: null,
+		permission: 'icommerce.options.index',
 		activated: true,
 		path: '/ecommerce/product-options',
 		name: 'ecommerce.options.index',
@@ -69,7 +69,7 @@ export default {
 	},
 	//Product options values
 	optionValues: {
-		permission: null,
+		permission: 'icommerce.optionvalues.index',
 		activated: true,
 		path: '/ecommerce/product-options-values',
 		name: 'ecommerce.options.values.index',

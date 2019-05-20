@@ -420,7 +420,7 @@
       //Get product categories
       getCategories() {
         return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.ecommerce.categories'
+          let configName = 'apiRoutes.eCommerce.categories'
           let params = {//Params to request
             refresh: true,
             params: {include: 'parent'},
@@ -441,7 +441,7 @@
         return new Promise((resolve, reject) => {
           const productId = _cloneDeep(this.productId)
           if (productId) {
-            let configName = 'apiRoutes.ecommerce.products'
+            let configName = 'apiRoutes.eCommerce.products'
             //Params
             let params = {
               params: {
@@ -488,7 +488,7 @@
         //Check validations
         if (!this.$v.$error) {
           this.loading = true
-          let configName = 'apiRoutes.ecommerce.products'
+          let configName = 'apiRoutes.eCommerce.products'
           commerceServices.crud.create(configName, this.getDataForm()).then(response => {
             this.$helper.alert.success('Product created ID: ' + response.data.id)
             this.actionAfterCreated(response.data.id)
@@ -504,7 +504,7 @@
         //Check validations
         if (!this.$v.$error) {
           this.loading = true
-          let configName = 'apiRoutes.ecommerce.products'
+          let configName = 'apiRoutes.eCommerce.products'
           commerceServices.crud.update(configName, this.productId, this.getDataForm()).then(response => {
             this.$helper.alert.success('Product updated ID: ' + response.data)
             this.initForm()
@@ -553,7 +553,7 @@
       //Search products
       searchProducts({action, searchQuery, callback}) {
         if (action === 'ASYNC_SEARCH') {
-          let configName = 'apiRoutes.ecommerce.products'
+          let configName = 'apiRoutes.eCommerce.products'
           let params = {//Params to request
             params: {filter: {search: searchQuery}},
           }

@@ -28,7 +28,8 @@
           <template slot="top-right" slot-scope="props">
             <!--Button new record-->
             <q-btn icon="fas fa-edit" color="primary" label="New Category"
-                   @click="formItemShow = true; itemIdToEdit = false"/>
+                   @click="formItemShow = true; itemIdToEdit = false"
+                   v-if="$auth.hasAccess('icommerce.categories.create')"/>
             <!--Button refresh data-->
             <q-btn icon="fas fa-sync-alt" color="primary" class="q-ml-xs"
                    @click="getDataTable(true)">
@@ -40,11 +41,13 @@
           <q-td slot="body-cell-actions" slot-scope="props" :props="props">
             <!--Edit button-->
             <q-btn color="primary" icon="fas fa-pen" size="sm"
+                   v-if="$auth.hasAccess('icommerce.categories.edit')"
                    @click="itemIdToEdit = props.row.id; formItemShow = true">
               <q-tooltip :delay="300">Edit</q-tooltip>
             </q-btn>
             <!--Delete button-->
             <q-btn color="negative" icon="fas fa-trash-alt" size="sm" class="q-ml-xs"
+                   v-if="$auth.hasAccess('icommerce.categories.destroy')"
                    @click="itemIdToDelete = props.row; dialogDeleteItem = true">
               <q-tooltip :delay="300">Delete</q-tooltip>
             </q-btn>
@@ -78,10 +81,10 @@
       <!--Buttons-->
       <template slot="buttons" slot-scope="props">
         <!--Button cancel-->
-        <q-btn color="negative" label="Cancel" @click="dialogDeleteItem = false" />
+        <q-btn color="negative" label="Cancel" @click="dialogDeleteItem = false"/>
         <!--Button confirm delete category-->
         <q-btn color="primary" icon="fas fa-trash-alt" :loading="loading"
-               label="Delete" @click="deleteItem()" />
+               label="Delete" @click="deleteItem()"/>
       </template>
     </q-dialog>
   </div>
@@ -157,7 +160,7 @@
         }
 
         //Request
-        commerceServices.crud.index('apiRoutes.ecommerce.categories', params).then(response => {
+        commerceServices.crud.index('apiRoutes.eCommerce.categories', params).then(response => {
           this.table.data = response.data
           this.table.pagination.page = response.meta.page.currentPage
           this.table.pagination.rowsNumber = response.meta.page.total
@@ -172,7 +175,7 @@
       deleteItem() {
         this.loading = true
         let idCategory = this.itemIdToDelete.id
-        commerceServices.crud.delete('apiRoutes.ecommerce.categories', idCategory).then(response => {
+        commerceServices.crud.delete('apiRoutes.eCommerce.categories', idCategory).then(response => {
           this.getDataTable(true)
           this.$helper.alert.success('Category deleted')
           this.dialogDeleteItem = false

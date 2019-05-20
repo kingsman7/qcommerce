@@ -165,7 +165,7 @@
       //Get data category to update
       getDataItem() {
         return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.ecommerce.options'
+          let configName = 'apiRoutes.eCommerce.options'
           let params = {//Params to request
             refresh: true,
             params: {filter: {allTranslations: true}}
@@ -186,7 +186,7 @@
         //Check validations
         if (!this.$v.$error) {
           this.loading = true
-          let configName = 'apiRoutes.ecommerce.options'
+          let configName = 'apiRoutes.eCommerce.options'
           commerceServices.crud.create(configName, this.locale.form).then(response => {
             this.$helper.alert.success('Option created ID: ' + response.data.id)
             this.initForm()
@@ -205,7 +205,7 @@
         //Check validations
         if (!this.$v.$error) {
           this.loading = true
-          let configname = 'apiRoutes.ecommerce.options'
+          let configname = 'apiRoutes.eCommerce.options'
           commerceServices.crud.update(configname, this.itemId, this.locale.form).then(response => {
             this.$helper.alert.success('Option updated ID: ' + this.itemId)
             this.initForm()
