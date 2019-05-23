@@ -8,7 +8,7 @@
     </h1>
 
     <!--Content-->
-    <div class="relative-position">
+    <div class="relative-position backend-page">
       <!--Table-->
       <div class="col-12">
         <q-table
@@ -17,7 +17,7 @@
           :pagination.sync="table.pagination"
           @request="getData"
           :filter="table.filter"
-          class="shadow-1"
+          class="shadow-1 border-top-color"
         >
           <!--Table slot left-->
           <template slot="top-left" slot-scope="props">
@@ -40,11 +40,11 @@
               />
             </div>
             <!--Button new record-->
-            <q-btn icon="fas fa-edit" color="primary" label="New Value"
+            <q-btn icon="fas fa-edit" color="positive" label="New Value"
                    v-if="$auth.hasAccess('icommerce.optionvalues.create')"
                    @click="formItemShow = true; itemIdToEdit = false"/>
             <!--Button refresh data-->
-            <q-btn icon="fas fa-sync-alt" color="primary" class="q-ml-xs"
+            <q-btn icon="fas fa-sync-alt" color="info" class="q-ml-xs"
                    @click="getDataTable(true)">
               <q-tooltip :delay="300">Refresh Data</q-tooltip>
             </q-btn>
@@ -53,7 +53,7 @@
           <!--= Custom Columns =-->
           <q-td slot="body-cell-actions" slot-scope="props" :props="props">
             <!--Edit button-->
-            <q-btn color="primary" icon="fas fa-pen" size="sm"
+            <q-btn color="positive" icon="fas fa-pen" size="sm"
                    v-if="$auth.hasAccess('icommerce.optionvalues.edit')"
                    @click="itemIdToEdit = props.row.id; formItemShow = true">
               <q-tooltip :delay="300">Edit</q-tooltip>
@@ -61,7 +61,7 @@
             <!--Delete button-->
             <q-btn color="negative" icon="fas fa-trash-alt" size="sm" class="q-ml-xs"
                    v-if="$auth.hasAccess('icommerce.optionvalues.destroy')"
-                   @click="itemIdToDelete = props.row; dialogDeleteItem = true">
+                   @click="deleteItem(props.row)">
               <q-tooltip :delay="300">Delete</q-tooltip>
             </q-btn>
           </q-td>
@@ -69,12 +69,7 @@
       </div>
 
       <!--Loading-->
-      <q-inner-loading :visible="loading">
-        <div class="q-box-inner-loading">
-          <q-spinner-hourglass size="50px" color="primary"/>
-          <h6 class="q-ma-none text-primary q-title">Loading...</h6>
-        </div>
-      </q-inner-loading>
+      <inner-loading :visible="loading"></inner-loading>
     </div>
 
     <!--Form category (create and/or update)-->
@@ -82,25 +77,6 @@
                        :option-id="optionId" :item-id="itemIdToEdit"
                        @updated="getDataTable(true)">
     </form-option-value>
-
-    <!--Dialog to delete category-->
-    <q-dialog v-model="dialogDeleteItem">
-      <!-- Message -->
-      <span slot="message">
-        <h1 class="q-title text-negative">Delete Category</h1>
-        Are you sure to delete category
-        <span class="text-primary">{{itemIdToDelete.description}}</span>
-      </span>
-
-      <!--Buttons-->
-      <template slot="buttons" slot-scope="props">
-        <!--Button cancel-->
-        <q-btn color="negative" label="Cancel" @click="dialogDeleteItem = false"/>
-        <!--Button confirm delete category-->
-        <q-btn color="primary" icon="fas fa-trash-alt" :loading="loading"
-               label="Delete" @click="deleteItem()"/>
-      </template>
-    </q-dialog>
   </div>
 </template>
 
@@ -111,10 +87,11 @@
   import formOptionValue from '@imagina/qcommerce/_components/admin/optionValues/form'
   import Treeselect from '@riophae/vue-treeselect'
   import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+  import innerLoading from 'src/components/master/innerLoading'
 
   export default {
     components: {
-      formOptionValue,Treeselect
+      formOptionValue,Treeselect,innerLoading
     },
     mounted() {
       this.$nextTick(function () {
@@ -214,18 +191,25 @@
         })
       },
       //Delete category
-      deleteItem() {
-        this.loading = true
-        let idCategory = this.itemIdToDelete.id
-        commerceServices.crud.delete('apiRoutes.eCommerce.optionValues', idCategory).then(response => {
-          this.getDataTable(true)
-          this.$helper.alert.success('Option deleted')
-          this.dialogDeleteItem = false
-          this.loading = false
-        }).catch(error => {
-          this.loading = false
-          this.$helper.alert.error('Failed: ' + error, 'bottom')
-        })
+      deleteItem(item) {
+        this.$q.dialog({
+          title: item.id+' - '+item.description,
+          message: 'Do you want delete this Option Value?',
+          color: 'negative',
+          ok: 'Delete',
+          cancel: true
+        }).then(data => {
+          this.loading = true
+          commerceServices.crud.delete('apiRoutes.eCommerce.optionValues', item.id).then(response => {
+            this.getDataTable(true)
+            this.$helper.alert.success('Option deleted')
+            this.dialogDeleteItem = false
+            this.loading = false
+          }).catch(error => {
+            this.loading = false
+            this.$helper.alert.error('Failed: ' + error, 'bottom')
+          })
+        }).catch(data => {})
       }
     }
   }
@@ -235,64 +219,6 @@
   @import "~variables";
   #productOptionsValuesIndexPage
     .q-table-container
-      border-top 3px solid $primary
-      .q-table-top
-        .q-input, .q-select
-          padding-bottom 0px
-
-          &:before
-            border 1px solid transparent
-
-          .q-if-inner
-            border 1px solid $grey-4
-            padding 5px 0px 5px 6px
-
-            .q-if-label
-              line-height 3 !important
-              color $grey-8
-
-        .q-select
-          .q-if-inner
-            border-right 0px
-          .q-icon
-            border 1px solid $grey-4
-            border-left  0px
-            height 36px
-            padding 5px 3px
-            margin 0px
-          .q-input-target
-            padding-left 4px
-
-
-        .q-search
-          border 1px solid $grey-4
-          padding 6px 9px
-          border-radius 5px
-          .q-if-inner
-            border 0px
-        .cont-vue-tree
-          border 1px solid $grey-4
-          border-left 2px solid $primary
-          border-radius 4px
-          .stack-label
-            padding 9px 4px
-            color $primary
-          .vue-treeselect
-            float right
-
-            .vue-treeselect__control
-              border 0px !important
-              width auto
-              padding-right 5px !important
-
-            .vue-treeselect__value-container
-              width 100px
-
-            .vue-treeselect__single-value
-              font-size 15px
-              height 36px
-              padding 5px 3px
-              line-height 1.8
-    .q-btn
-      box-shadow none
+      .vue-treeselect__value-container
+        width 100px
 </style>

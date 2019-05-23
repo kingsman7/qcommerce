@@ -81,12 +81,7 @@
     </div>
 
     <!--Loading-->
-    <q-inner-loading :visible="loading">
-      <div class="q-box-inner-loading">
-        <q-spinner-hourglass size="50px" color="primary"/>
-        <h6 class="q-ma-none text-primary q-title">Loading...</h6>
-      </div>
-    </q-inner-loading>
+    <inner-loading :visible="loading" />
   </div>
 </template>
 
@@ -95,6 +90,7 @@
   import Treeselect from '@riophae/vue-treeselect'
   import '@riophae/vue-treeselect/dist/vue-treeselect.css'
   import crudOptionValues from '@imagina/qcommerce/_components/admin/products/crudOptionValues'
+  import innerLoading from 'src/components/master/innerLoading'
   //Services
   import commerceServices from '@imagina/qcommerce/_services/index';
   //Plugins
@@ -104,7 +100,7 @@
     props: {
       productId: {default: false}
     },
-    components: {Treeselect, crudOptionValues},
+    components: {Treeselect, crudOptionValues, innerLoading},
     watch: {},
     mounted() {
       this.$nextTick(function () {

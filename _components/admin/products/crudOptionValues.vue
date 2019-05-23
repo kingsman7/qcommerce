@@ -1,5 +1,5 @@
 <template>
-  <div id="crudOptionValues" class="relative-position">
+  <div id="crudOptionValues" class="relative-position backend-page">
     <!--Table-->
     <q-table
       :data="table.data"
@@ -12,14 +12,14 @@
       </div>
       <div slot="top-right">
         <!--Button new record-->
-        <q-btn icon="fas fa-edit" color="primary" label="New Option Value"
+        <q-btn icon="fas fa-edit" color="positive" label="New Option Value"
                @click="modal.itemId = false; modal.show = true"/>
       </div>
 
       <!--= Custom Columns =-->
       <q-td slot="body-cell-actions" slot-scope="props" :props="props">
         <!--Edit button-->
-        <q-btn color="primary" icon="fas fa-pen" size="sm"
+        <q-btn color="positive" icon="fas fa-pen" size="sm"
                @click="modal.itemId = props.row.id; setItemUpdate()">
           <q-tooltip :delay="300">Edit</q-tooltip>
         </q-btn>
@@ -32,7 +32,7 @@
     </q-table>
 
     <!--Modal with form-->
-    <q-modal id="formCategory" class="modal-form" v-model="modal.show"
+    <q-modal id="formCategory" class="modal-form backend-page" v-model="modal.show"
              no-esc-dismiss no-backdrop-dismiss v-if="success">
       <q-modal-layout style="max-width: 1245px">
         <!--Header-->
@@ -46,11 +46,11 @@
         <q-toolbar slot="footer" color="white">
           <q-toolbar-title></q-toolbar-title>
           <!--Button Save-->
-          <q-btn icon="fas fa-save" color="primary"
+          <q-btn icon="fas fa-save" color="positive"
                  v-if="!modal.itemId" label="Save"
                  :loading="loading" @click="createItem()"/>
           <!--Button Update-->
-          <q-btn label="Update" icon="fas fa-pen" color="primary"
+          <q-btn label="Update" icon="fas fa-pen" color="positive"
                  :loading="loading" @click="updateItem()" v-else/>
         </q-toolbar>
 
@@ -171,29 +171,20 @@
             </div>
           </div>
           <!--Loading-->
-          <q-inner-loading :visible="loading">
-            <div class="q-box-inner-loading">
-              <q-spinner-hourglass size="50px" color="primary"/>
-              <h6 class="q-ma-none text-primary q-title">Loading...</h6>
-            </div>
-          </q-inner-loading>
+          <inner-loading :visible="loading" />
         </div>
       </q-modal-layout>
     </q-modal>
 
     <!--Loading-->
-    <q-inner-loading :visible="loading">
-      <div class="q-box-inner-loading">
-        <q-spinner-hourglass size="50px" color="primary"/>
-        <h6 class="q-ma-none text-primary q-title">Loading...</h6>
-      </div>
-    </q-inner-loading>
+    <inner-loading :visible="loading" />
   </div>
 </template>
 <script>
   //components
   import Treeselect from '@riophae/vue-treeselect'
   import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+  import innerLoading from 'src/components/master/innerLoading'
   //Services
   import commerceServices from '@imagina/qcommerce/_services/index';
   //Plugins
@@ -204,7 +195,7 @@
     props: {
       productOption: {defalt: false},
     },
-    components: {Treeselect},
+    components: {Treeselect, innerLoading},
     watch: {
       productOption: {
         deep: true,
@@ -215,7 +206,7 @@
       'modal.itemId': {
         deep: true,
         handler: function (newValue) {
-          if(!newValue) this.resetform()
+          if (!newValue) this.resetform()
         },
       }
     },
@@ -244,8 +235,8 @@
           data: [],
           columns: [
             {name: 'id', label: 'Id', field: 'id'},
-            {name: 'optionValue', label: 'Option Value', field: 'optionValue', align : 'left'},
-            {name: 'parentOptionValue', label: 'Parent Option Value', field: 'parentOptionValue', align : 'left'},
+            {name: 'optionValue', label: 'Option Value', field: 'optionValue', align: 'left'},
+            {name: 'parentOptionValue', label: 'Parent Option Value', field: 'parentOptionValue', align: 'left'},
             {name: 'quantity', label: 'quantity', field: 'quantity'},
             {
               name: 'subtract', label: 'subtract', field: 'substract',
@@ -312,7 +303,7 @@
         this.loading = false
       },
       //Reset Form
-      async resetform(){
+      async resetform() {
         this.$v.form.$reset()//Reset validations
         this.form = _cloneDeep(this.dataForm)//Reset form
         this.options = _cloneDeep(this.dataOptions)//Reset Options

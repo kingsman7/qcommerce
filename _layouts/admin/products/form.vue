@@ -12,7 +12,7 @@
     </h1>
 
     <!--Content-->
-    <div class="relative-position q-mb-lg">
+    <div class="relative-position q-mb-lg backend-page">
       <!--Data-->
       <div class="border-top-color shadow-1">
         <div class="row gutter-x-md" v-if="success">
@@ -213,7 +213,7 @@
               To add options, you must first create this product ...
             </div>
             <q-btn icon="fas fa-save" label="save and continue editing"
-                   @click="buttonActions.value = 4; createItem()" color="primary"/>
+                   @click="buttonActions.value = 4; createItem()" color="positive"/>
           </div>
         </q-tab-pane>
         <!-- discounts -->
@@ -229,12 +229,12 @@
         <!--Update button-->
         <q-btn
           v-if="productId"
-          color="primary" :loading="loading"
+          color="positive" :loading="loading"
           icon="fas fa-edit" label="Update" @click="updateItem()"
         />
         <!--Save button-->
         <q-btn-dropdown :label="buttonActions.label" split v-else :loading="loading"
-                        color="primary" icon="fas fa-save" @click="createItem()">
+                        color="positive" icon="fas fa-save" @click="createItem()" rounded >
           <q-list link>
             <q-item @click.native="buttonActions = {label : 'Save and return', value : 1}">
               Save and return
@@ -250,12 +250,7 @@
       </q-page-sticky>
 
       <!--Loading-->
-      <q-inner-loading :visible="loading">
-        <div class="q-box-inner-loading">
-          <q-spinner-hourglass size="50px" color="primary"/>
-          <h6 class="q-ma-none text-primary q-title">Loading...</h6>
-        </div>
-      </q-inner-loading>
+      <inner-loading :visible="loading"></inner-loading>
     </div>
   </div>
 </template>
@@ -268,6 +263,7 @@
   import recursiveList from 'src/components/master/recursiveListSelect'
   import uploadMedia from '@imagina/qmedia/_components/form'
   import crudOptions from '@imagina/qcommerce/_components/admin/products/crudOptions'
+  import innerLoading from 'src/components/master/innerLoading'
   //Services
   import commerceServices from '@imagina/qcommerce/_services/index';
   //Plugins
@@ -283,7 +279,8 @@
       Treeselect,
       recursiveList,
       uploadMedia,
-      crudOptions
+      crudOptions,
+      innerLoading
     },
     watch: {
       $route(to, from) {
@@ -578,64 +575,4 @@
 
 <style lang="stylus">
   @import "~variables";
-  #productFormPage
-    .border-top-color
-      border-top 3px solid $primary
-      padding 15px
-      min-height 160px
-
-    .q-input, .q-select, .q-datetime-input
-      padding-bottom 0px
-
-      &:before
-        border 1px solid transparent
-
-      .q-if-inner
-        border 1px solid $grey-4
-        padding 5px 3px
-
-        .q-if-label
-          line-height 3 !important
-          color $grey-8
-
-    .q-field
-      .q-field-bottom
-        padding-top 3px
-        margin 0px
-        border none
-
-    .vue-treeselect
-      border 1px solid $grey-4
-
-      .vue-treeselect__control
-        border 0px !important
-
-      .vue-treeselect__single-value
-        font-size 15px
-        height 36px
-        padding 5px 3px
-        line-height 1.8
-
-    .q-select, .q-datetime-input
-      .q-if-inner
-        border-right 0px
-
-      .q-icon
-        border 1px solid $grey-4
-        border-left 0px
-        height 36px
-        padding 5px 3px
-        margin 0px
-
-      .q-input-target
-        padding-left 4px
-
-    .q-btn
-      box-shadow none
-
-    .input-title
-      color $grey-8
-      font-size 12px
-      margin-left 4px
-      padding 6px 0
 </style>

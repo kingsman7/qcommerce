@@ -8,7 +8,7 @@
     </h1>
 
     <!--Content-->
-    <div class="relative-position">
+    <div class="relative-position backend-page">
       <!--Table-->
       <div class="col-12">
         <q-table
@@ -17,7 +17,7 @@
           :pagination.sync="table.pagination"
           @request="getdata"
           :filter="table.filter"
-          class="shadow-1"
+          class="shadow-1 border-top-color"
         >
           <!--Header Table-->
           <template slot="top" slot-scope="props">
@@ -32,12 +32,12 @@
               <!--Button Actions-->
               <div class="col-12 col-md-6 q-mt-sm text-right">
                 <!--Button new record-->
-                <q-btn icon="fas fa-edit" color="primary" label="New Product"
+                <q-btn icon="fas fa-edit" color="positive" label="New Product"
                        v-if="$auth.hasAccess('icommerce.products.create')"
-                       :to="{name: 'ecommerce.products.create'}"/>
+                       :to="{name: 'ecommerce.products.create'}" rounded />
                 <!--Button refresh data-->
-                <q-btn icon="fas fa-sync-alt" color="primary" class="q-ml-xs"
-                       @click="getDataTable(true)">
+                <q-btn icon="fas fa-sync-alt" color="info" class="q-ml-xs"
+                       @click="getDataTable(true)" rounded>
                   <q-tooltip :delay="300">Refresh Data</q-tooltip>
                 </q-btn>
               </div>
@@ -89,15 +89,15 @@
           <!--= Custom Columns =-->
           <q-td slot="body-cell-actions" slot-scope="props" :props="props">
             <!--Edit button-->
-            <q-btn color="primary" icon="fas fa-pen" size="sm"
+            <q-btn color="positive" icon="fas fa-pen" size="sm" rounded
                    v-if="$auth.hasAccess('icommerce.products.edit')"
                    :to="{name : 'ecommerce.products.edit' , params : {id : props.row.id}}">
               <q-tooltip :delay="300">Edit</q-tooltip>
             </q-btn>
             <!--Delete button-->
-            <q-btn color="negative" icon="fas fa-trash-alt" size="sm"
+            <q-btn color="negative" icon="fas fa-trash-alt" size="sm" rounded
                    v-if="$auth.hasAccess('icommerce.products.destroy')"
-                   @click="deleteItem(props.row.id)" class="q-ml-xs">
+                   @click="deleteItem(props.row)" class="q-ml-xs">
               <q-tooltip :delay="300">Delete</q-tooltip>
             </q-btn>
           </q-td>
@@ -105,12 +105,7 @@
       </div>
 
       <!--Loading-->
-      <q-inner-loading :visible="loading">
-        <div class="q-box-inner-loading">
-          <q-spinner-hourglass size="50px" color="primary"/>
-          <h6 class="q-ma-none text-primary q-title">Loading...</h6>
-        </div>
-      </q-inner-loading>
+      <inner-loading :visible="loading" />
     </div>
   </div>
 </template>
@@ -121,10 +116,12 @@
   //Component
   import Treeselect from '@riophae/vue-treeselect'
   import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+  import innerLoading from 'src/components/master/innerLoading'
 
   export default {
     components: {
-      Treeselect
+      Treeselect,
+      innerLoading
     },
     mounted() {
       this.$nextTick(function () {
@@ -244,17 +241,25 @@
         })
       },
       //Delete Product
-      deleteItem(id) {
-        this.loading = true
-        let configName = 'apiRoutes.eCommerce.products'
-        commerceServices.crud.delete(configName, id, {params: {}}).then(response => {
-          this.$helper.alert.success('Product deleted')
-          this.getDataTable(true)
-          this.loading = false
-        }).catch(error => {
-          this.$helper.alert.error('Failed: ' + error)
-          this.loading = false
-        })
+      deleteItem(item) {
+        this.$q.dialog({
+          title: item.id+' - '+item.name,
+          message: 'Do you want delete this product?',
+          color: 'negative',
+          ok: 'Delete',
+          cancel: true
+        }).then(data => {
+          this.loading = true
+          let configName = 'apiRoutes.eCommerce.products'
+          commerceServices.crud.delete(configName, item.id, {params: {}}).then(response => {
+            this.$helper.alert.success('Product deleted')
+            this.getDataTable(true)
+            this.loading = false
+          }).catch(error => {
+            this.$helper.alert.error('Failed: ' + error)
+            this.loading = false
+          })
+        }).catch(data => {})
       }
     }
   }
@@ -263,44 +268,6 @@
 <style lang="stylus">
   @import "~variables";
   #productIndexPage
-    .q-table-container
-      border-top 3px solid $primary
-
       .q-search
-        border 1px solid $grey-4
-        padding 6px 9px
-        border-radius 5px
         width 258px
-
-      .cont-vue-tree
-        border 1px solid $grey-4
-        border-left 2px solid $primary
-        border-radius 4px
-        display inline-block
-        margin-right 7px
-
-        @media screen and (max-width: $breakpoint-md)
-          width 100%
-          margin-bottom 10px
-
-        .stack-label
-          padding 9px 4px
-          color $primary
-
-        .vue-treeselect
-          float right
-
-          .vue-treeselect__control
-            border 0px !important
-            width auto
-            padding-right 5px !important
-
-          .vue-treeselect__single-value
-            font-size 15px
-            height 36px
-            padding 5px 3px
-            line-height 1.8
-
-    .q-btn
-      box-shadow none
 </style>

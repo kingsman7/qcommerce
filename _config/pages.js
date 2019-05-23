@@ -18,7 +18,7 @@ export default {
 		containerLayout: master,
 		title: 'Product List',
 		icon: 'fas fa-boxes',
-		middleware: [auth]
+		middleware: [auth,access]
 	},
 	//Product Create
 	productCreate: {
@@ -30,7 +30,7 @@ export default {
 		containerLayout: master,
 		title: 'Product Create',
 		icon: 'fas fa-boxes',
-		middleware: [auth]
+		middleware: [auth,access]
 	},
 	//Product Update
 	productEdit: {
@@ -42,7 +42,7 @@ export default {
 		containerLayout: master,
 		title: 'Product Edit',
 		icon: 'fas fa-boxes',
-		middleware: [auth]
+		middleware: [auth,access]
 	},
 	//Categories list
 	categories: {
@@ -53,7 +53,8 @@ export default {
 		layout: require('@imagina/qcommerce/_layouts/admin/category/index').default,
 		containerLayout: master,
 		title: 'Product Categories',
-		icon: 'fas fa-layer-group'
+		icon: 'fas fa-layer-group',
+		middleware: [auth,access]
 	},
 	//Product options
 	options: {
@@ -65,7 +66,7 @@ export default {
 		containerLayout: master,
 		title: 'Product Options',
 		icon: 'fas fa-cogs',
-		middleware: [auth]
+		middleware: [auth,access]
 	},
 	//Product options values
 	optionValues: {
@@ -77,6 +78,6 @@ export default {
 		containerLayout: master,
 		title: 'Options Values',
 		icon: 'fas fa-stream',
-		middleware: [auth]
+		middleware: [auth,access]
 	},
 }

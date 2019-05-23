@@ -1,7 +1,6 @@
 <template>
   <!--Modal with form to category-->
-  <q-modal id="formCategory" v-model="show" v-if="show"
-           no-esc-dismiss no-backdrop-dismiss class="backend-page">
+  <q-modal id="formCategory" v-model="show" v-if="show" no-esc-dismiss no-backdrop-dismiss>
     <q-modal-layout style="max-width: 1245px">
       <!--Header-->
       <q-toolbar slot="header">
@@ -14,11 +13,11 @@
       <q-toolbar slot="footer" color="white">
         <q-toolbar-title></q-toolbar-title>
         <!--Button Save-->
-        <q-btn icon="fas fa-save" color="positive"
+        <q-btn icon="fas fa-save" color="primary"
                v-if="!itemId" label="Save"
                :loading="loading" @click="createItem()"/>
         <!--Button Update-->
-        <q-btn label="Update" icon="fas fa-pen" color="positive"
+        <q-btn label="Update" icon="fas fa-pen" color="primary"
                :loading="loading" @click="updateItem()" v-else/>
       </q-toolbar>
 
@@ -76,36 +75,45 @@
               v-model="locale.formTemplate.parentId"
               placeholder=""
             />
-            <!--Show menu-->
-            <q-checkbox v-model="locale.formTemplate.showMenu"
-                        class="q-my-sm"
-                        label="Show in menu"/>
-            <div class="input-title">Image</div>
+  
             <upload-img
               v-model="locale.formTemplate.mediasSingle"
-              entity="Modules\Icommerce\Entities\Category"
+              entity="Modules\Iblog\Entities\Category"
               button-label="Choose File"
+              label="Main Image"
               :entity-id="itemId ? itemId : null"
               zone='mainimage'
+            />
+  
+            <upload-img
+              v-model="locale.formTemplate.mediasSingle"
+              entity="Modules\Iblog\Entities\Category"
+              button-label="Choose File"
+              label="Secondary Image"
+              :entity-id="itemId ? itemId : null"
+              zone='secondaryimage'
             />
           </div>
         </div>
         <!--Loading-->
-        <inner-loading :visible="loading" />
+        <q-inner-loading :visible="loading">
+          <div class="q-box-inner-loading">
+            <q-spinner-hourglass size="50px" color="primary"/>
+            <h6 class="q-ma-none text-primary q-title">Loading...</h6>
+          </div>
+        </q-inner-loading>
       </div>
     </q-modal-layout>
   </q-modal>
 </template>
-
 <script>
   //Services
-  import commerceServices from '@imagina/qcommerce/_services/index';
+  import service from '@imagina/qblog/_services/index';
   //Components
   import Treeselect from '@riophae/vue-treeselect'
   import '@riophae/vue-treeselect/dist/vue-treeselect.css'
   import uploadImg from '@imagina/qmedia/_components/form'
   import locales from '@imagina/qsite/_components/locales'
-  import innerLoading from 'src/components/master/innerLoading'
   //Plugins
   import {required} from 'vuelidate/lib/validators'
   import _cloneDeep from 'lodash.clonedeep'
@@ -115,7 +123,7 @@
       value: {default: false},
       itemId: {default: false}
     },
-    components: {uploadImg, Treeselect, locales, innerLoading},
+    components: {uploadImg, Treeselect, locales},
     watch: {
       value(newValue) {
         this.show = this.value
@@ -165,7 +173,7 @@
         return {
           fields: {
             parentId: 0,
-            showMenu: false,
+            status: false,
             mediasSingle: {}
           },
           fieldsTranslatable: {
@@ -198,13 +206,13 @@
       //Get data category to update
       getDataItem() {
         return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.eCommerce.categories'
+          let configName = 'apiRoutes.blog.categories'
           let params = {//Params to request
             refresh: true,
             params: {include: 'parent', filter: {allTranslations: true}}
           }
           //Request
-          commerceServices.crud.show(configName, this.itemId, params).then(response => {
+          service.crud.show(configName, this.itemId, params).then(response => {
             this.locale.form = _cloneDeep(response.data)
             resolve(true)
           }).catch(error => {
@@ -216,13 +224,13 @@
       //Get product categories
       getCategories() {
         return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.eCommerce.categories'
+          let configName = 'apiRoutes.blog.categories'
           let params = {//Params to request
             refresh: true,
             params: {include: 'parent', filter: {allTranslations: true}},
           }
           //Request
-          commerceServices.crud.index(configName, params).then(response => {
+          service.crud.index(configName, params).then(response => {
             this.categories = this.$helper.array.tree(response.data)
             resolve(true)
           }).catch(error => {
@@ -237,8 +245,8 @@
         //Check validations
         if (!this.$v.$error) {
           this.loading = true
-          let configName = 'apiRoutes.eCommerce.categories'
-          commerceServices.crud.create(configName, this.locale.form).then(response => {
+          let configName = 'apiRoutes.blog.categories'
+          service.crud.create(configName, this.locale.form).then(response => {
             this.$helper.alert.success('Category created ID: ' + response.data.id)
             this.initForm()
             this.loading = false
@@ -256,8 +264,8 @@
         //Check validations
         if (!this.$v.$error) {
           this.loading = true
-          let configname = 'apiRoutes.eCommerce.categories'
-          commerceServices.crud.update(configname, this.itemId, this.locale.form).then(response => {
+          let configname = 'apiRoutes.blog.categories'
+          service.crud.update(configname, this.itemId, this.locale.form).then(response => {
             this.$helper.alert.success('Category updated ID: ' + this.itemId)
             this.initForm()
             this.loading = false
@@ -279,7 +287,63 @@
     }
   }
 </script>
-
 <style lang="stylus">
   @import "~variables";
+  #formCategory
+    .category-image
+      height 230px
+      width 100%
+      background-position center
+      background-repeat no-repeat
+      background-size cover
+      padding 10px
+
+    .q-modal-layout
+      .q-layout-header, .q-layout-footer
+        box-shadow none !important
+
+      .layout-padding
+        padding 15px
+
+    .q-input, .q-select
+      padding-bottom 0px
+
+      &:before
+        border 1px solid transparent
+
+      .q-if-inner
+        border 1px solid $grey-4
+        padding 5px 3px
+
+        .q-if-label
+          line-height 3 !important
+          color $grey-8
+
+    .q-field
+      .q-field-bottom
+        padding-top 3px
+        margin 0px
+        border none
+
+    .vue-treeselect
+      border 1px solid $grey-4
+
+      .vue-treeselect__control
+        border 0px !important
+
+      .vue-treeselect__single-value
+        font-size 15px
+        height 36px
+        padding 5px 3px
+        line-height 1.8
+
+    .q-btn
+      box-shadow none
+
+    .input-title
+      color $grey-8
+      font-size 12px
+      margin-left 4px
+      padding 6px 0
+
 </style>

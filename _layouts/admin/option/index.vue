@@ -1,6 +1,5 @@
 <template>
 	<div id="productOptionsIndexPage" class="q-layout-page layout-padding">
-
 		<!--TITLE-->
 		<h1 class="q-headline text-primary">
 			<q-icon name="fas fa-cogs"></q-icon>
@@ -8,7 +7,7 @@
 		</h1>
 
 		<!--Content-->
-		<div class="relative-position">
+		<div class="relative-position backend-page">
 			<!--Table-->
 			<div class="col-12">
 				<q-table
@@ -17,7 +16,7 @@
 					:pagination.sync="table.pagination"
 					@request="getData"
 					:filter="table.filter"
-					class="shadow-1"
+					class="shadow-1 border-top-color"
 				>
 					<!--Table slot left-->
 					<template slot="top-left" slot-scope="props">
@@ -27,11 +26,11 @@
 					<!--Table slot right-->
 					<template slot="top-right" slot-scope="props">
 						<!--Button new record-->
-						<q-btn icon="fas fa-edit" color="primary" label="New Option"
+						<q-btn icon="fas fa-edit" color="positive" label="New Option"
 									 v-if="$auth.hasAccess('icommerce.options.create')"
 									 @click="formItemShow = true; itemIdToEdit = false"/>
 						<!--Button refresh data-->
-						<q-btn icon="fas fa-sync-alt" color="primary" class="q-ml-xs"
+						<q-btn icon="fas fa-sync-alt" color="info" class="q-ml-xs"
 									 @click="getDataTable(true)">
 							<q-tooltip :delay="300">Refresh Data</q-tooltip>
 						</q-btn>
@@ -40,7 +39,7 @@
 					<!--= Custom Columns =-->
 					<q-td slot="body-cell-actions" slot-scope="props" :props="props">
 						<!--Edit button-->
-						<q-btn color="primary" icon="fas fa-pen" size="sm"
+						<q-btn color="positive" icon="fas fa-pen" size="sm"
 									 v-if="$auth.hasAccess('icommerce.options.edit')"
 									 @click="itemIdToEdit = props.row.id; formItemShow = true">
 							<q-tooltip :delay="300">Edit</q-tooltip>
@@ -48,7 +47,7 @@
 						<!--Delete button-->
 						<q-btn color="negative" icon="fas fa-trash-alt" size="sm" class="q-ml-xs"
 									 v-if="$auth.hasAccess('icommerce.options.destroy')"
-									 @click="itemIdToDelete = props.row; dialogDeleteItem = true">
+									 @click="deleteItem(props.row)">
 							<q-tooltip :delay="300">Delete</q-tooltip>
 						</q-btn>
 					</q-td>
@@ -56,37 +55,13 @@
 			</div>
 
 			<!--Loading-->
-			<q-inner-loading :visible="loading">
-				<div class="q-box-inner-loading">
-					<q-spinner-hourglass size="50px" color="primary"/>
-					<h6 class="q-ma-none text-primary q-title">Loading...</h6>
-				</div>
-			</q-inner-loading>
+			<inner-loading :visible="loading" />
 		</div>
 
 		<!--Form category (create and/or update)-->
 		<form-option v-model="formItemShow" @created="getDataTable(true)"
 									 @updated="getDataTable(true)" :item-id="itemIdToEdit">
 		</form-option>
-
-		<!--Dialog to delete category-->
-		<q-dialog v-model="dialogDeleteItem">
-			<!-- Message -->
-			<span slot="message">
-        <h1 class="q-title text-negative">Delete Category</h1>
-        Are you sure to delete category
-        <span class="text-primary">{{itemIdToDelete.description}}</span>
-      </span>
-
-			<!--Buttons-->
-			<template slot="buttons" slot-scope="props">
-				<!--Button cancel-->
-				<q-btn color="negative" label="Cancel" @click="dialogDeleteItem = false" />
-				<!--Button confirm delete category-->
-				<q-btn color="primary" icon="fas fa-trash-alt" :loading="loading"
-							 label="Delete" @click="deleteItem()" />
-			</template>
-		</q-dialog>
 	</div>
 </template>
 
@@ -95,10 +70,12 @@
 	import commerceServices from '@imagina/qcommerce/_services/index';
 	//Component
 	import formOption from '@imagina/qcommerce/_components/admin/option/form'
+	import innerLoading from 'src/components/master/innerLoading'
 
 	export default {
 		components: {
-			formOption
+			formOption,
+			innerLoading
 		},
 		mounted() {
 			this.$nextTick(function () {
@@ -167,18 +144,25 @@
 				})
 			},
 			//Delete category
-			deleteItem() {
-				this.loading = true
-				let idCategory = this.itemIdToDelete.id
-				commerceServices.crud.delete('apiRoutes.eCommerce.options', idCategory).then(response => {
-					this.getDataTable(true)
-					this.$helper.alert.success('Option deleted')
-					this.dialogDeleteItem = false
-					this.loading = false
-				}).catch(error => {
-					this.loading = false
-					this.$helper.alert.error('Failed: ' + error, 'bottom')
-				})
+			deleteItem(item) {
+				this.$q.dialog({
+					title: item.id+' - '+item.description,
+					message: 'Do you want delete this Option?',
+					color: 'negative',
+					ok: 'Delete',
+					cancel: true
+				}).then(data => {
+					this.loading = true
+					commerceServices.crud.delete('apiRoutes.eCommerce.options', item.id).then(response => {
+						this.getDataTable(true)
+						this.$helper.alert.success('Option deleted')
+						this.dialogDeleteItem = false
+						this.loading = false
+					}).catch(error => {
+						this.loading = false
+						this.$helper.alert.error('Failed: ' + error, 'bottom')
+					})
+				}).catch(data => {})
 			}
 		}
 	}
@@ -186,15 +170,4 @@
 
 <style lang="stylus">
 	@import "~variables";
-	#productOptionsIndexPage
-		.q-table-container
-			border-top 3px solid $primary
-
-			.q-search
-				border 1px solid $grey-4
-				padding 6px 9px
-				border-radius 5px
-
-		.q-btn
-			box-shadow none
 </style>
