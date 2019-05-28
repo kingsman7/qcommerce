@@ -8,7 +8,6 @@
         <treeselect
           v-model="template.optionSelected"
           :async="true"
-          :append-to-body="true"
           :load-options="searchOptions"
           placeholder=""
           @input="createProductOption()"
@@ -19,7 +18,8 @@
           <q-item v-for="(item,key) in productOptions" :key="key">
             <!--Radio-->
             <q-item-side>
-              <q-radio v-model="template.currentOption" :val="item.id" @input="setDataOption()"/>
+              <q-radio v-model="template.currentOption"
+                       :val="item.id" @input="setDataOption()"/>
             </q-item-side>
             <!--Label-->
             <q-item-main :label="(key+1) +'. '+item.description"/>
@@ -46,7 +46,6 @@
               <div class="input-title">Parent</div>
               <treeselect
                 v-model="template.form.parentId"
-                :append-to-body="true"
                 :options="template.parentOptions"
                 placeholder=""
                 @input="setParentValues(); checkToUpdateOption(true);"
@@ -57,7 +56,6 @@
               <div class="input-title">Parent Option Value</div>
               <treeselect
                 v-model="template.form.parentOptionValueId"
-                :append-to-body="true"
                 :options="template.parentValues"
                 placeholder=""
                 @input="checkToUpdateOption()"
@@ -81,7 +79,7 @@
     </div>
 
     <!--Loading-->
-    <inner-loading :visible="loading" />
+    <inner-loading :visible="loading"/>
   </div>
 </template>
 
@@ -138,16 +136,20 @@
       },
       //Get Data from product
       getData() {
-        this.loading = true
-        let configName = 'apiRoutes.eCommerce.products'
-        let params = {remember: false, params: {include: 'productOptions', fields: 'id'}}
-        commerceServices.crud.show(configName, this.productId, params).then(response => {
-          this.productOptions = _cloneDeep(response.data.productOptions)//Set product Options
-          this.productOptionValues = _cloneDeep(response.data.optionValues)//Set product options values
-          this.loading = false
-        }).catch(error => {
-          this.loading = false
-          this.$helper.alert.error('Failed: ' + error)
+        return new Promise((resolve, reject) => {
+          this.loading = true
+          let configName = 'apiRoutes.eCommerce.products'
+          let params = {remember: false, params: {include: 'productOptions', fields: 'id'}}
+          commerceServices.crud.show(configName, this.productId, params).then(response => {
+            this.productOptions = _cloneDeep(response.data.productOptions)//Set product Options
+            this.productOptionValues = _cloneDeep(response.data.optionValues)//Set product options values
+            this.loading = false
+            resolve(true)
+          }).catch(error => {
+            this.loading = false
+            this.$helper.alert.error('Failed: ' + error)
+            reject(false)
+          })
         })
       },
       //Get option values
@@ -176,9 +178,15 @@
             optionId: this.template.optionSelected.toString()
           }
           //Request
-          commerceServices.crud.create(configName, dataOption).then(response => {
-            this.getData()//Get data again
-            this.template.optionSelected = null//Reset option of sleect options
+          commerceServices.crud.create(configName, dataOption).then(async response => {
+            await this.getData()//Get data again
+            this.template.optionSelected = null//Reset option of select options
+            //Get last option create
+            for (var item of this.productOptions) {
+              let currentOption = _cloneDeep(this.template.currentOption)
+              if (item.id >= currentOption) this.template.currentOption = item.id
+            }
+            this.setDataOption()//Set data option
             this.loading = false
           }).catch(error => {
             this.$helper.alert.error('Failed: ' + error, 'bottom')
@@ -343,6 +351,7 @@
     }
   }
 </script>
+
 <style lang="stylus">
   @import "~variables";
 </style>

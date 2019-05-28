@@ -28,7 +28,7 @@
               :error="$v.locale.formTemplate.name.$error"
               error-label="This field is required"
             >
-              <q-input v-model="locale.formTemplate.name"
+              <q-input v-model="locale.formTemplate.name" @input="setSlug()"
                        :stack-label="'name ('+locale.language+')*'"/>
             </q-field>
             <!--Slug-->
@@ -70,7 +70,6 @@
             <treeselect
               v-model="locale.formTemplate.parentId"
               :async="true"
-              :append-to-body="true"
               :load-options="searchProducts"
               :default-options="optionsTemplate.products"
               placeholder=""
@@ -79,7 +78,6 @@
             <div class="input-title">Status</div>
             <treeselect
               :clearable="false"
-              :append-to-body="true"
               :options="optionsTemplate.status"
               value-consists-of="BRANCH_PRIORITY"
               v-model="locale.formTemplate.status"
@@ -89,7 +87,6 @@
             <div class="input-title">Category</div>
             <treeselect
               :clearable="false"
-              :append-to-body="true"
               :options="optionsTemplate.categories"
               value-consists-of="BRANCH_PRIORITY"
               v-model="locale.formTemplate.categoryId"
@@ -128,7 +125,6 @@
               <div class="input-title">Stock Status</div>
               <treeselect
                 :clearable="false"
-                :append-to-body="true"
                 :options="optionsTemplate.stockStatus"
                 value-consists-of="BRANCH_PRIORITY"
                 v-model="locale.formTemplate.stockStatus"
@@ -176,7 +172,6 @@
             v-model="locale.formTemplate.relatedProducts"
             :async="true"
             :multiple="true"
-            :append-to-body="true"
             :load-options="searchProducts"
             :default-options="optionsTemplate.relatedProducts"
             placeholder=""
@@ -493,6 +488,8 @@
             this.loading = false
             this.$helper.alert.error('Failed: ' + error)
           })
+        }else{
+          this.$helper.alert.error('Please check required fields','bottom')
         }
       },
       //Update Product
@@ -509,6 +506,8 @@
             this.loading = false
             this.$helper.alert.error('Failed: You can not delete this product')
           })
+        }else{
+          this.$helper.alert.error('Please check required fields','bottom')
         }
       },
       //Get just values not null from form
@@ -569,6 +568,14 @@
           response = {locale: this.locale.formValidations}
         return response
       },
+      //Complete slug Only when is creation
+      setSlug(){
+        if(!this.productId){
+          let title = _cloneDeep(this.locale.formTemplate.name)
+          title = title.split(' ').join('-').toLowerCase()
+          this.locale.formTemplate.slug = _cloneDeep(title)
+        }
+      }
     }
   }
 </script>

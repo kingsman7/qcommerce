@@ -48,7 +48,6 @@
                   <div class="stack-label float-left">Category:</div>
                   <treeselect
                     :clearable="false"
-                    :append-to-body="true"
                     :options="table.options.categories"
                     @input="getDataTable(true)"
                     value-consists-of="BRANCH_PRIORITY"
@@ -61,7 +60,6 @@
                   <div class="stack-label float-left">Status:</div>
                   <treeselect
                     :clearable="false"
-                    :append-to-body="true"
                     :options="table.options.status"
                     @input="getDataTable(true)"
                     value-consists-of="BRANCH_PRIORITY"
@@ -74,7 +72,6 @@
                   <div class="stack-label float-left">Stock Status:</div>
                   <treeselect
                     :clearable="false"
-                    :append-to-body="true"
                     :options="table.options.stockStatus"
                     @input="getDataTable(true)"
                     value-consists-of="BRANCH_PRIORITY"

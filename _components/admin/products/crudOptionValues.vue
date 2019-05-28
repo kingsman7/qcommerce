@@ -68,7 +68,6 @@
                 <div class="input-title">Option Value *</div>
                 <treeselect
                   :clearable="false"
-                  :append-to-body="true"
                   :options="options.values"
                   value-consists-of="BRANCH_PRIORITY"
                   v-model="form.optionValueId"
@@ -80,7 +79,6 @@
               <treeselect
                 :clearable="false"
                 :disabled="options.parentValues.length ? false : true"
-                :append-to-body="true"
                 :options="options.parentValues"
                 value-consists-of="BRANCH_PRIORITY"
                 v-model="form.parentOptionValueId"
@@ -101,7 +99,6 @@
                 <div class="input-title">Subtract</div>
                 <treeselect
                   :clearable="false"
-                  :append-to-body="true"
                   :options="options.subtract"
                   value-consists-of="BRANCH_PRIORITY"
                   v-model="form.subtract"
@@ -120,7 +117,7 @@
                   <div class="input-title col-12">Price *</div>
                   <div class="col-2"><!--Prefix-->
                     <treeselect
-                      :clearable="false" :append-to-body="true"
+                      :clearable="false"
                       :options="options.prefix" v-model="form.pricePrefix"
                       placeholder=""
                     />
@@ -139,7 +136,7 @@
                   <div class="input-title col-12">Points *</div>
                   <div class="col-2"><!--Prefix-->
                     <treeselect
-                      :clearable="false" :append-to-body="true"
+                      :clearable="false"
                       :options="options.prefix" v-model="form.pointsPrefix"
                       placeholder=""
                     />
@@ -158,7 +155,7 @@
                   <div class="input-title col-12">Weight *</div>
                   <div class="col-2"><!--Prefix-->
                     <treeselect
-                      :clearable="false" :append-to-body="true"
+                      :clearable="false"
                       :options="options.prefix" v-model="form.weightPrefix"
                       placeholder=""
                     />

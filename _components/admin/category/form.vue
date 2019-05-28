@@ -37,7 +37,7 @@
               :error="$v.locale.formTemplate.title.$error"
               error-label="This field is required"
             >
-              <q-input v-model="locale.formTemplate.title"
+              <q-input v-model="locale.formTemplate.title" @input="setSlug()"
                        :stack-label="'Title ('+locale.language+')*'"/>
             </q-field>
             <!--Slug-->
@@ -70,7 +70,6 @@
             <div class="input-title">Parent</div>
             <treeselect
               :clearable="false"
-              :append-to-body="true"
               :options="this.categories"
               value-consists-of="BRANCH_PRIORITY"
               v-model="locale.formTemplate.parentId"
@@ -248,6 +247,8 @@
             this.loading = false
             this.$helper.alert.error('Failed: ' + error)
           })
+        }else{
+          this.$helper.alert.error('Please check required fields','bottom')
         }
       },
       //Update Category
@@ -267,6 +268,8 @@
             this.loading = false
             this.$helper.alert.error('Failed: ' + error)
           })
+        }else{
+          this.$helper.alert.error('Please check required fields','bottom')
         }
       },
       //Return object to validations
@@ -275,6 +278,14 @@
         if (this.locale && this.locale.formValidations)
           response = {locale: this.locale.formValidations}
         return response
+      },
+      //Complete slug Only when is creation
+      setSlug(){
+        if(!this.itemId){
+          let title = _cloneDeep(this.locale.formTemplate.title)
+          title = title.split(' ').join('-').toLowerCase()
+          this.locale.formTemplate.slug = _cloneDeep(title)
+        }
       }
     }
   }

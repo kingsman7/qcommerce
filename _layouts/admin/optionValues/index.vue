@@ -31,7 +31,6 @@
               <div class="stack-label float-left">Product Option: </div>
               <treeselect
                 :clearable="false"
-                :append-to-body="true"
                 :options="options"
                 @input="getDataTable(true)"
                 value-consists-of="BRANCH_PRIORITY"

@@ -193,6 +193,8 @@
             this.loading = false
             this.$helper.alert.error('Failed: ' + error)
           })
+        }else{
+          this.$helper.alert.error('Please check required fields','bottom')
         }
       },
       //Update Category
@@ -212,6 +214,8 @@
             this.loading = false
             this.$helper.alert.error('Failed: ' + error)
           })
+        }else{
+          this.$helper.alert.error('Please check required fields','bottom')
         }
       },
       //Return object to validations

@@ -69,7 +69,6 @@
             <div class="input-title">Parent</div>
             <treeselect
               :clearable="false"
-              :append-to-body="true"
               :options="this.categories"
               value-consists-of="BRANCH_PRIORITY"
               v-model="locale.formTemplate.parentId"
