@@ -75,15 +75,20 @@
                 />
               </q-field>
               <!--Parent Option Value -->
-              <div class="input-title">Parent Option Value</div>
-              <treeselect
-                :clearable="false"
-                :disabled="options.parentValues.length ? false : true"
-                :options="options.parentValues"
-                value-consists-of="BRANCH_PRIORITY"
-                v-model="form.parentOptionValueId"
-                placeholder="" class="q-mb-md"
-              />
+              <q-field
+                v-if="options.parentValues.length"
+                :error="$v.form.parentOptionValueId.$error"
+                error-label="This field is required"
+              >
+                <div class="input-title">Parent Option Value *</div>
+                <treeselect
+                  :clearable="false"
+                  :options="options.parentValues"
+                  value-consists-of="BRANCH_PRIORITY"
+                  v-model="form.parentOptionValueId"
+                  placeholder=""
+                />
+              </q-field>
               <!--Quantity-->
               <q-field
                 :error="$v.form.quantity.$error"
@@ -168,13 +173,13 @@
             </div>
           </div>
           <!--Loading-->
-          <inner-loading :visible="loading" />
+          <inner-loading :visible="loading"/>
         </div>
       </q-modal-layout>
     </q-modal>
 
     <!--Loading-->
-    <inner-loading :visible="loading" />
+    <inner-loading :visible="loading"/>
   </div>
 </template>
 <script>
@@ -216,6 +221,7 @@
       return {
         form: {
           optionValueId: {required},
+          parentOptionValueId: (this.options.parentValues && this.options.parentValues.length) ? {required} : false,
           quantity: {required},
           subtract: {required},
           price: {required},
@@ -348,6 +354,8 @@
             this.loading = false
             this.$helper.alert.error('Failed: ' + error)
           })
+        } else {
+          this.$helper.alert.error('Please check required fields', 'bottom')
         }
       },
       //Update Item
@@ -365,6 +373,8 @@
             this.loading = false
             this.$helper.alert.error('Failed: ' + error)
           })
+        } else {
+          this.$helper.alert.error('Please check required fields', 'bottom')
         }
       },
       //Delete Item
