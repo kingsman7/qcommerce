@@ -1,6 +1,6 @@
 {
   "_from": "@imagina/qcommerce",
-  "_id": "@imagina/qcommerce@0.0.4",
+  "_id": "@imagina/qcommerce@0.1.0",
   "_inBundle": false,
   "_integrity": "sha512-6/fU4cMB8T7vRNkUwAxO2TR+bWfOFAxlZc3HNd1jrGGXmoYdVg6txu5bAvln5UPbmGTop1UY7wKkRXzQqjScQQ==",
   "_location": "/@imagina/qcommerce",
@@ -20,7 +20,7 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/@imagina/qcommerce/-/qcommerce-0.0.4.tgz",
+  "_resolved": "https://registry.npmjs.org/@imagina/qcommerce/-/qcommerce-0.1.0.tgz",
   "_shasum": "5b758c3dfae05419122fdcaa9d661b7979c37c9c",
   "_spec": "@imagina/qcommerce",
   "_where": "D:\\imagina\\projects\\baseQuasar\\back-end",
@@ -44,5 +44,5 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "0.0.4"
+  "version": "0.1.0"
 }
