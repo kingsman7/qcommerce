@@ -11,4 +11,10 @@ export default {
 	options : urlBase + '/options',
 	optionValues : urlBase + '/option-values',
 	categories : urlBase + '/categories',
+	cart : urlBase + '/carts',
+	cartProducts : urlBase + '/cart-products',
+	paymentMethods: urlBase + '/payment-methods',
+	orders : urlBase + '/orders',
+	orderStatus : urlBase + '/order-statuses',
+	orderStatusHistory : urlBase + '/order-status-history',
 }
