@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <div class="row">
-      <div class="col-md-12">
+  <div class="q-container">
+    <div class="row ">
+      <div class="col-md-12 flex flex-center">
         
         <!-- (Prop) Title -->
-        <h1 class="q-headline text-primary">
-          {{title}}
+        <h1 class="q-headline text-primary ">
+          CHECKOUT
         </h1>
         
       </div>
@@ -14,28 +14,28 @@
       <div class="col-md-4">
         
         <!-- (Component) Customer Information -->
-        <CheckoutCustomer/>
+        <customerInformation/>
         
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 gutter-y-sm">
         
         <!-- (Component) Billing Details -->
-        <CheckoutBilling/>
+        <billingAddress/>
         
         <!-- (Component) Shipping Address -->
-        <CheckoutShipping/>
+        <shippingAddress/>
         
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 gutter-y-sm">
         
         <!-- (Component) Delivery Methods -->
-        <CheckoutDelivery/>
+        <shippingMethods/>
         
         <!-- (Component) Payment Methods -->
-        <CheckoutPayment/>
+        <paymentMethods/>
         
         <!-- (Component) Order Summary -->
-        <CheckoutSummary/>
+        <summary/>
         
       </div>
     </div>
@@ -44,27 +44,21 @@
 
 <script>
   // COMPONENTS
-  import CheckoutCustomer from '@imagina/qcommerce/_components/frontend/checkout/CheckoutCustomer'
-  import CheckoutBilling from '@imagina/qcommerce/_components/frontend/checkout/CheckoutBilling'
-  import CheckoutShipping from '@imagina/qcommerce/_components/frontend/checkout/CheckoutShipping'
-  import CheckoutDelivery from '@imagina/qcommerce/_components/frontend/checkout/CheckoutDelivery'
-  import CheckoutPayment from '@imagina/qcommerce/_components/frontend/checkout/CheckoutPayment'
-  import CheckoutSummary from '@imagina/qcommerce/_components/frontend/checkout/CheckoutSummary'
+  import customerInformation from '@imagina/qcommerce/_components/frontend/checkout/customerInformation'
+  import billingAddress from '@imagina/qcommerce/_components/frontend/checkout/billingAddress'
+  import shippingAddress from '@imagina/qcommerce/_components/frontend/checkout/shippingAddress'
+  import shippingMethods from '@imagina/qcommerce/_components/frontend/checkout/shippingMethods'
+  import paymentMethods from '@imagina/qcommerce/_components/frontend/checkout/paymentMethods'
+  import summary from '@imagina/qcommerce/_components/frontend/checkout/summary'
   
   export default {
-    props:{
-      title:{
-        type:String,
-        default:'Checkout'
-      }
-    },
     components:{
-      CheckoutCustomer,
-      CheckoutBilling,
-      CheckoutShipping,
-      CheckoutDelivery,
-      CheckoutPayment,
-      CheckoutSummary,
+      customerInformation,
+      billingAddress,
+      shippingAddress,
+      shippingMethods,
+      paymentMethods,
+      summary,
     },
     data(){
       return{
