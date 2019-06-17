@@ -14,14 +14,14 @@
             <q-field
               :error="false"
               error-label="We need a valid email">
-              <q-input  v-model="formData.firstName" float-label="First Name"/>
+              <q-input  v-model="checkoutData.attributes.paymentFirstName" float-label="First Name"/>
             </q-field>
           </div>
           <div class="col md-6">
             <q-field
               :error="false"
               error-label="We need a valid email">
-              <q-input v-model="formData.lastName" float-label="Last Name"/>
+              <q-input v-model="checkoutData.attributes.paymentLastName" float-label="Last Name"/>
             </q-field>
           </div>
         </div>
@@ -31,7 +31,7 @@
             <q-field
               :error="false"
               error-label="We need a valid email">
-              <q-input v-model="formData.companyName" float-label=" Company name"/>
+              <q-input v-model="checkoutData.attributes.paymentCompany" float-label=" Company name"/>
             </q-field>
           </div>
         </div>
@@ -41,7 +41,7 @@
             <q-field
               :error="false"
               error-label="We need a valid email">
-              <q-input v-model="formData.address1" float-label=" Address 1"/>
+              <q-input v-model="checkoutData.attributes.paymentAddress1" float-label=" Address 1"/>
             </q-field>
           </div>
         </div>
@@ -51,7 +51,7 @@
             <q-field
               :error="false"
               error-label="We need a valid email">
-              <q-input v-model="formData.address2" float-label=" Address 2"/>
+              <q-input v-model="checkoutData.attributes.paymentAddress2" float-label=" Address 2"/>
             </q-field>
           </div>
         </div>
@@ -61,14 +61,14 @@
           <q-field
             :error="false"
             error-label="We need a valid email">
-            <q-input v-model="formData.city" float-label="City"/>
+            <q-input v-model="checkoutData.attributes.paymentCity" float-label="City"/>
           </q-field>
           </div>
             <div class="col md-6">
           <q-field
             :error="false"
             error-label="We need a valid email">
-            <q-input v-model="formData.zipCode" float-label="Zip/Postal code"/>
+            <q-input v-model="checkoutData.attributes.paymentZipCode" float-label="Zip/Postal code"/>
           </q-field>
             </div>
         </div>
@@ -78,7 +78,7 @@
             <q-field
               :error="false"
               error-label="We need a valid email">
-              <q-input v-model="formData.country" float-label="Country"/>
+              <q-input v-model="checkoutData.attributes.paymentCountry" float-label="Country"/>
             </q-field>
           </div>
         </div>
@@ -88,7 +88,7 @@
             <q-field
               :error="false"
               error-label="We need a valid email">
-              <q-input v-model="formData.province" float-label="State/Province"/>
+              <q-input v-model="checkoutData.attributes.paymentZone" float-label="State/Province"/>
             </q-field>
           </div>
         </div>
@@ -100,19 +100,44 @@
 
 <script>
   export default {
+    props:{
+      checkoutData:{
+        type:Object,
+        default:()=>({
+          attributes: {
+            storeId: 0,
+            customerId: 0,
+            paymentMethod: '',
+            paymentMethod_id: 0,
+            shippingMethod: '',
+            shippingMethod_id: 0,
+            cartId: 0,
+            paymentFirstName: '',
+            paymentLastName: '',
+            paymentCompany: '',
+            paymentNit: '',
+            paymentAddress1: '',
+            paymentAddress2: '',
+            paymentCity: '',
+            paymentZipCode: '',
+            paymentCountry: '',
+            paymentZone: '',
+            shippingFirstName: '',
+            shippingLastName: '',
+            shippingCompany: '',
+            shippingAddress1: '',
+            shippingAddress2: '',
+            shippingCity: '',
+            shippingZipCode: '',
+            shippingCountry: '',
+            shippingZone: ''
+          }
+        })
+      }
+    },
     data(){
       return{
-        formData:{
-          firstName:'',
-          lastName:'',
-          companyName:'',
-          address1:'',
-          address2:'',
-          city:'',
-          zipCode:'',
-          country:'',
-          province:'',
-        }
+
       }
     }
   }
