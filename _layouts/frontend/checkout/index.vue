@@ -11,6 +11,7 @@
       </div>
     </div>
     <div class="row gutter-x-sm">
+      
       <div class="col-md-4">
         
         <!-- (Component) Customer Information -->
@@ -20,7 +21,7 @@
       <div class="col-md-4 gutter-y-sm">
         
         <!-- (Component) Billing Details -->
-        <billingAddress/>
+        <billingAddress :checkoutData="checkoutData"/>
         
         <!-- (Component) Shipping Address -->
         <shippingAddress/>
@@ -34,8 +35,8 @@
         <!-- (Component) Payment Methods -->
         <paymentMethods/>
         
-        <!-- (Component) Order Summary -->
-        <summary/>
+        <!-- (Component) Order Summary PDT -->
+        
         
       </div>
     </div>
@@ -49,7 +50,6 @@
   import shippingAddress from '@imagina/qcommerce/_components/frontend/checkout/shippingAddress'
   import shippingMethods from '@imagina/qcommerce/_components/frontend/checkout/shippingMethods'
   import paymentMethods from '@imagina/qcommerce/_components/frontend/checkout/paymentMethods'
-  import summary from '@imagina/qcommerce/_components/frontend/checkout/summary'
   
   export default {
     components:{
@@ -58,13 +58,46 @@
       shippingAddress,
       shippingMethods,
       paymentMethods,
-      summary,
+    },
+    watch:{
+      checkoutData(newVal){
+        // Dispactch uptate checkout store data
+      }
     },
     data(){
       return{
-      
+        checkoutData:{
+          attributes: {
+            storeId: 0,
+            customerId: 0,
+            paymentMethod: '',
+            paymentMethod_id: 0,
+            shippingMethod: '',
+            shippingMethod_id: 0,
+            cartId: 0,
+            paymentFirstName: '',
+            paymentLastName: '',
+            paymentCompany: '',
+            paymentNit: '',
+            paymentAddress1: '',
+            paymentAddress2: '',
+            paymentCity: '',
+            paymentZipCode: '',
+            paymentCountry: '',
+            paymentZone: '',
+            shippingFirstName: '',
+            shippingLastName: '',
+            shippingCompany: '',
+            shippingAddress1: '',
+            shippingAddress2: '',
+            shippingCity: '',
+            shippingZipCode: '',
+            shippingCountry: '',
+            shippingZone: ''
+          }
+        }
       }
-    }
+    },
   }
 </script>
 
