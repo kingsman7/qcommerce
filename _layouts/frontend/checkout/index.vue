@@ -19,12 +19,14 @@
         
       </div>
       <div class="col-md-4 gutter-y-sm">
+  
+        <!-- (Component) Shipping Address -->
+        <shippingAddress :checkoutData="checkoutData"/>
         
         <!-- (Component) Billing Details -->
         <billingAddress :checkoutData="checkoutData"/>
         
-        <!-- (Component) Shipping Address -->
-        <shippingAddress/>
+  
         
       </div>
       <div class="col-md-4 gutter-y-sm">
@@ -71,9 +73,9 @@
             storeId: 0,
             customerId: 0,
             paymentMethod: '',
-            paymentMethod_id: 0,
+            paymentMethodId: 0,
             shippingMethod: '',
-            shippingMethod_id: 0,
+            shippingMethodId: 0,
             cartId: 0,
             paymentFirstName: '',
             paymentLastName: '',
