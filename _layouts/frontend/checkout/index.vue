@@ -8,6 +8,7 @@
       </div>
     </div>
     <div class="row gutter-x-sm relative-position">
+      
       <div class="col-md-4">
         <!-- (COMPONENT) CUSTOMER INFORMATION -->
         <customerInformation/>
@@ -23,12 +24,17 @@
         <shippingMethods :checkoutData="checkoutData" :error="$v.checkoutData.attributes"/>
         <!-- (COMPONENT) PAYMENT METHODS -->
         <paymentMethods :checkoutData="checkoutData" :error="$v.checkoutData.attributes"/>
-        <!-- (COMPONENT) ORDER SUMMARY PDT -->
-        
+        <!-- (COMPONENT) ORDER SUMMARY
+        <summaryCart/> -->
         <div>
           <q-btn label="Send" color="primary" class="full-width" @click="saveOrder()"/>
         </div>
       </div>
+      
+      <pre v-show="true">
+        {{checkoutData}}
+      </pre>
+      
       <inner-loading :visible="loading" />
     </div>
   </div>
@@ -47,15 +53,23 @@
   import shippingAddress from '@imagina/qcommerce/_components/frontend/checkout/shippingAddress'
   import shippingMethods from '@imagina/qcommerce/_components/frontend/checkout/shippingMethods'
   import paymentMethods from '@imagina/qcommerce/_components/frontend/checkout/paymentMethods'
+  import summaryCart from '@imagina/qcommerce/_components/frontend/checkout/summary'
   import innerLoading from 'src/components/master/innerLoading'
   
   export default {
+    props:{
+      typeLayout:{
+        type:String,
+        default:'OnePage' // OnePage, Stepper
+      }
+    },
     components:{
       customerInformation,
       billingAddress,
       shippingAddress,
       shippingMethods,
       paymentMethods,
+      summaryCart,
       innerLoading,
     },
     data(){
@@ -88,7 +102,8 @@
             shippingCity: '',
             shippingZipCode: '',
             shippingCountry: '',
-            shippingZone: ''
+            shippingZone: '',
+            shippingAndBillingAddressIsSame: true,
           }
         }
       }
@@ -160,7 +175,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>
