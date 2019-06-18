@@ -12,13 +12,13 @@
         <div class="row gutter-x-sm">
           <div class="col md-6 q-pb-lg">
             <q-checkbox
-              v-model="shippingBillingIsSame"
+              v-model="checkoutData.attributes.shippingAndBillingAddressIsSame"
               label="My shipping and billing addresses are the same." />
           </div>
         </div>
-        
-        <div v-if="!shippingBillingIsSame">
-          
+  
+        <div v-if="!checkoutData.attributes.shippingAndBillingAddressIsSame">
+  
           <div class="row gutter-x-sm">
             <div class="col md-6">
               <q-field
@@ -32,19 +32,19 @@
             <div class="col md-6">
               <q-field
                 :error="error.paymentLastName.$error || false"
-                error-label="Field Required ">
+                error-label="Field Required">
                 <q-input
                   v-model="checkoutData.attributes.paymentLastName"
                   float-label="Last Name"/>
               </q-field>
             </div>
           </div>
-          
+  
           <div class="row gutter-x-sm">
             <div class="col md-12">
               <q-field
                 :error="error.paymentCompany.$error || false"
-                error-label="Field Required ">
+                error-label="Field Required">
                 <q-input
                   v-model="checkoutData.attributes.paymentCompany"
                   float-label=" Company name"/>
@@ -56,7 +56,7 @@
             <div class="col md-12">
               <q-field
                 :error="error.paymentAddress1.$error || false"
-                error-label="Field Required ">
+                error-label="Field Required">
                 <q-input
                   v-model="checkoutData.attributes.paymentAddress1"
                   float-label=" Address 1"/>
@@ -68,7 +68,7 @@
             <div class="col md-12">
               <q-field
                 :error="error.paymentAddress2.$error || false"
-                error-label="Field Required ">
+                error-label="Field Required">
                 <q-input
                   v-model="checkoutData.attributes.paymentAddress2"
                   float-label=" Address 2"/>
@@ -80,13 +80,13 @@
             <div class="col md-12">
               <q-field
                 :error="error.paymentCountry.$error || false"
-                error-label="Field Required ">
+                error-label="Field Required">
                 <q-select
-                  @input="handleOnChangeCountry()"
+                  @input="getProvinces()"
                   filter
                   float-label="Country"
-                  v-model="checkoutData.attributes.paymentCountry"
-                  :options="$store.state.qlocations.countries"/>
+                  v-model="country"
+                  :options="countries"/>
               </q-field>
             </div>
           </div>
@@ -95,52 +95,55 @@
             <div class="col md-12">
               <q-field
                 :error="error.paymentZone.$error || false"
-                error-label="Field Required ">
+                error-label="Field Required">
                 <q-select
-                  @input="handleOnChangeProvice()"
+                  @input="getCities()"
                   filter
                   float-label="State/Province"
-                  v-model="checkoutData.attributes.paymentZone"
+                  v-model="province"
                   :options="provinces"/>
               </q-field>
             </div>
           </div>
-          
+  
           <div class="row gutter-x-sm">
             <div class="col md-6">
               <q-field
                 :error="error.paymentCity.$error || false"
-                error-label="Field Required ">
+                error-label="Field Required">
+                <!-- RENDER SELECT IF CITIES LENGTH > 0, ELSE RENDER INPUT FIELD-->
                 <q-select
+                  v-if="cities.length"
                   filter
                   float-label="City"
-                  v-model="checkoutData.attributes.paymentCity"
+                  v-model="city"
                   :options="cities"/>
+                <q-input
+                  v-else
+                  placeholder="City"
+                  float-label="Type City Name"
+                  v-model="city.name"/>
               </q-field>
             </div>
             <div class="col md-6">
               <q-field
                 :error="error.paymentZipCode.$error || false"
-                error-label="Field Required ">
+                error-label="Field Required">
                 <q-input
                   v-model="checkoutData.attributes.paymentZipCode"
                   float-label="Zip/Postal code"/>
               </q-field>
             </div>
           </div>
-  
+          
         </div>
-  
+        
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  // COMPONENTS
-  import Treeselect from '@riophae/vue-treeselect'
-  import '@riophae/vue-treeselect/dist/vue-treeselect.css'
-  
   export default {
     props:{
       title:{
@@ -176,7 +179,8 @@
             shippingCity: '',
             shippingZipCode: '',
             shippingCountry: '',
-            shippingZone: ''
+            shippingZone: '',
+            shippingAndBillingAddressIsSame: true,
           }
         })
       },
@@ -185,65 +189,79 @@
         default:()=>{}
       }
     },
+    watch:{
+      country (val, oldVal) {
+        this.checkoutData.attributes.paymentCountry = this.country.iso_2
+      },
+      province (val, oldVal) {
+        this.checkoutData.attributes.paymentZone = this.province.name
+      },
+      city (val, oldVal) {
+        this.checkoutData.attributes.paymentCity = this.city.name
+      },
+      'city.name':function (val, oldVal) {
+        this.checkoutData.attributes.paymentCity = this.city.name
+      },
+    },
     components:{
-      Treeselect
+
     },
     data(){
       return{
         shippingBillingIsSame: true,
+        countries:[],
         provinces:[],
         cities:[],
+        country:{},
+        province:{},
+        city:{
+          name:''
+        },
       }
     },
-    watch:{
-      shippingBillingIsSame(val, oldVal){
-        if(this.shippingBillingIsSame){
-          this.checkoutData.attributes.paymentFirstName = this.checkoutData.attributes.shippingFirstName
-          this.checkoutData.attributes.paymentLastName = this.checkoutData.attributes.shippingLastName
-          this.checkoutData.attributes.paymentCompany = this.checkoutData.attributes.shippingCompany
-          this.checkoutData.attributes.paymentAddress1 = this.checkoutData.attributes.shippingAddress1
-          this.checkoutData.attributes.paymentAddress2 = this.checkoutData.attributes.shippingAddress2
-          this.checkoutData.attributes.paymentCity = this.checkoutData.attributes.shippingCity
-          this.checkoutData.attributes.paymentZipCode = this.checkoutData.attributes.shippingZipCode
-          this.checkoutData.attributes.paymentCountry = this.checkoutData.attributes.shippingCountry
-          this.checkoutData.attributes.paymentZone = this.checkoutData.attributes.shippingZone
-        }
-      }
+    created(){
+      this.getCountries()
     },
     methods:{
-      handleOnChangeCountry(){
+      getCountries(){
+        this.countries = this.toFormatToQSelect(this.$store.state.qlocations.countries)
+      },
+      getProvinces(){
         let params = {
           refresh:true,
           params:{
             filter:{
-              country:this.checkoutData.attributes.paymentCountry
+              country:this.country.id
             }
           }
         }
         this.$store.dispatch('qlocations/GET_PROVINCES',params)
-        .then(response=>{
-          this.provinces = this.$store.state.qlocations.provinces
-        })
-        .catch(error=>{
-          this.$helper.alert.error(`Error ${error}`)
-        })
+          .then(response=>{
+            this.provinces = this.toFormatToQSelect(this.$store.state.qlocations.provinces)
+          })
+          .catch(error=>{
+            this.$helper.alert.error(`Error ${error}`)
+          })
       },
-      handleOnChangeProvice(){
+      getCities(){
         let params = {
           refresh:true,
           params:{
             filter:{
-              province_id:this.checkoutData.attributes.paymentZone
+              province_id:this.province.id
             }
           }
         }
         this.$store.dispatch('qlocations/GET_CITIES',params)
-        .then(response=>{
-          this.cities = this.$store.state.qlocations.cities
-        })
-        .catch(error=>{
-          this.$helper.alert.error(`Error ${error}`)
-        })
+          .then(response=>{
+            this.cities = this.toFormatToQSelect(this.$store.state.qlocations.cities)
+          })
+          .catch(error=>{
+            this.$helper.alert.error(`Error ${error}`)
+          })
+      },
+      toFormatToQSelect(array){
+        return array.map( item => ({label:item.name, value:item }) )
       }
     }
   }

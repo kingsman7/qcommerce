@@ -8,7 +8,7 @@
         </h1>
       </div>
       <div class="col-md-12">
-      
+        <userLoginRegister />
       </div>
     </div>
   </div>
@@ -16,7 +16,7 @@
 
 <script>
   // COMPONENTS
-  
+  import userLoginRegister from '@imagina/quser/_components/auth/form'
   
   export default {
     props:{
@@ -26,14 +26,11 @@
       }
     },
     components:{
-    
+      userLoginRegister,
     }
   }
 </script>
 
 <style scoped>
-  .q-list {
-    border: 0px solid #e0e0e0;
-    border-top: 1px solid #e0e0e0;
-  }
+
 </style>

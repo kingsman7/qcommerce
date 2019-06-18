@@ -7,15 +7,19 @@
           Order Summary
         </h1>
       </div>
+      <div class="col-md-12">
+        <cart/>
+      </div>
     </div>
-  
-
   </div>
 </template>
 
 <script>
+  import cart from '@imagina/qcommerce/_components/frontend/cart/sumary'
   export default {
-
+    components:{
+      cart
+    }
   }
 </script>
 

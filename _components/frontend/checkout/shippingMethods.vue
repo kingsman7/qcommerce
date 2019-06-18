@@ -3,7 +3,7 @@
     <div class="row shadow-1">
       <div class="col-md-12 flex flex-center">
         <h1 class="q-headline text-primary ">
-          <q-chip color="primary">5</q-chip>
+          <q-chip color="primary">4</q-chip>
           {{title}}
         </h1>
       </div>
@@ -14,7 +14,7 @@
           <q-radio
             v-model="shipping"
             :val="shippingMethod"
-            :label="`${shippingMethod.title}`" />
+            :label="`${shippingMethod.title} ${shippingMethod.calculations.priceshow ? $n(shippingMethod.calculations.price) : ''}`" />
         </q-field>
       </div>
     </div>
