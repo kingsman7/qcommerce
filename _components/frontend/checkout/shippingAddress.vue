@@ -12,8 +12,8 @@
         <div class="row gutter-x-sm">
           <div class="col md-6">
             <q-field
-              :error="false"
-              error-label="We need a valid email">
+              :error="error.shippingFirstName.$error || false"
+              error-label="Field Required ">
               <q-input
                 v-model="checkoutData.attributes.shippingFirstName"
                 float-label="First Name"/>
@@ -21,8 +21,8 @@
           </div>
           <div class="col md-6">
             <q-field
-              :error="false"
-              error-label="We need a valid email">
+              :error="error.shippingLastName.$error || false"
+              error-label="Field Required">
               <q-input
                 v-model="checkoutData.attributes.shippingLastName"
                 float-label="Last Name"/>
@@ -33,8 +33,8 @@
         <div class="row gutter-x-sm">
           <div class="col md-12">
             <q-field
-              :error="false"
-              error-label="We need a valid email">
+              :error="error.shippingCompany.$error || false"
+              error-label="Field Required">
               <q-input
                 v-model="checkoutData.attributes.shippingCompany"
                 float-label=" Company name"/>
@@ -45,8 +45,8 @@
         <div class="row gutter-x-sm">
           <div class="col md-12">
             <q-field
-              :error="false"
-              error-label="We need a valid email">
+              :error="error.shippingAddress1.$error || false"
+              error-label="Field Required">
               <q-input
                 v-model="checkoutData.attributes.shippingAddress1"
                 float-label=" Address 1"/>
@@ -57,8 +57,8 @@
         <div class="row gutter-x-sm">
           <div class="col md-12">
             <q-field
-              :error="false"
-              error-label="We need a valid email">
+              :error="error.shippingAddress2.$error || false"
+              error-label="Field Required">
               <q-input
                 v-model="checkoutData.attributes.shippingAddress2"
                 float-label=" Address 2"/>
@@ -69,8 +69,8 @@
         <div class="row gutter-x-sm">
           <div class="col md-12">
             <q-field
-              :error="false"
-              error-label="This field is required">
+              :error="error.shippingCountry.$error || false"
+              error-label="Field Required">
               <q-select
                 @input="handleOnChangeCountry()"
                 filter
@@ -84,8 +84,8 @@
         <div class="row gutter-x-sm">
           <div class="col md-12">
             <q-field
-              :error="false"
-              error-label="We need a valid email">
+              :error="error.shippingZone.$error || false"
+              error-label="Field Required">
               <q-select
                 @input="handleOnChangeProvice()"
                 filter
@@ -99,8 +99,8 @@
         <div class="row gutter-x-sm">
           <div class="col md-6">
             <q-field
-              :error="false"
-              error-label="We need a valid email">
+              :error="error.shippingCity.$error || false"
+              error-label="Field Required">
               <q-select
                 filter
                 float-label="City"
@@ -110,8 +110,8 @@
           </div>
           <div class="col md-6">
             <q-field
-              :error="false"
-              error-label="We need a valid email">
+              :error="error.shippingZipCode.$error || false"
+              error-label="Field Required">
               <q-input
                 v-model="checkoutData.attributes.shippingZipCode"
                 float-label="Zip/Postal code"/>
@@ -167,32 +167,26 @@
             shippingZone: ''
           }
         })
+      },
+      error:{
+        type:Object,
+        default:()=>{}
       }
     },
     watch:{
       'checkoutData.attributes.shippingCountry':function (val, oldVal) {
-        let params = {
-          params:this.checkoutData.attributes
-        }
-        this.$store.dispatch('eCommerce/GET_SHIPPING_METHODS', params);
+       this.refreshShippingMethods()
       },
       'checkoutData.attributes.shippingZone':function (val, oldVal) {
-        let params = {
-          params:this.checkoutData.attributes
-        }
-        this.$store.dispatch('eCommerce/GET_SHIPPING_METHODS',params);
+        this.refreshShippingMethods()
       },
       'checkoutData.attributes.shippingCity':function (val, oldVal) {
-        let params = {
-          params:this.checkoutData.attributes
-        }
-        this.$store.dispatch('eCommerce/GET_SHIPPING_METHODS',params);
+        this.refreshShippingMethods()
       },
       'checkoutData.attributes.shippingZipCode':function (val, oldVal) {
-        let params = {
-          params:this.checkoutData.attributes
+        if (this.checkoutData.attributes.shippingZipCode.length >= 4){
+          this.refreshShippingMethods()
         }
-        this.$store.dispatch('eCommerce/GET_SHIPPING_METHODS', params);
       }
     },
     components:{
@@ -238,6 +232,15 @@
         .catch(error=>{
           this.$helper.alert.error(`Error ${error}`)
         })
+      },
+      refreshShippingMethods(){
+        let params = {
+          refresh:true,
+          params:{
+            filter:this.checkoutData.attributes
+          }
+        }
+        this.$store.dispatch('eCommerce/GET_SHIPPING_METHODS', params);
       }
     }
   }
