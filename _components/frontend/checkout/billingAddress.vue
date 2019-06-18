@@ -11,7 +11,9 @@
   
         <div class="row gutter-x-sm">
           <div class="col md-6 q-pb-lg">
-            <q-checkbox v-model="shippingBillingIsSame" label="My shipping and billing addresses are the same." />
+            <q-checkbox
+              v-model="shippingBillingIsSame"
+              label="My shipping and billing addresses are the same." />
           </div>
         </div>
         
@@ -20,8 +22,8 @@
           <div class="row gutter-x-sm">
             <div class="col md-6">
               <q-field
-                :error="false"
-                error-label="We need a valid email">
+                :error="error.paymentFirstName.$error || false"
+                error-label="Field Required ">
                 <q-input
                   v-model="checkoutData.attributes.paymentFirstName"
                   float-label="First Name"/>
@@ -29,8 +31,8 @@
             </div>
             <div class="col md-6">
               <q-field
-                :error="false"
-                error-label="We need a valid email">
+                :error="error.paymentLastName.$error || false"
+                error-label="Field Required ">
                 <q-input
                   v-model="checkoutData.attributes.paymentLastName"
                   float-label="Last Name"/>
@@ -41,8 +43,8 @@
           <div class="row gutter-x-sm">
             <div class="col md-12">
               <q-field
-                :error="false"
-                error-label="We need a valid email">
+                :error="error.paymentCompany.$error || false"
+                error-label="Field Required ">
                 <q-input
                   v-model="checkoutData.attributes.paymentCompany"
                   float-label=" Company name"/>
@@ -53,8 +55,8 @@
           <div class="row gutter-x-sm">
             <div class="col md-12">
               <q-field
-                :error="false"
-                error-label="We need a valid email">
+                :error="error.paymentAddress1.$error || false"
+                error-label="Field Required ">
                 <q-input
                   v-model="checkoutData.attributes.paymentAddress1"
                   float-label=" Address 1"/>
@@ -65,8 +67,8 @@
           <div class="row gutter-x-sm">
             <div class="col md-12">
               <q-field
-                :error="false"
-                error-label="We need a valid email">
+                :error="error.paymentAddress2.$error || false"
+                error-label="Field Required ">
                 <q-input
                   v-model="checkoutData.attributes.paymentAddress2"
                   float-label=" Address 2"/>
@@ -77,8 +79,8 @@
           <div class="row gutter-x-sm">
             <div class="col md-12">
               <q-field
-                :error="false"
-                error-label="This field is required">
+                :error="error.paymentCountry.$error || false"
+                error-label="Field Required ">
                 <q-select
                   @input="handleOnChangeCountry()"
                   filter
@@ -92,8 +94,8 @@
           <div class="row gutter-x-sm">
             <div class="col md-12">
               <q-field
-                :error="false"
-                error-label="We need a valid email">
+                :error="error.paymentZone.$error || false"
+                error-label="Field Required ">
                 <q-select
                   @input="handleOnChangeProvice()"
                   filter
@@ -107,8 +109,8 @@
           <div class="row gutter-x-sm">
             <div class="col md-6">
               <q-field
-                :error="false"
-                error-label="We need a valid email">
+                :error="error.paymentCity.$error || false"
+                error-label="Field Required ">
                 <q-select
                   filter
                   float-label="City"
@@ -118,8 +120,8 @@
             </div>
             <div class="col md-6">
               <q-field
-                :error="false"
-                error-label="We need a valid email">
+                :error="error.paymentZipCode.$error || false"
+                error-label="Field Required ">
                 <q-input
                   v-model="checkoutData.attributes.paymentZipCode"
                   float-label="Zip/Postal code"/>
@@ -177,6 +179,10 @@
             shippingZone: ''
           }
         })
+      },
+      error:{
+        type:Object,
+        default:()=>{}
       }
     },
     components:{
@@ -187,6 +193,21 @@
         shippingBillingIsSame: true,
         provinces:[],
         cities:[],
+      }
+    },
+    watch:{
+      shippingBillingIsSame(val, oldVal){
+        if(this.shippingBillingIsSame){
+          this.checkoutData.attributes.paymentFirstName = this.checkoutData.attributes.shippingFirstName
+          this.checkoutData.attributes.paymentLastName = this.checkoutData.attributes.shippingLastName
+          this.checkoutData.attributes.paymentCompany = this.checkoutData.attributes.shippingCompany
+          this.checkoutData.attributes.paymentAddress1 = this.checkoutData.attributes.shippingAddress1
+          this.checkoutData.attributes.paymentAddress2 = this.checkoutData.attributes.shippingAddress2
+          this.checkoutData.attributes.paymentCity = this.checkoutData.attributes.shippingCity
+          this.checkoutData.attributes.paymentZipCode = this.checkoutData.attributes.shippingZipCode
+          this.checkoutData.attributes.paymentCountry = this.checkoutData.attributes.shippingCountry
+          this.checkoutData.attributes.paymentZone = this.checkoutData.attributes.shippingZone
+        }
       }
     },
     methods:{
