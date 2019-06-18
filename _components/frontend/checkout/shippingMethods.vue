@@ -30,8 +30,41 @@
       },
       checkoutData:{
         type:Object,
-        default:()=>{}
+        default:()=>({
+          attributes: {
+            storeId: 0,
+            customerId: 0,
+            paymentMethod: '',
+            paymentMethodId: 0,
+            shippingMethod: '',
+            shippingMethodId: 0,
+            cartId: 0,
+            paymentFirstName: '',
+            paymentLastName: '',
+            paymentCompany: '',
+            paymentNit: '',
+            paymentAddress1: '',
+            paymentAddress2: '',
+            paymentCity: '',
+            paymentZipCode: '',
+            paymentCountry: '',
+            paymentZone: '',
+            shippingFirstName: '',
+            shippingLastName: '',
+            shippingCompany: '',
+            shippingAddress1: '',
+            shippingAddress2: '',
+            shippingCity: '',
+            shippingZipCode: '',
+            shippingCountry: '',
+            shippingZone: ''
+          }
+        })
       },
+      error:{
+        type:Object,
+        default:()=>{}
+      }
     },
     data(){
       return{
