@@ -7,7 +7,7 @@
         </h1>
       </div>
     </div>
-    <div class="row gutter-x-sm relative-position">
+    <div class="row gutter-x-sm gutter-y-sm relative-position">
       
       <div class="col-md-4">
         <!-- (COMPONENT) CUSTOMER INFORMATION -->
@@ -31,10 +31,6 @@
         </div>
       </div>
       
-      <pre v-show="true">
-        {{checkoutData}}
-      </pre>
-      
       <inner-loading :visible="loading" />
     </div>
   </div>
@@ -45,7 +41,7 @@
   import eCommerceService from '@imagina/qcommerce/_services/index'
   
   // PLUGINS
-  import {required} from 'vuelidate/lib/validators'
+  import {required, requiredIf} from 'vuelidate/lib/validators'
   
   // COMPONENTS
   import customerInformation from '@imagina/qcommerce/_components/frontend/checkout/customerInformation'
@@ -103,8 +99,8 @@
             shippingZipCode: '',
             shippingCountry: '',
             shippingZone: '',
-            shippingAndBillingAddressIsSame: true,
-          }
+          },
+          shippingAndBillingAddressIsSame: true,
         }
       }
     },
@@ -118,16 +114,56 @@
           shippingMethod: {required},
           shippingMethodId: {required},
           cartId: {required},
-          paymentFirstName: {required},
-          paymentLastName: {required},
-          paymentCompany: {required},
-          paymentNit: {required},
-          paymentAddress1: {required},
-          paymentAddress2: {required},
-          paymentCity: {required},
-          paymentZipCode: {required},
-          paymentCountry: {required},
-          paymentZone: {required},
+          paymentFirstName: {
+            required: requiredIf(function () {
+              return !this.checkoutData.shippingAndBillingAddressIsSame
+            })
+          },
+          paymentLastName: {
+            required: requiredIf(function () {
+              return !this.checkoutData.shippingAndBillingAddressIsSame
+            })
+          },
+          paymentCompany: {
+            required: requiredIf(function () {
+              return !this.checkoutData.shippingAndBillingAddressIsSame
+            })
+          },
+          paymentNit: {
+            required: requiredIf(function () {
+              return !this.checkoutData.shippingAndBillingAddressIsSame
+            })
+          },
+          paymentAddress1: {
+            required: requiredIf(function () {
+              return !this.checkoutData.shippingAndBillingAddressIsSame
+            })
+          },
+          paymentAddress2: {
+            required: requiredIf(function () {
+              return !this.checkoutData.shippingAndBillingAddressIsSame
+            })
+          },
+          paymentCity: {
+            required: requiredIf(function () {
+              return !this.checkoutData.shippingAndBillingAddressIsSame
+            })
+          },
+          paymentZipCode: {
+            required: requiredIf(function () {
+              return !this.checkoutData.shippingAndBillingAddressIsSame
+            })
+          },
+          paymentCountry: {
+            required: requiredIf(function () {
+              return !this.checkoutData.shippingAndBillingAddressIsSame
+            })
+          },
+          paymentZone: {
+            required: requiredIf(function () {
+              return !this.checkoutData.shippingAndBillingAddressIsSame
+            })
+          },
           shippingFirstName: {required},
           shippingLastName: {required},
           shippingCompany: {required},
@@ -142,7 +178,8 @@
     },
     methods:{
       // SEND ORDER TO SERVER
-      saveOrder(){
+      async saveOrder(){
+        await this.shippingBillingAddressSame()
         this.$v.$touch()
         if (this.$v.$invalid) {
           this.$helper.alert.error(`Please fill the Order correctly`)
@@ -170,6 +207,19 @@
             this.loading = false
             this.$helper.alert.error(`Error ${error}`)
           })
+        }
+      },
+      async shippingBillingAddressSame(){
+        if (this.checkoutData.shippingAndBillingAddressIsSame){
+          this.checkoutData.attributes.paymentFirstName = this.checkoutData.attributes.shippingFirstName
+          this.checkoutData.attributes.paymentLastName = this.checkoutData.attributes.shippingLastName
+          this.checkoutData.attributes.paymentCompany = this.checkoutData.attributes.shippingCompany
+          this.checkoutData.attributes.paymentAddress1 = this.checkoutData.attributes.shippingAddress1
+          this.checkoutData.attributes.paymentAddress2 = this.checkoutData.attributes.shippingAddress2
+          this.checkoutData.attributes.paymentCity = this.checkoutData.attributes.shippingCity
+          this.checkoutData.attributes.paymentZipCode = this.checkoutData.attributes.shippingZipCode
+          this.checkoutData.attributes.paymentCountry = this.checkoutData.attributes.shippingCountry
+          this.checkoutData.attributes.paymentZone = this.checkoutData.attributes.shippingZone
         }
       }
     }
