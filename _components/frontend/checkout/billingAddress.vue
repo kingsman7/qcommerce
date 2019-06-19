@@ -8,136 +8,153 @@
         </h1>
       </div>
       <div class="col-md-12 q-px-md">
-  
+        
         <div class="row gutter-x-sm">
           <div class="col md-6 q-pb-lg">
             <q-checkbox
-              v-model="checkoutData.attributes.shippingAndBillingAddressIsSame"
+              v-model="checkoutData.shippingAndBillingAddressIsSame"
               label="My shipping and billing addresses are the same." />
           </div>
         </div>
   
-        <div v-if="!checkoutData.attributes.shippingAndBillingAddressIsSame">
+        <div v-if="!checkoutData.shippingAndBillingAddressIsSame">
   
-          <div class="row gutter-x-sm">
-            <div class="col md-6">
-              <q-field
-                :error="error.paymentFirstName.$error || false"
-                error-label="Field Required ">
-                <q-input
-                  v-model="checkoutData.attributes.paymentFirstName"
-                  float-label="First Name"/>
-              </q-field>
-            </div>
-            <div class="col md-6">
-              <q-field
-                :error="error.paymentLastName.$error || false"
-                error-label="Field Required">
-                <q-input
-                  v-model="checkoutData.attributes.paymentLastName"
-                  float-label="Last Name"/>
-              </q-field>
-            </div>
-          </div>
-  
-          <div class="row gutter-x-sm">
+          <div class="row gutter-x-sm" v-if="$store.state.auth.userData || false">
             <div class="col md-12">
               <q-field
-                :error="error.paymentCompany.$error || false"
-                error-label="Field Required">
-                <q-input
-                  v-model="checkoutData.attributes.paymentCompany"
-                  float-label=" Company name"/>
-              </q-field>
-            </div>
-          </div>
-  
-          <div class="row gutter-x-sm">
-            <div class="col md-12">
-              <q-field
-                :error="error.paymentAddress1.$error || false"
-                error-label="Field Required">
-                <q-input
-                  v-model="checkoutData.attributes.paymentAddress1"
-                  float-label=" Address 1"/>
-              </q-field>
-            </div>
-          </div>
-  
-          <div class="row gutter-x-sm">
-            <div class="col md-12">
-              <q-field
-                :error="error.paymentAddress2.$error || false"
-                error-label="Field Required">
-                <q-input
-                  v-model="checkoutData.attributes.paymentAddress2"
-                  float-label=" Address 2"/>
-              </q-field>
-            </div>
-          </div>
-  
-          <div class="row gutter-x-sm">
-            <div class="col md-12">
-              <q-field
-                :error="error.paymentCountry.$error || false"
+                :error="false"
                 error-label="Field Required">
                 <q-select
-                  @input="getProvinces()"
                   filter
-                  float-label="Country"
-                  v-model="country"
-                  :options="countries"/>
+                  float-label="Addresses"
+                  v-model="modelTest"
+                  :options="toFormatToQSelect($store.state.auth.userData.addresses)"/>
               </q-field>
             </div>
           </div>
   
-          <div class="row gutter-x-sm">
-            <div class="col md-12">
-              <q-field
-                :error="error.paymentZone.$error || false"
-                error-label="Field Required">
-                <q-select
-                  @input="getCities()"
-                  filter
-                  float-label="State/Province"
-                  v-model="province"
-                  :options="provinces"/>
-              </q-field>
-            </div>
-          </div>
+          <div v-show="!$store.state.auth.userData">
   
-          <div class="row gutter-x-sm">
-            <div class="col md-6">
-              <q-field
-                :error="error.paymentCity.$error || false"
-                error-label="Field Required">
-                <!-- RENDER SELECT IF CITIES LENGTH > 0, ELSE RENDER INPUT FIELD-->
-                <q-select
-                  v-if="cities.length"
-                  filter
-                  float-label="City"
-                  v-model="city"
-                  :options="cities"/>
-                <q-input
-                  v-else
-                  placeholder="City"
-                  float-label="Type City Name"
-                  v-model="city.name"/>
-              </q-field>
+            <div class="row gutter-x-sm">
+              <div class="col md-6">
+                <q-field
+                  :error="error.paymentFirstName.$error || false"
+                  error-label="Field Required ">
+                  <q-input
+                    v-model="checkoutData.attributes.paymentFirstName"
+                    float-label="First Name"/>
+                </q-field>
+              </div>
+              <div class="col md-6">
+                <q-field
+                  :error="error.paymentLastName.$error || false"
+                  error-label="Field Required">
+                  <q-input
+                    v-model="checkoutData.attributes.paymentLastName"
+                    float-label="Last Name"/>
+                </q-field>
+              </div>
             </div>
-            <div class="col md-6">
-              <q-field
-                :error="error.paymentZipCode.$error || false"
-                error-label="Field Required">
-                <q-input
-                  v-model="checkoutData.attributes.paymentZipCode"
-                  float-label="Zip/Postal code"/>
-              </q-field>
+  
+            <div class="row gutter-x-sm">
+              <div class="col md-12">
+                <q-field
+                  :error="error.paymentCompany.$error || false"
+                  error-label="Field Required">
+                  <q-input
+                    v-model="checkoutData.attributes.paymentCompany"
+                    float-label=" Company name"/>
+                </q-field>
+              </div>
             </div>
+  
+            <div class="row gutter-x-sm">
+              <div class="col md-12">
+                <q-field
+                  :error="error.paymentAddress1.$error || false"
+                  error-label="Field Required">
+                  <q-input
+                    v-model="checkoutData.attributes.paymentAddress1"
+                    float-label=" Address 1"/>
+                </q-field>
+              </div>
+            </div>
+  
+            <div class="row gutter-x-sm">
+              <div class="col md-12">
+                <q-field
+                  :error="error.paymentAddress2.$error || false"
+                  error-label="Field Required">
+                  <q-input
+                    v-model="checkoutData.attributes.paymentAddress2"
+                    float-label=" Address 2"/>
+                </q-field>
+              </div>
+            </div>
+  
+            <div class="row gutter-x-sm">
+              <div class="col md-12">
+                <q-field
+                  :error="error.paymentCountry.$error || false"
+                  error-label="Field Required">
+                  <q-select
+                    @input="getProvinces()"
+                    filter
+                    float-label="Country"
+                    v-model="country"
+                    :options="countries"/>
+                </q-field>
+              </div>
+            </div>
+  
+            <div class="row gutter-x-sm">
+              <div class="col md-12">
+                <q-field
+                  :error="error.paymentZone.$error || false"
+                  error-label="Field Required">
+                  <q-select
+                    @input="getCities()"
+                    filter
+                    float-label="State/Province"
+                    v-model="province"
+                    :options="provinces"/>
+                </q-field>
+              </div>
+            </div>
+  
+            <div class="row gutter-x-sm">
+              <div class="col md-6">
+                <q-field
+                  :error="error.paymentCity.$error || false"
+                  error-label="Field Required">
+                  <!-- RENDER SELECT IF CITIES LENGTH > 0, ELSE RENDER INPUT FIELD-->
+                  <q-select
+                    v-if="cities.length"
+                    filter
+                    float-label="City"
+                    v-model="city"
+                    :options="cities"/>
+                  <q-input
+                    v-else
+                    placeholder="City"
+                    float-label="Type City Name"
+                    v-model="city.name"/>
+                </q-field>
+              </div>
+              <div class="col md-6">
+                <q-field
+                  :error="error.paymentZipCode.$error || false"
+                  error-label="Field Required">
+                  <q-input
+                    v-model="checkoutData.attributes.paymentZipCode"
+                    float-label="Zip/Postal code"/>
+                </q-field>
+              </div>
+            </div>
+            
+            
           </div>
-          
         </div>
-        
       </div>
     </div>
   </div>
@@ -217,6 +234,7 @@
         city:{
           name:''
         },
+        modelTest: '',
       }
     },
     created(){

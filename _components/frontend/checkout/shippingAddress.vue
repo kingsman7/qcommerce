@@ -9,129 +9,138 @@
       </div>
       <div class="col-md-12 q-px-md">
         
-        <div class="row gutter-x-sm">
-          <div class="col md-6">
-            <q-field
-              :error="error.shippingFirstName.$error || false"
-              error-label="Field Required ">
-              <q-input
-                @input="handleOnChangeInput('FirstName', checkoutData.attributes.shippingFirstName)"
-                v-model="checkoutData.attributes.shippingFirstName"
-                float-label="First Name"/>
-            </q-field>
-          </div>
-          <div class="col md-6">
-            <q-field
-              :error="error.shippingLastName.$error || false"
-              error-label="Field Required">
-              <q-input
-                @input="handleOnChangeInput('LastName', checkoutData.attributes.shippingLastName)"
-                v-model="checkoutData.attributes.shippingLastName"
-                float-label="Last Name"/>
-            </q-field>
-          </div>
-        </div>
-        
-        <div class="row gutter-x-sm">
+        <div class="row gutter-x-sm" v-if="$store.state.auth.userData || false">
           <div class="col md-12">
             <q-field
-              :error="error.shippingCompany.$error || false"
-              error-label="Field Required">
-              <q-input
-                @input="handleOnChangeInput('Company', checkoutData.attributes.shippingCompany)"
-                v-model="checkoutData.attributes.shippingCompany"
-                float-label=" Company name"/>
-            </q-field>
-          </div>
-        </div>
-        
-        <div class="row gutter-x-sm">
-          <div class="col md-12">
-            <q-field
-              :error="error.shippingAddress1.$error || false"
-              error-label="Field Required">
-              <q-input
-                @input="handleOnChangeInput('Address1', checkoutData.attributes.shippingAddress1)"
-                v-model="checkoutData.attributes.shippingAddress1"
-                float-label=" Address 1"/>
-            </q-field>
-          </div>
-        </div>
-        
-        <div class="row gutter-x-sm">
-          <div class="col md-12">
-            <q-field
-              :error="error.shippingAddress2.$error || false"
-              error-label="Field Required">
-              <q-input
-                @input="handleOnChangeInput('Address2', checkoutData.attributes.shippingAddress2)"
-                v-model="checkoutData.attributes.shippingAddress2"
-                float-label=" Address 2"/>
-            </q-field>
-          </div>
-        </div>
-
-        <div class="row gutter-x-sm">
-          <div class="col md-12">
-            <q-field
-              :error="error.shippingCountry.$error || false"
+              :error="false"
               error-label="Field Required">
               <q-select
-                @input="getProvinces()"
                 filter
-                float-label="Country"
-                v-model="country"
-                :options="countries"/>
+                float-label="Addresses"
+                v-model="modelTest"
+                :options="toFormatToQSelect($store.state.auth.userData.addresses)"/>
             </q-field>
           </div>
         </div>
         
-        <div class="row gutter-x-sm">
-          <div class="col md-12">
-            <q-field
-              :error="error.shippingZone.$error || false"
-              error-label="Field Required">
-              <q-select
-                @input="getCities()"
-                filter
-                float-label="State/Province"
-                v-model="province"
-                :options="provinces"/>
-            </q-field>
+        <div v-show="!$store.state.auth.userData">
+          <div class="row gutter-x-sm" >
+            <div class="col md-6">
+              <q-field
+                :error="error.shippingFirstName.$error || false"
+                error-label="Field Required ">
+                <q-input
+                  v-model="checkoutData.attributes.shippingFirstName"
+                  float-label="First Name"/>
+              </q-field>
+            </div>
+            <div class="col md-6">
+              <q-field
+                :error="error.shippingLastName.$error || false"
+                error-label="Field Required">
+                <q-input
+                  v-model="checkoutData.attributes.shippingLastName"
+                  float-label="Last Name"/>
+              </q-field>
+            </div>
           </div>
-        </div>
+          
+          <div class="row gutter-x-sm">
+            <div class="col md-12">
+              <q-field
+                :error="error.shippingCompany.$error || false"
+                error-label="Field Required">
+                <q-input
+                  v-model="checkoutData.attributes.shippingCompany"
+                  float-label=" Company name"/>
+              </q-field>
+            </div>
+          </div>
+          
+          <div class="row gutter-x-sm">
+            <div class="col md-12">
+              <q-field
+                :error="error.shippingAddress1.$error || false"
+                error-label="Field Required">
+                <q-input
+                  v-model="checkoutData.attributes.shippingAddress1"
+                  float-label=" Address 1"/>
+              </q-field>
+            </div>
+          </div>
+          
+          <div class="row gutter-x-sm">
+            <div class="col md-12">
+              <q-field
+                :error="error.shippingAddress2.$error || false"
+                error-label="Field Required">
+                <q-input
+                  v-model="checkoutData.attributes.shippingAddress2"
+                  float-label=" Address 2"/>
+              </q-field>
+            </div>
+          </div>
+          
+          <div class="row gutter-x-sm">
+            <div class="col md-12">
+              <q-field
+                :error="error.shippingCountry.$error || false"
+                error-label="Field Required">
+                <q-select
+                  @input="getProvinces()"
+                  filter
+                  float-label="Country"
+                  v-model="country"
+                  :options="countries"/>
+              </q-field>
+            </div>
+          </div>
+          
+          <div class="row gutter-x-sm">
+            <div class="col md-12">
+              <q-field
+                :error="error.shippingZone.$error || false"
+                error-label="Field Required">
+                <q-select
+                  @input="getCities()"
+                  filter
+                  float-label="State/Province"
+                  v-model="province"
+                  :options="provinces"/>
+              </q-field>
+            </div>
+          </div>
+          
+          <div class="row gutter-x-sm">
+            <div class="col md-6">
+              <q-field
+                :error="error.shippingCity.$error || false"
+                error-label="Field Required">
+                <!-- RENDER SELECT IF CITIES LENGTH > 0, ELSE RENDER INPUT FIELD-->
+                <q-select
+                  v-if="cities.length"
+                  filter
+                  float-label="City"
+                  v-model="city"
+                  :options="cities"/>
+                <q-input
+                  v-else
+                  placeholder="City"
+                  float-label="Type City Name"
+                  v-model="city.name"/>
+              </q-field>
+            </div>
+            <div class="col md-6">
+              <q-field
+                :error="error.shippingZipCode.$error || false"
+                error-label="Field Required">
+                <q-input
+                  v-model="checkoutData.attributes.shippingZipCode"
+                  float-label="Zip/Postal code"/>
+              </q-field>
+            </div>
+          </div>
         
-        <div class="row gutter-x-sm">
-          <div class="col md-6">
-            <q-field
-              :error="error.shippingCity.$error || false"
-              error-label="Field Required">
-              <!-- RENDER SELECT IF CITIES LENGTH > 0, ELSE RENDER INPUT FIELD-->
-              <q-select
-                v-if="cities.length"
-                filter
-                @input="handleOnChangeInput('City', checkoutData.attributes.shippingCity)"
-                float-label="City"
-                v-model="city"
-                :options="cities"/>
-              <q-input
-                v-else
-                @input="handleOnChangeInput('City', checkoutData.attributes.shippingCity)"
-                placeholder="City"
-                float-label="Type City Name"
-                v-model="city.name"/>
-            </q-field>
-          </div>
-          <div class="col md-6">
-            <q-field
-              :error="error.shippingZipCode.$error || false"
-              error-label="Field Required">
-              <q-input
-                @input="handleOnChangeInput('ZipCode', checkoutData.attributes.shippingZipCode)"
-                v-model="checkoutData.attributes.shippingZipCode"
-                float-label="Zip/Postal code"/>
-            </q-field>
-          </div>
         </div>
       
       </div>
@@ -140,10 +149,6 @@
 </template>
 
 <script>
-  // COMPONENTS
-  import Treeselect from '@riophae/vue-treeselect'
-  import '@riophae/vue-treeselect/dist/vue-treeselect.css'
-
   export default {
     props:{
       title:{
@@ -180,8 +185,8 @@
             shippingZipCode: '',
             shippingCountry: '',
             shippingZone: '',
-            shippingAndBillingAddressIsSame: true,
-          }
+          },
+          shippingAndBillingAddressIsSame: true,
         })
       },
       error:{
@@ -213,10 +218,11 @@
       }
     },
     components:{
-      Treeselect
+
     },
     data(){
       return{
+        shippingBillingIsSame: true,
         countries:[],
         provinces:[],
         cities:[],
@@ -225,6 +231,7 @@
         city:{
           name:''
         },
+        modelTest:'',
       }
     },
     created(){
@@ -244,13 +251,12 @@
           }
         }
         this.$store.dispatch('qlocations/GET_PROVINCES',params)
-        .then(response=>{
-          this.provinces = this.toFormatToQSelect(this.$store.state.qlocations.provinces)
-          this.handleOnChangeInput('Country', checkoutData.attributes.shippingCountry)
-        })
-        .catch(error=>{
-          this.$helper.alert.error(`Error ${error}`)
-        })
+          .then(response=>{
+            this.provinces = this.toFormatToQSelect(this.$store.state.qlocations.provinces)
+          })
+          .catch(error=>{
+            this.$helper.alert.error(`Error ${error}`)
+          })
       },
       getCities(){
         let params = {
@@ -262,20 +268,12 @@
           }
         }
         this.$store.dispatch('qlocations/GET_CITIES',params)
-        .then(response=>{
-          this.cities = this.toFormatToQSelect(this.$store.state.qlocations.cities)
-          this.handleOnChangeInput('Zone', checkoutData.attributes.shippingZone)
-        })
-        .catch(error=>{
-          this.$helper.alert.error(`Error ${error}`)
-        })
-      },
-      handleOnChangeInput(name, value){
-        if (this.checkoutData.attributes.shippingAndBillingAddressIsSame){
-          let inputName = `payment${name}`
-          console.warn(inputName)
-          this.checkoutData.attributes[inputName] = value
-        }
+          .then(response=>{
+            this.cities = this.toFormatToQSelect(this.$store.state.qlocations.cities)
+          })
+          .catch(error=>{
+            this.$helper.alert.error(`Error ${error}`)
+          })
       },
       refreshShippingMethods(){
         let params = {
