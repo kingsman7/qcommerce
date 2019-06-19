@@ -14,6 +14,7 @@ export default {
 	cart : urlBase + '/carts',
 	cartProducts : urlBase + '/cart-products',
 	paymentMethods: urlBase + '/payment-methods',
+	shippingMethods: urlBase + '/shipping-methods',
 	orders : urlBase + '/orders',
 	orderStatus : urlBase + '/order-statuses',
 	orderStatusHistory : urlBase + '/order-status-history',

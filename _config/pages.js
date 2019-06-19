@@ -156,4 +156,31 @@ export default {
 		icon: 'fas fa-stream',
 		middleware: [auth,access]
 	},
+  
+  // Payment Methods
+  paymentMethods: {
+    permission: 'icommerce.payment-methods.manage',
+    activated: true,
+    path: '/payment-methods',
+    name: 'payment.methods',
+    layout: require('@imagina/qcommerce/_layouts/admin/paymentMethods/index').default,
+    containerLayout: master,
+    title: 'Payment Methods',
+    icon: 'fas fa-money-bill-wave',
+    middleware: [auth,access]
+  },
+  
+  // Shipping Methods
+  shippingMethods: {
+    permission: 'icommerce.shipping-methods.manage',
+    activated: true,
+    path: '/shipping-methods',
+    name: 'shipping.methods',
+    layout: require('@imagina/qcommerce/_layouts/admin/shippingMethods/index').default,
+    containerLayout: master,
+    title: 'Shipping Methods',
+    icon: 'fas fa-shipping-fast',
+    middleware: [auth,access]
+  },
+  
 }
