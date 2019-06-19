@@ -1,5 +1,6 @@
 export default {
-    shippingMethods:[],
-    paymentMethods:[],
-    checkout:{}
+  shippingMethods:[],
+  paymentMethods:[],
+  checkout:{},
+  stores:[],
 }

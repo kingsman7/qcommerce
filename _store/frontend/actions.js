@@ -26,6 +26,19 @@ export const GET_PAYMNENT_METHODS= ({ commit, state, dispatch }, params = {}) =>
   })
 }
 
+export const GET_STORES= ({ commit, state, dispatch }, params = {}) => {
+  return new Promise(async (resolve, reject) => {
+    await eCommerceService.crud.index('apiRoutes.eCommerce.stores', params)
+      .then(response => {
+        commit('SET_STORES', response.data)
+        resolve(true)
+      })
+      .catch(error=>{
+        reject(error)
+      })
+  })
+}
+
 export const UPDATECHECKOUT = ({ commit, state, dispatch }, payload) => {
   commit('UPDATE_CHECKOUT', payload)
 }

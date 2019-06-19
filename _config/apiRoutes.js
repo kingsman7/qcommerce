@@ -18,6 +18,6 @@ export default {
 	orderStatus : urlBase + '/order-statuses',
 	orderStatusHistory : urlBase + '/order-status-history',
   shippingMethods: urlBase + '/shipping-methods',
-  shippingMethodsCalculationsAll: urlBase + '/shipping-methods/calculations/all'
-
+  shippingMethodsCalculationsAll: urlBase + '/shipping-methods/calculations/all',
+  stores: urlBase + '/stores',
 }

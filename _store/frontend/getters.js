@@ -12,3 +12,8 @@ export function getterPaymentMethods (state){
 export function getterPaymentCheckout (state){
   return state.checkout
 }
+
+// Return stores
+export function getterStores (state){
+  return state.stores
+}
