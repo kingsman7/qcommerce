@@ -1,13 +1,13 @@
 <template>
   <div id="selectQuantityComponent">
     <!--Butotn subtract-->
-    <q-btn @click="subtract()" icon="remove" color="grey-4"/>
+    <q-btn @click="subtract()" icon="remove" color="grey-4" style="position: absolute"/>
     <!--Input-->
     <q-input v-model="response" type="number"
              @focus="tmpResponse = response"
              @keyup.enter="vEnter()" @blur="vBlur()"/>
     <!--Butotn add-->
-    <q-btn @click="add()" icon="add" color="grey-4"/>
+    <q-btn @click="add()" icon="add" color="grey-4" style="position: absolute"/>
   </div>
 </template>
 <script>
