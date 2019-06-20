@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="row shadow-1">
-      <div class="col-md-12 flex flex-center">
+      <div class="col-xs-12 col-md-12 flex flex-center">
         <h1 class="q-headline text-primary ">
           <q-chip color="primary">4</q-chip>
           {{title}}
         </h1>
       </div>
-      <div class="col-md-12 q-my-sm q-px-sm">
+      <div class="col-xs-12 col-md-12 q-my-sm q-px-sm">
         <q-item-separator />
         <q-field
           :error="error.shippingMethod.$error"
