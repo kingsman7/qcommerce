@@ -1,101 +1,59 @@
 <template>
-  <div id="shoppingCartIndex" class="q-container">
-    
+  <div class="q-container">
     <div class="backend-page q-mb-xl relative-position">
       <div class="row gutter-x-sm">
-        <!--List products-->
         <div class="col-12 col-md-12">
-          <!--Table-->
-          <q-table
-            v-if="cart.products && cart.products.length"
-            :data="cart.products"
-            :columns="columns"
-            hide-header
-            class="border-top-color shadow-1"
-          >
-            <!--Image product-->
-            <q-td slot="body-cell-img-prodct" slot-scope="props" :props="props">
-              <!---Delete buttom-->
-              <div class="content-btn-delete">
-                <q-btn size="sm" rounded color="negative" flat
-                       @click="deleteItem(props.row, false)" icon="fas fa-trash">
-                  <q-tooltip class="q-subheading">Remove: {{props.row.name}}</q-tooltip>
-                </q-btn>
-              </div>
-              <div class="img-product"
-                   :style="'background-image: url('+props.row.mainImage.path+')'">
-              </div>
-            </q-td>
-            <!--Product description-->
-            <q-td slot="body-cell-description" slot-scope="props" :props="props">
-              <div>
-                <!--Title-->
-                <div class="q-title text-grey-7">{{props.row.name}}</div>
-                <!--Price-->
-                <div class="text-blue-grey-9">
-                  <p class="q-body-2 text-weight-bold">
-                    $ {{$n(props.row.product.price)}}
-                  </p>
-                </div>
-                <!--Options-->
-                <div v-if="props.row.productOptionValues && props.row.productOptionValues.length">
-                  <div class="inline-block option-content" :key="key"
-                       v-for="(option, key) in props.row.productOptionValues">
-                    <!--Option title-->
-                    <div class="option-title">{{option.option}}</div>
-                    <!--Value title-->
-                    <div class="value-title">
-                      <q-icon name="fas fa-caret-right" />
-                      {{option.optionValue}}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </q-td>
-            <!--Actions-->
-            <q-td slot="body-cell-actions" slot-scope="props" class="text-right">
-              <!--Sub total-->
-              <div class="text-blue-grey-9 q-title">
-                <div class="q-subheading">Subtotal</div>
-                <p class="q-body-2 text-weight-bold q-ma-none">
-                  $ {{ $n(props.row.total) }}
-                </p>
-              </div>
-              <!--Quantity-->
-              <div class="q-my-sm">
-                <div class="q-subheading q-mb-xs">Cantidad</div>
-                <select-quantity v-model="props.row.quantity" @enter="update(props.row)"
-                                 @blur="update(props.row)" @btn="update(props.row)"/>
-              </div>
-            </q-td>
-          </q-table>
-          <!--Message not found items-->
-          <div v-else class="border-top-color shadow-1">
-            Your cart is empty...
-          </div>
-        </div>
-        
-        <!-- Summary -->
-        <div class="col-12 col-md-4">
-          <div class="border-top-color shadow-1">
-            <q-list no-border class="q-pa-none">
-              <q-list-header class="q-pa-none q-headline">
-                RESUMEN DE TU PEDIDO
-              </q-list-header>
-              <q-item class="q-pa-none">
-                <q-item-main label="TOTAL" class="q-subheading"/>
-                <q-item-side right>
-                  <p class="q-ma-none text-primary">
-                    $ {{ cart.total ? $n(cart.total) : '0'}}
-                  </p>
-                </q-item-side>
-              </q-item>
-              <q-item class="text-center q-pb-none">
+          <div v-if="cart.products && cart.products.length">
+            <q-list>
+              <q-list-header>Products</q-list-header>
+              <q-item v-for="(product, index) in cart.products" :key="index">
+                <q-item-side :image="product.mainImage.path"/>
                 <q-item-main>
-                  <q-btn label="comprar" color="positive" :to="{name: 'checkout.index'}"/>
+                  <q-item-tile label>{{product.name}}</q-item-tile>
+                  <q-item-tile label-lines>${{$n(product.total)}}</q-item-tile>
+                  <q-item-tile sublabel>
+                    <div
+                      :key="key"
+                      v-for="(option, key) in product.productOptionValues">
+                      <div class="option-title">
+                        {{option.option}}
+                      </div>
+                      <div class="value-title">
+                        <q-icon name="fas fa-caret-right"/>
+                        {{option.optionValue}}
+                      </div>
+                    </div>
+                  </q-item-tile>
+                  <q-item-tile sublabel-lines	>
+  
+                    <div class="row">
+                      <div class="col-md-12">
+                        <select-quantity
+                          v-model="product.quantity"
+                          @enter="update(product)"
+                            @btn="update(product)"/>
+                      </div>
+                    </div>
+                  </q-item-tile>
+                  <q-item-side right>
+                    <q-btn
+                      size="sm"
+                      rounded
+                      color="negative"
+                      flat
+                     @click="deleteItem(product, false)"
+                      icon="fas fa-trash">
+                      <q-tooltip class="q-subheading">
+                        Remove: {{product.name}}
+                      </q-tooltip>
+                    </q-btn>
+                  </q-item-side>
                 </q-item-main>
               </q-item>
             </q-list>
+          </div>
+          <div v-else class="border-top-color shadow-1">
+            Your cart is empty...
           </div>
         </div>
       </div>
@@ -171,7 +129,6 @@
               "cartId": this.cart.id,
               "id": item.id
             }
-
             //Request
             this.$store.dispatch('shoppingCart/UPDATE_PRODUCT_INTO_CART', formData).then(async response => {
               await this.getCart()
