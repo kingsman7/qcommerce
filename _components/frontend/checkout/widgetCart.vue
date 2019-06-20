@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import cart from '@imagina/qcommerce/_components/frontend/cart/sumary'
+  import cart from '@imagina/qcommerce/_components/frontend/cart/widgetCart'
   export default {
     components:{
       cart
