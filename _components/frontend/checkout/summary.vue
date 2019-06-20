@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="row shadow-1">
-      <div class="col-md-12 flex flex-center">
+      <div class="col-12 flex flex-center">
         <h1 class="q-headline text-primary ">
           <q-chip color="primary">6</q-chip>
           Order Summary
         </h1>
       </div>
-      <div class="col-md-12">
+      <div class="col-12">
         <cart/>
       </div>
     </div>
