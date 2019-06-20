@@ -9,17 +9,18 @@
     </div>
     <div class="row gutter-x-sm gutter-y-sm relative-position">
       
-      <div class="col-sm-12 col-md-12 col-lg-4">
+      
+      <div :class="typeLayout == 'OnePage' ? 'col-sm-12 col-md-12 col-lg-4' : 'col-12'">
         <!-- (COMPONENT) CUSTOMER INFORMATION -->
         <customerInformation/>
       </div>
-      <div class="col-sm-12 col-md-12 col-lg-4 gutter-y-sm">
+      <div :class="typeLayout == 'OnePage' ? 'col-sm-12 col-md-12 col-lg-4 gutter-y-sm' : 'col-12'">
         <!-- (COMPONENT) SHIPPING ADDRESS -->
         <shippingAddress :checkoutData="checkoutData" :error="$v.checkoutData.attributes"/>
         <!-- (COMPONENT) BILLING DETAILS -->
         <billingAddress :checkoutData="checkoutData" :error="$v.checkoutData.attributes"/>
       </div>
-      <div class="col-sm-12 col-md-12 col-lg-4 gutter-y-sm">
+      <div :class="typeLayout == 'OnePage' ? 'col-sm-12 col-md-12 col-lg-4 gutter-y-sm' : 'col-12'">
         <!-- (COMPONENT) DELIVERY METHODS -->
         <shippingMethods :checkoutData="checkoutData" :error="$v.checkoutData.attributes"/>
         <!-- (COMPONENT) PAYMENT METHODS -->
@@ -49,7 +50,7 @@
   import shippingAddress from '@imagina/qcommerce/_components/frontend/checkout/shippingAddress'
   import shippingMethods from '@imagina/qcommerce/_components/frontend/checkout/shippingMethods'
   import paymentMethods from '@imagina/qcommerce/_components/frontend/checkout/paymentMethods'
-  import summaryCart from '@imagina/qcommerce/_components/frontend/checkout/summary'
+  import summaryCart from '@imagina/qcommerce/_components/frontend/checkout/widgetCart'
   import innerLoading from 'src/components/master/innerLoading'
   
   export default {
@@ -225,3 +226,10 @@
     }
   }
 </script>
+
+<style>
+  .backend-page .border-top-color {
+    border-top: 3px solid var(--q-color-primary);
+    padding: 15px;
+  }
+</style>
