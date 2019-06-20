@@ -1,7 +1,7 @@
 <template>
   <div class="q-container">
     <div class="row ">
-      <div class="col-md-12 flex flex-center">
+      <div class="col-12 flex flex-center">
         <h1 class="q-headline text-primary">
           CHECKOUT
         </h1>
@@ -9,23 +9,23 @@
     </div>
     <div class="row gutter-x-sm gutter-y-sm relative-position">
       
-      <div class="col-md-4">
+      <div class="col-sm-12 col-md-12 col-lg-4">
         <!-- (COMPONENT) CUSTOMER INFORMATION -->
         <customerInformation/>
       </div>
-      <div class="col-md-4 gutter-y-sm">
+      <div class="col-sm-12 col-md-12 col-lg-4 gutter-y-sm">
         <!-- (COMPONENT) SHIPPING ADDRESS -->
         <shippingAddress :checkoutData="checkoutData" :error="$v.checkoutData.attributes"/>
         <!-- (COMPONENT) BILLING DETAILS -->
         <billingAddress :checkoutData="checkoutData" :error="$v.checkoutData.attributes"/>
       </div>
-      <div class="col-md-4 gutter-y-sm">
+      <div class="col-sm-12 col-md-12 col-lg-4 gutter-y-sm">
         <!-- (COMPONENT) DELIVERY METHODS -->
         <shippingMethods :checkoutData="checkoutData" :error="$v.checkoutData.attributes"/>
         <!-- (COMPONENT) PAYMENT METHODS -->
         <paymentMethods :checkoutData="checkoutData" :error="$v.checkoutData.attributes"/>
-        <!-- (COMPONENT) ORDER SUMMARY
-        <summaryCart/> -->
+        <!-- (COMPONENT) ORDER SUMMARY  -->
+        <summaryCart/>
         <div>
           <q-btn label="Send" color="primary" class="full-width" @click="saveOrder()"/>
         </div>
