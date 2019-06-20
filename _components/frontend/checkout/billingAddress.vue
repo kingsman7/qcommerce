@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="row shadow-1">
-      <div class="col-md-12 flex flex-center">
+      <div class="col-xs-12 col-md-12 flex flex-center">
         <h1 class="q-headline text-primary ">
           <q-chip color="primary">3</q-chip>
           {{title}}
         </h1>
       </div>
-      <div class="col-md-12 q-px-md">
-        
+      <div class="col-xs-12 col-md-12 col-md-12 q-px-md">
+        <q-item-separator />
         <div class="row gutter-x-sm">
           <div class="col md-6 q-pb-lg">
             <q-checkbox
