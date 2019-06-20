@@ -1,16 +1,17 @@
 <template>
   <div>
     <div class="row shadow-1">
-      <div class="col-md-12 flex flex-center">
-        <h1 class="q-headline text-primary ">
+      <div class="col-xs-12 col-md-12 flex flex-center">
+        <h1 class="q-headline text-primary">
           <q-chip color="primary">2</q-chip>
           {{title}}
         </h1>
       </div>
-      <div class="col-md-12 q-px-md">
+      <div class="col-xs-12 col-md-12 q-px-md">
+        <q-item-separator />
         
         <div class="row gutter-x-sm" v-if="$store.state.auth.userData || false">
-          <div class="col md-12">
+          <div class="col-xs-12  col-md-12">
             <q-field
               :error="false"
               error-label="Field Required">
