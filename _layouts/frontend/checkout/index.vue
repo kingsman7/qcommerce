@@ -99,6 +99,7 @@
             shippingZipCode: '',
             shippingCountry: '',
             shippingZone: '',
+            options:{}
           },
           shippingAndBillingAddressIsSame: true,
         }
@@ -186,7 +187,7 @@
         } else {
           
           this.loading = true
-          eCommerceService.crud.create('apiRoutes.eCommerce.orders', this.checkoutData)
+          eCommerceService.crud.create('apiRoutes.eCommerce.orders', this.checkoutData.attributes)
           .then(response => {
             
             // CLEAR DATA IN SHOPPING CART
