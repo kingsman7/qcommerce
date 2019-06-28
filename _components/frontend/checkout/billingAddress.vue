@@ -279,7 +279,7 @@
           })
       },
       toFormatToQSelect(array){
-        return array.map( item => ({label:item.name, value:item }) )
+        return array.map( item => ({label:item.name || `${item.firstName} ${item.lastName} - ${item.city} ${item.state} ${item.address1}`, value:item }) )
       }
     }
   }

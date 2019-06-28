@@ -9,7 +9,6 @@
     </div>
     <div class="row gutter-x-sm gutter-y-sm relative-position">
       
-      
       <div :class="typeLayout == 'OnePage' ? 'col-sm-12 col-md-12 col-lg-4' : 'col-12'">
         <!-- (COMPONENT) CUSTOMER INFORMATION -->
         <customerInformation/>
@@ -80,7 +79,7 @@
             paymentMethodId: 0,
             shippingMethod: '',
             shippingMethodId: 0,
-            cartId: 0,
+            cartId: this.$store.state.shoppingCart.cart.id || null,
             paymentFirstName: '',
             paymentLastName: '',
             paymentCompany: '',

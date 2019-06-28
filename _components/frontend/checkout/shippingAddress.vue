@@ -12,13 +12,15 @@
         
         <div class="row gutter-x-sm" v-if="$store.state.auth.userData || false">
           <div class="col-xs-12  col-md-12">
+            
             <q-field
               :error="false"
               error-label="Field Required">
               <q-select
+                @input="changeAddressInSelect()"
                 filter
                 float-label="Addresses"
-                v-model="modelTest"
+                v-model="addressInSelect"
                 :options="toFormatToQSelect($store.state.auth.userData.addresses)"/>
             </q-field>
           </div>
@@ -232,7 +234,7 @@
         city:{
           name:''
         },
-        modelTest:'',
+        addressInSelect:'',
       }
     },
     created(){
@@ -285,8 +287,21 @@
         }
         this.$store.dispatch('eCommerce/GET_SHIPPING_METHODS', params);
       },
+      changeAddressInSelect(){
+        this.checkoutData.attributes.shippingFirstName = this.addressInSelect.firstName || 'Default Value'
+        this.checkoutData.attributes.shippingLastName = this.addressInSelect.lastName || 'Default Value'
+        this.checkoutData.attributes.shippingCompany = this.addressInSelect.shippingCompany || 'Default Value'
+        this.checkoutData.attributes.shippingAddress1 = this.addressInSelect.address1 || 'Default Value'
+        this.checkoutData.attributes.shippingAddress2 = this.addressInSelect.address2 || 'Default Value'
+        this.checkoutData.attributes.shippingCountry = this.addressInSelect.country || 'Default Value'
+        this.checkoutData.attributes.shippingZone = this.addressInSelect.state || 'Default Value'
+        this.checkoutData.attributes.shippingCity = this.addressInSelect.city || 'Default Value'
+        this.checkoutData.attributes.shippingZipCode = this.addressInSelect.zipCode || 'Default Value'
+        // Get All Shipping Methods in new Data
+        this.refreshShippingMethods()
+      },
       toFormatToQSelect(array){
-        return array.map( item => ({label:item.name, value:item }) )
+        return array.map( item => ({label:item.name || `${item.firstName} ${item.lastName} - ${item.city} ${item.state} ${item.address1}`, value:item }) )
       }
     }
   }

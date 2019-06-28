@@ -7,8 +7,9 @@
           {{title}}
         </h1>
       </div>
-      <div class="col-xs-12 col-md-12 q-my-sm q-px-sm">
+      <div class="col-xs-12 col-md-12 q-my-sm q-px-sm relative-position">
         <q-item-separator />
+        
         <q-field
           :error="error.shippingMethod.$error"
           error-label="* Payment Method Required">
@@ -64,14 +65,18 @@
               :image="shippingMethod.mainImage.path" />
           </q-item>
         </q-field>
-        
+        <inner-loading :visible="loading" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import innerLoading from 'src/components/master/innerLoading'
   export default {
+    components:{
+      innerLoading
+    },
     props:{
       title:{
         type:String,
@@ -113,6 +118,20 @@
       error:{
         type:Object,
         default:()=>{}
+      }
+    },
+    watch:{
+      shipping(val){
+        this.checkoutData.attributes.shippingMethod = this.shipping.name
+        this.checkoutData.attributes.shippingMethodId = this.shipping.id
+      },
+      '$store.state.eCommerce.shippingMethods': function () {
+        this.loading = true
+        
+        setTimeout(()=>{
+          this.loading = false
+        
+        },1000)
       }
     },
     data(){
