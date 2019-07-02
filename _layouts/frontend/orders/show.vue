@@ -93,7 +93,7 @@
               </div>
               <div class="row q-py-xs text-right secondary-font text-weight-bold">
 
-                {{JSON.parse(order.paymentAddress1).address}}
+                {{order.paymentAddress1}}
 
 
               </div>
@@ -106,7 +106,7 @@
               </div>
               <div class="row q-py-xs text-right secondary-font text-weight-bold">
 
-                {{JSON.parse(order.shippingAddress1).address}}
+                {{order.shippingAddress1}}
 
 
               </div>

@@ -3,7 +3,7 @@
 
     <!--TITLE-->
     <h1 class="q-headline text-primary">
-      Mis Pedidos
+      My Order History
     </h1>
 
     <!--Content-->
@@ -42,17 +42,22 @@
 
 
               </div>
-            </div>
+            </div>º
           </template>
 
           <!--= Custom Columns =-->
           <q-td slot="body-cell-actions" slot-scope="props" class="text-right">
             <q-btn
-              icon="visibility"
+              label="Ver"
               color="green"
-              size="sm"
-              round
+
+              flat
               :to="{name : 'order.show' , params : {id : props.row.id}}"/>
+          </q-td>
+          <q-td slot="body-cell-statusName" slot-scope="props" class="text-right">
+            <q-chip tag>
+              {{props.row.statusName}}
+            </q-chip>
           </q-td>
 
 
@@ -60,8 +65,11 @@
             $ {{ $n(props.row.total) }}
           </q-td>
 
-          <q-td slot="body-cell-status" slot-scope="props" class="text-right">
-            {{props.row}}
+          <q-td slot="body-cell-created_at" slot-scope="props" class="text-right">
+            <q-chip icon="date_range" square>
+              {{props.row.createdAt}}
+            </q-chip>
+            
           </q-td>
 
         </q-table>
@@ -95,47 +103,37 @@
           columns: [
           {
             name: 'id',
-            label: 'Numero de pedido',
+            label: 'Order #',
             field: 'id',
           },
           {
             name: 'total',
-            label: 'TOTAL',
+            label: 'Total',
             field: 'total',
           },
           {
             name: 'statusName',
-            label: 'ESTADO',
+            label: 'Status',
             field: 'statusName',
           },
           {
-            name: 'paymentCity',
-            label: 'CIUDAD',
-            field: 'paymentCity',
-          },
-          {
-            name: 'paymentZone',
-            label: 'DEPARTAMENTE',
-            field: 'paymentZone',
-          },
-          {
-            name: 'paymentCountry',
-            label: 'PAIS',
-            field: 'paymentCountry',
-          },
-          {
             name: 'email',
-            label: 'E-MAIL',
+            label: 'E-Mail',
             field: 'email',
           },
           {
             name: 'shippingMethod',
-            label: 'MÉTODO DE ENVÍO',
+            label: 'Shipping',
             field: 'shippingMethod',
           },
           {
+            name: 'created_at',
+            label: 'Created at',
+            field: 'created_at',
+          },
+          {
             name: 'actions',
-            label: 'ACCIONES',
+            label: 'Actions',
             field: 'actions',
           },
         ],
