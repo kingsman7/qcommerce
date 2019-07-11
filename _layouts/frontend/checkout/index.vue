@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="row gutter-x-sm gutter-y-sm relative-position">
-      
+
       <div :class="typeLayout == 'OnePage' ? 'col-sm-12 col-md-12 col-lg-4' : 'col-12'">
         <!-- (COMPONENT) CUSTOMER INFORMATION -->
         <customerInformation/>
@@ -30,7 +30,7 @@
           <q-btn label="Send" color="primary" class="full-width" @click="saveOrder()"/>
         </div>
       </div>
-      
+
       <inner-loading :visible="loading" />
     </div>
   </div>
@@ -39,10 +39,10 @@
 <script>
   // SERVICES
   import eCommerceService from '@imagina/qcommerce/_services/index'
-  
+
   // PLUGINS
   import {required, requiredIf} from 'vuelidate/lib/validators'
-  
+
   // COMPONENTS
   import customerInformation from '@imagina/qcommerce/_components/frontend/checkout/customerInformation'
   import billingAddress from '@imagina/qcommerce/_components/frontend/checkout/billingAddress'
@@ -51,7 +51,7 @@
   import paymentMethods from '@imagina/qcommerce/_components/frontend/checkout/paymentMethods'
   import summaryCart from '@imagina/qcommerce/_components/frontend/checkout/widgetCart'
   import innerLoading from 'src/components/master/innerLoading'
-  
+
   export default {
     props:{
       typeLayout:{
@@ -98,6 +98,7 @@
             shippingCity: '',
             shippingZipCode: '',
             shippingCountry: '',
+            shippingCountryCode: '',
             shippingZone: '',
             options:{}
           },
@@ -185,22 +186,22 @@
         if (this.$v.$invalid) {
           this.$helper.alert.error(`Please fill the Order correctly`)
         } else {
-          
+
           this.loading = true
           eCommerceService.crud.create('apiRoutes.eCommerce.orders', this.checkoutData.attributes)
           .then(response => {
-            
+
             // CLEAR DATA IN SHOPPING CART
             this.$store.dispatch("shoppingCart/CLEAR_CART")
-            
+
             // OPEN NEW WINDOW IF THE PAYMENT METHOD REQUIRES IT
             if(response.data.paymentData.external){
               window.open(response.data.paymentData.redirectRoute, '_blank');
             }
-            
+
             // REDIRECT THE USER TO THE SHOW VIEW OF THE NEWLY CREATED ORDER
             this.$router.push({name : 'order.show' , params : {id : response.data.orderId}})
-            
+
             this.$helper.alert.success('Order Created Succesfuly')
             this.loading = false
           })

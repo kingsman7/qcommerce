@@ -9,10 +9,10 @@
       </div>
       <div class="col-xs-12 col-md-12 q-px-md">
         <q-item-separator />
-        
+
         <div class="row gutter-x-sm" v-if="$store.state.auth.userData || false">
           <div class="col-xs-12  col-md-12">
-            
+
             <q-field
               :error="false"
               error-label="Field Required">
@@ -25,7 +25,7 @@
             </q-field>
           </div>
         </div>
-        
+
         <div v-show="!$store.state.auth.userData">
           <div class="row gutter-x-sm" >
             <div class="col md-6">
@@ -47,7 +47,7 @@
               </q-field>
             </div>
           </div>
-          
+
           <div class="row gutter-x-sm">
             <div class="col md-12">
               <q-field
@@ -59,7 +59,7 @@
               </q-field>
             </div>
           </div>
-          
+
           <div class="row gutter-x-sm">
             <div class="col md-12">
               <q-field
@@ -71,7 +71,7 @@
               </q-field>
             </div>
           </div>
-          
+
           <div class="row gutter-x-sm">
             <div class="col md-12">
               <q-field
@@ -83,7 +83,7 @@
               </q-field>
             </div>
           </div>
-          
+
           <div class="row gutter-x-sm">
             <div class="col md-12">
               <q-field
@@ -98,7 +98,7 @@
               </q-field>
             </div>
           </div>
-          
+
           <div class="row gutter-x-sm">
             <div class="col md-12">
               <q-field
@@ -113,7 +113,7 @@
               </q-field>
             </div>
           </div>
-          
+
           <div class="row gutter-x-sm">
             <div class="col md-6">
               <q-field
@@ -143,9 +143,9 @@
               </q-field>
             </div>
           </div>
-        
+
         </div>
-      
+
       </div>
     </div>
   </div>
@@ -199,7 +199,8 @@
     },
     watch:{
       country (val, oldVal) {
-        this.checkoutData.attributes.shippingCountry = this.country.iso_2
+        this.checkoutData.attributes.shippingCountry = this.country.name
+        this.checkoutData.attributes.shippingCountryCode = this.country.iso_2
         this.refreshShippingMethods()
       },
       province (val, oldVal) {
@@ -281,9 +282,7 @@
       refreshShippingMethods(){
         let params = {
           refresh:true,
-          params:{
-            filter:this.checkoutData.attributes
-          }
+          params: this.$helper.toSnakeCase(this.checkoutData.attributes)
         }
         this.$store.dispatch('eCommerce/GET_SHIPPING_METHODS', params);
       },
