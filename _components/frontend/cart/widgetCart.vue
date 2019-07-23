@@ -59,12 +59,18 @@
           </div>
           <q-item-separator />
           <!-- Summary -->
-          <div class="col-12 flex flex-center">
+          <div class="col-12">
               <q-list no-border class="q-pa-none">
                 <q-item class="q-pa-none">
                   <q-item-side >
                     <p class="q-ma-none text-primary q-headline">
-                      TOTAL $ {{ cart.total || '0'}}
+                      Subtotal ${{ cart.total || '0'}}
+                    </p>
+                    <p class="q-ma-none text-primary q-headline">
+                      Shipping ${{checkoutData.attributes.shippingMethodPrice || 0}}
+                    </p>
+                    <p class="q-ma-none text-primary q-headline">
+                      Total ${{ parseInt(cart.total || 0) + parseInt(checkoutData.attributes.shippingMethodPrice || 0) }}
                     </p>
                   </q-item-side>
                 </q-item>
@@ -90,6 +96,41 @@
       simple: {
         type: Boolean,
         default: false
+      },
+      checkoutData:{
+        type:Object,
+        default:()=>({
+          attributes: {
+            storeId: 0,
+            customerId: 0,
+            paymentMethod: '',
+            paymentMethodId: 0,
+            shippingMethod: '',
+            shippingMethodId: 0,
+            shippingMethodPrice: 0,
+            cartId: 0,
+            paymentFirstName: '',
+            paymentLastName: '',
+            paymentCompany: '',
+            paymentNit: '',
+            paymentAddress1: '',
+            paymentAddress2: '',
+            paymentCity: '',
+            paymentZipCode: '',
+            paymentCountry: '',
+            paymentZone: '',
+            shippingFirstName: '',
+            shippingLastName: '',
+            shippingCompany: '',
+            shippingAddress1: '',
+            shippingAddress2: '',
+            shippingCity: '',
+            shippingZipCode: '',
+            shippingCountry: '',
+            shippingZone: '',
+          },
+          shippingAndBillingAddressIsSame: true,
+        })
       },
     },
     components: {selectQuantity,innerLoading},
@@ -128,6 +169,7 @@
         }).then(async data => {
           this.loading = true
           await this.$store.dispatch('shoppingCart/DEL_PRODUCT_FROM_CART', item.id)
+          await this.refreshShippingMethods()
           await this.getCart()
           this.loading = false
         }).catch(() => {})
@@ -147,6 +189,7 @@
             }
             //Request
             this.$store.dispatch('shoppingCart/UPDATE_PRODUCT_INTO_CART', formData).then(async response => {
+              await this.refreshShippingMethods()
               await this.getCart()
               this.loading = false
             }).catch(error => {
@@ -155,6 +198,14 @@
             })
           }
         },100)
+      },
+      refreshShippingMethods(){
+        this.checkoutData.attributes.cartId = this.$store.state.shoppingCart.cart.id
+        let params = {
+          refresh:true,
+          params: this.$helper.toSnakeCase(this.checkoutData.attributes)
+        }
+        this.$store.dispatch('eCommerce/GET_SHIPPING_METHODS', params);
       },
     }
   }

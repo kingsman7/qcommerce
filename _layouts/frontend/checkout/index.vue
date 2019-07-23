@@ -7,6 +7,7 @@
         </h1>
       </div>
     </div>
+    
     <div class="row gutter-x-sm gutter-y-sm relative-position">
 
       <div :class="typeLayout == 'OnePage' ? 'col-sm-12 col-md-12 col-lg-4' : 'col-12'">
@@ -25,12 +26,12 @@
         <!-- (COMPONENT) PAYMENT METHODS -->
         <paymentMethods :checkoutData="checkoutData" :error="$v.checkoutData.attributes"/>
         <!-- (COMPONENT) ORDER SUMMARY  -->
-        <summaryCart/>
+        <summaryCart :checkoutData="checkoutData"/>
         <div>
           <q-btn label="Send" color="primary" class="full-width" @click="saveOrder()"/>
         </div>
       </div>
-
+      
       <inner-loading :visible="loading" />
     </div>
   </div>
@@ -79,7 +80,9 @@
             paymentMethodId: 0,
             shippingMethod: '',
             shippingMethodId: 0,
-            cartId: this.$store.state.shoppingCart.cart.id || null,
+            shippingMethodPrice: 0,
+            cartId: this.$store.state.shoppingCart.cart.id,
+            total:0,
             paymentFirstName: '',
             paymentLastName: '',
             paymentCompany: '',

@@ -42,7 +42,7 @@
 
 
               </div>
-            </div>º
+            </div>
           </template>
 
           <!--= Custom Columns =-->

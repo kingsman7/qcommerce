@@ -27,9 +27,8 @@
               <p>{{$store.state.auth.userData.email}}</p>
             </q-card-main>
             <q-card-separator />
-            <q-card-actions v-if="false">
-              <q-btn flat color="primary" icon="person" label="Profile" />
-              <q-btn flat color="primary" icon="exit_to_app" label="LogOut" />
+            <q-card-actions v-if="true">
+              <q-btn flat color="primary" icon="person" label="Profile" :to="{name: 'user.profile.me'}"/>
             </q-card-actions>
           </q-card>
           

@@ -8,7 +8,7 @@
         </h1>
       </div>
       <div class="col-12">
-        <cart/>
+        <cart :checkoutData="checkoutData"/>
       </div>
     </div>
   </div>
@@ -19,7 +19,44 @@
   export default {
     components:{
       cart
-    }
+    },
+    props: {
+      checkoutData:{
+        type:Object,
+        default:()=>({
+          attributes: {
+            storeId: 0,
+            customerId: 0,
+            paymentMethod: '',
+            paymentMethodId: 0,
+            shippingMethod: '',
+            shippingMethodId: 0,
+            shippingMethodPrice: 0,
+            cartId: 0,
+            paymentFirstName: '',
+            paymentLastName: '',
+            paymentCompany: '',
+            paymentNit: '',
+            paymentAddress1: '',
+            paymentAddress2: '',
+            paymentCity: '',
+            paymentZipCode: '',
+            paymentCountry: '',
+            paymentZone: '',
+            shippingFirstName: '',
+            shippingLastName: '',
+            shippingCompany: '',
+            shippingAddress1: '',
+            shippingAddress2: '',
+            shippingCity: '',
+            shippingZipCode: '',
+            shippingCountry: '',
+            shippingZone: '',
+          },
+          shippingAndBillingAddressIsSame: true,
+        })
+      },
+    },
   }
 </script>
 

@@ -19,14 +19,24 @@
               <q-select
                 @input="changeAddressInSelect()"
                 filter
-                float-label="Addresses"
+                stack-label="I want to use an existing address"
                 v-model="addressInSelect"
                 :options="toFormatToQSelect($store.state.auth.userData.addresses)"/>
             </q-field>
+            
           </div>
+          
+          <div class="col-xs-12 col-md-12 q-mb-md">
+  
+            <q-checkbox
+              v-model="newAddress"
+              label="I want to use a new address"/>
+            
+          </div>
+          
         </div>
-
-        <div v-show="!$store.state.auth.userData">
+        
+        <div v-show="!$store.state.auth.userData || newAddress">
           <div class="row gutter-x-sm" >
             <div class="col md-6">
               <q-field
@@ -143,7 +153,7 @@
               </q-field>
             </div>
           </div>
-
+          
         </div>
 
       </div>
@@ -168,7 +178,7 @@
             paymentMethodId: 0,
             shippingMethod: '',
             shippingMethodId: 0,
-            cartId: 0,
+            cartId: this.$store.state.shoppingCart.cart.id,
             paymentFirstName: '',
             paymentLastName: '',
             paymentCompany: '',
@@ -226,6 +236,7 @@
     },
     data(){
       return{
+        newAddress: false,
         shippingBillingIsSame: true,
         countries:[],
         provinces:[],
@@ -280,6 +291,7 @@
           })
       },
       refreshShippingMethods(){
+        this.checkoutData.attributes.cartId = this.$store.state.shoppingCart.cart.id
         let params = {
           refresh:true,
           params: this.$helper.toSnakeCase(this.checkoutData.attributes)
@@ -300,7 +312,7 @@
         this.refreshShippingMethods()
       },
       toFormatToQSelect(array){
-        return array.map( item => ({label:item.name || `${item.firstName} ${item.lastName} - ${item.city} ${item.state} ${item.address1}`, value:item }) )
+        return array.map( item => ({label:item.name || `${item.city} ${item.state} ${item.address1}`, value:item }) )
       }
     }
   }

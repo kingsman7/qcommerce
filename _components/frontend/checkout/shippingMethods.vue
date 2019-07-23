@@ -12,7 +12,7 @@
         
         <q-field
           :error="error.shippingMethod.$error"
-          error-label="* Payment Method Required">
+          error-label="Shipping Method Required">
           <q-item
             separator dense
             tag="label"
@@ -31,23 +31,36 @@
               </q-item-tile>
               <q-item-tile sublabel>
                 
-                <div  v-if="shippingMethod.calculations.priceshow || false">
-                  ${{$n(shippingMethod.calculations.price)}}
-                </div>
-  
                 <div v-if="shippingMethod.calculations.msj!=='error' && shippingMethod.calculations.msj!=='freeshipping'">
-                  <pre>{{shippingMethod.calculations.items}}</pre>
-  
-                  <div
-                    :key="index"
-                    v-for="(item, index) in shippingMethod.calculations.items">
-                    {{item}}
+                  
+                  <div v-if="shippingMethod.calculations.items">
+                    <q-item
+                      v-if="shippingMethod.calculations.items"
+                      separator dense
+                      tag="label"
+                      v-for="(item, index) in formatItemsForShippingMethod(shippingMethod.calculations.items, shippingMethod.id)"
+                      :key="index">
+                      <q-item-side>
+                        <q-radio
+                          style="display: block"
+                          v-model="shipping"
+                          :val="item"/>
+                      </q-item-side>
+                      <q-item-main>
+                        <q-item-tile label>
+                          {{item.configTitle}}
+                        </q-item-tile>
+                        <q-item-tile sublabel>
+                          {{item.price}}
+                        </q-item-tile>
+                      </q-item-main>
+                    </q-item>
                   </div>
                   
                 </div>
                 
                 <div v-if="shippingMethod.calculations.status == 'error'">
-                  <span class="text-warning">
+                  <span class="text-negative">
                     {{shippingMethod.calculations.msj}}
                   </span>
                 </div>
@@ -62,7 +75,7 @@
             </q-item-main>
             <q-item-side
               v-if="(shippingMethod.mainImage.path).indexOf('default.jpg') == -1 ? true : true"
-              :image="shippingMethod.mainImage.path" />
+              :avatar="shippingMethod.mainImage.path" />
           </q-item>
         </q-field>
         <inner-loading :visible="loading" />
@@ -92,6 +105,7 @@
             paymentMethodId: 0,
             shippingMethod: '',
             shippingMethodId: 0,
+            shippingMethodPrice: 0,
             cartId: 0,
             paymentFirstName: '',
             paymentLastName: '',
@@ -124,6 +138,7 @@
       shipping(val){
         this.checkoutData.attributes.shippingMethod = this.shipping.name
         this.checkoutData.attributes.shippingMethodId = this.shipping.id
+         this.checkoutData.attributes.shippingMethodPrice = this.shipping.price || 0
       },
       '$store.state.eCommerce.shippingMethods': function () {
         this.loading = true
@@ -137,11 +152,20 @@
     data(){
       return{
         loading:false,
-        shipping:''
+        shipping:'',
+        shippingUPS:'',
       }
     },
     methods:{
-
+      formatItemsForShippingMethod(shippingMethods, parent = 0){
+        return shippingMethods.map( shippingMethod => {
+          let data =shippingMethod
+          data.name = shippingMethod.configName
+          data.id = parent
+          data.price = shippingMethod.price
+          return data
+        })
+      },
     }
   }
 </script>
