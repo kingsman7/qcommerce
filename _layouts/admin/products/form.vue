@@ -4,11 +4,8 @@
 
     <!--TITLE-->
     <h1 class="q-headline text-primary">
-      <q-icon name="fas fa-box-open" class="q-mr-sm"></q-icon>
-      <span v-if="productId">
-        Update Product ID:{{productId}}
-      </span>
-      <span v-else>Create Product</span>
+      <q-icon :name="$route.meta.icon"></q-icon>
+      {{$tr($route.meta.title)}}
     </h1>
 
     <!--Content-->
@@ -18,7 +15,6 @@
         <div class="row gutter-x-md" v-if="success">
           <!--Language-->
           <div class="col-12">
-            <span class="input-title q-mr-sm">Language</span>
             <locales v-model="locale" ref="localeComponent" @validate="$v.$touch()"/>
           </div>
           <!--Form left-->
@@ -26,48 +22,48 @@
             <!--name-->
             <q-field
               :error="$v.locale.formTemplate.name.$error"
-              error-label="This field is required"
+              :error-label="$tr('ui.message.fieldRequired')"
             >
               <q-input v-model="locale.formTemplate.name" @input="setSlug()"
-                       :stack-label="'name ('+locale.language+')*'"/>
+                       :stack-label="`${$tr('ui.form.name')} (${locale.language})*`"/>
             </q-field>
             <!--Slug-->
             <q-field
               :error="$v.locale.formTemplate.slug.$error"
-              error-label="This field is required"
+              :error-label="$tr('ui.message.fieldRequired')"
             >
               <q-input v-model="locale.formTemplate.slug"
-                       :stack-label="'Slug ('+locale.language+')*'"/>
+                       :stack-label="`${$tr('ui.form.slug')} (${locale.language})*`"/>
             </q-field>
             <!--Sumario-->
             <q-field
               :error="$v.locale.formTemplate.summary.$error"
-              error-label="This field is required"
+              :error-label="$tr('ui.message.fieldRequired')"
             >
               <q-input v-model="locale.formTemplate.summary" type="textarea"
-                       :stack-label="'Summary ('+locale.language+')*'" rows="3"/>
+                       :stack-label="`${$tr('ui.form.summary')} (${locale.language})*`" rows="3"/>
             </q-field>
             <!--Description-->
             <q-field
               :error="$v.locale.formTemplate.description.$error"
-              error-label="This field is required"
+              :error-label="$tr('ui.message.fieldRequired')"
             >
-              <div class="input-title">Description ({{locale.language}})*</div>
+              <div class="input-title">{{`${$tr('ui.form.description')} (${locale.language})*`}}</div>
               <q-editor v-model="locale.formTemplate.description"
                         :toolbar="editorText.toolbar"/>
             </q-field>
             <!--Meta Title-->
             <q-input v-model="locale.formTemplate.metaTitle"
-                     :stack-label="'Meta Title ('+locale.language+')'"/>
+                     :stack-label="`${$tr('ui.form.metaTitle')} (${locale.language})*`"/>
             <!--Meta Description-->
             <q-input v-model="locale.formTemplate.metaDescription" type="textarea"
-                     :stack-label="'Meta Description ('+locale.language+')'" rows="3"/>
+                     :stack-label="`${$tr('ui.form.metaDescription')} (${locale.language})*`" rows="3"/>
           </div>
           <!--Form right-->
           <div class="col-12 col-md-4" v-if="locale.success">
             <!--Parent-->
-            <div class="input-title">Parent</div>
-            <treeselect
+            <div class="input-title">{{`${$tr('ui.form.parent')}`}}</div>
+            <tree-select
               v-model="locale.formTemplate.parentId"
               :async="true"
               :load-options="searchProducts"
@@ -75,17 +71,22 @@
               placeholder=""
             />
             <!--Status-->
-            <div class="input-title">Status</div>
-            <treeselect
+            <div class="input-title">{{`${$tr('ui.form.status')}`}}</div>
+            <tree-select
               :clearable="false"
-              :options="optionsTemplate.status"
+              :options="options.status"
               value-consists-of="BRANCH_PRIORITY"
               v-model="locale.formTemplate.status"
               placeholder=""
             />
             <!--Category-->
-            <div class="input-title">Category</div>
-            <treeselect
+            <div class="input-title">
+              {{`${$tr('ui.form.category')}`}}
+              <!--Crud category-->
+              <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
+                    just-create @created="getCategories"/>
+            </div>
+            <tree-select
               :clearable="false"
               :options="optionsTemplate.categories"
               value-consists-of="BRANCH_PRIORITY"
@@ -93,7 +94,12 @@
               placeholder=""
             />
             <!--Categories-->
-            <div class="input-title">Categories</div>
+            <div class="input-title">
+              {{`${$trp('ui.form.category')}`}}
+              <!--Crud category-->
+              <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
+                    just-create @created="getCategories"/>
+            </div>
             <recursive-list v-model="locale.formTemplate.categories"
                             :items="optionsTemplate.categories"/>
           </div>
@@ -104,13 +110,10 @@
       <q-tabs align="justify" class="q-mt-lg border-top-color shadow-1" v-model="vTab"
               v-if="locale.success" inverted style="padding: 0px !important;">
         <!-- Tabs titles-->
-        <q-tab slot="title" name="data" label="Data"/>
-        <q-tab slot="title" name="links" label="Links"/>
-        <q-tab slot="title" name="images" label="Images"/>
-        <q-tab slot="title" name="options" label="Options"/>
-        <!--<q-tab slot="title" name="discounts" label="Discounts"/>
-        <q-tab slot="title" name="file" label="File"/>
-        <q-tab slot="title" name="relatedProducts" label="Related Products"/>-->
+        <q-tab slot="title" name="data" :label="$tr('ui.label.data')"/>
+        <q-tab slot="title" name="links" :label="$tr('ui.label.link')"/>
+        <q-tab slot="title" name="images" :label="$trp('ui.label.image')"/>
+        <q-tab slot="title" name="options" :label="$trp('ui.label.option')"/>
 
         <!-- Data -->
         <q-tab-pane name="data" keep-alive>
@@ -118,57 +121,63 @@
             <!--Left-->
             <div class="col-12 col-md-6">
               <!--SKU-->
-              <q-input v-model="locale.formTemplate.sku" stack-label="SKU"/>
+              <q-input v-model="locale.formTemplate.sku" :stack-label="$tr('ui.form.sku')"/>
               <!--Quantity-->
-              <q-input v-model="locale.formTemplate.quantity" stack-label="Quantity" type="number"/>
+              <q-input v-model="locale.formTemplate.quantity" :stack-label="$tr('ui.form.quantity')" type="number"/>
               <!--Status-->
-              <div class="input-title">Stock Status</div>
-              <treeselect
+              <div class="input-title">{{$tr('ui.form.stock')}}</div>
+              <tree-select
                 :clearable="false"
-                :options="optionsTemplate.stockStatus"
+                :options="options.stockStatus"
                 value-consists-of="BRANCH_PRIORITY"
                 v-model="locale.formTemplate.stockStatus"
                 placeholder=""
               />
               <!--Price-->
-              <q-input v-model="locale.formTemplate.price" stack-label="Price" type="number"/>
+              <q-input v-model="locale.formTemplate.price" :stack-label="$tr('ui.form.price')" type="number"/>
               <!--availability date-->
-              <q-datetime v-model="locale.formTemplate.dateAvailable" stack-label="Availability Date"/>
+              <q-datetime v-model="locale.formTemplate.dateAvailable" format="DD MMMM, YYYY"
+                          :stack-label="$tr('qcommerce.layout.form.availableDate')"/>
               <!--weight-->
-              <q-input v-model="locale.formTemplate.weight" stack-label="Weight" type="number"/>
+              <q-input v-model="locale.formTemplate.weight" :stack-label="$tr('ui.form.weight')" type="number"/>
               <!--length-->
-              <q-input v-model="locale.formTemplate.length" stack-label="Length" type="number"/>
+              <q-input v-model="locale.formTemplate.length" :stack-label="$tr('ui.form.length')" type="number"/>
             </div>
             <!--Right-->
             <div class="col-12 col-md-6">
               <!--width-->
-              <q-input v-model="locale.formTemplate.width" stack-label="Width" type="number"/>
+              <q-input v-model="locale.formTemplate.width" :stack-label="$tr('ui.form.width')" type="number"/>
               <!--height-->
-              <q-input v-model="locale.formTemplate.height" stack-label="Height" type="number"/>
+              <q-input v-model="locale.formTemplate.height" :stack-label="$tr('ui.form.height')" type="number"/>
               <!--minimum-->
-              <q-input v-model="locale.formTemplate.minimum" stack-label="Minimum Order" type="number"/>
+              <q-input :stack-label="$tr('qcommerce.layout.form.minimumOrder')"
+                       type="number" v-model="locale.formTemplate.minimum"/>
               <!--reference-->
-              <q-input v-model="locale.formTemplate.reference" stack-label="Reference"/>
+              <q-input v-model="locale.formTemplate.reference" :stack-label="$tr('ui.form.reference')"/>
               <!--Order Weight-->
-              <q-input v-model="locale.formTemplate.orderWeight" stack-label="Order Weight"/>
+              <q-input :stack-label="$tr('qcommerce.layout.form.orderWeight')"
+                       v-model="locale.formTemplate.orderWeight"/>
               <!--Points-->
-              <q-input v-model="locale.formTemplate.points" stack-label="Points"/>
+              <q-input v-model="locale.formTemplate.points" :stack-label="$trp('ui.form.point')"/>
               <!--Requires shipping-->
-              <q-checkbox v-model="locale.formTemplate.shipping" label="Requires Shipping" class="q-mt-sm"/>
+              <q-checkbox :label="$tr('qcommerce.layout.form.requriedShipping')"
+                          v-model="locale.formTemplate.shipping" class="q-mt-sm"/>
               <!--Free shipping-->
               <br>
-              <q-checkbox v-model="locale.formTemplate.freeshipping" label="Free Shipping"/>
+              <q-checkbox :label="$tr('qcommerce.layout.form.freeShipping')"
+                          v-model="locale.formTemplate.freeshipping"/>
               <!--Substrac from Stock-->
               <br>
-              <q-checkbox v-model="locale.formTemplate.subtract" label="Subtract From Stock"/>
+              <q-checkbox :label="$tr('qcommerce.layout.form.subtractFromStock')"
+                          v-model="locale.formTemplate.subtract"/>
             </div>
           </div>
         </q-tab-pane>
         <!-- Links -->
         <q-tab-pane name="links" keep-alive>
           <!--Related Products-->
-          <div class="input-title">Related Products</div>
-          <treeselect
+          <div class="input-title">{{$tr('qcommerce.layout.form.relatedProducts')}}</div>
+          <tree-select
             v-model="locale.formTemplate.relatedProducts"
             :async="true"
             :multiple="true"
@@ -180,21 +189,19 @@
         <!-- images -->
         <q-tab-pane name="images" keep-alive>
           <!--Video-->
-          <q-input v-model="locale.formTemplate.options.video" stack-label="Video"/>
-          <div class="input-title">Image</div>
+          <q-input v-model="locale.formTemplate.options.video" :stack-label="$tr('ui.form.video')"/>
+          <div class="input-title">{{$tr('ui.form.image')}}</div>
           <upload-media
             v-model="locale.formTemplate.mediasSingle"
             entity="Modules\Icommerce\Entities\Product"
-            button-label="Choose File"
             :entity-id="productId ? productId : null"
             zone='mainimage'
           />
-          <div class="input-title">Gallery</div>
+          <div class="input-title">{{$tr('ui.form.gallery')}}</div>
           <upload-media
             multiple
             v-model="locale.formTemplate.mediasMulti"
             entity="Modules\Icommerce\Entities\Product"
-            button-label="Choose File"
             :entity-id="productId ? productId : null"
             zone='gallery'
           />
@@ -205,18 +212,12 @@
           <div v-else class="text-center">
             <div class="q-my-md">
               <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
-              To add options, you must first create this product ...
+              {{`${$tr('qcommerce.layout.message.warnAddOpt')}...`}}
             </div>
-            <q-btn icon="fas fa-save" label="save and continue editing"
+            <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
                    @click="buttonActions.value = 4; createItem()" color="positive"/>
           </div>
         </q-tab-pane>
-        <!-- discounts -->
-        <q-tab-pane name="discounts">Discount</q-tab-pane>
-        <!-- file -->
-        <q-tab-pane name="file">Files</q-tab-pane>
-        <!-- Releted products -->
-        <q-tab-pane name="relatedProducts">Related products</q-tab-pane>
       </q-tabs>
 
       <!--Buttons Actions-->
@@ -225,27 +226,31 @@
         <q-btn
           v-if="productId"
           color="positive" :loading="loading"
-          icon="fas fa-edit" label="Update" @click="updateItem()"
+          icon="fas fa-edit" :label="$tr('ui.label.update')" @click="updateItem()"
         />
         <!--Save button-->
         <q-btn-dropdown :label="buttonActions.label" split v-else :loading="loading"
-                        color="positive" icon="fas fa-save" @click="createItem()" rounded >
+                        content-style="min-width: 250px !important"
+                        color="positive" icon="fas fa-save" @click="createItem()" rounded align="right">
           <q-list link>
-            <q-item @click.native="buttonActions = {label : 'Save and return', value : 1}">
-              Save and return
+            <q-item @click.native="buttonActions = {label : options.btn.saveAndReturn, value : 1}"
+                    v-close-overlay>
+              {{options.btn.saveAndReturn}}
             </q-item>
-            <q-item @click.native="buttonActions = {label : 'Save and continue editing', value : 2}">
-              Save and continue editing
+            <q-item @click.native="buttonActions = {label : options.btn.saveAndEdit, value : 2}"
+                    v-close-overlay>
+              {{options.btn.saveAndEdit}}
             </q-item>
-            <q-item @click.native="buttonActions = {label : 'Save and create a new', value : 3}">
-              Save and create a new
+            <q-item @click.native="buttonActions = {label : options.btn.saveAndCreate, value : 3}"
+                    v-close-overlay>
+              {{options.btn.saveAndCreate}}
             </q-item>
           </q-list>
         </q-btn-dropdown>
       </q-page-sticky>
 
       <!--Loading-->
-      <inner-loading :visible="loading"></inner-loading>
+      <inner-loading :visible="loading"/>
     </div>
   </div>
 </template>
@@ -253,14 +258,9 @@
 <script>
   //Components
   import locales from '@imagina/qsite/_components/locales'
-  import Treeselect from '@riophae/vue-treeselect'
-  import '@riophae/vue-treeselect/dist/vue-treeselect.css'
   import recursiveList from 'src/components/master/recursiveListSelect'
   import uploadMedia from '@imagina/qmedia/_components/form'
   import crudOptions from '@imagina/qcommerce/_components/admin/products/crudOptions'
-  import innerLoading from 'src/components/master/innerLoading'
-  //Services
-  import commerceServices from '@imagina/qcommerce/_services/index';
   //Plugins
   import _cloneDeep from 'lodash.clonedeep'
   import {required} from 'vuelidate/lib/validators'
@@ -270,12 +270,10 @@
 
   export default {
     components: {
+      crudOptions,
       locales,
-      Treeselect,
       recursiveList,
       uploadMedia,
-      crudOptions,
-      innerLoading
     },
     watch: {
       $route(to, from) {
@@ -295,6 +293,7 @@
         locale: {},
         vTab: 'data',
         loading: false,
+        loadingCategory: false,
         success: false,
         productId: false,
         editorText: {
@@ -317,18 +316,13 @@
         },
         optionsTemplate: {
           categories: [],
-          status: [
-            {label: 'Enabled', id: 1},
-            {label: 'Disable', id: 0}
-          ],
-          stockStatus: [
-            {label: 'In Stock', id: 1},
-            {label: 'Out Stock', id: 0}
-          ],
           products: [],
           relatedProducts: []
         },
-        buttonActions: {label: 'Save and return', value: 1}
+        buttonActions: {label: '', value: 1},
+        modalShow: {
+          category: false
+        }
       }
     },
     computed: {
@@ -340,7 +334,7 @@
             status: 1,
             categoryId: null,
             categories: [],
-            addedById: this.$store.state.auth.userId,
+            addedById: this.$store.state.quserAuth.userId,
             sku: 0,
             quantity: 0,
             stockStatus: 1,
@@ -362,7 +356,7 @@
             productOptions: [],
             mediasSingle: {},
             mediasMulti: {},
-            options: {video:null},
+            options: {video: null},
             //taxClassId: null,
             //manufacturerId: null,
           },
@@ -391,7 +385,25 @@
             let offset = this.$refs.productFormPage.scrollHeight
             setScrollPosition(target, offset, 1000)
           }, 500)
-      }
+      },
+      //Options translatables
+      options() {
+        return {
+          status: [
+            {label: this.$tr('ui.label.enabled'), id: 1},
+            {label: this.$tr('ui.label.disabled'), id: 0}
+          ],
+          stockStatus: [
+            {label: this.$tr('ui.label.available'), id: 1},
+            {label: this.$tr('ui.label.soldOut'), id: 0}
+          ],
+          btn: {
+            saveAndReturn: this.$tr('ui.message.saveAndReturn'),
+            saveAndEdit: this.$tr('ui.message.saveAndEdit'),
+            saveAndCreate: this.$tr('ui.message.saveAndCreate'),
+          }
+        }
+      },
     },
     methods: {
       //Init Form
@@ -399,6 +411,7 @@
         this.loading = true
         this.success = false//Disable status of page
         this.vTab = 'data'
+        this.buttonActions = {label: this.options.btn.saveAndReturn, value: 1}
         this.locale = _cloneDeep(this.dataLocale)//Add fields
         this.productId = this.$route.params.id//Update param from route
         if (this.locale.success) this.$refs.localeComponent.vReset()//Reset locale
@@ -412,18 +425,22 @@
       //Get product categories
       getCategories() {
         return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.eCommerce.categories'
+          this.loadingCategory = true
+          let configName = 'apiRoutes.qcommerce.categories'
           let params = {//Params to request
             refresh: true,
             params: {include: 'parent'},
           }
+
           //Request
-          commerceServices.crud.index(configName, params).then(response => {
+          this.$crud.index(configName, params).then(response => {
             this.optionsTemplate.categories = this.$helper.array.tree(response.data)
-            this.locale.fields.categoryId = response.data[0].id
+            this.locale.fields.categoryId = response.data.length ? response.data[0].id : null
+            this.loadingCategory = false
             resolve(true)
           }).catch(error => {
-            this.$helper.alert.error('Failed: ' + error, 'bottom')
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+            this.loadingCategory = false
             reject(true)
           })
         })
@@ -433,20 +450,21 @@
         return new Promise((resolve, reject) => {
           const productId = _cloneDeep(this.productId)
           if (productId) {
-            let configName = 'apiRoutes.eCommerce.products'
+            let configName = 'apiRoutes.qcommerce.products'
             //Params
             let params = {
+              refresh : true,
               params: {
                 include: 'relatedProducts,categories,parent',
                 filter: {allTranslations: true}
               }
             }
             //Request
-            commerceServices.crud.show(configName, productId, params).then(response => {
+            this.$crud.show(configName, productId, params).then(response => {
               this.orderDataItemToLocale(response.data)
               resolve(true)//Resolve
             }).catch(error => {
-              this.$helper.alert.error('Failed: ' + error)
+              this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
               this.loading = false
               reject(false)//Resolve
             })
@@ -480,16 +498,16 @@
         //Check validations
         if (!this.$v.$error) {
           this.loading = true
-          let configName = 'apiRoutes.eCommerce.products'
-          commerceServices.crud.create(configName, this.getDataForm()).then(response => {
-            this.$helper.alert.success('Product created ID: ' + response.data.id)
+          let configName = 'apiRoutes.qcommerce.products'
+          this.$crud.create(configName, this.getDataForm()).then(response => {
+            this.$alert.success({message: `${this.$tr('ui.message.recordCreated')} ID: ${response.data.id}`})
             this.actionAfterCreated(response.data.id)
           }).catch(error => {
             this.loading = false
-            this.$helper.alert.error('Failed: ' + error)
+            this.$alert.error({message: this.$tr('ui.message.recordNoCreatde'), pos: 'bottom'})
           })
-        }else{
-          this.$helper.alert.error('Please check required fields','bottom')
+        } else {
+          this.$alert.error({message: this.$tr('ui.message.formInvalid'), pos: 'bottom'})
         }
       },
       //Update Product
@@ -498,16 +516,16 @@
         //Check validations
         if (!this.$v.$error) {
           this.loading = true
-          let configName = 'apiRoutes.eCommerce.products'
-          commerceServices.crud.update(configName, this.productId, this.getDataForm()).then(response => {
-            this.$helper.alert.success('Product updated ID: ' + response.data)
+          let configName = 'apiRoutes.qcommerce.products'
+          this.$crud.update(configName, this.productId, this.getDataForm()).then(response => {
+            this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
             this.initForm()
           }).catch(error => {
             this.loading = false
-            this.$helper.alert.error('Failed: You can not delete this product')
+            this.$alert.error({message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom'})
           })
-        }else{
-          this.$helper.alert.error('Please check required fields','bottom')
+        } else {
+          this.$alert.error({message: this.$tr('ui.message.formInvalid'), pos: 'bottom'})
         }
       },
       //Get just values not null from form
@@ -549,15 +567,15 @@
       //Search products
       searchProducts({action, searchQuery, callback}) {
         if (action === 'ASYNC_SEARCH') {
-          let configName = 'apiRoutes.eCommerce.products'
+          let configName = 'apiRoutes.qcommerce.products'
           let params = {//Params to request
             params: {filter: {search: searchQuery}},
           }
           //Request
-          commerceServices.crud.index(configName, params).then(response => {
+          this.$crud.index(configName, params).then(response => {
             callback(null, this.$helper.array.tree(response.data))
           }).catch(error => {
-            this.$helper.alert.error('Failed: ' + error, 'bottom')
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
           })
         }
       },
@@ -569,11 +587,11 @@
         return response
       },
       //Complete slug Only when is creation
-      setSlug(){
-        if(!this.productId){
-          let title = _cloneDeep(this.locale.formTemplate.name)
+      setSlug() {
+        if (!this.productId) {
+          let title = this.$clone(this.locale.formTemplate.name)
           title = title.split(' ').join('-').toLowerCase()
-          this.locale.formTemplate.slug = _cloneDeep(title)
+          this.locale.formTemplate.slug = this.$clone(title.normalize("NFD").replace(/[\u0300-\u036f]/g, ""))
         }
       }
     }
