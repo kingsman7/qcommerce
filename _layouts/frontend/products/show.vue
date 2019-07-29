@@ -100,12 +100,12 @@
           refresh: true,
           params: {filter: {field: 'slug'}, include: 'productOptions,optionValues'}
         }
-        icommerceService.crud.show('apiRoutes.eCommerce.products', slugProduct, params).then(response => {
+        icommerceService.crud.show('apiRoutes.qcommerce.products', slugProduct, params).then(response => {
           this.productData = response.data//Add data
           this.productSelectd = response.data.slug//Set product selected
           this.loading = false
         }).catch(error => {
-          this.$helper.alert.error('Failed: ' + error, 'bottom')
+          this.$alert.error({message : 'Failed: ' + error, pos : 'bottom'})
           this.loading = false
         })
       },

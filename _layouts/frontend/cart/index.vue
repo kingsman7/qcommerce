@@ -145,8 +145,8 @@
     methods: {
       async getCart() {
         this.loading = true
-        await this.$store.dispatch('shoppingCart/GET_CART', true)
-        this.cart = this.$store.state.shoppingCart.cart
+        await this.$store.dispatch('qcommerceCart/GET_CART', true)
+        this.cart = this.$store.state.qcommerceCart.cart
         this.$root.$emit('updateCart')
         this.loading = false
       },
@@ -159,7 +159,7 @@
           cancel: true
         }).then(async data => {
           this.loading = true
-          await this.$store.dispatch('shoppingCart/DEL_PRODUCT_FROM_CART', item.id)
+          await this.$store.dispatch('qcommerceCart/DEL_PRODUCT_FROM_CART', item.id)
           await this.getCart()
           this.loading = false
         }).catch(() => {})
@@ -179,7 +179,7 @@
             }
 
             //Request
-            this.$store.dispatch('shoppingCart/UPDATE_PRODUCT_INTO_CART', formData).then(async response => {
+            this.$store.dispatch('qcommerceCart/UPDATE_PRODUCT_INTO_CART', formData).then(async response => {
               await this.getCart()
               this.loading = false
             }).catch(error => {

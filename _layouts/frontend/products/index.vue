@@ -6,21 +6,21 @@
           <menu-categories class="widgetMenuCategories" title="· Nuestro Menú ·" />
         </div>
         <div class="col-md-9">
-          <div 
+          <div
             class="row gutter-x-sm"
             v-if="products.length">
-            <router-link 
+            <router-link
               tag="div" :key="index"
               v-for="(product, index) in products"
               class="col-xs-12 col-sm-12 col-md-4 text-center product"
               :to="{name:'product.show', params: { slugProduct: product.slug }}">
-              <div 
+              <div
                 :style="`background-image: url(${product.mainImage.path});`"
                 class="product-img">
-                <q-btn 
+                <q-btn
                   :to="{name:'product.show', params: { slugProduct: product.slug }}"
                   label="Pedir"
-                  color="primary" 
+                  color="primary"
                   class="q-btn inline q-my-md btn-product"/>
               </div>
               <div class="q-mt-lg">
@@ -33,8 +33,8 @@
               </div>
             </router-link>
           </div>
-          <div 
-            class="row" 
+          <div
+            class="row"
             v-else>
             <div class="col-md-12">
               <span class="q-display-1">
@@ -42,15 +42,15 @@
               </span>
             </div>
           </div>
-          <div 
-            class="row" 
+          <div
+            class="row"
             v-if="paginate.maxPages > 1">
             <div class="col-md-12 flex justify-end q-pt-xl">
-              <q-pagination 
+              <q-pagination
                 direction-links
                 @input="getProducts()"
-                v-model="paginate.page" 
-                :min="paginate.minPages" 
+                v-model="paginate.page"
+                :min="paginate.minPages"
                 :max="paginate.maxPages" />
             </div>
           </div>
@@ -114,14 +114,14 @@
           }
         }
         icommerceService.crud
-        .index('apiRoutes.eCommerce.products',params)
+        .index('apiRoutes.qcommerce.products',params)
         .then(response=>{
           this.paginate.maxPages = response.meta.page.lastPage
           this.products = response.data
           this.visible = false
         })
         .catch(error=>{
-          this.$helper.alert.error('Failed: ' + error, 'bottom')
+          this.$alert.error({message : 'Failed: ' + error, pos : 'bottom'})
           this.visible = false
         })
       }
@@ -131,21 +131,21 @@
 </script>
 
 <style scoped lang="stylus">
-  
+
   @import "~variables";
-  
+
   div.product
     cursor pointer
 
   .product-img
-    background-position: center; 
-    background-repeat: no-repeat; 
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
     width: 100%
     height 260px
     border: 1px solid #dddddd52
     border-radius 10px
-  
+
   .btn-product
     margin-top 240px
 

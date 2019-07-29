@@ -32,7 +32,7 @@
       value: {default: false}
     },
     data(){
-      
+
       return {
         searchValue: '',
         products: [],
@@ -67,7 +67,7 @@
       searchProducts(searchValue, done) {
         let token = searchValue.toLowerCase();
         let params = {params:{filter:{search: token}}};
-        qcommerceService.crud.index('apiRoutes.eCommerce.products',params).then(response => {
+        qcommerceService.crud.index('apiRoutes.qcommerce.products',params).then(response => {
           let prods = response.data;
           this.products = [];
           prods.forEach((product,i) => {
@@ -78,7 +78,7 @@
               sublabel: product.summary
             };
           });
-          
+
           if(!prods.length){
             this.products.push({
               value: "",

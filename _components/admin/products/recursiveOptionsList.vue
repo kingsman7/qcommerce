@@ -10,12 +10,12 @@
           <q-btn icon="fas fa-plus" color="positive"
                  v-if="permitChildren(item)"
                  size="xs" @click="vEmitAddOption(item.id)">
-            <q-tooltip>Add option to: {{item.description}}</q-tooltip>
+            <q-tooltip>{{`${$tr('ui.label.add')} ${$tr('ui.label.option')}`}}</q-tooltip>
           </q-btn>
           <q-btn icon="far fa-trash-alt" color="negative"
                  class="q-ml-xs"
                  size="xs" @click="vEmitDelete(item.id)">
-            <q-tooltip>Delete option: {{item.description}}</q-tooltip>
+            <q-tooltip>{{`${$tr('ui.label.delete')}`}}</q-tooltip>
           </q-btn>
         </q-item-side>
       </template>

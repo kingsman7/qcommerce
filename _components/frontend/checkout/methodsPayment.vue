@@ -5,16 +5,16 @@
 		</div>
 
 		<div class="col-xs-12">
-		
+
 			<q-radio
 				class="q-mb-md"
 				style="font-family: Muli;font-size: 1.25rem; display:block"
-				v-for="(item, index) in paymentMethods" 
+				v-for="(item, index) in paymentMethods"
 				:key="index"
 				:label="item.title"
-				v-model="paymentMethod" 
+				v-model="paymentMethod"
 				:val="item" />
-				
+
 		</div>
 	</div>
 </template>
@@ -31,14 +31,14 @@
 			}
 		},
 		mounted(){
-			this.$nextTick(function () { 
+			this.$nextTick(function () {
 				this.getPaymentMethods()
 			})
 		},
 		methods:{
 			getPaymentMethods(){
 				this.visible = true
-				eCommerceService.crud.index('apiRoutes.eCommerce.paymentMethods')
+				eCommerceService.crud.index('apiRoutes.qcommerce.paymentMethods')
 				.then(response=>{
 					this.loading = false
 					this.paymentMethods = response.data

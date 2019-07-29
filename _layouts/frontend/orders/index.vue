@@ -146,7 +146,7 @@
           },
           filter: {
             search: null,
-            customer:this.$store.state.auth.userId,
+            customer:this.$store.state.quserAuth.userId,
             order:{
               field:'id',
               way:'DESC'
@@ -180,7 +180,7 @@
           }
         }
         //Request
-        commerceServices.crud.index('apiRoutes.eCommerce.orders', params)
+        commerceServices.crud.index('apiRoutes.qcommerce.orders', params)
         .then(response => {
           this.table.data = response.data
           this.table.pagination.page = response.meta.page.currentPage

@@ -169,7 +169,7 @@
           params:{}
         }
         icommerceService.crud
-          .show('apiRoutes.eCommerce.orders',orderId, params)
+          .show('apiRoutes.qcommerce.orders',orderId, params)
           .then(response=>{
             this.order = response.data
             this.loading = false

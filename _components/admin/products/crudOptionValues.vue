@@ -3,16 +3,16 @@
     <!--Table-->
     <q-table
       :data="table.data"
-      :columns="table.columns"
+      :columns="columns"
       row-key="name"
     >
       <!--Header-->
       <div slot="top-left">
-        <span class="input-title">Product Option Values</span>
+        <span class="input-title">{{$tr('qcommerce.layout.form.productOptionValues')}}</span>
       </div>
       <div slot="top-right">
         <!--Button new record-->
-        <q-btn icon="fas fa-edit" color="positive" label="New Option Value"
+        <q-btn icon="fas fa-edit" color="positive" :label="$tr('qcommerce.layout.newOptionValue')"
                @click="modal.itemId = false; modal.show = true"/>
       </div>
 
@@ -21,12 +21,12 @@
         <!--Edit button-->
         <q-btn color="positive" icon="fas fa-pen" size="sm"
                @click="modal.itemId = props.row.id; setItemUpdate()">
-          <q-tooltip :delay="300">Edit</q-tooltip>
+          <q-tooltip :delay="300">{{$tr('ui.label.edit')}}</q-tooltip>
         </q-btn>
         <!--Delete button-->
         <q-btn color="negative" icon="fas fa-trash-alt" size="sm" class="q-ml-xs"
                @click="deleteItem(props.row.id)">
-          <q-tooltip :delay="300">Delete</q-tooltip>
+          <q-tooltip :delay="300">{{$tr('ui.label.delete')}}</q-tooltip>
         </q-btn>
       </q-td>
     </q-table>
@@ -37,8 +37,12 @@
       <q-modal-layout style="max-width: 1245px">
         <!--Header-->
         <q-toolbar slot="header">
-          <q-toolbar-title v-if="!modal.itemId">New Product Option Value</q-toolbar-title>
-          <q-toolbar-title v-else>Update Product Option Value ID: {{modal.itemId}}</q-toolbar-title>
+          <q-toolbar-title v-if="!modal.itemId">
+            {{$tr('qcommerce.layout.newProductOptionValue')}}
+          </q-toolbar-title>
+          <q-toolbar-title v-else>
+            {{`${$tr('qcommerce.layout.updatedProductOptionValue')} ID: ${modal.itemId}`}}
+          </q-toolbar-title>
           <q-btn flat v-close-overlay icon="fas fa-times"/>
         </q-toolbar>
 
@@ -47,10 +51,10 @@
           <q-toolbar-title></q-toolbar-title>
           <!--Button Save-->
           <q-btn icon="fas fa-save" color="positive"
-                 v-if="!modal.itemId" label="Save"
+                 v-if="!modal.itemId" :label="$tr('ui.label.save')"
                  :loading="loading" @click="createItem()"/>
           <!--Button Update-->
-          <q-btn label="Update" icon="fas fa-pen" color="positive"
+          <q-btn :label="$tr('ui.label.update')" icon="fas fa-pen" color="positive"
                  :loading="loading" @click="updateItem()" v-else/>
         </q-toolbar>
 
@@ -62,13 +66,19 @@
               <!--Option Value-->
               <q-field
                 :error="$v.form.optionValueId.$error"
-                error-label="This field is required"
+                :error-label="$tr('ui.message.fieldRequired')"
                 class="q-pa-none"
               >
-                <div class="input-title">Option Value *</div>
+                <div class="input-title">
+                  {{`${$tr('qcommerce.layout.form.optionValue')} *`}}
+                  <!--Crud Option Value-->
+                  <crud :crud-data="import('@imagina/qcommerce/_crud/productOptionValues')"
+                        just-create @created="getOptionValues"/>
+                </div>
                 <treeselect
                   :clearable="false"
                   :options="options.values"
+                  :append-to-body="true"
                   value-consists-of="BRANCH_PRIORITY"
                   v-model="form.optionValueId"
                   placeholder=""
@@ -78,11 +88,17 @@
               <q-field
                 v-if="options.parentValues.length"
                 :error="$v.form.parentOptionValueId.$error"
-                error-label="This field is required"
+                :error-label="$tr('ui.message.fieldRequired')"
               >
-                <div class="input-title">Parent Option Value *</div>
+                <div class="input-title">
+                  {{`${$tr('qcommerce.layout.form.parentOptionValue')} *`}}
+                  <!--Crud Option Value-->
+                  <crud :crud-data="import('@imagina/qcommerce/_crud/productOptionValues')"
+                        just-create @created="getOptionValues"/>
+                </div>
                 <treeselect
                   :clearable="false"
+                  :append-to-body="true"
                   :options="options.parentValues"
                   value-consists-of="BRANCH_PRIORITY"
                   v-model="form.parentOptionValueId"
@@ -92,18 +108,22 @@
               <!--Quantity-->
               <q-field
                 :error="$v.form.quantity.$error"
-                error-label="This field is required"
+                :error-label="$tr('ui.message.fieldRequired')"
               >
-                <q-input v-model="form.quantity" type="number" stack-label="Quantity *"/>
+                <q-input v-model="form.quantity" type="number"
+                         :stack-label="`${$tr('ui.form.quantity')} *`"/>
               </q-field>
               <!--Subtrack-->
               <q-field
                 :error="$v.form.subtract.$error"
-                error-label="This field is required"
+                :error-label="$tr('ui.message.fieldRequired')"
               >
-                <div class="input-title">Subtract</div>
+                <div class="input-title">
+                  {{`${$tr('qcommerce.layout.form.subtractFromStock')}`}}
+                </div>
                 <treeselect
                   :clearable="false"
+                  :append-to-body="true"
                   :options="options.subtract"
                   value-consists-of="BRANCH_PRIORITY"
                   v-model="form.subtract"
@@ -116,10 +136,10 @@
               <!--Price-->
               <q-field
                 :error="$v.form.price.$error"
-                error-label="This field is required"
+                :error-label="$tr('ui.message.fieldRequired')"
               >
                 <div class="content-prefix row">
-                  <div class="input-title col-12">Price *</div>
+                  <div class="input-title col-12">{{`${$tr('ui.form.price')} *`}}</div>
                   <div class="col-2"><!--Prefix-->
                     <treeselect
                       :clearable="false"
@@ -135,10 +155,10 @@
               <!--Points-->
               <q-field
                 :error="$v.form.points.$error"
-                error-label="This field is required"
+                :error-label="$tr('ui.message.fieldRequired')"
               >
                 <div class="content-prefix row">
-                  <div class="input-title col-12">Points *</div>
+                  <div class="input-title col-12">{{`${$trp('ui.form.point')} *`}}</div>
                   <div class="col-2"><!--Prefix-->
                     <treeselect
                       :clearable="false"
@@ -154,10 +174,10 @@
               <!--weight-->
               <q-field
                 :error="$v.form.weight.$error"
-                error-label="This field is required"
+                :error-label="$tr('ui.message.fieldRequired')"
               >
                 <div class="content-prefix row">
-                  <div class="input-title col-12">Weight *</div>
+                  <div class="input-title col-12">{{`${$tr('ui.form.weight')} *`}}</div>
                   <div class="col-2"><!--Prefix-->
                     <treeselect
                       :clearable="false"
@@ -234,26 +254,14 @@
       return {
         loading: false,
         success: false,
+        optionId: null,
         table: {
           data: [],
-          columns: [
-            {name: 'id', label: 'Id', field: 'id'},
-            {name: 'optionValue', label: 'Option Value', field: 'optionValue', align: 'left'},
-            {name: 'parentOptionValue', label: 'Parent Option Value', field: 'parentOptionValue', align: 'left'},
-            {name: 'quantity', label: 'quantity', field: 'quantity'},
-            {
-              name: 'subtract', label: 'subtract', field: 'substract',
-              format: val => parseInt(val) ? 'Yes' : 'No'
-            },
-            {name: 'price', label: 'price', field: 'price'},
-            {name: 'points', label: 'points', field: 'points'},
-            {name: 'weight', label: 'weight', field: 'weight'},
-            {name: 'actions', label: ''},
-          ]
         },
         modal: {
           show: false,
           itemId: false,
+          formOptionValue: false
         },
         form: {},
         options: {}
@@ -284,14 +292,33 @@
           values: [],
           parentValues: [],
           subtract: [
-            {label: 'Yes', id: 1},
-            {label: 'No', id: 0},
+            {label: this.$tr('ui.label.yes'), id: 1},
+            {label: this.$tr('ui.label.no'), id: 0},
           ],
           prefix: [
             {label: '+', id: '+'},
             {label: '-', id: '-'},
           ]
         }
+      },
+      //Columns translatables
+      columns() {
+        return [
+          {name: 'id', label: this.$tr('ui.form.id'), field: 'id'},
+          {
+            name: 'optionValue', label: this.$tr('qcommerce.layout.form.optionValue'),
+            field: 'optionValue', align: 'left'
+          },
+          {
+            name: 'parentOptionValue', label: this.$tr('qcommerce.layout.form.parentOptionValue'),
+            field: 'parentOptionValue', align: 'left'
+          },
+          {name: 'quantity', label: this.$tr('ui.form.quantity'), field: 'quantity'},
+          {name: 'price', label: this.$tr('ui.form.price'), field: 'price'},
+          {name: 'points', label: this.$trp('ui.form.point'), field: 'points'},
+          {name: 'weight', label: this.$trp('ui.form.weight'), field: 'weight'},
+          {name: 'actions', label: this.$trp('ui.form.actions')},
+        ]
       }
     },
     methods: {
@@ -316,25 +343,22 @@
           this.form.productId = this.productOption.productId
           this.form.optionId = this.productOption.optionId
         }
-        if (this.productOption.optionId)//Get values from option
-          await this.getOptionValues(this.productOption.optionId)
-        if (this.productOption.parentOptionId)//Get values from parent option
-          await this.getOptionValues(this.productOption.parentOptionId, 'parentValues')
+        this.getOptionValues()//Get options values
       },
       //Get data
       getData() {
         return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.eCommerce.productOptionValues'
+          let configName = 'apiRoutes.qcommerce.productOptionValues'
           let params = {
             remember: false,
             params: {include: '', filter: {productOptionId: this.productOption.id}}
           }
-          commerceServices.crud.index(configName, params).then(response => {
+          this.$crud.index(configName, params).then(response => {
             this.table.data = response.data
             resolve(true)
           }).catch(error => {
             this.loading = false
-            this.$helper.alert.error('Failed: ' + error)
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
             reject(error)
           })
         })
@@ -345,17 +369,17 @@
         //Check validations
         if (!this.$v.form.$error) {
           this.loading = true
-          let configName = 'apiRoutes.eCommerce.productOptionValues'
-          commerceServices.crud.create(configName, this.form).then(response => {
-            this.$helper.alert.success('Product Option Value created ID: ' + response.data.id)
+          let configName = 'apiRoutes.qcommerce.productOptionValues'
+          this.$crud.create(configName, this.form).then(response => {
+            this.$alert.success({message: this.$tr('ui.message.recordCreated'), pos: 'bottom'})
             this.initForm()
             this.loading = false
           }).catch(error => {
+            this.$alert.error({message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom'})
             this.loading = false
-            this.$helper.alert.error('Failed: ' + error)
           })
         } else {
-          this.$helper.alert.error('Please check required fields', 'bottom')
+          this.$alert.error({message: this.$tr('ui.message.formInvalid'), pos: 'bottom'})
         }
       },
       //Update Item
@@ -364,30 +388,30 @@
         //Check validations
         if (!this.$v.$error) {
           this.loading = true
-          let configname = 'apiRoutes.eCommerce.productOptionValues'
-          commerceServices.crud.update(configname, this.modal.itemId, this.form).then(response => {
-            this.$helper.alert.success('Product Option Value updated ID: ' + this.itemId)
+          let configname = 'apiRoutes.qcommerce.productOptionValues'
+          this.$crud.update(configname, this.modal.itemId, this.form).then(response => {
+            this.$alert.success({message: this.$tr('ui.message.recordUpdated'), pos: 'bottom'})
             this.initForm()
             this.loading = false
           }).catch(error => {
+            this.$alert.error({message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom'})
             this.loading = false
-            this.$helper.alert.error('Failed: ' + error)
           })
         } else {
-          this.$helper.alert.error('Please check required fields', 'bottom')
+          this.$alert.error({message: this.$tr('ui.message.formInvalid'), pos: 'bottom'})
         }
       },
       //Delete Item
       deleteItem(itemId) {
         this.loading = true
-        let configName = 'apiRoutes.eCommerce.productOptionValues'
-        commerceServices.crud.delete(configName, itemId).then(response => {
-          this.$helper.alert.success('Product Option Value deleted ID: ' + response.data.id)
+        let configName = 'apiRoutes.qcommerce.productOptionValues'
+        this.$crud.delete(configName, itemId).then(response => {
+          this.$alert.success({message: this.$tr('ui.message.recordDeleted'), pos: 'bottom'})
           this.initForm()
           this.loading = false
         }).catch(error => {
+          this.$alert.error({message: this.$tr('ui.message.recordNoDeleted'), pos: 'bottom'})
           this.loading = false
-          this.$helper.alert.error('Failed: ' + error)
         })
       },
       //Set data to item update
@@ -398,22 +422,32 @@
         this.modal.show = true
       },
       //Get option values
-      getOptionValues(optionId, itemName = 'values') {
-        return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.eCommerce.optionValues'
-          let params = {params: {filter: {optionId: optionId}}}
-          commerceServices.crud.index(configName, params).then(response => {
-            this.options[itemName] = []
-            response.data.forEach(item => {//Order values
-              this.options[itemName].push({label: item.description, id: item.id})
+      async getOptionValues() {
+        this.loading = true
+        //Sub funtion to get options
+        let getOptions = (optionId, itemName = 'values') =>{
+          return new Promise((resolve, reject) => {
+            let configName = 'apiRoutes.qcommerce.optionValues'
+            let params = {refresh: true, params: {filter: {optionId: optionId}}}
+            this.$crud.index(configName, params).then(response => {
+              this.options[itemName] = []
+              response.data.forEach(item => {//Order values
+                this.options[itemName].push({label: item.description, id: item.id})
+              })
+              resolve(true)
+            }).catch(error => {
+              this.loading = false
+              this.$helper.alert.error('Failed: ' + error)
+              reject(error)
             })
-            resolve(true)
-          }).catch(error => {
-            this.loading = false
-            this.$helper.alert.error('Failed: ' + error)
-            reject(error)
           })
-        })
+        }
+
+        if (this.productOption.optionId)//Get values from option
+          await getOptions(this.productOption.optionId)
+        if (this.productOption.parentOptionId)//Get values from parent option
+          await getOptions(this.productOption.parentOptionId, 'parentValues')
+        this.loading = false
       },
     }
   }

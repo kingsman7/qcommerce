@@ -140,7 +140,7 @@
           }
         }
         //Request
-        commerceServices.crud.index('apiRoutes.eCommerce.productOptions', params).then(response => {
+        commerceServices.crud.index('apiRoutes.qcommerce.productOptions', params).then(response => {
           this.template.options = this.$helper.array.builTree(response.data)
           this.loading = false
         }).catch(error => {
@@ -159,7 +159,7 @@
             price: this.template.total,
           }
 
-          this.$store.dispatch('shoppingCart/SET_PRODUCT_INTO_CART', formData).then(response => {
+          this.$store.dispatch('qcommerceCart/SET_PRODUCT_INTO_CART', formData).then(response => {
             this.$q.dialog({
               title: 'Producto agregado al carrito!',
               color: 'positive',

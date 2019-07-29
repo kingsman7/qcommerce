@@ -40,7 +40,7 @@
         this.loading = true
         let params = {refresh: false, params: {}}
         //Request
-        commerceServices.crud.index('apiRoutes.eCommerce.categories', params).then(response => {
+        commerceServices.crud.index('apiRoutes.qcommerce.categories', params).then(response => {
           this.orderCategoriesToMenu(response.data)
           this.loading = false
         }).catch(error => {
@@ -64,7 +64,7 @@
             if (item.children) data.children = recursiveMenu(item.children)
             menu.push(data)//Add to data menu
           })
-          
+
           return menu//Return response
         }
         this.menuCategories = recursiveMenu(this.$helper.array.builTree(categories))

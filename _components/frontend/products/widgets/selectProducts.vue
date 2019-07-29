@@ -49,7 +49,7 @@
             params: {filter: {categoryId: this.categoryId}}
           }
           //Request
-          commerceServices.crud.index('apiRoutes.eCommerce.products', params).then(response => {
+          commerceServices.crud.index('apiRoutes.qcommerce.products', params).then(response => {
             this.products = this.$helper.array.tree(response.data, {label: 'name', id: 'slug'})
             this.loading = false
           }).catch(error => {

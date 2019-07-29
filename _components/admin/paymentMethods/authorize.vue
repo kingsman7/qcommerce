@@ -4,24 +4,25 @@
     <q-modal-layout style="max-width: 1245px">
       <!--Header-->
       <q-toolbar slot="header">
-        <q-toolbar-title>Update Payment Method: {{item.title}}</q-toolbar-title>
+        <q-toolbar-title>
+          {{`${$tr('qcommerce.layout.updatePaymentMethod')}: ${item.title}`}}
+        </q-toolbar-title>
         <q-btn flat v-close-overlay icon="fas fa-times"/>
       </q-toolbar>
-      
+
       <!--Footer-->
       <q-toolbar slot="footer" color="white">
         <q-toolbar-title></q-toolbar-title>
         <!--Button Update-->
-        <q-btn label="Update" icon="fas fa-pen" color="positive"
-               :loading="loading" @click="updateItem" />
+        <q-btn :label="$tr('ui.label.update')" icon="fas fa-pen" color="positive"
+               :loading="loading" @click="updateItem"/>
       </q-toolbar>
-      
+
       <!--Content-->
       <div class="layout-padding relative-position">
         <div class="row gutter-x-md">
           <!--Language-->
           <div class="col-12">
-            <span class="input-title q-mr-sm">Language</span>
             <locales v-model="locale" ref="localeComponent" @validate="$v.$touch()"/>
           </div>
           <!--Form left-->
@@ -29,77 +30,59 @@
             <!--Title-->
             <q-field
               :error="$v.locale.formTemplate.title.$error"
-              error-label="This field is required"
+              :error-label="$tr('ui.message.fieldRequired')"
             >
               <q-input v-model="locale.formTemplate.title"
-                       :stack-label="'Title ('+locale.language+')*'"/>
+                       :stack-label="`${$tr('ui.form.title')} (${locale.language})*`"/>
             </q-field>
-            
+
             <!--Description-->
             <q-field
               :error="$v.locale.formTemplate.description.$error"
-              error-label="This field is required"
+              :error-label="$tr('ui.message.fieldRequired')"
             >
-              <div class="input-title">Description ({{locale.language}})*</div>
+              <div class="input-title">
+                {{`${$tr('ui.form.description')} (${locale.language})*`}}
+              </div>
               <q-input v-model="locale.formTemplate.description"
-                        type="textarea" rows="3"/>
+                       type="textarea" rows="3"/>
             </q-field>
- 
+
             <!--Api Login-->
-            <q-field
-            
-            >
-              <q-input v-model="locale.formTemplate.apilogin"
-                       stack-label="Api Login"/>
-            </q-field>
-            
+            <q-input v-model="locale.formTemplate.apilogin"
+                     :stack-label="$tr('qcommerce.layout.form.apiLogin')"/>
+
             <!--Transaction Key-->
-            <q-field
-            
-            >
-              <q-input v-model="locale.formTemplate.transactionkey"
-                       stack-label="Transaction Key"/>
-            </q-field>
-  
+            <q-input v-model="locale.formTemplate.transactionkey"
+                     :stack-label="$tr('qcommerce.layout.form.transactionKey')"/>
+
             <!--Client Key-->
-            <q-field
-  
-            >
-              <q-input v-model="locale.formTemplate.clientkey"
-                       stack-label="Client Key"/>
-            </q-field>
-            
-            
-            <!--Mode-->
-            <q-field
-            
-            >
-              <q-select v-model="locale.formTemplate.mode"
-                        :options="[
-                        {label:'SANDBOX',value:'sandbox'},
-                        {label:'LIVE',value:'live'}
-                        ]"
-                        stack-label="Mode"/>
-            </q-field>
-            
-            
-            <!--Status-->
-            <q-field
-            
-            >
-              <q-toggle v-model="locale.formTemplate.status"
-                        label="Active" color="positive"/>
-            </q-field>
-          
-          
+            <q-input v-model="locale.formTemplate.clientkey"
+                     :stack-label="$tr('qcommerce.layout.form.clientKey')"/>
           </div>
           <!--Form right-->
           <div class="col-12 col-md-4" v-if="locale.success">
+            <!--Mode-->
+            <q-select v-model="locale.formTemplate.mode"
+                      :options="[
+                        {label:'SANDBOX',value:'sandbox'},
+                        {label:'LIVE',value:'live'}
+                        ]"
+                      :stack-label="$tr('qcommerce.layout.form.mode')"/>
+            <!--Status-->
+            <q-select v-model="locale.formTemplate.status"
+                      :options="[
+                        {label:$tr('ui.label.enabled'),value:true},
+                        {label:$tr('ui.label.disabled'),value:false}
+                        ]"
+                      :stack-label="$tr('ui.form.status')"/>
             <!--Main Image-->
+            <div class="input-title">
+              {{$tr('ui.form.image')}}
+            </div>
             <upload-img
               v-model="locale.formTemplate.mediasSingle"
               entity="Modules\Icommerce\Entities\PaymentMethod"
-              button-label="Choose File"
               :entity-id="itemId ? itemId : null"
               zone='mainimage'
             />
@@ -112,19 +95,16 @@
   </q-modal>
 </template>
 <script>
-  //Services
-  import commerceServices from '@imagina/qcommerce/_services/index';
-  
   //Components
   import uploadImg from '@imagina/qmedia/_components/form'
   import locales from '@imagina/qsite/_components/locales'
   import innerLoading from 'src/components/master/innerLoading'
-  
+
   //Plugins
   import {required} from 'vuelidate/lib/validators'
   import _cloneDeep from 'lodash.clonedeep'
   import {alert} from '@imagina/qhelper/_plugins/alert'
-  
+
   export default {
     props: {
       value: {default: false},
@@ -148,18 +128,11 @@
         this.$emit('input', this.show)
         this.initForm()
       },
-      item: {
-        handler: function (val, oldVal) {
-          console.warn("item ",this.item)
-          
-        },
-        deep: true
-      }
     },
     mounted() {
       this.$nextTick(function () {
         this.show = this.value//Assign props value to show modal
-        
+
       })
     },
     data() {
@@ -202,15 +175,15 @@
         this.loading = true
         //If ther is category Id, request data, else set default data
         this.locale = _cloneDeep(this.dataLocale)
-        
+
         //initialize item data
-        if(this.item)
+        if (this.item)
           this.locale.form = _cloneDeep(this.item)
         this.$v.$reset()//Reset validations
         this.show = this.value//Assign props value to show modal
         this.loading = false
       },
-  
+
       //Return object to validations
       getObjectValidation() {
         let response = {}
@@ -218,9 +191,9 @@
           response = {locale: this.locale.formValidations}
         return response
       },
-      
+
       //update item
-      updateItem(){
+      updateItem() {
         this.$refs.localeComponent.vTouch()//Validate component locales
         //Check validations
         if (!this.$v.$error) {
@@ -234,21 +207,21 @@
             init: data["init"]
           }
           //Request
-          commerceServices.crud.update('apiRoutes.eCommerce.paymentMethods', this.item.id, data).then(response => {
-    
-            this.$alert.success('Payment method updated', 'top')
+          this.$crud.update('apiRoutes.qcommerce.paymentMethods', this.item.id, data).then(response => {
+            this.$alert.success({message: this.$tr('ui.message.recordUpdated')})
+            this.$emit('updated')
             this.loading = false
             this.show = false
           }).catch(error => {
+            this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
             this.loading = false
-            this.$helper.alert.error('Failed: ' + error, 'bottom')
           })
-        }else{
-          this.$helper.alert.error('Please check required fields','bottom')
+        } else {
+          this.$alert.error({message: this.$tr('ui.message.formInvalid'), pos: 'bottom'})
         }
       }
     }
-    
+
   }
 </script>
 <style lang="stylus">
