@@ -24,7 +24,7 @@
 
 ## Pages
 
-- ### Front-End
+- #### Front-End
 
   | PAGE | NAME | PARAMS |
   | ------------- | ------------- | ------------- |
@@ -35,7 +35,7 @@
   | Orders Index | orders.index | - |
   | Order Show | order.show | {id} |
   
-- ### Back-End
+- #### Back-End
 
   | PAGE | NAME | PARAMS |
   | ------------- | ------------- | ------------- |
@@ -61,7 +61,7 @@
   | Select Quantity | @imagina/qcommerce/_components/selectQuantity |
 
 ## Store VUEX  
-- #### States
+- ##### States
   - qcommerceOrders.pending
   - qcommerceCart.cart
   - qcommerceCart.cartId
