@@ -151,7 +151,7 @@
       update(data) {
         this.loading = true
         //Request
-        this.$crud.update('apiRoutes.qommerce.shippingMethods', data.id, data).then(response => {
+        this.$crud.update('apiRoutes.qcommerce.shippingMethods', data.id, data).then(response => {
           this.$alert.success({message: this.$tr('ui.message.recordUpdated')})
           this.loading = false
         }).catch(error => {
