@@ -61,6 +61,21 @@
           </div>
           <!--Form right-->
           <div class="col-12 col-md-4" v-if="locale.success">
+            <!--Record Master-->
+            <div v-if="canManageRecordMaster">
+              <div class="input-title">
+                {{`${$tr('ui.form.masterRecord')}`}}
+              </div>
+              <tree-select
+                :clearable="false"
+                v-model="locale.formTemplate.options.masterRecord"
+                :options="[
+                {label: this.$tr('ui.label.yes'), id: 1},
+                {label: this.$tr('ui.label.no'), id: 0},
+              ]"
+                placeholder=""
+              />
+            </div>
             <!--Parent-->
             <div class="input-title">{{`${$tr('ui.form.parent')}`}}</div>
             <tree-select
@@ -356,7 +371,10 @@
             productOptions: [],
             mediasSingle: {},
             mediasMulti: {},
-            options: {video: null},
+            options: {
+              masterRecord: 0,
+              video: null
+            },
             //taxClassId: null,
             //manufacturerId: null,
           },
@@ -404,6 +422,22 @@
           }
         }
       },
+      //Has manage master record
+      canManageRecordMaster(){
+        let response = true
+
+        if(this.productId && !this.$auth.hasAccess('isite.master.records.edit')){
+          response = false
+          //Validate if record is master
+          let record = this.locale.formTemplate
+          if(record && record.options && parseInt(record.options.masterRecord))
+            this.$router.push({name : 'app.home'})
+        }
+        if(!this.productId && !this.$auth.hasAccess('isite.master.records.create'))
+          response = false
+
+        return response
+      }
     },
     methods: {
       //Init Form
@@ -453,7 +487,7 @@
             let configName = 'apiRoutes.qcommerce.products'
             //Params
             let params = {
-              refresh : true,
+              refresh: true,
               params: {
                 include: 'relatedProducts,categories,parent',
                 filter: {allTranslations: true}
@@ -544,10 +578,10 @@
           let action = this.buttonActions.value
           switch (action) {
             case 1://redirect to index products
-              this.$router.push({name: 'ecommerce.products.index'})
+              this.$router.push({name: 'qcommerce.admin.products.index'})
               break;
             case 2://Redirect to update this product
-              this.$router.push({name: 'ecommerce.products.edit', params: {id: id}})
+              this.$router.push({name: 'qcommerce.admin.products.edit', params: {id: id}})
               this.loading = false
               break;
             case 3://Reset and init form
@@ -556,7 +590,7 @@
               break;
             case 4://Redirect to update this product and options
               this.$router.push({
-                name: 'ecommerce.products.edit',
+                name: 'qcommerce.admin.products.edit',
                 params: {id: id, editOptions: 1},
               })
               this.loading = false
