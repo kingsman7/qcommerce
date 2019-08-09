@@ -1,4 +1,4 @@
-## QCOMMERCE  | 1.0.0
+## QCOMMERCE  | 1.0.3
 
 ## Installation
 

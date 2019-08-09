@@ -1,12 +1,5 @@
 <template>
-  <div id="paymentMethodsIndex"
-       class="q-layout-page row layout-padding">
-
-    <!--TITLE-->
-    <h1 class="q-headline text-primary">
-      <q-icon v-if="$route.meta.icon" :name="$route.meta.icon"/>
-      {{$tr($route.meta.title)}}
-    </h1>
+  <div id="paymentMethodsIndex">
 
     <!--Content-->
     <div class="col-12 relative-position backend-page">

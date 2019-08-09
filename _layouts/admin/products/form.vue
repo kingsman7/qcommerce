@@ -1,17 +1,9 @@
 <template>
-  <div id="productFormPage" ref="productFormPage"
-       class="q-layout-page layout-padding">
-
-    <!--TITLE-->
-    <h1 class="q-headline text-primary">
-      <q-icon :name="$route.meta.icon"></q-icon>
-      {{$tr($route.meta.title)}}
-    </h1>
-
+  <div id="productFormPage" ref="productFormPage">
     <!--Content-->
     <div class="relative-position q-mb-lg backend-page">
       <!--Data-->
-      <div class="border-top-color shadow-1">
+      <div class="box">
         <div class="row gutter-x-md" v-if="success">
           <!--Language-->
           <div class="col-12">
@@ -122,7 +114,7 @@
       </div>
 
       <!--Extra Data-->
-      <q-tabs align="justify" class="q-mt-lg border-top-color shadow-1" v-model="vTab"
+      <q-tabs align="justify" class="q-mt-lg box" v-model="vTab"
               v-if="locale.success" inverted style="padding: 0px !important;">
         <!-- Tabs titles-->
         <q-tab slot="title" name="data" :label="$tr('ui.label.data')"/>
