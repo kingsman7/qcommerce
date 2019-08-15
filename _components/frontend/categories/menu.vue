@@ -1,12 +1,44 @@
 <template>
   <div id="menuCategoriesComponent">
     <div class="relative-position content">
-      <!--Title-->
-      <div class="title-menu q-title q-mb-sm">{{title}}</div>
-      <!--Recursive list-->
-      <recursive-item id="menuList" :menu="menuCategories" />
+      <!--Categories desktop-->
+      <div class="q-hide q-sm-show q-pt-sm bg-white">
+        <!--Title-->
+        <div class="title-menu q-title q-mb-sm text-primary q-pl-sm">
+          <q-icon v-if="icon" :name="icon" color="primary" size="17px" class="q-mr-sm"/>
+          <span v-if="title">{{title}}</span>
+        </div>
+        <!--Recursive list-->
+        <recursive-item :translatable="false" id="menuList" :menu="menuCategories"/>
+      </div>
+
+      <!--Categories Mobile-->
+      <div class="q-sm-hide">
+        <!--Button open modal-->
+        <q-btn :label="title" :icon="icon || ''" @click="modal.show = true"
+               class="no-shadow" color="primary"/>
+        <!--Categorries modal-->
+        <q-modal v-model="modal.show" class="q-md-hide" maximized>
+          <q-modal-layout>
+            <!--Header-->
+            <q-toolbar slot="header">
+              <q-btn flat round dense v-close-overlay
+                     icon="keyboard_arrow_left"/>
+              <q-toolbar-title v-if="title">
+                {{title}}
+              </q-toolbar-title>
+            </q-toolbar>
+
+            <!--Recursive list-->
+            <div class="layout-padding">
+              <recursive-item :translatable="false" id="menuList" :menu="menuCategories"/>
+            </div>
+          </q-modal-layout>
+        </q-modal>
+      </div>
+
       <!--Loading-->
-      <inner-loading :visible="loading" />
+      <inner-loading :visible="loading"/>
     </div>
   </div>
 </template>
@@ -19,7 +51,8 @@
 
   export default {
     props: {
-      title : {default : 'Categories'}
+      title: {default: 'Categories'},
+      icon: {default: false},
     },
     components: {recursiveItem, innerLoading},
     watch: {},
@@ -31,7 +64,10 @@
     data() {
       return {
         loading: false,
-        menuCategories: []
+        menuCategories: [],
+        modal: {
+          show: false
+        }
       }
     },
     methods: {
@@ -44,18 +80,27 @@
           this.orderCategoriesToMenu(response.data)
           this.loading = false
         }).catch(error => {
-          console.warn('Error getting categories',error)
+          console.warn('Error getting categories', error)
           this.loading = false
         })
       },
       //Order categories to menu
       orderCategoriesToMenu(categories) {
         const recursiveMenu = (items) => {
-          let menu = []
+          //Default list
+          let menu = [
+            {
+              title: this.$tr('ui.label.all'),
+              name: 'products.index',
+              permission: null,
+              activated: true
+            }
+          ]
+
           items.forEach((item) => {
             let data = {
               title: item.title ? item.title : item.label,
-              name: 'products.index',
+              name: 'products.index.by.category',
               params: {slugCategory: item.slug},
               permission: item.showMenu ? null : 'no.show.item',
               activated: true

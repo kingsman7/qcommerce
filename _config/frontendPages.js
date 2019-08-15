@@ -11,8 +11,20 @@ export default {
 	productsIndex: {
 		permission: null,
 		activated: true,
-		path: '/products/:slugCategory',
+		path: '/products',
 		name: 'products.index',
+		layout: require('@imagina/qcommerce/_layouts/frontend/products/index').default,
+		containerLayout: master,
+		title: 'Product Index',
+		icon: 'fas fa-boxes',
+		//middleware: [auth,access]
+	},
+	// Index Product
+	productsIndexByCategory: {
+		permission: null,
+		activated: true,
+		path: '/products/:slugCategory',
+		name: 'products.index.by.category',
 		layout: require('@imagina/qcommerce/_layouts/frontend/products/index').default,
 		containerLayout: master,
 		title: 'Product Index',

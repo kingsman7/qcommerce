@@ -1,6 +1,6 @@
 <template>
   <div id="widgetSelectProducts">
-    <treeselect
+    <tree-select
       v-model="productSlug"
       :options="products"
       :clearable="false"
@@ -12,9 +12,6 @@
   </div>
 </template>
 <script>
-  //components
-  import Treeselect from '@riophae/vue-treeselect'
-  import '@riophae/vue-treeselect/dist/vue-treeselect.css'
   // Services
   import commerceServices from '@imagina/qcommerce/_services/index';
 
@@ -24,7 +21,7 @@
       categoryId: {default: false},
       width : {default: 'auto'}
     },
-    components: {Treeselect},
+    components: {},
     watch: {},
     mounted() {
       this.$nextTick(function () {

@@ -1,18 +1,29 @@
 <template>
-  <section>
-    <div class="q-container relative-position">
-      <div class="row gutter-x-sm q-my-md">
-        <div class="col-xs-12 col-sm-12 col-md-3">
-          <menu-categories class="widgetMenuCategories" title="· Nuestro Menú ·" />
+  <div class="bg-grey-2">
+    <div class="q-container relative-position q-px-md">
+      <div class="row gutter-x-sm q-py-md">
+        <!--Left-->
+        <div class="col-12 col-md-4 col-lg-3">
+          <!--Search-->
+          <div class="backend-page q-mb-md bg-white">
+            <q-search ref="search" v-model="search" clearable
+                      :debounce="700" @input="getProducts()"/>
+          </div>
+
+          <!--Categories-->
+          <menu-categories class="widgetMenuCategories"
+                           title="Nuestro Menú" icon="fas fa-list"/>
         </div>
-        <div class="col-md-9">
+
+        <!--Right-->
+        <div class="col-12 col-md-8 col-lg-9">
           <div
             class="row gutter-x-sm"
             v-if="products.length">
             <router-link
               tag="div" :key="index"
               v-for="(product, index) in products"
-              class="col-xs-12 col-sm-12 col-md-4 text-center product"
+              class="col-12 col-md-4 text-center product"
               :to="{name:'product.show', params: { slugProduct: product.slug }}">
               <div
                 :style="`background-image: url(${product.mainImage.path});`"
@@ -51,7 +62,7 @@
                 @input="getProducts()"
                 v-model="paginate.page"
                 :min="paginate.minPages"
-                :max="paginate.maxPages" />
+                :max="paginate.maxPages"/>
             </div>
           </div>
         </div>
@@ -59,7 +70,7 @@
       <!--Inner Loading-->
       <inner-loading :visible="visible"></inner-loading>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -71,59 +82,76 @@
   import innerLoading from 'src/components/master/innerLoading'
 
   export default {
-    components:{
+    components: {
       menuCategories,
       innerLoading
     },
-    watch:{
+    beforeRouteLeave(to, from, next) {
+      next()
+      this.focusSearch()//Check if load search
+    },
+    watch: {
       $route(to, from) {
         this.getProducts()
       }
     },
-    mounted(){
-      this.$nextTick(()=>{
-        this.getProducts()
+    mounted() {
+      this.$nextTick(() => {
+        this.init()
       })
     },
-    data(){
-      return{
-        showProduct:false,
-        visible:false,
-        products:[],
-        paginate:{
+    data() {
+      return {
+        showProduct: false,
+        visible: false,
+        products: [],
+        paginate: {
           page: 1,
-          take:10,
+          take: 10,
           minPages: 1,
           maxPages: 0
-        }
+        },
+        search: ''
       }
     },
-    methods:{
+    methods: {
+      //Init
+      init() {
+        this.focusSearch()//Check if load search
+        this.getProducts()//Get products
+      },
+      //Focus search
+      focusSearch() {
+        if (this.$route.params.search)
+          this.$refs.search.focus()
+      },
       // Get all products by category :slug
-      getProducts(){
+      getProducts() {
         this.visible = true
         let params = {
-          params:{
-            filter:{
-              categorySlug:this.$route.params.slugCategory,
-              locale:'es'
+          params: {
+            filter: {
+              categorySlug: this.$route.params.slugCategory,
+              locale: 'es',
+               search: this.search
             },
-            include:'productOptions,optionValues',
-            take:this.paginate.take,
-            page:this.paginate.page,
+            include: 'productOptions,optionValues',
+            take: this.paginate.take,
+            page: this.paginate.page,
           }
         }
+
         icommerceService.crud
-        .index('apiRoutes.qcommerce.products',params)
-        .then(response=>{
-          this.paginate.maxPages = response.meta.page.lastPage
-          this.products = response.data
-          this.visible = false
-        })
-        .catch(error=>{
-          this.$alert.error({message : 'Failed: ' + error, pos : 'bottom'})
-          this.visible = false
-        })
+          .index('apiRoutes.qcommerce.products', params)
+          .then(response => {
+            this.paginate.maxPages = response.meta.page.lastPage
+            this.products = response.data
+            this.visible = false
+          })
+          .catch(error => {
+            this.$alert.error({message: 'Failed: ' + error, pos: 'bottom'})
+            this.visible = false
+          })
       }
     }
   }
