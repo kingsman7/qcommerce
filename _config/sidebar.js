@@ -12,6 +12,7 @@ export default [
       pages.qcommerce.optionValues,//products options
       pages.qcommerce.paymentMethods,//products options
       pages.qcommerce.shippingMethods,//products options
+      pages.qcommerce.orders,//Orders
     ]
   },
 ]

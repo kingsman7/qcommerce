@@ -12,6 +12,24 @@ export default {
   updateProductOptionValue : 'Actualizar valor de Opción de producto',
   updatePaymentMethod : 'Actualizar metodo de pago',
   updateShippingMethod : 'Actualizar metodo de envio',
+  newOrder : 'Nuevo Orden',
+  updateOrder : 'Actualizar Orden',
+
+  orderAccountInformation: 'Información de pedido y cuenta',
+  orderStatus: 'Estado del pedido',
+  orderDate: 'Fecha de orden',
+  placedFromIP: 'Pedido realizado desde la IP',
+  accountInformation: 'Información de la cuenta',
+  addressInformation: 'Datos del Domicilio',
+  billingAddress: 'Dirección de Envio',
+  paymentShippingMethod: 'Pago y método de envío',
+  paymentInformation: 'Información del pago',
+  itemsOrdered: 'Artículos ordenados',
+  orderTotal: 'Total del pedido',
+  subtotal: 'Total parcial',
+  shipping: 'Envío',
+
+
   form : {
     availableDate : 'Disponible desde',
     minimumOrder : 'Orden minima',
@@ -44,6 +62,10 @@ export default {
     shipperPostalCode : 'Codigo postal de envio',
     shipperStateCode : 'Codigo de Estado de envio',
     shipperCountryCode : 'Codigo De Pais de envio',
+    total: 'Total',
+    city: 'Ciudad',
+    country: 'País',
+    shippingMethod: 'Métodos de Envío',
   },
   message : {
     warnAddOpt : 'Para agregar opciones, primero debe crear el producto',

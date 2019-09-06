@@ -103,4 +103,26 @@ export default {
 		icon: 'fas fa-shipping-fast',
 		middleware: [auth,access]
 	},
+  orders: {
+    permission: null,
+    activated: true,
+    path: '/orders',
+    name: 'qcommerce.admin.shipping.orders.index',
+    layout: require('@imagina/qcommerce/_layouts/admin/order/index').default,
+    containerLayout: master,
+    title: 'qcommerce.sidebar.adminOrders',
+    icon: 'fas fa-box-open',
+    middleware: [auth,access]
+  },
+  order: {
+    permission: null,
+    activated: true,
+    path: '/order/:id',
+    name: 'qcommerce.admin.shipping.orders.show',
+    layout: require('@imagina/qcommerce/_layouts/admin/order/show').default,
+    containerLayout: master,
+    title: 'qcommerce.sidebar.adminOrders',
+    icon: 'fas fa-box-open',
+    middleware: [auth,access]
+  },
 }
