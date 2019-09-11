@@ -28,7 +28,7 @@
                   <div class="col-md-3">
                     {{$tr('qcommerce.layout.orderDate')}}
                   </div>
-                  <div class="col-md-9">{{$trd(order.createdAt)}}</div>
+                  <div class="col-md-9">{{(order.createdAt)}}</div>
                 </div>
                 <div class="row">
                   <div class="col-md-3">
@@ -153,8 +153,28 @@
       </div>
     </div>
   
-    <div class="row q-mt-md">
-      <div class="col-md-12 backend-page">
+    
+  
+    <div class="row q-mt-md gutter-x-sm">
+      <div class="col-md-6 backend-page">
+        <div class="row gutter-x-sm">
+          <div class="col-md-12">
+  
+            <q-card class="box-table">
+              <q-card-title>
+                {{$tr('qcommerce.layout.orderHistory')}}
+              </q-card-title>
+              <q-card-separator />
+              <q-card-main>
+                <order-status-history :items="order.histories" />
+                <addStatusOrder @orderHistoryCreated="getOrder()"/>
+              </q-card-main>
+            </q-card>
+            
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 backend-page">
         <div class="row gutter-x-sm">
           <div class="col-md-12">
           
@@ -199,24 +219,35 @@
                 </div>
               </q-card-main>
             </q-card>
+            
           </div>
         </div>
       </div>
     </div>
+    
     <inner-loading :visible="loading"/>
   </div>
 </template>
 
 <script>
+  import orderStatusHistory from '@imagina/qcommerce/_components/admin/orders/orderStatusHistory';
   import orderItems from '@imagina/qcommerce/_components/frontend/orders/orderItems';
+  import addStatusOrder from '@imagina/qcommerce/_components/admin/orders/addStatusOrder'
   export default {
     components:{
-      orderItems
+      orderItems,
+      orderStatusHistory,
+      addStatusOrder
     },
     data (){
       return {
         loading: false,
-        order : {}
+        order : {
+          customer: {
+            fullName: ''
+          },
+          items:[],
+        }
       }
     },
     created() {
