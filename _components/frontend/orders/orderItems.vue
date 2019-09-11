@@ -6,12 +6,11 @@
       :pagination="{
         rowsPerPage: 0
       }" hide-bottom
-      class="no-shadow secondary-font"
-    >
+      class="no-shadow secondary-font">
       <q-td slot="body-cell-description" slot-scope="props" :props="props">
         <div>
           <!--Title-->
-          <div class="q-title text-secondary text-weight-bold">
+          <div>
             {{props.row.title}}
           </div>
           <!--Options-->
@@ -44,9 +43,9 @@
     data () {
       return {
         columns: [
-          { name: 'cantidad', label: 'Cantidad', field: 'quantity', align: 'center' },
-          { name: 'codigo', label: 'Codigo', field: 'id', align: 'center' },
-          { name: 'description', label: 'Description', align: 'center' },
+          { name: 'cantidad', label: 'Cantidad', field: 'quantity', align: 'left' },
+          { name: 'codigo', label: 'Codigo', field: 'id', align: 'left' },
+          { name: 'description', label: 'Description', align: 'left' },
           {
             name: 'valor',
             label: 'Valor',
