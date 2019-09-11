@@ -28,7 +28,7 @@ export default {
   orderTotal: 'Total del pedido',
   subtotal: 'Total parcial',
   shipping: 'Envío',
-
+  orderHistory: 'Historial de Orden',
 
   form : {
     availableDate : 'Disponible desde',

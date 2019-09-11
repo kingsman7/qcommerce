@@ -28,6 +28,7 @@ export default {
   orderTotal: 'Order Total',
   subtotal: 'Subtotal',
   shipping: 'Shipping',
+  orderHistory: 'Order History',
 
   form : {
     availableDate : 'Available From',
