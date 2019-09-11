@@ -152,9 +152,7 @@
         </div>
       </div>
     </div>
-  
     
-  
     <div class="row q-mt-md gutter-x-sm">
       <div class="col-md-6 backend-page">
         <div class="row gutter-x-sm">
