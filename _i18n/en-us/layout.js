@@ -14,6 +14,8 @@ export default {
   updateShippingMethod : 'Update Shipping Method',
   newOrder : 'New Order',
   updateOrder : 'Update Order',
+  newCoupon: 'New Coupon',
+  updateCoupon: 'Update Coupon',
 
   orderAccountInformation: 'Order & Account Information',
   orderStatus: 'Order Status',
@@ -66,6 +68,23 @@ export default {
     city: 'City',
     country: 'Country',
     shippingMethod: 'Shipping Method',
+
+    // Coupons
+    code: 'Coupon Code',
+    type: 'Type',
+    category: 'Category',
+    product: 'Product',
+    customer: 'Customer',
+    discount: 'Discount',
+    typeDiscount: 'Type Discount',
+    logged: 'Logged Required',
+    shipping: 'Shipping',
+    dateStart: 'Date Start',
+    dateEnd: 'Date End',
+    quantityTotal: 'Quantity Total',
+    quantityTotalCustomer: 'Quantity Total Per Customer',
+    status: 'Status',
+
   },
   message : {
     warnAddOpt : 'To add options, you must first create the product',

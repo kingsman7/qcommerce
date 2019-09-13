@@ -9,4 +9,5 @@ export default {
   adminPaymentMethods : 'Métodos de pago',
   adminShippingMethods : 'Métodos de envío',
   adminOrders : 'Ordenes',
+  adminCoupons: 'Cupones',
 }

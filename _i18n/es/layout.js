@@ -14,6 +14,8 @@ export default {
   updateShippingMethod : 'Actualizar metodo de envio',
   newOrder : 'Nuevo Orden',
   updateOrder : 'Actualizar Orden',
+  newCoupon: 'Nuevo Cupon',
+  updateCoupon: 'Actualizar Cupon',
 
   orderAccountInformation: 'Información de pedido y cuenta',
   orderStatus: 'Estado del pedido',
@@ -66,6 +68,22 @@ export default {
     city: 'Ciudad',
     country: 'País',
     shippingMethod: 'Métodos de Envío',
+
+    // Cupones
+    code: 'Codigo de Cupon',
+    type: 'Tipo',
+    category: 'Categoría',
+    product: 'Producto',
+    customer: 'Cliente',
+    discount: 'Descuento',
+    typeDiscount: 'Tipo de Descuento',
+    logged: 'Requiere inicio de Sesión',
+    shipping: 'Envío',
+    dateStart: 'Fecha de Inicio',
+    dateEnd: 'Fecha Fin',
+    quantityTotal: 'Cantidad Total de Cupones',
+    quantityTotalCustomer: 'Cantidad Total de Cupones por Cliente',
+    status: 'Estado',
   },
   message : {
     warnAddOpt : 'Para agregar opciones, primero debe crear el producto',
