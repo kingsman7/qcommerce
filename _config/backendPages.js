@@ -125,4 +125,37 @@ export default {
     icon: 'fas fa-box-open',
     middleware: [auth,access]
   },
+  coupons: {
+    permission: null,
+    activated: true,
+    path: '/coupons',
+    name: 'qcommerce.admin.coupons.index',
+    layout: require('@imagina/qcommerce/_layouts/admin/coupons/index').default,
+    containerLayout: master,
+    title: 'qcommerce.sidebar.adminCoupons',
+    icon: 'fas fa-ticket-alt',
+    middleware: [auth,access]
+  },
+  couponsCreate: {
+    permission: null,
+    activated: true,
+    path: '/coupons/create',
+    name: 'qcommerce.admin.coupons.create',
+    layout: require('@imagina/qcommerce/_layouts/admin/coupons/form').default,
+    containerLayout: master,
+    title: 'qcommerce.sidebar.adminCoupons',
+    icon: 'fas fa-ticket-alt',
+    middleware: [auth,access]
+  },
+  couponsEdit: {
+    permission: null,
+    activated: true,
+    path: '/coupons/:id',
+    name: 'qcommerce.admin.coupons.edit',
+    layout: require('@imagina/qcommerce/_layouts/admin/coupons/form').default,
+    containerLayout: master,
+    title: 'qcommerce.sidebar.adminCoupons',
+    icon: 'fas fa-ticket-alt',
+    middleware: [auth,access]
+  },
 }
