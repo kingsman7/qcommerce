@@ -19,4 +19,5 @@ export default {
 	orders : `${urlBase}/orders`,
 	orderStatus : `${urlBase}/order-statuses`,
 	orderStatusHistory : `${urlBase}/order-status-history`,
+  coupons : `${urlBase}/coupons`,
 }

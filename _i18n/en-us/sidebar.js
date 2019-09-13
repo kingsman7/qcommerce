@@ -7,5 +7,7 @@ export default {
   adminOptions : 'Product Options',
   adminValues : 'Options Values',
   adminPaymentMethods : 'Payment methods',
-  adminShippingMethods : 'Shipping methods'
+  adminShippingMethods : 'Shipping methods',
+  adminOrders : 'Orders',
+  adminCoupons: 'Coupons',
 }

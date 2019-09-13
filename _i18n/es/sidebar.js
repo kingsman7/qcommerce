@@ -7,5 +7,7 @@ export default {
   adminOptions : 'Opciones de Producto',
   adminValues : 'Valores de Opción',
   adminPaymentMethods : 'Métodos de pago',
-  adminShippingMethods : 'Métodos de envío'
+  adminShippingMethods : 'Métodos de envío',
+  adminOrders : 'Ordenes',
+  adminCoupons: 'Cupones',
 }
