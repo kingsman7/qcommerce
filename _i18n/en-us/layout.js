@@ -31,6 +31,7 @@ export default {
   subtotal: 'Subtotal',
   shipping: 'Shipping',
   orderHistory: 'Order History',
+  generateCode: 'Generate Code',
 
   form : {
     availableDate : 'Available From',
@@ -84,6 +85,11 @@ export default {
     quantityTotal: 'Quantity Total',
     quantityTotalCustomer: 'Quantity Total Per Customer',
     status: 'Status',
+    CouponOrder: 'Coupon Order',
+    CouponProduct: 'Coupon Product',
+    CouponCategory: 'Coupon Category',
+    fixedValue: 'Fixed Value',
+    Percentage: 'Percentage'
 
   },
   message : {
