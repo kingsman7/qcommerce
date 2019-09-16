@@ -24,7 +24,7 @@
                 {{$tr('qcommerce.layout.form.code')}} *
                 <q-btn
                   @click="generateCoupon()"
-                  label="Generate Code"
+                  :label="this.$tr('qcommerce.layout.generateCode')"
                   color="primary"/>
               </div>
               <q-input
@@ -43,9 +43,9 @@
                 :clearable="false"
                 v-model="form.type"
                 :options="[
-                  {label: 'Coupon for Order', id: 1},
-                  {label: 'Coupon for Product', id: 2},
-                  {label: 'Coupon for Category', id: 3},
+                  {label: this.$tr('qcommerce.layout.form.CouponOrder'), id: 1},
+                  {label: this.$tr('qcommerce.layout.form.CouponProduct'), id: 2},
+                  {label: this.$tr('qcommerce.layout.form.CouponCategory'), id: 3},
                 ]"
                 placeholder=""/>
               </q-field>
@@ -84,8 +84,8 @@
               :clearable="false"
               v-model="form.typeDiscount"
               :options="[
-                {label: 'Fixed Value', id: '0'},
-                {label: 'Percentage', id: '1'},
+                {label: this.$tr('qcommerce.layout.form.fixedValue'), id: '0'},
+                {label: this.$tr('qcommerce.layout.form.Percentage'), id: '1'},
                 ]"
               placeholder=""/>
             </q-field>
@@ -134,7 +134,7 @@
                 v-model="form.status"
                 :options="[
                     {label: 'Active', id: 1},
-                    {label: 'Inactive', id: 2},
+                    {label: 'Inactive', id: 0},
                   ]"
                 placeholder=""/>
             </q-field>
