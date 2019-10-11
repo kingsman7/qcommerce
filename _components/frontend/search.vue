@@ -110,7 +110,6 @@
   }
 </script>
 <style lang="stylus">
-    @import "~variables";
     #searchComponent
       border-radius: 30px
 </style>

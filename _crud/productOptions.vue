@@ -31,31 +31,34 @@
             id: {value: ''},
             userId: {value: this.$store.state.quserAuth.userId},
             description: {
-              label: this.$tr('ui.form.description'),
+              label: `${this.$tr('ui.form.description')}*`,
               value: '',
               type: 'text',
-              isRequired: true,
               isTranslatable: true,
+              rules: [
+                val => !!val || this.$tr('ui.message.fieldRequired')
+              ],
             },
             type: {
-              label: this.$tr('ui.form.type'),
+              label: `${this.$tr('ui.form.type')}*`,
               value: null,
               type: 'select',
-              isRequired: true,
               isTranslatable: false,
               options : [
-                {label: 'Text', id: 'text'},
-                {label: 'Textarea', id: 'textarea'},
-                {label: 'Select', id: 'select'},
-                {label: 'Radio', id: 'radio'},
-                {label: 'Checkbox', id: 'checkbox'},
-              ]
+                {label: 'Text', value: 'text'},
+                {label: 'Textarea', value: 'textarea'},
+                {label: 'Select', value: 'select'},
+                {label: 'Radio', value: 'radio'},
+                {label: 'Checkbox', value: 'checkbox'},
+              ],
+              rules: [
+                val => !!val || this.$tr('ui.message.fieldRequired')
+              ],
             },
             sortOrder: {
               label: this.$tr('ui.form.sort'),
               value: 0,
               type: 'number',
-              isRequired: true,
               isTranslatable: false,
             },
           },

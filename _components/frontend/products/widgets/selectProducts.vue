@@ -1,25 +1,16 @@
 <template>
   <div id="widgetSelectProducts">
-    <tree-select
-      v-model="productSlug"
-      :options="products"
-      :clearable="false"
-      placeholder=""
-      :style="'width: '+width+' !important'"
-      @input="$emit('input',productSlug)"
-    />
-    <q-progress v-if="loading" indeterminate color="primary" height="2px"/>
+    <q-select outlined dense v-model="productSlug" emit-value map-options
+              :options="products" @input="$emit('input',productSlug)"
+              :style="'width: '+width+' !important'" />
   </div>
 </template>
 <script>
-  // Services
-  import commerceServices from '@imagina/qcommerce/_services/index';
-
   export default {
     props: {
-      value : {default: false},
+      value: {default: false},
       categoryId: {default: false},
-      width : {default: 'auto'}
+      width: {default: 'auto'}
     },
     components: {},
     watch: {},
@@ -46,8 +37,8 @@
             params: {filter: {categoryId: this.categoryId}}
           }
           //Request
-          commerceServices.crud.index('apiRoutes.qcommerce.products', params).then(response => {
-            this.products = this.$helper.array.tree(response.data, {label: 'name', id: 'slug'})
+          this.$crud.index('apiRoutes.qcommerce.products', params).then(response => {
+            this.products = this.$array.tree(response.data, {label: 'name', id: 'slug'})
             this.loading = false
           }).catch(error => {
             console.error('[select-product-widget] Error getting products by category', error)
@@ -63,7 +54,6 @@
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
   #widgetSelectProducts
     display: inline-block
     min-height 40px !important

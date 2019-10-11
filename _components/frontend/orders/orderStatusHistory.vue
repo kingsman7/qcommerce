@@ -29,7 +29,7 @@
       return {
         columns: [
           { name: 'title', label: 'Status', field: row => row.status.title, align: 'center' },
-        
+
           {
             name: 'createdAt',
             label: 'Date',
@@ -44,7 +44,6 @@
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
   #orderStatusHistoryComponent
     table
       thead

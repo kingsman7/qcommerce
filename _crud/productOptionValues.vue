@@ -2,7 +2,7 @@
 <script>
   export default {
     computed: {
-      crudData() {
+      crudData () {
         return {
           apiRoute: 'apiRoutes.qcommerce.optionValues',
           permission: 'icommerce.optionvalues',
@@ -11,7 +11,7 @@
           },
           read: {
             columns: [
-              {name: 'id', label: this.$tr('ui.form.id'), field: 'id', style: 'width: 50px'},
+              { name: 'id', label: this.$tr('ui.form.id'), field: 'id', style: 'width: 50px' },
               {
                 name: 'description', label: this.$tr('ui.form.description'),
                 field: 'description', align: 'rigth'
@@ -24,56 +24,59 @@
                 name: 'created_at', label: this.$tr('ui.form.createdAt'), field: 'createdAt', align: 'left',
                 format: val => val ? this.$trd(val) : '-'
               },
-              {name: 'actions', label: this.$tr('ui.form.actions'), align: 'left'},
+              { name: 'actions', label: this.$tr('ui.form.actions'), align: 'left' },
             ],
-            requestParams: {include: 'option'},
+            requestParams: { include: 'option' },
             filters: {
               optionId: {
                 label: `${this.$tr('ui.form.option')}:`,
                 value: '0',
                 type: 'select',
                 options: [
-                  {label: this.$tr('ui.label.all'), id: '0'}
+                  { label: this.$tr('ui.label.all'), value: '0' }
                 ],
                 loadOptions: {
                   apiRoute: 'apiRoutes.qcommerce.options',
-                  select: {label: 'description', id: 'id'}
+                  select: { label: 'description', id: 'id' }
                 }
               },
             }
           },
           update: {
             title: this.$tr('qcommerce.layout.updateOptionValue'),
-            requestParams: {include: ''}
+            requestParams: { include: '' }
           },
           delete: true,
           formLeft: {
-            id: {value: ''},
-            userId: {value: this.$store.state.quserAuth.userId},
+            id: { value: '' },
+            userId: { value: this.$store.state.quserAuth.userId },
             description: {
-              label: this.$tr('ui.form.description'),
+              label: `${this.$tr('ui.form.description')}*`,
               value: '',
               type: 'text',
-              isRequired: true,
               isTranslatable: true,
+              rules: [
+                val => !!val || this.$tr('ui.message.fieldRequired')
+              ],
             },
             optionId: {
-              label: this.$tr('ui.form.option'),
+              label: `${this.$tr('ui.form.option')}*`,
               value: null,
               type: 'select',
-              isRequired: true,
               isTranslatable: false,
+              rules: [
+                val => !!val || this.$tr('ui.message.fieldRequired')
+              ],
               loadOptions: {
                 apiRoute: 'apiRoutes.qcommerce.options',
-                select: {label: 'description', id: 'id'}
+                select: { label: 'description', id: 'id' }
               }
             },
             sortOrder: {
               label: this.$tr('ui.form.sort'),
               value: 0,
               type: 'number',
-              isRequired: true,
-              isTranslatable: false,
+              isTranslatable: false
             },
             mediasSingle: {
               name: 'mediasSingle',
@@ -81,7 +84,7 @@
               value: {},
               type: 'media',
               zone: 'mainimage',
-              entity: "Modules\\Icommerce\\Entities\\OptionValue",
+              entity: 'Modules\\Icommerce\\Entities\\OptionValue',
               enitityId: null
             },
           },

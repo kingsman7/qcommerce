@@ -1,7 +1,7 @@
 <template>
   <div id="crudOptions" class="relative-position">
     <!--Form-->
-    <div class="row gutter-sm">
+    <div class="row q-col-gutter-sm">
       <!--Form Left-->
       <div class="col-12 col-md-4">
         <div class="border q-pa-sm">
@@ -57,12 +57,12 @@
             <q-toggle v-model="template.form.required" @input="updateProductOption()"/>
           </div>
           <!--Form-->
-          <div class="row gutter-sm q-mt-sm">
+          <div class="row q-col-gutter-sm q-mt-sm">
             <!--Option value parent-->
             <div class="col-12 col-md-4"
                  v-if="showFieldForm && parseInt(template.form.parentId) && template.parentValues.length">
               <div class="input-title">{{`${$tr('qcommerce.layout.form.parentOptionValue')} *`}}</div>
-              <treeselect
+              <tree-select
                 v-model="template.form.parentOptionValueId"
                 :clearable="false"
                 :options="template.parentValues"
@@ -73,7 +73,7 @@
             </div>
             <!--Option Value-->
             <div class="col-12 col-md-4" v-if="showFieldForm">
-              <q-input v-model="template.form.value" :stack-label="`${$tr('qcommerce.layout.form.optionValue')} *`"
+              <q-input v-model="template.form.value" :label="`${$tr('qcommerce.layout.form.optionValue')} *`"
                        @blur="updateProductOption()"/>
             </div>
             <!--Option Values-->
@@ -86,16 +86,16 @@
     </div>
 
     <!--Modal-->
-    <q-modal v-model="modal.show" class="backend-page">
-      <q-modal-layout style="max-width: 400px !important;">
+    <q-dialog v-model="modal.show">
+      <q-card class="backend-page" style="max-width: 400px !important;">
         <!--Header-->
-        <q-toolbar slot="header">
+        <q-toolbar class="bg-primary text-white">
           <q-toolbar-title>{{$tr('qcommerce.layout.newOption')}}</q-toolbar-title>
-          <q-btn flat v-close-overlay icon="fas fa-times"/>
+          <q-btn flat v-close-popup icon="fas fa-times"/>
         </q-toolbar>
 
         <!--Content-->
-        <div class="layout-padding relative-position">
+        <div class="bg-white q-pa-sm">
           <!--Parent-->
           <div v-if="modal.parentOption" class="q-mb-md">
             <div class="input-title">{{$tr('ui.form.parent')}}</div>
@@ -103,13 +103,13 @@
             {{modal.parentOption.description}}
           </div>
           <!--Options-->
-          <div class="input-title capitalize">
+          <div class="input-title capitalize q-mb-sm">
             {{`${$tr('ui.form.option')} *`}}
             <!--Crud option-->
             <crud :crud-data="import('@imagina/qcommerce/_crud/productOptions')"
                   just-create @created="getOptions"/>
           </div>
-          <treeselect
+          <tree-select
             v-model="modal.optionSelected"
             :options="template.options"
             placeholder=""
@@ -120,8 +120,8 @@
           <!--Loading-->
           <inner-loading :visible="modal.loading"/>
         </div>
-      </q-modal-layout>
-    </q-modal>
+      </q-card>
+    </q-dialog>
 
     <!--Loading-->
     <inner-loading :visible="loading"/>
@@ -130,19 +130,14 @@
 
 <script>
   //components
-  import Treeselect from '@riophae/vue-treeselect'
-  import '@riophae/vue-treeselect/dist/vue-treeselect.css'
   import recursiveOptions from '@imagina/qcommerce/_components/admin/products/recursiveOptionsList'
   import crudOptionValues from '@imagina/qcommerce/_components/admin/products/crudOptionValues'
-  import innerLoading from 'src/components/master/innerLoading'
-  //Plugins
-  import _cloneDeep from 'lodash.clonedeep'
 
   export default {
     props: {
       productId: {default: false}
     },
-    components: {recursiveOptions, Treeselect, crudOptionValues, innerLoading},
+    components: {recursiveOptions, crudOptionValues},
     watch: {},
     mounted() {
       this.$nextTick(function () {
@@ -196,8 +191,8 @@
           let configName = 'apiRoutes.qcommerce.products'
           let params = {remember: false, params: {include: 'productOptions', fields: 'id'}}
           this.$crud.show(configName, this.productId, params).then(response => {
-            this.productOptions = _cloneDeep(response.data.productOptions)//Set product Options
-            this.productOptionValues = _cloneDeep(response.data.optionValues)//Set product options values
+            this.productOptions = this.$clone(response.data.productOptions)//Set product Options
+            this.productOptionValues = this.$clone(response.data.optionValues)//Set product options values
             this.loading = false
             resolve(true)
           }).catch(error => {
@@ -247,7 +242,7 @@
             this.modal.optionSelected = null//Reset option of select options
             //Get last option create
             for (var item of this.productOptions) {
-              let currentOption = _cloneDeep(this.template.currentOption)
+              let currentOption = this.$clone(this.template.currentOption)
               if (item.id >= currentOption) this.template.currentOption = item.id
             }
             this.setDataOption()//Set data option
@@ -265,7 +260,7 @@
       updateProductOption() {
         this.loading = true
         let configName = 'apiRoutes.qcommerce.productOptions'//Config Name
-        let form = _cloneDeep(this.template.form)//Get form
+        let form = this.$clone(this.template.form)//Get form
         if (!form.parentId) form.parentId = null//Set null as default parent
         if (!form.parentOptionValueId) form.parentOptionValueId = null//Set null as default parent option
 
@@ -291,7 +286,7 @@
             color: 'negative',
             ok: this.$tr('ui.label.delete'),
             cancel: this.$tr('ui.label.cancel'),
-          }).then(response => {//If comfirn delete action
+          }).onOk(response => {//If comfirn delete action
             this.loading = true
             let configName = 'apiRoutes.qcommerce.productOptions'
             //Request
@@ -301,17 +296,17 @@
               await this.getData()//Get data
               this.$refs.optionList.vRefresh()//Refresh List options
               this.loading = false
-            }).catch(error => {
+            }).catch((error) => {
               this.$alert.error({message: this.$tr('ui.message.recordNoDeleted'), pos: 'bottom'})
               this.loading = false
             })
-          }).catch(response => {
+          }).onCancel(response => {
           })
         }
       },
       //Check if option is not parent of other option
       checkToDeleteOption(optionId) {
-        const currentOption = _cloneDeep(this.template.currentOption)//Get current option
+        const currentOption = this.$clone(this.template.currentOption)//Get current option
         this.template.currentOption = optionId//Set as current this option
         if (currentOption != optionId) this.setDataOption()//Set data from this option
         const option = this.findOption(optionId, 'parentId')//Find option to check
@@ -329,8 +324,8 @@
       },
       //Set data and values from product option seleected
       setDataOption() {
-        const selectedOption = _cloneDeep(this.template.currentOption)
-        const option = _cloneDeep(this.template.form)
+        const selectedOption = this.$clone(this.template.currentOption)
+        const option = this.$clone(this.template.form)
         //Update product options
         if (option.id) {
           for (var key in this.productOptions) {
@@ -342,7 +337,7 @@
         if (selectedOption) {
           this.setParentOptions()//Order select to parent
           const newOption = this.findOption(selectedOption)//Find new option
-          this.template.form = _cloneDeep(newOption)//Update form template
+          this.template.form = this.$clone(newOption)//Update form template
           this.getOptionValues(newOption.optionId)//Get Values from option
           this.setParentValues()//Get parent values
         }
@@ -351,7 +346,7 @@
       //Order in select options to parent
       setParentOptions() {
         this.template.parentOptions = []//Reset parent Options
-        const currentOption = _cloneDeep(this.template.currentOption)
+        const currentOption = this.$clone(this.template.currentOption)
         this.productOptions.forEach((item, key) => {
           if (item.id != currentOption)
             this.template.parentOptions.push({
@@ -361,7 +356,7 @@
       },
       //set Parent Values
       setParentValues() {
-        const parentId = _cloneDeep(this.template.form.parentId)
+        const parentId = this.$clone(this.template.form.parentId)
         if (parentId) {
           const option = this.findOption(parentId)//Find option
           this.template.form.parentOptionId = option.optionId//Set parent option ID
@@ -383,7 +378,7 @@
           response.data.forEach(item => {//Order options to tree select
             options.push({label: item.description, id: item.id})
           })
-          this.template.options = _cloneDeep(options)
+          this.template.options = this.$clone(options)
           this.loadingOptions = false
         }).catch(error => {
           this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
@@ -392,7 +387,7 @@
       },
       //Find option by parameter
       findOption(value, field = 'id') {
-        const options = _cloneDeep(this.productOptions)//Get all options
+        const options = this.$clone(this.productOptions)//Get all options
         let response = false //Default response
         let index = options.findIndex(item => item[field] == value)//Find if this option is parent
         if (index >= 0) {
@@ -407,7 +402,6 @@
 </script>
 
 <style lang="stylus">
-  @import "~variables";
   #crudOptions
     .border
       border 1px solid $grey-4

@@ -45,7 +45,6 @@
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
   #transactionsComponent
     table
       thead

@@ -30,11 +30,11 @@
               {name: 'slug', label: this.$tr('ui.form.slug'), field: 'slug', align: 'left'},
               {
                 name: 'price', label: this.$tr('ui.form.price'), field: 'price', align: 'left',
-                format: val => this.$n(val, 'currency', this.$q.i18n.lang)
+                format: val => this.$trc(val)
               },
               {
                 name: 'createdAt', label: this.$tr('ui.form.createdAt'), field: 'createdAt', align: 'left',
-                format: val => val ? this.$d(this.$moment(val, 'YYYY-MM-DD HH:mm').toDate(), 'short', this.$q.i18n.lang) : '-',
+                format: val => val ? this.$trd(val) : '-',
               },
               {name: 'actions', label: this.$tr('ui.form.actions'), align: 'left'},
             ],

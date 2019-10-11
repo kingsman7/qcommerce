@@ -7,31 +7,31 @@
     <div class="col-md-12">
       <div class="row">
         <div class="col-xs-3 q-px-sm">
-          <treeselect
+          <tree-select
             v-model="addrees.form.typeStreet"
             :options="typesStreet"
             :clearable="false"/>
         </div>
         <div class="col-xs-3 q-px-sm">
           <p>
-          <input 
-            type="text" 
-            v-model="addrees.form.street"  
-            float-label="Calle, Carrera, Avenida" 
+          <input
+            type="text"
+            v-model="addrees.form.street"
+            float-label="Calle, Carrera, Avenida"
             class="no-shadow vue-treeselect__control"/>
           </p>
         </div>
-        
+
         <div class="col-xs-1 q-px-sm text-center">
           <p>#</p>
         </div>
 
         <div class="col-xs-2 q-px-sm">
           <p>
-          <input 
-            type="text" 
-            v-model="addrees.form.number1"  
-            float-label="Numero" 
+          <input
+            type="text"
+            v-model="addrees.form.number1"
+            float-label="Numero"
             class="no-shadow vue-treeselect__control"/>
           </p>
         </div>
@@ -42,10 +42,10 @@
 
         <div class="col-xs-2 q-px-sm">
           <p>
-          <input 
-            type="text" 
-            v-model="addrees.form.number2"  
-            float-label="Con" 
+          <input
+            type="text"
+            v-model="addrees.form.number2"
+            float-label="Con"
             class="no-shadow vue-treeselect__control"/>
           </p>
         </div>

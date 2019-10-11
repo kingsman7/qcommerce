@@ -4,12 +4,12 @@
       <!--Categories desktop-->
       <div class="q-hide q-sm-show q-pt-sm bg-white">
         <!--Title-->
-        <div class="title-menu q-title q-mb-sm text-primary q-pl-sm">
+        <div class="title-menu text-h6 q-mb-sm text-primary q-pl-sm">
           <q-icon v-if="icon" :name="icon" color="primary" size="17px" class="q-mr-sm"/>
-          <span v-if="title">{{title}}</span>
+          <label v-if="title">{{title}}</label>
         </div>
         <!--Recursive list-->
-        <recursive-item :translatable="false" id="menuList" :menu="menuCategories"/>
+        <recursive-item class="text-left" :translatable="false" :menu="menuCategories"/>
       </div>
 
       <!--Categories Mobile-->
@@ -18,23 +18,22 @@
         <q-btn :label="title" :icon="icon || ''" @click="modal.show = true"
                class="no-shadow" color="primary"/>
         <!--Categorries modal-->
-        <q-modal v-model="modal.show" class="q-md-hide" maximized>
-          <q-modal-layout>
+        <q-dialog v-model="modal.show" class="q-sm-hide" maximized>
+          <q-card>
             <!--Header-->
-            <q-toolbar slot="header">
-              <q-btn flat round dense v-close-overlay
-                     icon="keyboard_arrow_left"/>
+            <q-toolbar class="bg-primary text-white">
               <q-toolbar-title v-if="title">
                 {{title}}
               </q-toolbar-title>
+              <q-btn flat v-close-popup icon="fas fa-times"/>
             </q-toolbar>
 
             <!--Recursive list-->
             <div class="layout-padding">
-              <recursive-item :translatable="false" id="menuList" :menu="menuCategories"/>
+              <recursive-item :translatable="false" :menu="menuCategories"/>
             </div>
-          </q-modal-layout>
-        </q-modal>
+          </q-card>
+        </q-dialog>
       </div>
 
       <!--Loading-->
@@ -45,7 +44,6 @@
 <script>
   //Components
   import recursiveItem from 'src/components/master/recursiveItem'
-  import innerLoading from 'src/components/master/innerLoading'
   //Services
   import commerceServices from '@imagina/qcommerce/_services/index'
 
@@ -54,7 +52,7 @@
       title: {default: 'Categories'},
       icon: {default: false},
     },
-    components: {recursiveItem, innerLoading},
+    components: {recursiveItem},
     watch: {},
     mounted() {
       this.$nextTick(function () {
@@ -80,7 +78,7 @@
           this.orderCategoriesToMenu(response.data)
           this.loading = false
         }).catch(error => {
-          console.warn('Error getting categories', error)
+          console.error('Error getting categories', error)
           this.loading = false
         })
       },
@@ -112,16 +110,10 @@
 
           return menu//Return response
         }
-        this.menuCategories = recursiveMenu(this.$helper.array.builTree(categories))
+        this.menuCategories = recursiveMenu(this.$array.builTree(categories))
       },
     }
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
-  #menuCategoriesComponent
-    #menuList
-      .q-item
-        &:hover
-          cursor: pointer;
 </style>

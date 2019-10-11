@@ -10,4 +10,6 @@ export default {
   adminShippingMethods : 'Métodos de envío',
   adminOrders : 'Ordenes',
   adminCoupons: 'Cupones',
+  createCoupons: 'Crear cupon',
+  editCoupons: 'Editar cupon',
 }

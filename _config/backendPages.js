@@ -1,11 +1,3 @@
-//Layout container
-import master from 'src/layouts/master'
-import blank from 'src/layouts/blank'
-
-//Middleware
-import auth from '@imagina/quser/_router/middlewares/auth'
-import access from '@imagina/quser/_router/middlewares/access'
-
 export default {
   //Product List
 	products: {
@@ -13,11 +5,11 @@ export default {
 		activated: true,
 		path: '/ecommerce/products',
 		name: 'qcommerce.admin.products.index',
-		layout: require('@imagina/qcommerce/_layouts/admin/products/index').default,
-		containerLayout: master,
+		page: () => import('@imagina/qcommerce/_layouts/admin/products/index'),
+		layout: () => import('src/layouts/master'),
 		title: 'qcommerce.sidebar.adminProducts',
 		icon: 'fas fa-boxes',
-		middleware: [auth,access]
+		authenticated: true,
 	},
 	//Product Create
 	productCreate: {
@@ -25,11 +17,11 @@ export default {
 		activated: true,
 		path: '/ecommerce/products/create',
 		name: 'qcommerce.admin.products.create',
-		layout: require('@imagina/qcommerce/_layouts/admin/products/form').default,
-		containerLayout: master,
+		page: () => import('@imagina/qcommerce/_layouts/admin/products/form'),
+		layout: () => import('src/layouts/master'),
 		title: 'qcommerce.sidebar.adminProductCreate',
 		icon: 'fas fa-boxes',
-		middleware: [auth,access]
+		authenticated: true,
 	},
 	//Product Update
 	productEdit: {
@@ -37,11 +29,11 @@ export default {
 		activated: true,
 		path: '/ecommerce/products/:id',
 		name: 'qcommerce.admin.products.edit',
-		layout: require('@imagina/qcommerce/_layouts/admin/products/form').default,
-		containerLayout: master,
+		page: () => import('@imagina/qcommerce/_layouts/admin/products/form'),
+		layout: () => import('src/layouts/master'),
 		title: 'qcommerce.sidebar.adminProductEdit',
 		icon: 'fas fa-boxes',
-		middleware: [auth,access]
+		authenticated: true,
 	},
 	//Categories list
 	categories: {
@@ -49,11 +41,11 @@ export default {
 		activated: true,
 		path: '/ecommerce/product-categories',
 		name: 'qcommerce.admin.categories',
-		layout: require('@imagina/qcommerce/_layouts/admin/category/index').default,
-		containerLayout: master,
+		page: () => import('@imagina/qcommerce/_layouts/admin/category/index'),
+		layout: () => import('src/layouts/master'),
 		title: 'qcommerce.sidebar.adminCategories',
 		icon: 'fas fa-layer-group',
-		middleware: [auth,access]
+		authenticated: true,
 	},
 	//Product options
 	options: {
@@ -61,11 +53,11 @@ export default {
 		activated: true,
 		path: '/ecommerce/product-options',
 		name: 'qcommerce.admin.options',
-		layout: require('@imagina/qcommerce/_layouts/admin/option/index').default,
-		containerLayout: master,
+		page: () => import('@imagina/qcommerce/_layouts/admin/option/index'),
+		layout: () => import('src/layouts/master'),
 		title: 'qcommerce.sidebar.adminOptions',
 		icon: 'fas fa-cogs',
-		middleware: [auth,access]
+		authenticated: true,
 	},
 	//Product options values
 	optionValues: {
@@ -73,11 +65,11 @@ export default {
 		activated: true,
 		path: '/ecommerce/product-options-values',
 		name: 'qcommerce.admin.options.values',
-		layout: require('@imagina/qcommerce/_layouts/admin/optionValues/index').default,
-		containerLayout: master,
+		page: () => import('@imagina/qcommerce/_layouts/admin/optionValues/index'),
+		layout: () => import('src/layouts/master'),
 		title: 'qcommerce.sidebar.adminValues',
 		icon: 'fas fa-stream',
-		middleware: [auth,access]
+		authenticated: true,
 	},
 	// Payment Methods
 	paymentMethods: {
@@ -85,11 +77,11 @@ export default {
 		activated: true,
 		path: '/payment-methods',
 		name: 'qcommerce.admin.payment.methods',
-		layout: require('@imagina/qcommerce/_layouts/admin/paymentMethods/index').default,
-		containerLayout: master,
+		page: () => import('@imagina/qcommerce/_layouts/admin/paymentMethods/index'),
+		layout: () => import('src/layouts/master'),
 		title: 'qcommerce.sidebar.adminPaymentMethods',
 		icon: 'fas fa-money-bill-wave',
-		middleware: [auth,access]
+		authenticated: true,
 	},
 	// Shipping Methods
 	shippingMethods: {
@@ -97,65 +89,65 @@ export default {
 		activated: true,
 		path: '/shipping-methods',
 		name: 'qcommerce.admin.shipping.methods',
-		layout: require('@imagina/qcommerce/_layouts/admin/shippingMethods/index').default,
-		containerLayout: master,
+		page: () => import('@imagina/qcommerce/_layouts/admin/shippingMethods/index'),
+		layout: () => import('src/layouts/master'),
 		title: 'qcommerce.sidebar.adminShippingMethods',
 		icon: 'fas fa-shipping-fast',
-		middleware: [auth,access]
+		authenticated: true,
 	},
   orders: {
     permission: null,
     activated: true,
     path: '/orders',
     name: 'qcommerce.admin.shipping.orders.index',
-    layout: require('@imagina/qcommerce/_layouts/admin/order/index').default,
-    containerLayout: master,
+    page: () => import('@imagina/qcommerce/_layouts/admin/order/index'),
+    layout: () => import('src/layouts/master'),
     title: 'qcommerce.sidebar.adminOrders',
     icon: 'fas fa-box-open',
-    middleware: [auth,access]
+    authenticated: true,
   },
   order: {
-    permission: null,
+    permission: 'icommerce.orders.index',
     activated: true,
     path: '/order/:id',
     name: 'qcommerce.admin.shipping.orders.show',
-    layout: require('@imagina/qcommerce/_layouts/admin/order/show').default,
-    containerLayout: master,
+    page: () => import('@imagina/qcommerce/_layouts/admin/order/show'),
+    layout: () => import('src/layouts/master'),
     title: 'qcommerce.sidebar.adminOrders',
     icon: 'fas fa-box-open',
-    middleware: [auth,access]
+    authenticated: true,
   },
   coupons: {
-    permission: null,
+    permission: 'icommerce.coupons.index',
     activated: true,
     path: '/coupons',
     name: 'qcommerce.admin.coupons.index',
-    layout: require('@imagina/qcommerce/_layouts/admin/coupons/index').default,
-    containerLayout: master,
+    page: () => import('@imagina/qcommerce/_layouts/admin/coupons/index'),
+    layout: () => import('src/layouts/master'),
     title: 'qcommerce.sidebar.adminCoupons',
     icon: 'fas fa-ticket-alt',
-    middleware: [auth,access]
+    authenticated: true,
   },
   couponsCreate: {
-    permission: null,
+    permission: 'icommerce.coupons.create',
     activated: true,
     path: '/coupons/create',
     name: 'qcommerce.admin.coupons.create',
-    layout: require('@imagina/qcommerce/_layouts/admin/coupons/form').default,
-    containerLayout: master,
-    title: 'qcommerce.sidebar.adminCoupons',
+    page: () => import('@imagina/qcommerce/_layouts/admin/coupons/form'),
+    layout: () => import('src/layouts/master'),
+    title: 'qcommerce.sidebar.createCoupons',
     icon: 'fas fa-ticket-alt',
-    middleware: [auth,access]
+    authenticated: true,
   },
   couponsEdit: {
-    permission: null,
+    permission: 'icommerce.coupons.edit',
     activated: true,
     path: '/coupons/:id',
     name: 'qcommerce.admin.coupons.edit',
-    layout: require('@imagina/qcommerce/_layouts/admin/coupons/form').default,
-    containerLayout: master,
-    title: 'qcommerce.sidebar.adminCoupons',
+    page: () => import('@imagina/qcommerce/_layouts/admin/coupons/form'),
+    layout: () => import('src/layouts/master'),
+    title: 'qcommerce.sidebar.editCoupons',
     icon: 'fas fa-ticket-alt',
-    middleware: [auth,access]
+    authenticated: true,
   },
 }

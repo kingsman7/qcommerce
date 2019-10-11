@@ -14,7 +14,7 @@
         </div>
         <!-- If option type is select -->
         <div v-if="option.type == 'select'">
-          <treeselect
+          <tree-select
             v-model="section[option.id].singleOption"
             :options="getOptionsSelect(option.productOptionValues)"
             placeholder="Select a option..."
@@ -227,7 +227,6 @@
 </script>
 
 <style lang="stylus">
-  @import "~variables";
   #recursiveListOptionsComponent
     .chip-required
       min-height 16px !important

@@ -4,41 +4,41 @@
       <p> <q-icon name="local_shipping"/> Dirección de Envío</p>
     </div>
     <div class="col-xs-3 q-px-sm">
-      <input 
+      <input
         disabled
-        type="text" 
-        v-model="addrees.form.typeStreet"  
-        float-label="Calle, Carrera, Avenida" 
+        type="text"
+        v-model="addrees.form.typeStreet"
+        float-label="Calle, Carrera, Avenida"
         class="no-shadow vue-treeselect__control"/>
     </div>
     <div class="col-xs-3 q-px-sm">
-      <input 
+      <input
         disabled
-        type="text" 
-        v-model="addrees.form.street"  
-        float-label="Calle, Carrera, Avenida" 
+        type="text"
+        v-model="addrees.form.street"
+        float-label="Calle, Carrera, Avenida"
         class="no-shadow vue-treeselect__control"/>
     </div>
     <div class="col-xs-1 q-px-sm text-center">
       <p>#</p>
     </div>
     <div class="col-xs-2 q-px-sm">
-      <input 
+      <input
         disabled
-        type="text" 
-        v-model="addrees.form.number1"  
-        float-label="Calle, Carrera, Avenida" 
+        type="text"
+        v-model="addrees.form.number1"
+        float-label="Calle, Carrera, Avenida"
         class="no-shadow vue-treeselect__control"/>
     </div>
     <div class="col-xs-1 q-px-sm text-center">
-      <p>-<p/>
+      <p>-</p>
     </div>
     <div class="col-xs-2 q-px-sm q-pb-sm">
-      <input 
+      <input
         disabled
-        type="text" 
-        v-model="addrees.form.number2"  
-        float-label="Calle, Carrera, Avenida" 
+        type="text"
+        v-model="addrees.form.number2"
+        float-label="Calle, Carrera, Avenida"
         class="no-shadow vue-treeselect__control"/>
     </div>
   </div>

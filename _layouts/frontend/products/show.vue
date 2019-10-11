@@ -57,7 +57,7 @@
   import innerLoading from 'src/components/master/innerLoading'
   import selectProducts from '@imagina/qcommerce/_components/frontend/products/widgets/selectProducts'
   import addToCart from '@imagina/qcommerce/_components/frontend/cart/widgets/addToCartOptions'
-  import notFound from 'src/components/404'
+  import notFound from 'src/components/master/404'
 
   // Services
   import icommerceService from '@imagina/qcommerce/_services/index';
@@ -114,7 +114,6 @@
 </script>
 
 <style lang="stylus">
-  @import "~variables";
   #showProductPage
     margin 25px auto
     #showProductContent

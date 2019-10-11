@@ -14,8 +14,8 @@ export default {
   updateShippingMethod : 'Actualizar metodo de envio',
   newOrder : 'Nuevo Orden',
   updateOrder : 'Actualizar Orden',
-  newCoupon: 'Nuevo Cupón',
-  updateCoupon: 'Actualizar Cupón',
+  newCoupon: 'Nuevo Cupon',
+  updateCoupon: 'Actualizar Cupon',
 
   orderAccountInformation: 'Información de pedido y cuenta',
   orderStatus: 'Estado del pedido',
@@ -31,7 +31,6 @@ export default {
   subtotal: 'Total parcial',
   shipping: 'Envío',
   orderHistory: 'Historial de Orden',
-  generateCode: 'Generar Código',
 
   form : {
     availableDate : 'Disponible desde',
@@ -71,7 +70,7 @@ export default {
     shippingMethod: 'Métodos de Envío',
 
     // Cupones
-    code: 'Codigo de Cupón',
+    code: 'Codigo de Cupon',
     type: 'Tipo',
     category: 'Categoría',
     product: 'Producto',
@@ -85,12 +84,6 @@ export default {
     quantityTotal: 'Cantidad Total de Cupones',
     quantityTotalCustomer: 'Cantidad Total de Cupones por Cliente',
     status: 'Estado',
-    CouponOrder: 'Cupon para orden',
-    CouponProduct: 'Cupon para producto',
-    CouponCategory: 'Cupon para Categoria',
-    fixedValue: 'Valor Fijo',
-    Percentage: 'Porcentaje'
-
   },
   message : {
     warnAddOpt : 'Para agregar opciones, primero debe crear el producto',

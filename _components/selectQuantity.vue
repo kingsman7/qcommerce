@@ -91,7 +91,6 @@
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
   #selectQuantityComponent
     .q-btn
       border-radius 0px !important

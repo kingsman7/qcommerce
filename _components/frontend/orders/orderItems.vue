@@ -60,10 +60,9 @@
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
   #orderItemsComponent
     table
-      
+
       thead
         th
           color $primary

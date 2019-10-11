@@ -10,18 +10,18 @@
       Status
       <tree-select v-model="form.status" :options="statuses"/>
     </q-field>
-    
+
     <q-field
       helper="Helper"
       :error="$v.form.comment.$error"
       error-label="We need a valid email">
       <q-input  rows="3" type="textarea" v-model="form.comment" stack-label="Comment"/>
     </q-field>
-  
+
     <div class="q-mt-md">
       <q-btn label="save" color="primary" icon="save" @click="saveOrderHistoryStatus()"/>
     </div>
-    
+
   </div>
 </template>
 
@@ -54,7 +54,7 @@
       getStatus(){
         let params= {
           params :{
-          
+
           }
         }
         this.$crud.index('apiRoutes.qcommerce.orderStatus', params)
@@ -67,7 +67,7 @@
             })
           })
           .catch( error => {
-          
+
           })
       },
       saveOrderHistoryStatus(){
@@ -97,7 +97,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>

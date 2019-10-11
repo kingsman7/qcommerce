@@ -1,20 +1,20 @@
 <template>
   <div class="row">
     <div class="col-md-12 flex flex-center">
-      <router-link 
-        tag="a" 
+      <router-link
+        tag="a"
         v-for="(category, index) in categories"
         :key="index"
-        class="q-mx-sm q-py-sm" 
+        class="q-mx-sm q-py-sm"
         :to="{name:'products.index', params: { slugCategory: category.slug }}">
         <div class="flex flex-center text-white border">
           <div
-            class="flex flex-center text-white circle text-center" 
+            class="flex flex-center text-white circle text-center"
             :style="formatImage(category.mainImage.path)">
             {{category.title}}
-            <q-btn 
-              :label="btnLabel" 
-              color="primary" 
+            <q-btn
+              :label="btnLabel"
+              color="primary"
               :to="{name:'products.index', params: { slugCategory: category.slug }}"
               rounded style="position: absolute; margin-top: 38px;"/>
           </div>
@@ -65,26 +65,23 @@
   }
 </script>
 
-<style scoped lang="stylus">
-
-  @import "~variables";
-  
-  .circle 
+<style lang="stylus">
+  .circle
     border-radius 50%
     background $primary
     height 90%
     width 90%
     font-size 25px
-  
-  .border 
-    &:hover 
-      background $primary 
+
+  .border
+    &:hover
+      background $primary
       border 2px $primary solid
 
   .border
     border-radius: 50%;
-    height: 200px; 
-    width: 200px; 
+    height: 200px;
+    width: 200px;
     border: 2px #8e7e7d dashed;
     transition: all .7s;
 

@@ -37,7 +37,6 @@
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
   #customerDataComponent
     table
       thead

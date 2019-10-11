@@ -15,7 +15,13 @@
         <!--Table slot left-->
         <template slot="top-left" slot-scope="props">
           <!--Search-->
-          <q-search hide-underline clearable v-model="table.filter.search" @input="getDataTable"/>
+          <q-input clearable v-model="table.filter.search" dense outlined debounce="800"
+                   :placeholder="`${$tr('ui.label.search',{capitalize : true})}...`"
+                   @input="getDataTable">
+            <template v-slot:append>
+              <q-icon name="search"/>
+            </template>
+          </q-input>
         </template>
         <!--Table slot right-->
         <template slot="top-right" slot-scope="props">
@@ -43,21 +49,14 @@
 
 
       <!--Loading-->
-      <inner-loading :visible="loading"></inner-loading>
+      <inner-loading :visible="loading" />
       <component :is="itemToEdit.name" v-model="formItemShow" :item="itemToEdit"
                  @updated="getDataTable(true)" :itemId="itemToEdit.id"/>
     </div>
   </div>
 </template>
 <script>
-  //Plugins
-  import {alert} from '@imagina/qhelper/_plugins/alert'
-
-  //Services
-  import commerceServices from '@imagina/qcommerce/_services/index';
-
   //Components
-  import innerLoading from 'src/components/master/innerLoading'
   import icommercepaypal from '@imagina/qcommerce/_components/admin/paymentMethods/paypal'
   import icommercepayu from '@imagina/qcommerce/_components/admin/paymentMethods/payu'
   import icommercecheckmo from '@imagina/qcommerce/_components/admin/paymentMethods/checkmo'
@@ -66,7 +65,6 @@
   export default {
     props: {},
     components: {
-      innerLoading,
       icommercepaypal,
       icommercepayu,
       icommercecheckmo,
@@ -104,7 +102,7 @@
           {name: 'title', label: this.$tr('ui.form.title'), field: 'title', align: 'rigth'},
           {
             name: 'createdAt', label: this.$tr('ui.form.createdAt'), field: 'createdAt', align: 'left',
-            format: val => val ? this.$d(this.$moment(val, 'YYYY-MM-DD HH:mm').toDate(), 'short', this.$q.i18n.lang) : '-',
+            format: val => val ? this.$trd(val) : '-',
           },
           {name: 'actions', label: this.$tr('ui.form.actions'), align: 'left'},
         ]
@@ -162,5 +160,4 @@
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
 </style>

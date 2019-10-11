@@ -194,7 +194,6 @@
 </script>
 
 <style lang="stylus">
-  @import "~variables";
   #shoppingCartIndex
     .q-table
       .content-btn-delete

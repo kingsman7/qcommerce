@@ -35,25 +35,31 @@
             id: {value: ''},
             userId: {value: this.$store.state.quserAuth.userId},
             title: {
-              label: this.$tr('ui.form.title'),
+              label: `${this.$tr('ui.form.title')}*`,
               value: '',
               type: 'text',
-              isRequired: true,
               isTranslatable: true,
+              rules: [
+                val => !!val || this.$tr('ui.message.fieldRequired')
+              ],
             },
             slug: {
-              label: this.$tr('ui.form.slug'),
+              label: `${this.$tr('ui.form.slug')}*`,
               value: '',
               type: 'text',
-              isRequired: true,
               isTranslatable: true,
+              rules: [
+                val => !!val || this.$tr('ui.message.fieldRequired')
+              ],
             },
             description: {
-              label: this.$tr('ui.form.description'),
+              label: `${this.$tr('ui.form.description')}*`,
               value: '',
               type: 'html',
-              isRequired: true,
               isTranslatable: true,
+              rules: [
+                val => !!val || this.$tr('ui.message.fieldRequired')
+              ],
             },
             metaTitle: {
               label: this.$tr('ui.form.metaTitle'),

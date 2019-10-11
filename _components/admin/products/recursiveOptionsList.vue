@@ -1,98 +1,93 @@
 <template>
   <q-list no-border separator link id="listOptionsCommerce" class="q-pa-none" v-if="!loading">
     <!-- Dropdwon Item -->
-    <q-collapsible v-for="(item,key) in productOptions"
-                   :key="key" opened icon-toggle>
+    <q-expansion-item v-for="(item,key) in productOptions" :key="key" default-opened expand-icon-class="hidden">
       <template slot="header">
         <q-radio v-model="optionSelected" :val="item.id" @input="vEmit()"/>
-        <q-item-main>{{item.description}}</q-item-main>
-        <q-item-side right>
-          <q-btn icon="fas fa-plus" color="positive"
-                 v-if="permitChildren(item)"
-                 size="xs" @click="vEmitAddOption(item.id)">
-            <q-tooltip>{{`${$tr('ui.label.add')} ${$tr('ui.label.option')}`}}</q-tooltip>
-          </q-btn>
-          <q-btn icon="far fa-trash-alt" color="negative"
-                 class="q-ml-xs"
-                 size="xs" @click="vEmitDelete(item.id)">
-            <q-tooltip>{{`${$tr('ui.label.delete')}`}}</q-tooltip>
-          </q-btn>
-        </q-item-side>
+        <q-item-section>{{item.description}}</q-item-section>
+        <q-item-section side>
+          <div>
+            <q-btn icon="fas fa-plus" color="positive" v-if="permitChildren(item)"
+                   size="xs" @click="vEmitAddOption(item.id)">
+              <q-tooltip>{{`${$tr('ui.label.add')} ${$tr('ui.label.option')}`}}</q-tooltip>
+            </q-btn>
+            <q-btn icon="far fa-trash-alt" color="negative"
+                   class="q-ml-xs" size="xs" @click="vEmitDelete(item.id)">
+              <q-tooltip>{{`${$tr('ui.label.delete')}`}}</q-tooltip>
+            </q-btn>
+          </div>
+        </q-item-section>
       </template>
       <recursive-options-list v-if="item.children" :list-items="item.children"
                               :parent-id="item.id" v-model="optionSelected" @add="vEmitAddOption(optionSelected)"
                               @delete="vEmitDelete(optionSelected)" @input="vEmit"/>
-    </q-collapsible>
+    </q-expansion-item>
   </q-list>
 </template>
 <script>
-  //Plugins
-  import auth from '@imagina/quser/_plugins/auth'
-  import _cloneDeep from 'lodash.clonedeep'
   //Services
-  import commerceServices from '@imagina/qcommerce/_services/index';
+  import commerceServices from '@imagina/qcommerce/_services/index'
 
   export default {
     name: 'recursiveOptionsList',
     components: {},
     props: {
-      listItems: {default: false},
-      parentId: {default: 0},
-      value: {default: null}
+      listItems: { default: false },
+      parentId: { default: 0 },
+      value: { default: null }
     },
     watch: {
-      listItems() {
+      listItems () {
         this.init()
       },
-      value() {
+      value () {
         this.optionSelected = this.value
       }
     },
-    mounted() {
+    mounted () {
       this.$nextTick(function () {
         this.init()
       })
     },
-    data() {
+    data () {
       return {
-        loading : false,
+        loading: false,
         productOptions: [],
         optionSelected: null
       }
     },
     methods: {
       //Init Form
-      init() {
+      init () {
         this.loading = true
-        this.productOptions = _cloneDeep(this.$helper.array.builTree(this.listItems, this.parentId))
+        this.productOptions = this.$clone(this.$array.builTree(this.listItems, this.parentId))
         this.loading = false
       },
-      permitChildren(item) {
+      permitChildren (item) {
         let types = ['select', 'radio']
         let response = types.indexOf(item.type)
         return (response == -1) ? false : true
       },
-      vEmit() {
+      vEmit () {
         this.$emit('input', this.optionSelected)
       },
-      vEmitAddOption(optionId) {
+      vEmitAddOption (optionId) {
         this.optionSelected = optionId
         this.vEmit()
         this.$emit('add')
       },
-      vEmitDelete(optionId) {
+      vEmitDelete (optionId) {
         this.optionSelected = optionId
         this.vEmit()
         this.$emit('delete')
       },
-      vRefresh() {
+      vRefresh () {
         this.init()
       }
     }
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
   #listOptionsCommerce
     .q-item
       padding 0px
@@ -101,8 +96,8 @@
         &.relative-position
           display: none
 
-    .q-collapsible-inner
-      .q-collapsible-sub-item
+    .q-expansion-item
+      .q-expansion-item__content
         padding 0px 0px 0px 15px
 </style>
 

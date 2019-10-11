@@ -158,10 +158,7 @@
 
 </script>
 
-<style scoped lang="stylus">
-
-  @import "~variables";
-
+<style lang="stylus">
   div.product
     cursor pointer
 

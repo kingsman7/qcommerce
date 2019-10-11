@@ -3,7 +3,6 @@ import { helper } from '@imagina/qhelper/_plugins/helper'
 import axios from 'axios'
 import config from 'src/config/index'
 import eCommerceService from '@imagina/qcommerce/_services/index'
-import store from 'src/store/index'
 import { remember } from '@imagina/qhelper/_plugins/remember'
 
 export const GET_ORDERS_PENDING = ({ commit, state, dispatch }, Vue) => {

@@ -198,7 +198,6 @@
 </script>
 
 <style lang="stylus">
-  @import "~variables";
   #OrderIndexPage
       .q-search
         width 258px

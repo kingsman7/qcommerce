@@ -15,7 +15,13 @@
         <!--Table slot left-->
         <template slot="top-left" slot-scope="props">
           <!--Search-->
-          <q-search hide-underline clearable v-model="table.filter.search" @input="getDataTable"/>
+          <q-input clearable v-model="table.filter.search" dense outlined debounce="800"
+                   :placeholder="`${$tr('ui.label.search',{capitalize : true})}...`"
+                   @input="getDataTable">
+            <template v-slot:append>
+              <q-icon name="search"/>
+            </template>
+          </q-input>
         </template>
         <!--Table slot right-->
         <template slot="top-right" slot-scope="props">
@@ -92,7 +98,7 @@
             {name: 'title', label: 'Title', field: 'title', align: 'rigth'},
             {
               name: 'createdAt', label: 'Creation Date', field: 'createdAt', align: 'left',
-              format: val => val ? this.$d(this.$moment(val, 'YYYY-MM-DD HH:mm').toDate(), 'short', this.$q.i18n.lang) : '-',
+              format: val => val ? this.$trd(val) : '-',
             },
             {name: 'actions', label: 'Actions', align: 'left'},
           ],
@@ -159,5 +165,4 @@
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
 </style>

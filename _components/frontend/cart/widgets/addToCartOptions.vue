@@ -183,7 +183,6 @@
 </script>
 
 <style lang="stylus">
-  @import "~variables";
   #addCartOptions
     .q-list
       padding 0
