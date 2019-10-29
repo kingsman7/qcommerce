@@ -77,17 +77,17 @@
           formRight: {
             masterRecord : {
               label: this.$tr('ui.form.masterRecord'),
-              value: 0,
+              value: '0',
               isFakeField : true,
               type: 'select',
               options: [
-                {label: this.$tr('ui.label.yes'), id: 1},
-                {label: this.$tr('ui.label.no'), id: 0},
+                {label: this.$tr('ui.label.yes'), value: '1'},
+                {label: this.$tr('ui.label.no'), value: '0'},
               ]
             },
             parentId: {
               label: this.$tr('ui.form.parent'),
-              value: 0,
+              value: '0',
               type: 'select',
               clearable: true,
               loadOptions: {

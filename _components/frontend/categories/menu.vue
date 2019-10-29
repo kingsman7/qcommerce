@@ -44,8 +44,6 @@
 <script>
   //Components
   import recursiveItem from 'src/components/master/recursiveItem'
-  //Services
-  import commerceServices from '@imagina/qcommerce/_services/index'
 
   export default {
     props: {
@@ -53,65 +51,49 @@
       icon: {default: false},
     },
     components: {recursiveItem},
-    watch: {},
-    mounted() {
-      this.$nextTick(function () {
-        this.getCategories()
-      })
-    },
     data() {
       return {
         loading: false,
-        menuCategories: [],
         modal: {
           show: false
         }
       }
     },
-    methods: {
-      //Get categories
-      getCategories() {
-        this.loading = true
-        let params = {refresh: false, params: {}}
-        //Request
-        commerceServices.crud.index('apiRoutes.qcommerce.categories', params).then(response => {
-          this.orderCategoriesToMenu(response.data)
-          this.loading = false
-        }).catch(error => {
-          console.error('Error getting categories', error)
-          this.loading = false
-        })
-      },
-      //Order categories to menu
-      orderCategoriesToMenu(categories) {
-        const recursiveMenu = (items) => {
-          //Default list
-          let menu = [
-            {
-              title: this.$tr('ui.label.all'),
-              name: 'products.index',
-              permission: null,
-              activated: true
-            }
-          ]
+    computed:{
+      menuCategories(){
+        let categories = this.$store.state.qcrudMaster.index['qcommerce-categories']
+        if(categories){
+          const recursiveMenu = (items) => {
+            //Default list
+            let menu = [
+              {
+                title: this.$tr('ui.label.all'),
+                name: 'products.index',
+                permission: null,
+                activated: true
+              }
+            ]
 
-          items.forEach((item) => {
-            let data = {
-              title: item.title ? item.title : item.label,
-              name: 'products.index.by.category',
-              params: {slugCategory: item.slug},
-              permission: item.showMenu ? null : 'no.show.item',
-              activated: true
-            }
-            //cHeck childrens
-            if (item.children) data.children = recursiveMenu(item.children)
-            menu.push(data)//Add to data menu
-          })
+            items.forEach((item) => {
+              let data = {
+                title: item.title ? item.title : item.label,
+                name: 'products.index.by.category',
+                params: {slugCategory: item.slug},
+                permission: item.showMenu ? null : 'no.show.item',
+                activated: true
+              }
+              //cHeck childrens
+              if (item.children) data.children = recursiveMenu(item.children)
+              menu.push(data)//Add to data menu
+            })
 
-          return menu//Return response
-        }
-        this.menuCategories = recursiveMenu(this.$array.builTree(categories))
-      },
+            return menu//Return response
+          }
+
+          let menu = recursiveMenu(this.$array.builTree(categories.data))
+          return menu
+        }else return []
+      }
     }
   }
 </script>

@@ -1,4 +1,6 @@
 export default {
-  currentProduct : null,
-  currentCategory : null
+  products : {},
+  categories : {},
+  indexProducts : {},
+  indexCategories : {}
 }

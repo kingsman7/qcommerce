@@ -3,37 +3,39 @@ import crud from '@imagina/qcrud/_services/baseService'
 
 
 //Get product and set as current product
-export function GET_PRODUCT({commit}, slug) {
+export function GET_PRODUCT({commit, state}, params) {
   return new Promise((resolve, reject) => {
-    let paramsRequest = {refresh: true,params : {filter : {field : 'slug'}}}
+    if (!params.slug) return reject('Slug is required')
+    let products = Object.assign({}, state.products)
 
-    if (slug){
-      crud.show('apiRoutes.qcommerce.products', slug, paramsRequest).then(response => {
-        commit('SET_PRODUCT', response.data)
-        resolve(response.data)
-      }).catch(error => {
-        reject(error)
-      })
-    }
-    else
-      reject('slug is required')
+    let defaultParams = {filter: {field: 'slug'}}
+    let paramsRequest = {refresh: true, params: {...defaultParams, ...params.params || {}}}
+
+    crud.show('apiRoutes.qcommerce.products', params.slug, paramsRequest).then(response => {
+      if (response.data) products[params.slug] = response.data
+      commit('SET_PRODUCT', products)
+      resolve(response.data)
+    }).catch(error => {
+      reject(error)
+    })
   })
 }
 
-//Get ategory and set as current category
-export function GET_CATEGORY({commit}, slug) {
+//Get product and set as current product
+export function GET_CATEGORY({commit, state}, params) {
   return new Promise((resolve, reject) => {
-    let paramsRequest = {refresh: true,params : {filter : {field : 'slug'}}}
+    if (!params.slug) return reject('Slug is required')
+    let categories = Object.assign({}, state.categories)
 
-    if (slug){
-      crud.show('apiRoutes.qcommerce.categories', slug, paramsRequest).then(response => {
-        commit('SET_CATEGORY', response.data)
-        resolve(response.data)
-      }).catch(error => {
-        reject(error)
-      })
-    }
-    else
-      reject('slug is required')
+    let defaultParams = {filter: {field: 'slug'}}
+    let paramsRequest = {refresh: true, params: {...defaultParams, ...params.params || {}}}
+
+    crud.show('apiRoutes.qcommerce.categories', params.slug, paramsRequest).then(response => {
+      if (response.data) categories[params.slug] = response.data
+      commit('SET_CATEGORY', categories)
+      resolve(response.data)
+    }).catch(error => {
+      reject(error)
+    })
   })
 }

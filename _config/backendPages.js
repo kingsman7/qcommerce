@@ -96,7 +96,7 @@ export default {
 		authenticated: true,
 	},
   orders: {
-    permission: null,
+		permission: 'icommerce.orders.index',
     activated: true,
     path: '/orders',
     name: 'qcommerce.admin.shipping.orders.index',
