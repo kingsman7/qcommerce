@@ -114,8 +114,7 @@
   //Components
   import selectQuantity from '@imagina/qcommerce/_components/selectQuantity'
   //Services
-  import icommerceService from '@imagina/qcommerce/_services/index';
-  import innerLoading from 'src/components/master/innerLoading'
+  import icommerceService from '@imagina/qcommerce/_services/index'
 
   export default {
     props: {
@@ -124,7 +123,7 @@
         default: false
       },
     },
-    components: {selectQuantity,innerLoading},
+    components: {selectQuantity},
     data() {
       return {
         test: 1,

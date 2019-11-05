@@ -57,7 +57,6 @@
 </template>
 <script>
   //Components
-  import innerLoading from 'src/components/master/innerLoading'
   import icommerceagree from '@imagina/qcommerce/_components/admin/shippingMethods/agree'
   import icommerceflatrate from '@imagina/qcommerce/_components/admin/shippingMethods/flatrate'
   import icommercefreeshipping from '@imagina/qcommerce/_components/admin/shippingMethods/freeshipping'
@@ -70,7 +69,6 @@
   export default {
     props: {},
     components: {
-      innerLoading,
       icommerceagree,
       icommerceflatrate,
       icommercefreeshipping,

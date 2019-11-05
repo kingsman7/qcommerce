@@ -140,16 +140,12 @@
   import orderStatusHistory from '@imagina/qcommerce/_components/frontend/orders/orderStatusHistory';
   import transactions from '@imagina/qcommerce/_components/frontend/orders/transactions';
   import customerData from '@imagina/qcommerce/_components/frontend/orders/customerData';
-  import innerLoading from 'src/components/master/innerLoading';
-  import notResults from 'src/components/master/notResults';
 
   export default {
     components:{
       orderItems,
       orderStatusHistory,
       transactions,
-      innerLoading,
-      notResults,
       customerData
     },
     data(){

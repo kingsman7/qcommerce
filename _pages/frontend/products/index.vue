@@ -79,12 +79,10 @@
 
   // Components
   import menuCategories from '@imagina/qcommerce/_components/frontend/categories/menu'
-  import innerLoading from 'src/components/master/innerLoading'
 
   export default {
     components: {
-      menuCategories,
-      innerLoading
+      menuCategories
     },
     beforeRouteLeave(to, from, next) {
       next()

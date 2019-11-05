@@ -64,7 +64,6 @@
   import commerceServices from '@imagina/qcommerce/_services/index'
 
   // COMPONENTS
-  import innerLoading from 'src/components/master/innerLoading'
   import productOptionValues from '@imagina/qcommerce/_components/frontend/products/widgets/selectOptionsProduct'
   import selectQuantity from '@imagina/qcommerce/_components/selectQuantity'
 
@@ -77,7 +76,6 @@
       additionalPrice: {default: true}
     },
     components: {
-      innerLoading,
       productOptionValues,
       selectQuantity
     },

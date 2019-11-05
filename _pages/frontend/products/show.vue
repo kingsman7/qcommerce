@@ -54,10 +54,8 @@
 <script>
   // Components
   import menuCategories from '@imagina/qcommerce/_components/frontend/categories/menu'
-  import innerLoading from 'src/components/master/innerLoading'
   import selectProducts from '@imagina/qcommerce/_components/frontend/products/widgets/selectProducts'
   import addToCart from '@imagina/qcommerce/_components/frontend/cart/widgets/addToCartOptions'
-  import notFound from 'src/components/master/404'
 
   // Services
   import icommerceService from '@imagina/qcommerce/_services/index';
@@ -68,10 +66,8 @@
     props: {},
     components: {
       menuCategories,
-      innerLoading,
       selectProducts,
       addToCart,
-      notFound,
     },
     mounted() {
       this.$nextTick(function () {

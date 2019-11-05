@@ -76,12 +76,9 @@
 <script>
   //Services
   import commerceServices from '@imagina/qcommerce/_services/index';
-  //Component
-  import innerLoading from 'src/components/master/innerLoading'
 
   export default {
     components: {
-      innerLoading
     },
     mounted() {
       this.$nextTick(function () {

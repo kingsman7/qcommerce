@@ -89,10 +89,6 @@
   </q-dialog>
 </template>
 <script>
-  //Components
-  import uploadImg from '@imagina/qmedia/_components/form'
-  import locales from '@imagina/qsite/_components/locales'
-  import innerLoading from 'src/components/master/innerLoading'
 
   //Plugins
   import _cloneDeep from 'lodash.clonedeep'
@@ -109,9 +105,6 @@
       },
     },
     components: {
-      uploadImg,
-      locales,
-      innerLoading
     },
     watch: {
       value (newValue) {
