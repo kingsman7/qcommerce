@@ -82,22 +82,9 @@
                 v-model="locale.formTemplate.status"
                 placeholder=""
               />
-              <!--Category-->
-              <div class="input-title">
-                {{`${$tr('ui.form.category')}*`}}
-                <!--Crud category-->
-                <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
-                      just-create @created="getCategories"/>
-              </div>
-              <tree-select
-                :clearable="false"
-                :append-to-body="true"
-                class="q-mb-md"
-                :options="optionsTemplate.categories"
-                value-consists-of="BRANCH_PRIORITY"
-                v-model="locale.formTemplate.categoryId"
-                placeholder=""
-              />
+              <!--Crud category-->
+              <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
+                    crud-select @created="getCategories" :label="`${$tr('ui.form.category')}*`"/>
               <!--Categories-->
               <div class="input-title">
                 {{`${$trp('ui.form.category')}`}}
@@ -124,7 +111,7 @@
           <q-tab-panels v-model="vTab">
             <!-- Data -->
             <q-tab-panel name="tab-data">
-              <div class="row q-col-gutter-sm">
+              <div class="q-form row q-col-gutter-sm">
                 <!--Left-->
                 <div class="col-12 col-md-6">
                   <!--SKU-->
@@ -287,9 +274,9 @@
   import uploadMedia from '@imagina/qmedia/_components/form'
   import crudOptions from '@imagina/qcommerce/_components/admin/products/crudOptions'
   //Plugins
-  import { scroll } from 'quasar'
+  import {scroll} from 'quasar'
 
-  const { getScrollTarget, setScrollPosition } = scroll
+  const {getScrollTarget, setScrollPosition} = scroll
 
   export default {
     components: {
@@ -298,16 +285,16 @@
       uploadMedia,
     },
     watch: {
-      $route (to, from) {
+      $route(to, from) {
         this.initForm()
       }
     },
-    mounted () {
+    mounted() {
       this.$nextTick(function () {
         this.initForm()
       })
     },
-    data () {
+    data() {
       return {
         locale: {},
         vTab: 'tab-data',
@@ -338,7 +325,7 @@
           products: [],
           relatedProducts: []
         },
-        buttonActions: { label: '', value: 1 },
+        buttonActions: {label: '', value: 1},
         modalShow: {
           category: false
         }
@@ -346,7 +333,7 @@
     },
     computed: {
       //Data locale component
-      dataLocale () {
+      dataLocale() {
         return {
           fields: {
             parentId: null,
@@ -393,7 +380,7 @@
         }
       },
       //Check if update options
-      updateOptions () {
+      updateOptions() {
         if (this.$route.params.editOptions) {
           setTimeout(() => {
             this.vTab = 'tab-options'
@@ -404,15 +391,15 @@
         }
       },
       //Options translatables
-      options () {
+      options() {
         return {
           status: [
-            { label: this.$tr('ui.label.enabled'), id: 1 },
-            { label: this.$tr('ui.label.disabled'), id: 0 }
+            {label: this.$tr('ui.label.enabled'), id: 1},
+            {label: this.$tr('ui.label.disabled'), id: 0}
           ],
           stockStatus: [
-            { label: this.$tr('ui.label.available'), id: 1 },
-            { label: this.$tr('ui.label.soldOut'), id: 0 }
+            {label: this.$tr('ui.label.available'), id: 1},
+            {label: this.$tr('ui.label.soldOut'), id: 0}
           ],
           btn: {
             saveAndReturn: this.$tr('ui.message.saveAndReturn'),
@@ -422,7 +409,7 @@
         }
       },
       //Has manage master record
-      canManageRecordMaster () {
+      canManageRecordMaster() {
         let response = true
 
         if (this.productId && !this.$auth.hasAccess('isite.master.records.edit')) {
@@ -430,7 +417,7 @@
           //Validate if record is master
           let record = this.locale.formTemplate
           if (record && record.options && parseInt(record.options.masterRecord)) {
-            this.$router.push({ name: 'app.home' })
+            this.$router.push({name: 'app.home'})
           }
         }
         if (!this.productId && !this.$auth.hasAccess('isite.master.records.create')) {
@@ -442,11 +429,11 @@
     },
     methods: {
       //Init Form
-      async initForm () {
+      async initForm() {
         this.loading = true
         this.success = false//Disable status of page
         this.vTab = 'tab-data'
-        this.buttonActions = { label: this.options.btn.saveAndReturn, value: 1 }
+        this.buttonActions = {label: this.options.btn.saveAndReturn, value: 1}
         this.locale = this.$clone(this.dataLocale)//Add fields
         this.productId = this.$route.params.id//Update param from route
         if (this.locale.success) this.$refs.localeComponent.vReset()//Reset locale
@@ -457,13 +444,13 @@
         this.loading = false
       },
       //Get product categories
-      getCategories () {
+      getCategories() {
         return new Promise((resolve, reject) => {
           this.loadingCategory = true
           let configName = 'apiRoutes.qcommerce.categories'
           let params = {//Params to request
             refresh: true,
-            params: { include: 'parent' },
+            params: {include: 'parent'},
           }
 
           //Request
@@ -473,14 +460,14 @@
             this.loadingCategory = false
             resolve(true)
           }).catch(error => {
-            this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
             this.loadingCategory = false
             reject(true)
           })
         })
       },
       //Get product if is edit
-      getData () {
+      getData() {
         return new Promise((resolve, reject) => {
           const productId = this.$clone(this.productId)
           if (productId) {
@@ -490,7 +477,7 @@
               refresh: true,
               params: {
                 include: 'relatedProducts,categories,parent',
-                filter: { allTranslations: true }
+                filter: {allTranslations: true}
               }
             }
             //Request
@@ -498,7 +485,7 @@
               this.orderDataItemToLocale(response.data)
               resolve(true)//Resolve
             }).catch(error => {
-              this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
+              this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
               this.loading = false
               reject(false)//Resolve
             })
@@ -508,7 +495,7 @@
         })
       },
       //order data item to locale component
-      orderDataItemToLocale (data) {
+      orderDataItemToLocale(data) {
         let orderData = this.$clone(data)
         //Set default Parent options
         if (data.parent) this.optionsTemplate.products = this.$array.tree([data.parent])
@@ -528,35 +515,35 @@
         this.locale.form = this.$clone(orderData)
       },
       //Create Product
-      async createItem () {
+      async createItem() {
         if (await this.$refs.localeComponent.validateForm()) {
           this.loading = true
           let configName = 'apiRoutes.qcommerce.products'
           this.$crud.create(configName, this.getDataForm()).then(response => {
-            this.$alert.success({ message: `${this.$tr('ui.message.recordCreated')} ID: ${response.data.id}` })
+            this.$alert.success({message: `${this.$tr('ui.message.recordCreated')} ID: ${response.data.id}`})
             this.actionAfterCreated(response.data.id)
           }).catch(error => {
             this.loading = false
-            this.$alert.error({ message: this.$tr('ui.message.recordNoCreatde'), pos: 'bottom' })
+            this.$alert.error({message: this.$tr('ui.message.recordNoCreatde'), pos: 'bottom'})
           })
         }
       },
       //Update Product
-      async updateItem () {
+      async updateItem() {
         if (await this.$refs.localeComponent.validateForm()) {
           this.loading = true
           let configName = 'apiRoutes.qcommerce.products'
           this.$crud.update(configName, this.productId, this.getDataForm()).then(response => {
-            this.$alert.success({ message: `${this.$tr('ui.message.recordUpdated')}` })
+            this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
             this.initForm()
           }).catch(error => {
             this.loading = false
-            this.$alert.error({ message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom' })
+            this.$alert.error({message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom'})
           })
         }
       },
       //Get just values not null from form
-      getDataForm () {
+      getDataForm() {
         let response = this.locale.form
         for (var item in response) {
           let valueItem = response[item]
@@ -567,15 +554,15 @@
         return response
       },
       //Action after created
-      actionAfterCreated (id) {
+      actionAfterCreated(id) {
         setTimeout(() => {
           let action = this.buttonActions.value
           switch (action) {
             case 1://redirect to index products
-              this.$router.push({ name: 'qcommerce.admin.products.index' })
+              this.$router.push({name: 'qcommerce.admin.products.index'})
               break
             case 2://Redirect to update this product
-              this.$router.push({ name: 'qcommerce.admin.products.edit', params: { id: id } })
+              this.$router.push({name: 'qcommerce.admin.products.edit', params: {id: id}})
               this.loading = false
               break
             case 3://Reset and init form
@@ -585,7 +572,7 @@
             case 4://Redirect to update this product and options
               this.$router.push({
                 name: 'qcommerce.admin.products.edit',
-                params: { id: id, editOptions: 1 },
+                params: {id: id, editOptions: 1},
               })
               this.loading = false
               break
@@ -593,22 +580,22 @@
         }, 2000)
       },
       //Search products
-      searchProducts ({ action, searchQuery, callback }) {
+      searchProducts({action, searchQuery, callback}) {
         if (action === 'ASYNC_SEARCH') {
           let configName = 'apiRoutes.qcommerce.products'
           let params = {//Params to request
-            params: { filter: { search: searchQuery } },
+            params: {filter: {search: searchQuery}},
           }
           //Request
           this.$crud.index(configName, params).then(response => {
             callback(null, this.$array.tree(response.data))
           }).catch(error => {
-            this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
           })
         }
       },
       //Complete slug Only when is creation
-      setSlug () {
+      setSlug() {
         if (!this.productId) {
           let title = this.$clone(this.locale.formTemplate.name)
           title = title.split(' ').join('-').toLowerCase()
