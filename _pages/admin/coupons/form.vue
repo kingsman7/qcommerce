@@ -185,7 +185,6 @@
         }
         this.$crud.show('apiRoutes.qcommerce.coupons', this.$route.params.id, params)
           .then(response => {
-            console.warn(response.data.productId)
             Object.assign(this.form, { ...response.data })
             setTimeout(() => {
               this.form.productId = response.data.productId

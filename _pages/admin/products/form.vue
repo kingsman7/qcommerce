@@ -84,13 +84,13 @@
               />
               <!--Crud category-->
               <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
-                    crud-select @created="getCategories" :label="`${$tr('ui.form.category')}*`"/>
+                    type="select" @created="getCategories" :crud-props="{label:`${$tr('ui.form.category')}*`}"/>
               <!--Categories-->
-              <div class="input-title">
+              <div class="input-title relative-position q-mb-sm">
                 {{`${$trp('ui.form.category')}`}}
                 <!--Crud category-->
                 <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
-                      just-create @created="getCategories"/>
+                      type="button-create" class="absolute-right" @created="getCategories"/>
               </div>
               <recursive-list v-model="locale.formTemplate.categories"
                               :items="optionsTemplate.categories"/>

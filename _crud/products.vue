@@ -80,45 +80,7 @@
           update: {
             to : 'qcommerce.admin.products.edit'
           },
-          delete: true,
-          formLeft: {
-            id: {value: ''},
-            userId: {value: this.$store.state.quserAuth.userId},
-            description: {
-              label: this.$tr('ui.form.description'),
-              value: '',
-              type: 'text',
-              isRequired: true,
-              isTranslatable: true,
-            },
-            optionId: {
-              label: this.$tr('ui.form.option'),
-              value: null,
-              type: 'select',
-              isRequired: true,
-              isTranslatable: false,
-              loadOptions: {
-                apiRoute: 'apiRoutes.qcommerce.options',
-                select: {label: 'description', id: 'id'}
-              }
-            },
-            sortOrder: {
-              label: this.$tr('ui.form.sort'),
-              value: 0,
-              type: 'number',
-              isRequired: true,
-              isTranslatable: false,
-            },
-            mediasSingle: {
-              name: 'mediasSingle',
-              label: this.$tr('ui.form.firstImage'),
-              value: {},
-              type: 'media',
-              zone: 'mainimage',
-              entity: "Modules\\Icommerce\\Entities\\OptionValue",
-              enitityId: null
-            },
-          },
+          delete: true
         }
       }
     }

@@ -9,7 +9,7 @@
       <div slot="top-right">
         <!--Button new record-->
         <q-btn icon="fas fa-edit" color="positive" :label="$tr('qcommerce.layout.newOptionValue')"
-               @click="modal.itemId = false; modal.show = true"/>
+               @click="modal.itemId = false; modal.show = true" class="btn-small"/>
       </div>
 
       <!--= Custom Columns =-->
@@ -50,11 +50,11 @@
             <!--Form left-->
             <div class="col-12 col-md-6">
               <!--Option Value-->
-              <div class="input-title">
+              <div class="input-title relative-position q-mb-sm">
                 {{`${$tr('qcommerce.layout.form.optionValue')} *`}}
                 <!--Crud Option Value-->
                 <crud :crud-data="import('@imagina/qcommerce/_crud/productOptionValues')"
-                      just-create @created="getOptionValues"/>
+                      type="button-create" @created="getOptionValues" class="absolute-right"/>
               </div>
               <q-field v-model="form.optionValueId" borderless
                        :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
@@ -69,11 +69,11 @@
               </q-field>
               <!--Parent Option Value -->
               <div v-if="options.parentValues.length">
-                <div class="input-title">
+                <div class="input-title relative-position q-mb-sm">
                   {{`${$tr('qcommerce.layout.form.parentOptionValue')} *`}}
                   <!--Crud Option Value-->
                   <crud :crud-data="import('@imagina/qcommerce/_crud/productOptionValues')"
-                        just-create @created="getOptionValues"/>
+                        type="button-create" @created="getOptionValues" class="absolute-right"/>
                 </div>
                 <q-field v-model="form.parentOptionValueId" borderless
                          :rules="[val => !!val || $tr('ui.message.fieldRequired')]">

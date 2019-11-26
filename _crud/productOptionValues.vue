@@ -1,9 +1,15 @@
 <template></template>
 <script>
   export default {
+    data() {
+      return {
+        crudId: this.$uid()
+      }
+    },
     computed: {
       crudData () {
         return {
+          crudId: this.crudId,
           apiRoute: 'apiRoutes.qcommerce.optionValues',
           permission: 'icommerce.optionvalues',
           create: {
@@ -29,12 +35,14 @@
             requestParams: { include: 'option' },
             filters: {
               optionId: {
-                label: `${this.$tr('ui.form.option')}:`,
                 value: '0',
                 type: 'select',
-                options: [
-                  { label: this.$tr('ui.label.all'), value: '0' }
-                ],
+                props : {
+                  label: `${this.$tr('ui.form.option')}:`,
+                  options: [
+                    { label: this.$tr('ui.label.all'), value: '0' }
+                  ],
+                },
                 loadOptions: {
                   apiRoute: 'apiRoutes.qcommerce.options',
                   select: { label: 'description', id: 'id' }
@@ -51,44 +59,57 @@
             id: { value: '' },
             userId: { value: this.$store.state.quserAuth.userId },
             description: {
-              label: `${this.$tr('ui.form.description')}*`,
               value: '',
-              type: 'text',
+              type: 'input',
               isTranslatable: true,
-              rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired')
-              ],
+              props : {
+                label: `${this.$tr('ui.form.description')}*`,
+                rules: [
+                  val => !!val || this.$tr('ui.message.fieldRequired')
+                ],
+              }
             },
             optionId: {
-              label: `${this.$tr('ui.form.option')}*`,
               value: null,
               type: 'select',
               isTranslatable: false,
-              rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired')
-              ],
+              props : {
+                label: `${this.$tr('ui.form.option')}*`,
+                rules: [
+                  val => !!val || this.$tr('ui.message.fieldRequired')
+                ],
+              },
               loadOptions: {
                 apiRoute: 'apiRoutes.qcommerce.options',
                 select: { label: 'description', id: 'id' }
               }
             },
             sortOrder: {
-              label: this.$tr('ui.form.sort'),
               value: 0,
-              type: 'number',
-              isTranslatable: false
+              type: 'input',
+              isTranslatable: false,
+              props : {
+                type : 'number',
+                label: this.$tr('ui.form.sort'),
+              }
             },
             mediasSingle: {
               name: 'mediasSingle',
-              label: this.$tr('ui.form.firstImage'),
               value: {},
               type: 'media',
-              zone: 'mainimage',
-              entity: 'Modules\\Icommerce\\Entities\\OptionValue',
-              enitityId: null
+              props : {
+                label: this.$tr('ui.form.firstImage'),
+                zone: 'mainimage',
+                entity: 'Modules\\Icommerce\\Entities\\OptionValue',
+                enitityId: null
+              }
             },
           },
         }
+      },
+      //Crud info
+      crudInfo() {
+        return this.$store.state.qcrudComponent.component[this.crudId] || {}
       }
     }
   }

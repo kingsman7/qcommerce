@@ -70,6 +70,9 @@
   import _cloneDeep from 'lodash.clonedeep'
   import {alert} from '@imagina/qhelper/_plugins/alert'
 
+  //Components
+  import uploadImg from '@imagina/qmedia/_components/form'
+
   export default {
     props: {
       value: {default: false},
@@ -80,8 +83,7 @@
         },
       },
     },
-    components: {
-    },
+    components: {uploadImg},
     watch: {
       value(newValue) {
         this.show = this.value
@@ -128,7 +130,7 @@
         this.locale = _cloneDeep(this.dataLocale)
 
         //initialize item data
-        if (this.item){
+        if (this.item) {
           this.locale.form = _cloneDeep(this.item)
         }
         this.show = this.value//Assign props value to show modal
@@ -136,7 +138,7 @@
       },
 
       //update item
-      async updateItem () {
+      async updateItem() {
         if (await this.$refs.localeComponent.validateForm()) {
           this.loading = true
           let data = _cloneDeep(this.locale.form);
@@ -145,7 +147,7 @@
           }
           //Request
           this.$crud.update('apiRoutes.qcommerce.shippingMethods', this.item.id, data).then(response => {
-            this.$alert.success({ message: this.$tr('ui.message.recordUpdated') })
+            this.$alert.success({message: this.$tr('ui.message.recordUpdated')})
             this.$emit('updated')
             this.loading = false
             this.show = false

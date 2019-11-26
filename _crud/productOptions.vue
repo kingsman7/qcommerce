@@ -1,9 +1,15 @@
 <template></template>
 <script>
   export default {
+    data() {
+      return {
+        crudId: this.$uid()
+      }
+    },
     computed: {
       crudData() {
         return {
+          crudId: this.crudId,
           apiRoute: 'apiRoutes.qcommerce.options',
           permission: 'icommerce.options',
           create: {
@@ -31,38 +37,49 @@
             id: {value: ''},
             userId: {value: this.$store.state.quserAuth.userId},
             description: {
-              label: `${this.$tr('ui.form.description')}*`,
               value: '',
-              type: 'text',
+              type: 'input',
               isTranslatable: true,
-              rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired')
-              ],
+              props : {
+                label: `${this.$tr('ui.form.description')}*`,
+                rules: [
+                  val => !!val || this.$tr('ui.message.fieldRequired')
+                ],
+              }
             },
             type: {
-              label: `${this.$tr('ui.form.type')}*`,
               value: null,
               type: 'select',
               isTranslatable: false,
-              options : [
-                {label: 'Text', value: 'text'},
-                {label: 'Textarea', value: 'textarea'},
-                {label: 'Select', value: 'select'},
-                {label: 'Radio', value: 'radio'},
-                {label: 'Checkbox', value: 'checkbox'},
-              ],
-              rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired')
-              ],
+              props : {
+                label: `${this.$tr('ui.form.type')}*`,
+                options : [
+                  {label: 'Text', value: 'text'},
+                  {label: 'Textarea', value: 'textarea'},
+                  {label: 'Select', value: 'select'},
+                  {label: 'Radio', value: 'radio'},
+                  {label: 'Checkbox', value: 'checkbox'},
+                ],
+                rules: [
+                  val => !!val || this.$tr('ui.message.fieldRequired')
+                ],
+              }
             },
             sortOrder: {
-              label: this.$tr('ui.form.sort'),
               value: 0,
-              type: 'number',
+              type: 'input',
               isTranslatable: false,
+              props : {
+                type : 'number',
+                label: this.$tr('ui.form.sort'),
+              }
             },
           },
         }
+      },
+      //Crud info
+      crudInfo() {
+        return this.$store.state.qcrudComponent.component[this.crudId] || {}
       }
     },
   }

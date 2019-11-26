@@ -67,10 +67,12 @@
   </q-dialog>
 </template>
 <script>
-
   //Plugins
   import _cloneDeep from 'lodash.clonedeep'
   import {alert} from '@imagina/qhelper/_plugins/alert'
+
+  //Component
+  import uploadImg from '@imagina/qmedia/_components/form'
 
   export default {
     props: {
@@ -82,8 +84,7 @@
         },
       },
     },
-    components: {
-    },
+    components: {uploadImg},
     watch: {
       value(newValue) {
         this.show = this.value
@@ -130,7 +131,7 @@
         this.locale = _cloneDeep(this.dataLocale)
 
         //initialize item data
-        if (this.item){
+        if (this.item) {
           this.locale.form = _cloneDeep(this.item)
         }
         this.show = this.value//Assign props value to show modal
@@ -138,7 +139,7 @@
       },
 
       //update item
-      async updateItem () {
+      async updateItem() {
         if (await this.$refs.localeComponent.validateForm()) {
           this.loading = true
           let data = _cloneDeep(this.locale.form);

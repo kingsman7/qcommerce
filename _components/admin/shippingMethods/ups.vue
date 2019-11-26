@@ -103,6 +103,9 @@
   import _cloneDeep from 'lodash.clonedeep'
   import {alert} from '@imagina/qhelper/_plugins/alert'
 
+  //Components
+  import uploadImg from '@imagina/qmedia/_components/form'
+
   export default {
     props: {
       value: {default: false},
@@ -113,8 +116,7 @@
         },
       },
     },
-    components: {
-    },
+    components: {uploadImg},
     watch: {
       value(newValue) {
         this.show = this.value
@@ -175,7 +177,7 @@
       },
 
       //update item
-      async updateItem () {
+      async updateItem() {
         if (await this.$refs.localeComponent.validateForm()) {
           this.loading = true
           let data = _cloneDeep(this.locale.form);

@@ -11,7 +11,7 @@
             <div class="float-left q-py-sm">{{$tr('qcommerce.layout.productOptions')}}</div>
             <!--Button add Option-->
             <q-btn icon="fas fa-pen" :label="$tr('qcommerce.layout.newOption')" color="positive"
-                   class="float-right" @click="addOption()"/>
+                   class="float-right btn-small" @click="addOption()"/>
           </div>
           <!--Message not option selected-->
           <div v-if="!productOptions.length" class="text-grey-8">
@@ -103,19 +103,9 @@
             {{modal.parentOption.description}}
           </div>
           <!--Options-->
-          <div class="input-title capitalize q-mb-sm">
-            {{`${$tr('ui.form.option')} *`}}
-            <!--Crud option-->
-            <crud :crud-data="import('@imagina/qcommerce/_crud/productOptions')"
-                  just-create @created="getOptions"/>
-          </div>
-          <tree-select
-            v-model="modal.optionSelected"
-            :options="template.options"
-            placeholder=""
-            :append-to-body="true"
-            @input="createProductOption()"
-          />
+          <crud :crud-data="import('@imagina/qcommerce/_crud/productOptions')" v-model="modal.optionSelected"
+                type="select" @created="getOptions" :crud-props="{label : `${$tr('ui.form.option')} *`}"
+                :config="{options : {label : 'description', value : 'id'}}" @input="createProductOption()"/>
 
           <!--Loading-->
           <inner-loading :visible="modal.loading"/>
@@ -154,7 +144,7 @@
           parentOption: 0,
           optionSelected: null,
           loading: false,
-          formOption : false
+          formOption: false
         },
         productOptions: [],//Options
         productOptionValues: [],//Option values
@@ -312,7 +302,7 @@
         const option = this.findOption(optionId, 'parentId')//Find option to check
         if (option)//If exist option, show message to fedbak
           this.$q.dialog({
-            message: this.$tr('qcommerce.layout.message.noDeleteOption',{name : option.keyDescription}),
+            message: this.$tr('qcommerce.layout.message.noDeleteOption', {name: option.keyDescription}),
             title: this.$tr('ui.label.warning'),
             color: 'negative',
           }).then(data => {

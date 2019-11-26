@@ -68,12 +68,13 @@
 <script>
   //Plugins
   import _cloneDeep from 'lodash.clonedeep'
-  import { alert } from '@imagina/qhelper/_plugins/alert'
+  import {alert} from '@imagina/qhelper/_plugins/alert'
+  import uploadImg from '@imagina/qmedia/_components/form'
 
   export default {
     props: {
-      value: { default: false },
-      itemId: { default: false },
+      value: {default: false},
+      itemId: {default: false},
       item: {
         default: () => {
           return {}
@@ -81,23 +82,24 @@
       },
     },
     components: {
+      uploadImg
     },
     watch: {
-      value (newValue) {
+      value(newValue) {
         this.show = this.value
       },
-      show (newValue) {
+      show(newValue) {
         this.$emit('input', this.show)
         this.initForm()
       }
     },
-    mounted () {
+    mounted() {
       this.$nextTick(function () {
         this.show = this.value//Assign props value to show modal
 
       })
     },
-    data () {
+    data() {
       return {
         show: false,
         locale: _cloneDeep(this.dataLocale),
@@ -106,7 +108,7 @@
     },
     computed: {
       //Data locale component
-      dataLocale () {
+      dataLocale() {
         return {
           fields: {
             init: '',
@@ -122,7 +124,7 @@
     },
     methods: {
       //Init form
-      async initForm () {
+      async initForm() {
         this.loading = true
         //If ther is category Id, request data, else set default data
         this.locale = _cloneDeep(this.dataLocale)
@@ -136,7 +138,7 @@
       },
 
       //update item
-      async updateItem () {
+      async updateItem() {
         if (await this.$refs.localeComponent.validateForm()) {
           this.loading = true
           let data = _cloneDeep(this.locale.form)
@@ -145,12 +147,12 @@
           }
           //Request
           this.$crud.update('apiRoutes.qcommerce.shippingMethods', this.item.id, data).then(response => {
-            this.$alert.success({ message: this.$tr('ui.message.recordUpdated') })
+            this.$alert.success({message: this.$tr('ui.message.recordUpdated')})
             this.$emit('updated')
             this.loading = false
             this.show = false
           }).catch(error => {
-            this.$alert.error({ message: this.$tr('ui.message.recordNoUpdated') })
+            this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
             this.loading = false
           })
         }
