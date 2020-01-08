@@ -1,6 +1,5 @@
 const moduleName = 'icommerce';
 const moduleVersion = 'v3';
-const baseApiUrl = `${env('BASE_URL', 'http://localhost:8000')}/api`;
 const urlBase = `/${moduleName}/${moduleVersion}`
 
 export default {

@@ -1,8 +1,8 @@
-## QCOMMERCE  | 2.0.4
+## QCOMMERCE  | 2.0.5
 
 ## Installation
 
-`` npm i @imagina/qcommerce@2.0.4 ``
+`` npm i @imagina/qcommerce@2.0.5 ``
 
 ## API Routes
 
