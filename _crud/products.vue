@@ -8,11 +8,14 @@
           permission: 'icommerce.products',
           create: {
             title: this.$tr('qcommerce.layout.newProduct'),
-            to : 'qcommerce.admin.products.create'
+            to : {name: 'qcommerce.admin.products.create'},
           },
           read: {
             columns: [
               {name: 'id', label: this.$tr('ui.form.id'), field: 'id', style: 'width: 50px'},
+              {
+                  name: 'image', label: this.$tr('ui.form.image'), field: 'mainImage', style: 'width: 50px',
+              },
               {name: 'name', label: this.$tr('ui.form.title'), field: 'name', style: 'width: 50px', align: 'rigth'},
               {name: 'sku', label: this.$tr('ui.form.sku'), field: 'sku', align: 'left'},
               {
