@@ -48,7 +48,8 @@
         let params = {}
         this.categories.loading = true
         this.$crud.index('apiRoutes.qcommerce.categories', params).then(({ data }) => {
-          this.categories.data = this.$array.builTree(data)
+          let removeShowMenuFalse = data.filter( it => it.showMenu == true)
+          this.categories.data = this.$array.builTree(removeShowMenuFalse)
           this.categories.loading = false
         }).catch( error => {
           this.$helper.alert.error('Failed: ' + error, 'bottom')
