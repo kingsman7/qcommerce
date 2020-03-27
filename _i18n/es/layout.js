@@ -73,6 +73,7 @@ export default {
     code: 'Codigo de Cupon',
     type: 'Tipo',
     category: 'Categoría',
+    categories: 'Categorías',
     product: 'Producto',
     customer: 'Cliente',
     discount: 'Descuento',

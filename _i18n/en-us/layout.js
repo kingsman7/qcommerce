@@ -73,6 +73,7 @@ export default {
     code: 'Coupon Code',
     type: 'Type',
     category: 'Category',
+    categories: 'Categories',
     product: 'Product',
     customer: 'Customer',
     discount: 'Discount',
