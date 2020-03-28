@@ -48,7 +48,6 @@
 						slugCategory: category.slug
 					}
 				})
-				console.warn(category.slug)
 			}
 		}
 	}
