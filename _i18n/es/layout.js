@@ -68,6 +68,7 @@ export default {
     city: 'Ciudad',
     country: 'País',
     shippingMethod: 'Métodos de Envío',
+    dimensions: 'Dimensiones',
 
     // Cupones
     code: 'Codigo de Cupon',
@@ -91,5 +92,9 @@ export default {
     noOptions : 'No hay opciones agregadas',
     noDeleteOption : 'No puede borrar está opción, es padre de {name}',
     selectProduct : 'Seleccione una opción de producto'
+  },
+  options:{
+    yes: 'Sí',
+    no: 'No',
   }
 }
