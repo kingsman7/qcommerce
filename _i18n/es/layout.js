@@ -69,6 +69,9 @@ export default {
     country: 'País',
     shippingMethod: 'Métodos de Envío',
     dimensions: 'Dimensiones',
+    link: 'Relaciones',
+    content: 'Contenido',
+    data: 'Datos',
 
     // Cupones
     code: 'Codigo de Cupon',

@@ -15,46 +15,48 @@
             <!--Form left-->
             <div class="col-12" v-if="locale.success">
               <q-list padding bordered class="rounded-borders q-pa-none">
-                <q-expansion-item default-opened header-class="text-primary" icon="home" label="General">
+                <q-expansion-item default-opened header-class="text-primary" icon="home" :label="$tr('qcommerce.layout.form.content')">
                   <q-separator />
                   <q-card>
                     <q-card-section class="q-pa-sm">
-                      <!--name-->
-                      <q-input v-model="locale.formTemplate.name" @input="setSlug()" outlined dense
-                               :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                               :label="`${$tr('ui.form.name')} (${locale.language})*`"/>
-                      <!--Slug-->
-                      <q-input v-model="locale.formTemplate.slug" outlined dense
-                               :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                               :label="`${$tr('ui.form.slug')} (${locale.language})*`"/>
-                      <!--Sumario-->
-                      <q-input v-model="locale.formTemplate.summary" type="textarea" outlined dense
-                               :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                               :label="`${$tr('ui.form.summary')} (${locale.language})*`" rows="3"/>
-                      <!--Description-->
-                      <div class="input-title">{{`${$tr('ui.form.description')} (${locale.language})*`}}</div>
-                      <q-field v-model="locale.formTemplate.description" borderless
-                               :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
-                        <q-editor v-model="locale.formTemplate.description" class="full-width"
-                                  :toolbar="editorText.toolbar" content-class="text-grey-9" toolbar-text-color="grey-9"/>
-                      </q-field>
-                      <!--Meta Title-->
-                      <q-input v-model="locale.formTemplate.metaTitle" outlined dense
-                               :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                               :label="`${$tr('ui.form.metaTitle')} (${locale.language})*`"/>
-                      <!--Meta Description-->
-                      <q-input v-model="locale.formTemplate.metaDescription" type="textarea"
-                               :rules="[val => !!val || $tr('ui.message.fieldRequired')]" outlined dense
-                               :label="`${$tr('ui.form.metaDescription')} (${locale.language})*`" rows="3"/>
+                      <div class="q-pa-sm">
+                        <!--name-->
+                        <q-input v-model="locale.formTemplate.name" @input="setSlug()" outlined dense
+                                 :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                                 :label="`${$tr('ui.form.name')} (${locale.language})*`"/>
+                        <!--Slug-->
+                        <q-input v-model="locale.formTemplate.slug" outlined dense
+                                 :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                                 :label="`${$tr('ui.form.slug')} (${locale.language})*`"/>
+                        <!--Sumario-->
+                        <q-input v-model="locale.formTemplate.summary" type="textarea" outlined dense
+                                 :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                                 :label="`${$tr('ui.form.summary')} (${locale.language})*`" rows="3"/>
+                        <!--Description-->
+                        <div class="input-title">{{`${$tr('ui.form.description')} (${locale.language})*`}}</div>
+                        <q-field v-model="locale.formTemplate.description" borderless
+                                 :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
+                          <q-editor v-model="locale.formTemplate.description" class="full-width"
+                                    :toolbar="editorText.toolbar" content-class="text-grey-9" toolbar-text-color="grey-9"/>
+                        </q-field>
+                        <!--Meta Title-->
+                        <q-input v-model="locale.formTemplate.metaTitle" outlined dense
+                                 :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                                 :label="`${$tr('ui.form.metaTitle')} (${locale.language})*`"/>
+                        <!--Meta Description-->
+                        <q-input v-model="locale.formTemplate.metaDescription" type="textarea"
+                                 :rules="[val => !!val || $tr('ui.message.fieldRequired')]" outlined dense
+                                 :label="`${$tr('ui.form.metaDescription')} (${locale.language})*`" rows="3"/>
+                      </div>
                     </q-card-section>
                   </q-card>
                 </q-expansion-item>
                 <q-separator />
-                <q-expansion-item header-class="text-primary" icon="info" label="Datos">
+                <q-expansion-item header-class="text-primary" icon="info" :label="$tr('qcommerce.layout.form.data')">
                   <q-separator />
                   <q-card>
                     <q-card-section class="q-pa-sm">
-                      <div class="q-form row q-col-gutter-sm">
+                      <div class="q-form q-pa-sm row q-col-gutter-sm">
                         <!--Left-->
                         <div class="col-12 col-md-6">
                           <!--reference-->
@@ -71,14 +73,6 @@
                           <!--minimum-->
                           <q-input :label="$tr('qcommerce.layout.form.minimumOrder')" outlined dense
                                    type="number" v-model="locale.formTemplate.minimum"/>
-                          <!--Substrac from Stock-->
-                          <div class="q-pa-xs">
-                            {{ $tr('qcommerce.layout.form.subtractFromStock') }}
-                          </div>
-                          <div class="q-gutter-xs">
-                            <q-radio v-model="locale.formTemplate.shipping" :val="true" :label="$tr('qcommerce.layout.options.yes')" />
-                            <q-radio v-model="locale.formTemplate.shipping" :val="false" :label="$tr('qcommerce.layout.options.no')" />
-                          </div>
                           <!--Status-->
                           <div class="input-title">{{$tr('ui.form.stock')}}</div>
                           <tree-select
@@ -87,9 +81,16 @@
                                   :options="options.stockStatus"
                                   value-consists-of="BRANCH_PRIORITY"
                                   v-model="locale.formTemplate.stockStatus"
-                                  placeholder=""
                                   class="q-mb-md"
                           />
+                          <!--Substrac from Stock-->
+                          <div class="q-pa-xs">
+                            {{ $tr('qcommerce.layout.form.subtractFromStock') }}
+                          </div>
+                          <div class="q-gutter-xs">
+                            <q-radio v-model="locale.formTemplate.subtract" :val="true" :label="$tr('qcommerce.layout.options.yes')" />
+                            <q-radio v-model="locale.formTemplate.subtract" :val="false" :label="$tr('qcommerce.layout.options.no')" />
+                          </div>
                         </div>
                         <!--Right-->
                         <div class="col-12 col-md-6">
@@ -104,10 +105,9 @@
                               </q-popup-proxy>
                             </template>
                           </q-input>
+                          <!--Points-->
+                          <q-input v-model="locale.formTemplate.points" outlined dense :label="$trp('ui.form.point')"/>
                           <!--Dimensions-->
-                          <div class="q-pa-xs">
-                            {{ $tr('qcommerce.layout.form.dimensions') }}
-                          </div>
                           <div class="row q-col-gutter-xs">
                             <!--length-->
                             <div class="col-xs-12 col-sm-4">
@@ -142,18 +142,30 @@
                                   v-model="locale.formTemplate.status"
                                   placeholder=""
                           />
-                          <!--Points-->
-                          <q-input v-model="locale.formTemplate.points" outlined dense :label="$trp('ui.form.point')"/>
                           <div class="row">
                             <div class="col-12 col-sm-6">
                               <!--Requires shipping-->
-                              <q-checkbox :label="$tr('qcommerce.layout.form.requriedShipping')"
-                                          v-model="locale.formTemplate.shipping"/>
+                              <div class="q-pa-xs">
+                                {{ $tr('qcommerce.layout.form.requriedShipping') }}
+                              </div>
+                              <div class="q-gutter-xs">
+                                <q-radio v-model="locale.formTemplate.shipping" :val="true" :label="$tr('qcommerce.layout.options.yes')" />
+                                <q-radio v-model="locale.formTemplate.shipping" :val="false" :label="$tr('qcommerce.layout.options.no')" />
+                              </div>
+                              <!--<q-checkbox :label="$tr('qcommerce.layout.form.requriedShipping')"
+                                          v-model="locale.formTemplate.shipping"/>-->
                             </div>
                             <div class="col-12 col-sm-6">
                               <!--Free shipping-->
-                              <q-checkbox :label="$tr('qcommerce.layout.form.freeShipping')"
-                                          v-model="locale.formTemplate.freeshipping"/>
+                              <div class="q-pa-xs">
+                                {{ $tr('qcommerce.layout.form.freeShipping') }}
+                              </div>
+                              <div class="q-gutter-xs">
+                                <q-radio v-model="locale.formTemplate.freeshipping" :val="true" :label="$tr('qcommerce.layout.options.yes')" />
+                                <q-radio v-model="locale.formTemplate.freeshipping" :val="false" :label="$tr('qcommerce.layout.options.no')" />
+                              </div>
+                              <!--<q-checkbox :label="$tr('qcommerce.layout.form.freeShipping')"
+                                          v-model="locale.formTemplate.freeshipping"/>-->
                             </div>
                           </div>
                         </div>
@@ -162,113 +174,114 @@
                   </q-card>
                 </q-expansion-item>
                 <q-separator />
-                <q-expansion-item header-class="text-primary" icon="link" label="Relaciones">
+                <q-expansion-item header-class="text-primary" icon="link" :label="$tr('qcommerce.layout.form.link')">
                   <q-separator />
                   <q-card>
                     <q-card-section class="q-pa-sm">
-                      <!--Record Master-->
-                      <div v-if="canManageRecordMaster" class="q-mb-md">
-                        <div class="input-title">
-                          {{`${$tr('ui.form.masterRecord')}`}}
+                      <div class="q-pa-sm">
+                        <!--Record Master-->
+                        <div v-if="canManageRecordMaster" class="q-mb-md">
+                          <div class="input-title">
+                            {{`${$tr('ui.form.masterRecord')}`}}
+                          </div>
+                          <tree-select
+                                  :clearable="false"
+                                  :append-to-body="true"
+                                  v-model="locale.formTemplate.options.masterRecord"
+                                  :options="[
+                        {label: this.$tr('ui.label.yes'), id: 1},
+                        {label: this.$tr('ui.label.no'), id: 0},
+                      ]"
+                                  placeholder=""
+                          />
                         </div>
+                        <!--Parent-->
+                        <div class="input-title">{{`${$tr('ui.form.parent')}`}}</div>
                         <tree-select
-                                :clearable="false"
+                                v-model="locale.formTemplate.parentId"
+                                :async="true"
                                 :append-to-body="true"
-                                v-model="locale.formTemplate.options.masterRecord"
-                                :options="[
-                      {label: this.$tr('ui.label.yes'), id: 1},
-                      {label: this.$tr('ui.label.no'), id: 0},
-                    ]"
+                                class="q-mb-md"
+                                :load-options="searchProducts"
+                                :default-options="optionsTemplate.products"
+                                placeholder=""
+                        />
+                        <!--Crud category-->
+                        <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
+                              type="select" @created="getCategories" :crud-props="{label:`${$tr('ui.form.category')}*`}" v-model="locale.formTemplate.categoryId"/>
+                        <!--Categories-->
+                        <div class="input-title relative-position q-mb-sm">
+                          {{`${$trp('ui.form.category')}`}}
+                          <!--Crud category-->
+                          <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
+                                type="button-create" class="absolute-right" @created="getCategories"/>
+                        </div>
+                        <recursive-list v-model="locale.formTemplate.categories"
+                                        :items="optionsTemplate.categories"/>
+                        <!--Related Products-->
+                        <div class="input-title">{{$tr('qcommerce.layout.form.relatedProducts')}}</div>
+                        <tree-select
+                                v-model="locale.formTemplate.relatedProducts"
+                                :async="true"
+                                :multiple="true"
+                                :append-to-body="true"
+                                :load-options="searchProducts"
+                                :default-options="optionsTemplate.relatedProducts"
                                 placeholder=""
                         />
                       </div>
-                      <!--Parent-->
-                      <div class="input-title">{{`${$tr('ui.form.parent')}`}}</div>
-                      <tree-select
-                              v-model="locale.formTemplate.parentId"
-                              :async="true"
-                              :append-to-body="true"
-                              class="q-mb-md"
-                              :load-options="searchProducts"
-                              :default-options="optionsTemplate.products"
-                              placeholder=""
-                      />
-                      <!--Crud category-->
-                      <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
-                            type="select" @created="getCategories" :crud-props="{label:`${$tr('ui.form.category')}*`}" v-model="locale.formTemplate.categoryId"/>
-                      <!--Categories-->
-                      <div class="input-title relative-position q-mb-sm">
-                        {{`${$trp('ui.form.category')}`}}
-                        <!--Crud category-->
-                        <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
-                              type="button-create" class="absolute-right" @created="getCategories"/>
-                      </div>
-                      <recursive-list v-model="locale.formTemplate.categories"
-                                      :items="optionsTemplate.categories"/>
-                      <!--Related Products-->
-                      <div class="input-title">{{$tr('qcommerce.layout.form.relatedProducts')}}</div>
-                      <tree-select
-                              v-model="locale.formTemplate.relatedProducts"
-                              :async="true"
-                              :multiple="true"
-                              :append-to-body="true"
-                              :load-options="searchProducts"
-                              :default-options="optionsTemplate.relatedProducts"
-                              placeholder=""
-                      />
                     </q-card-section>
                   </q-card>
                 </q-expansion-item>
                 <q-separator />
+                <q-expansion-item header-class="text-primary" icon="image" :label="$trp('ui.label.image')">
+                  <q-separator />
+                  <q-card>
+                    <q-card-section class="q-pa-sm">
+                      <div class="q-pa-sm">
+                        <!--Video-->
+                        <q-input v-model="locale.formTemplate.options.video" outlined dense :label="$tr('ui.form.video')"/>
+                        <div class="input-title">{{$tr('ui.form.image')}}</div>
+                        <upload-media
+                                v-model="locale.formTemplate.mediasSingle"
+                                entity="Modules\Icommerce\Entities\Product"
+                                :entity-id="productId ? productId : null"
+                                zone='mainimage'
+                        />
+                        <div class="input-title">{{$tr('ui.form.gallery')}}</div>
+                        <upload-media
+                                multiple
+                                v-model="locale.formTemplate.mediasMulti"
+                                entity="Modules\Icommerce\Entities\Product"
+                                :entity-id="productId ? productId : null"
+                                zone='gallery'
+                        />
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </q-expansion-item>
+                <q-separator />
+                <q-expansion-item header-class="text-primary" icon="settings" :label="$trp('ui.label.option')">
+                  <q-card>
+                    <q-card-section class="q-pa-sm">
+                      <div class="q-pa-sm">
+                        <crud-options :productId="productId" v-if="productId"/>
+                        <div v-else class="text-center">
+                          <div class="q-my-md">
+                            <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
+                            {{`${$tr('qcommerce.layout.message.warnAddOpt')}...`}}
+                          </div>
+                          <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
+                                 @click="buttonActions.value = 4; createItem()" color="positive"/>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </q-expansion-item>
               </q-list>
             </div>
           </div>
         </q-form>
-
-        <!--Extra Data-->
-        <div v-if="locale.success" class="q-mt-lg box" style="padding: 0px !important;">
-          <!-- Tabs titles-->
-          <q-tabs v-model="vTab" align="justify">
-            <q-tab name="tab-images" :label="$trp('ui.label.image')"/>
-            <q-tab name="tab-options" :label="$trp('ui.label.option')"/>
-          </q-tabs>
-
-          <q-tab-panels v-model="vTab">
-            <!-- images -->
-            <q-tab-panel name="tab-images" keep-alive>
-              <!--Video-->
-              <q-input v-model="locale.formTemplate.options.video" outlined dense :label="$tr('ui.form.video')"/>
-              <div class="input-title">{{$tr('ui.form.image')}}</div>
-              <upload-media
-                v-model="locale.formTemplate.mediasSingle"
-                entity="Modules\Icommerce\Entities\Product"
-                :entity-id="productId ? productId : null"
-                zone='mainimage'
-              />
-              <div class="input-title">{{$tr('ui.form.gallery')}}</div>
-              <upload-media
-                multiple
-                v-model="locale.formTemplate.mediasMulti"
-                entity="Modules\Icommerce\Entities\Product"
-                :entity-id="productId ? productId : null"
-                zone='gallery'
-              />
-            </q-tab-panel>
-            <!-- options -->
-            <q-tab-panel name="tab-options" keep-alive>
-              <crud-options :productId="productId" v-if="productId"/>
-              <div v-else class="text-center">
-                <div class="q-my-md">
-                  <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
-                  {{`${$tr('qcommerce.layout.message.warnAddOpt')}...`}}
-                </div>
-                <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
-                       @click="buttonActions.value = 4; createItem()" color="positive"/>
-              </div>
-            </q-tab-panel>
-          </q-tab-panels>
-        </div>
-
         <!--Buttons Actions-->
         <q-page-sticky position="bottom-right" :offset="[18, 18]">
           <!--Update button-->

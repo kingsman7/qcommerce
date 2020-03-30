@@ -69,6 +69,9 @@ export default {
     country: 'Country',
     shippingMethod: 'Shipping Method',
     dimensions: 'Dimensions',
+    link: 'Relations',
+    content: 'Content',
+    data: 'Data',
 
     // Coupons
     code: 'Coupon Code',
