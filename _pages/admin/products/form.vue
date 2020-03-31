@@ -14,8 +14,8 @@
             </div>
             <!--Form left-->
             <div class="col-12" v-if="locale.success">
-              <q-list padding bordered class="rounded-borders q-pa-none">
-                <q-expansion-item default-opened header-class="text-primary" icon="home" :label="$tr('qcommerce.layout.form.content')">
+              <q-list class="q-pa-none">
+                <q-expansion-item default-opened bordered class="q-my-md q-mx-sm rounded-borders" header-class="text-primary" icon="home" expand-icon="fas fa-plus" expanded-icon="fas fa-minus" :label="$tr('qcommerce.layout.form.content')">
                   <q-separator />
                   <q-card>
                     <q-card-section class="q-pa-sm">
@@ -51,8 +51,7 @@
                     </q-card-section>
                   </q-card>
                 </q-expansion-item>
-                <q-separator />
-                <q-expansion-item header-class="text-primary" icon="info" :label="$tr('qcommerce.layout.form.data')">
+                <q-expansion-item bordered class="q-my-md q-mx-sm rounded-borders" header-class="text-primary" icon="info" expand-icon="fas fa-plus" expanded-icon="fas fa-minus" :label="$tr('qcommerce.layout.form.data')">
                   <q-separator />
                   <q-card>
                     <q-card-section class="q-pa-sm">
@@ -173,8 +172,7 @@
                     </q-card-section>
                   </q-card>
                 </q-expansion-item>
-                <q-separator />
-                <q-expansion-item header-class="text-primary" icon="link" :label="$tr('qcommerce.layout.form.link')">
+                <q-expansion-item bordered class="q-my-md q-mx-sm rounded-borders" header-class="text-primary" icon="link" expand-icon="fas fa-plus" expanded-icon="fas fa-minus" :label="$tr('qcommerce.layout.form.link')">
                   <q-separator />
                   <q-card>
                     <q-card-section class="q-pa-sm">
@@ -233,8 +231,7 @@
                     </q-card-section>
                   </q-card>
                 </q-expansion-item>
-                <q-separator />
-                <q-expansion-item header-class="text-primary" icon="image" :label="$trp('ui.label.image')">
+                <q-expansion-item bordered class="q-my-md q-mx-sm rounded-borders" header-class="text-primary" icon="image" expand-icon="fas fa-plus" expanded-icon="fas fa-minus" :label="$trp('ui.label.image')">
                   <q-separator />
                   <q-card>
                     <q-card-section class="q-pa-sm">
@@ -260,8 +257,8 @@
                     </q-card-section>
                   </q-card>
                 </q-expansion-item>
-                <q-separator />
-                <q-expansion-item header-class="text-primary" icon="settings" :label="$trp('ui.label.option')">
+                <q-expansion-item bordered class="q-my-md q-mx-sm rounded-borders" header-class="text-primary" icon="settings" expand-icon="fas fa-plus" expanded-icon="fas fa-minus" :label="$trp('ui.label.option')">
+                  <q-separator />
                   <q-card>
                     <q-card-section class="q-pa-sm">
                       <div class="q-pa-sm">
@@ -654,6 +651,8 @@
     }
   }
 </script>
-
 <style lang="stylus">
+  #productFormPage
+    .q-expansion-item
+      border 1px solid rgba(0,0,0,0.12);
 </style>
