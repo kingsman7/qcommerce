@@ -8,7 +8,7 @@
           permission: 'icommerce.products',
           create: {
             title: this.$tr('qcommerce.layout.newProduct'),
-            to : 'qcommerce.admin.products.create'
+            to : 'create'
           },
           read: {
             columns: [

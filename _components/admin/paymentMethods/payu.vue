@@ -30,46 +30,52 @@
                      type="textarea" rows="3" :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
 
             <!--Merchant ID-->
-            <q-input v-model="locale.formTemplate.merchantid" outlined dense
+            <q-input v-model="locale.formTemplate.options.merchant_id" outlined dense
                      :label="$tr('qcommerce.layout.form.merchantId')"/>
 
             <!--API login-->
-            <q-input v-model="locale.formTemplate.apilogin" outlined dense
+            <q-input v-model="locale.formTemplate.options.api_login" outlined dense
                      :label="$tr('qcommerce.layout.form.apiLogin')"/>
 
             <!--API Key-->
-            <q-input v-model="locale.formTemplate.apikey" outlined dense
+            <q-input v-model="locale.formTemplate.options.api_key" outlined dense
                      :label="$tr('qcommerce.layout.form.apiKey')"/>
 
             <!--Account ID-->
-            <q-input v-model="locale.formTemplate.accountid" outlined dense
+            <q-input v-model="locale.formTemplate.options.account_id" outlined dense
                      :label="$tr('qcommerce.layout.form.accountId')"/>
           </div>
           <!--Form right-->
           <div class="col-12 col-md-4" v-if="locale.success">
             <!--Mode-->
-            <q-select v-model="locale.formTemplate.mode"
+            <q-select v-model="locale.formTemplate.options.mode"
                       :options="[
-                        {label:'SANDBOX',value:'sandbox'},
-                        {label:'LIVE',value:'live'}
+                        {label:'SANDBOX',value:'sandbox',id:'sandbox'},
+                        {label:'LIVE',value:'live',id:'live'}
                         ]"
                       outlined dense
+                      map-options
+                      emit-value
                       :label="$tr('qcommerce.layout.form.mode')"/>
             <!--Status-->
-            <q-select v-model="locale.formTemplate.status"
+            <q-select v-model="locale.formTemplate.active"
                       :options="[
                         {label:$tr('ui.label.enabled'),value:true},
                         {label:$tr('ui.label.disabled'),value:false}
                       ]"
                       outlined dense
+                      map-options
+                      emit-value
                       :label="$tr('ui.form.status')"/>
 
             <!--Allow use of Test Credit Cards-->
-            <q-select v-model="locale.formTemplate.test"
+            <q-select v-model="locale.formTemplate.options.test"
                       :options="[
                         {label:$tr('ui.label.enabled'),value:1},
                         {label:$tr('ui.label.disabled'),value:0}
                       ]"
+                      map-options
+                      emit-value
                       outlined dense
                       :label="$tr('qcommerce.layout.form.allowTestCreditCard')"/>
             <!--Main Image-->
@@ -147,15 +153,18 @@
       dataLocale() {
         return {
           fields: {
-            merchantid: '',
-            apilogin: '',
-            apikey: '',
-            init: '',
-            mode: 'sandbox',
-            test: '',
-            status: false,
-            accountid: '',
-            mediasSingle: {}
+            options:{
+              merchant_id: '',
+              api_login: '',
+              api_key: '',
+              init: '',
+              mode: 'sandbox',
+              test: '',
+              account_id: '',
+            },
+            active: false,
+            mediasSingle: {},
+            store_id:1
           },
           fieldsTranslatable: {
             title: null,
@@ -184,15 +193,6 @@
         if (await this.$refs.localeComponent.validateForm()) {
           this.loading = true
           let data = _cloneDeep(this.locale.form)
-          data['options'] = {
-            merchantid: data.merchantid,
-            apilogin: data.apilogin,
-            apikey: data.apikey,
-            init: data['init'],
-            mode: data.mode,
-            test: data['test'],
-            accountid: data.accountid
-          }
           //Request
           this.$crud.update('apiRoutes.qcommerce.paymentMethods', this.item.id, data).then(response => {
             this.$alert.success({message: this.$tr('ui.message.recordUpdated')})
