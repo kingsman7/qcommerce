@@ -2,7 +2,7 @@
   <div id="productFormPage" ref="productFormPage">
     <q-no-ssr>
       <!--Content-->
-      <div class="relative-position q-mb-lg backend-page">
+      <div class="productForm relative-position q-mb-lg backend-page">
         <!--Data-->
         <q-form autocorrect="off" autocomplete="off" ref="formContent" class="box"
                 @submit="(!itemId && !field) ? createItem() : updateItem()"
@@ -83,13 +83,14 @@
                                   class="q-mb-md"
                           />
                           <!--Substrac from Stock-->
-                          <div class="q-pa-xs">
-                            {{ $tr('qcommerce.layout.form.subtractFromStock') }}
-                          </div>
-                          <div class="q-gutter-xs">
-                            <q-radio v-model="locale.formTemplate.subtract" :val="true" :label="$tr('qcommerce.layout.options.yes')" />
-                            <q-radio v-model="locale.formTemplate.subtract" :val="false" :label="$tr('qcommerce.layout.options.no')" />
-                          </div>
+                              <q-toggle
+                                      v-model="locale.formTemplate.subtract"
+                                      :true-value="true"
+                                      :false-value="false"
+                                      :label="$tr('qcommerce.layout.form.subtractFromStock')"
+                                      left-label
+                                      color="primary"
+                              />
                         </div>
                         <!--Right-->
                         <div class="col-12 col-md-6">
@@ -144,25 +145,27 @@
                           <div class="row">
                             <div class="col-12 col-sm-6">
                               <!--Requires shipping-->
-                              <div class="q-pa-xs">
-                                {{ $tr('qcommerce.layout.form.requriedShipping') }}
-                              </div>
-                              <div class="q-gutter-xs">
-                                <q-radio v-model="locale.formTemplate.shipping" :val="true" :label="$tr('qcommerce.layout.options.yes')" />
-                                <q-radio v-model="locale.formTemplate.shipping" :val="false" :label="$tr('qcommerce.layout.options.no')" />
-                              </div>
+                                  <q-toggle
+                                          v-model="locale.formTemplate.shipping"
+                                          :true-value="true"
+                                          :false-value="false"
+                                          :label="$tr('qcommerce.layout.form.requriedShipping')"
+                                          left-label
+                                          color="primary"
+                                  />
                               <!--<q-checkbox :label="$tr('qcommerce.layout.form.requriedShipping')"
                                           v-model="locale.formTemplate.shipping"/>-->
                             </div>
                             <div class="col-12 col-sm-6">
                               <!--Free shipping-->
-                              <div class="q-pa-xs">
-                                {{ $tr('qcommerce.layout.form.freeShipping') }}
-                              </div>
-                              <div class="q-gutter-xs">
-                                <q-radio v-model="locale.formTemplate.freeshipping" :val="true" :label="$tr('qcommerce.layout.options.yes')" />
-                                <q-radio v-model="locale.formTemplate.freeshipping" :val="false" :label="$tr('qcommerce.layout.options.no')" />
-                              </div>
+                                <q-toggle
+                                        v-model="locale.formTemplate.freeshipping"
+                                        :true-value="true"
+                                        :false-value="false"
+                                        :label="$tr('qcommerce.layout.form.freeShipping')"
+                                        left-label
+                                        color="primary"
+                                />
                               <!--<q-checkbox :label="$tr('qcommerce.layout.form.freeShipping')"
                                           v-model="locale.formTemplate.freeshipping"/>-->
                             </div>
@@ -652,7 +655,7 @@
   }
 </script>
 <style lang="stylus">
-  #productFormPage
+  .productForm
     .q-expansion-item
       border 1px solid rgba(0,0,0,0.12);
 </style>
