@@ -206,10 +206,11 @@
                                 :load-options="searchProducts"
                                 :default-options="optionsTemplate.products"
                                 placeholder=""
+                                label="name"
                         />
                         <!--Crud category-->
                         <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
-                              type="select" @created="getCategories" :crud-props="{label:`${$tr('ui.form.category')}*`}" v-model="locale.formTemplate.categoryId"/>
+                              type="select" @created="getCategories" :crud-props="{label:`${$tr('ui.form.category')}*`, value: locale.formTemplate.categoryId}" v-model="locale.formTemplate.categoryId"/>
                         <!--Categories-->
                         <div class="input-title relative-position q-mb-sm">
                           {{`${$trp('ui.form.category')}`}}
@@ -229,6 +230,7 @@
                                 :load-options="searchProducts"
                                 :default-options="optionsTemplate.relatedProducts"
                                 placeholder=""
+                                label="name"
                         />
                       </div>
                     </q-card-section>
@@ -525,7 +527,7 @@
             let params = {
               refresh: true,
               params: {
-                include: 'relatedProducts,categories,parent',
+                include: 'relatedProducts,categories,category,parent',
                 filter: {allTranslations: true}
               }
             }
@@ -547,7 +549,7 @@
       orderDataItemToLocale(data) {
         let orderData = this.$clone(data)
         //Set default Parent options
-        if (data.parent) this.optionsTemplate.products = this.$array.tree([data.parent])
+        if (data.parent) this.optionsTemplate.products = this.$array.tree([data.parent],{label: 'name',id: 'id'})
         //Order categories
         orderData.categories.forEach((item, key) => {
           orderData.categories[key] = item.id
@@ -558,8 +560,10 @@
         })
         //Set default related products options
         if (data.relatedProducts && data.relatedProducts.length) {
-          this.optionsTemplate.relatedProducts = this.$array.tree(data.relatedProducts)
+          this.optionsTemplate.relatedProducts = this.$array.tree(data.relatedProducts,{label: 'name',id: 'id'})
         }
+
+        console.log(orderData)
 
         this.locale.form = this.$clone(orderData)
       },
@@ -637,7 +641,7 @@
           }
           //Request
           this.$crud.index(configName, params).then(response => {
-            callback(null, this.$array.tree(response.data))
+            callback(null, this.$array.tree(response.data, { label: 'name', id: 'id' }))
           }).catch(error => {
             this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
           })

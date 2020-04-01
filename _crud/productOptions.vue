@@ -30,7 +30,8 @@
           },
           update: {
             title: this.$tr('qcommerce.layout.updateOption'),
-            requestParams: {include: ''}
+            requestParams: {include: ''},
+            to : 'qcommerce.admin.options.edit',
           },
           delete: true,
           formLeft: {
