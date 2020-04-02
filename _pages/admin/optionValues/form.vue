@@ -14,6 +14,13 @@
             <q-input outlined dense v-model="locale.formTemplate.description"
                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                      :label="`${$tr('ui.form.description')} (${locale.language})*`"/>
+            <div class="input-title">{{$tr('ui.form.image')}}</div>
+            <upload-media
+                    v-model="locale.formTemplate.mediasSingle"
+                    entity="Modules\Icommerce\Entities\OptionValue"
+                    :entity-id="itemId ? itemId : null"
+                    zone='mainimage'
+            />
           </div>
           <!--Button Actions-->
           <div class="col-12 text-right">
@@ -32,9 +39,11 @@
 
 <script>
   import {required} from 'vuelidate/lib/validators'
+  import uploadMedia from '@imagina/qmedia/_components/form'
 
   export default {
     components: {
+      uploadMedia
     },
     watch: {
       $route(to, from) {
@@ -65,6 +74,7 @@
         return {
           fields: {
             optionId: this.$route.params.optionId,
+            sortOrder: 1,
           },
           fieldsTranslatable: {
             description: '',
@@ -120,7 +130,7 @@
           let configName = 'apiRoutes.qcommerce.optionValues'
           this.$crud.create(configName, this.getDataForm()).then(response => {
             this.$alert.success({message: `${this.$tr('ui.message.recordCreated')} ID: ${response.data.id}`})
-            this.$router.push({name: 'qcommerce.admin.options.show', params: {id: this.$route.params.optionId}})
+            this.$router.push({name: 'qcommerce.admin.options.edit', params: {id: this.$route.params.optionId}})
           }).catch(error => {
             this.loading = false
             this.$alert.error({message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom'})

@@ -89,8 +89,8 @@ export default {
 		name: 'qcommerce.admin.optionValues.create',
 		page: () => import('@imagina/qcommerce/_pages/admin/optionValues/form'),
 		layout: () => import('@imagina/qsite/_layouts/master.vue'),
-		title: 'qcommerce.sidebar.adminValues',
-		icon: 'fas fa-circle',
+		title: 'qcommerce.sidebar.adminValuesCreate',
+		icon: 'fas fa-stream',
 		authenticated: true,
 	},
 	optionValuesUpdate: {
@@ -100,8 +100,8 @@ export default {
 		name: 'qcommerce.admin.optionValues.update',
 		page: () => import('@imagina/qcommerce/_pages/admin/optionValues/form'),
 		layout: () => import('@imagina/qsite/_layouts/master.vue'),
-		title: 'qcommerce.sidebar.adminValues',
-		icon: 'fas fa-circle',
+		title: 'qcommerce.sidebar.adminValuesEdit',
+		icon: 'fas fa-stream',
 		authenticated: true,
 	},
 	// Payment Methods

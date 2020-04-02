@@ -9,7 +9,7 @@ export default [
       pages.qcommerce.products,//products index
       pages.qcommerce.categories,//products categories,
       pages.qcommerce.options,//products options
-      pages.qcommerce.optionValues,//products options
+      //pages.qcommerce.optionValues,//products options
       pages.qcommerce.paymentMethods,//products options
       pages.qcommerce.shippingMethods,//products options
       pages.qcommerce.orders,//Orders
