@@ -14,6 +14,7 @@ export default [
       pages.qcommerce.shippingMethods,//products options
       pages.qcommerce.orders,//Orders
       pages.qcommerce.coupons,//Coupons
+      pages.qcommerce.stores,//Coupons
     ]
   },
 ]

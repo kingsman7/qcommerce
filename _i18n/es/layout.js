@@ -14,6 +14,8 @@ export default {
   updateShippingMethod : 'Actualizar metodo de envio',
   newOrder : 'Nuevo Orden',
   updateOrder : 'Actualizar Orden',
+  newStore : 'Nueva Tienda',
+  updateStore : 'Actualizar Tienda',
   newCoupon: 'Nuevo Cupon',
   updateCoupon: 'Actualizar Cupon',
 

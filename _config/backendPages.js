@@ -150,6 +150,18 @@ export default {
     icon: 'fas fa-box-open',
     authenticated: true,
   },
+  //Stores list
+  stores: {
+	permission: null,
+	activated: true,
+	path: '/ecommerce/stores',
+	name: 'qcommerce.admin.stores',
+	page: () => import('@imagina/qcommerce/_pages/admin/store/index'),
+	layout: () => import('@imagina/qsite/_layouts/master.vue'),
+	title: 'qcommerce.sidebar.adminStores',
+	icon: 'fas fa-store',
+	authenticated: true,
+  },
   coupons: {
     permission: 'icommerce.coupons.index',
     activated: true,
