@@ -16,8 +16,9 @@
             {{optionValue.description}}
           </div>
           <div class="col-6 text-right q-py-xs relative-position">
+            <!--:to="{name: 'qcommerce.admin.optionValues.update', params: {optionId: $route.params.id, id: optionValue.id}}"-->
             <q-btn
-              :to="{name: 'qcommerce.admin.optionValues.update', params: {optionId: $route.params.id, id: optionValue.id}}"
+              @click="$root.$emit('showEdit',optionValue.id)"
               icon="fas fa-pen"
               size="xs"
               class="q-mr-sm"
@@ -62,11 +63,12 @@
 
 <script>
   import draggable from 'vuedraggable'
-
+  import optionValuesForm from '@imagina/qcommerce/_pages/admin/optionValues/form'
   export default {
     name: 'nestedDraggable',
     components: {
       draggable,
+      optionValuesForm
     },
     props: {
       optionValues: {
@@ -77,7 +79,10 @@
     data() {
       return {
         dialogDeleteItem: false,
+        dialogEditValue: false,
         itemIdToDelete: {},
+        optionId: this.$route.params.id || null,
+        id: null,
       }
     },
     computed: {

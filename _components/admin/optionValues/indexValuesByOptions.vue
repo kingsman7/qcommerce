@@ -4,7 +4,7 @@
       <div class="float-right">
         <q-btn :to="{name: 'qcommerce.admin.options'}" icon="fas fa-arrow-alt-circle-left"
                color="primary" class="q-ml-xs"/>
-        <q-btn :to="{name: 'qcommerce.admin.optionValues.create', params: {optionId: $route.params.id}}" icon="fas fa-edit"
+        <q-btn @click="id = -1;dialogNewValue=true" icon="fas fa-edit"
                :label="$tr('qcommerce.layout.newOptionValue')" color="positive" class="q-ml-xs"/>
         <q-btn @click="getItems(true)" icon="fas fa-sync-alt" color="info" class="q-ml-xs">
           <q-tooltip :delay="300">
@@ -23,16 +23,33 @@
              color="positive" class="q-ml-xs"/>
     </div>
 
+    <q-dialog v-model="dialogNewValue">
+      <q-card>
+          <q-toolbar class="bg-primary text-white">
+              <q-avatar>
+                  <q-icon name="fa fa-stream" />
+              </q-avatar>
+              <q-toolbar-title><span class="text-weight-bold">{{ this.id > 0?$tr('qcommerce.sidebar.adminValuesEdit'):$tr('qcommerce.sidebar.adminValuesCreate') }}</span></q-toolbar-title>
+              <q-btn flat round dense icon="close" v-close-popup />
+          </q-toolbar>
+          <q-card-section>
+              <option-values-form :option-id="$route.params.id" :id="id" @updated="closeNewModal"></option-values-form>
+          </q-card-section>
+      </q-card>
+    </q-dialog>
+
     <inner-loading :visible="loading"/>
   </div>
 </template>
 
 <script>
   import nestedoptionValues from '@imagina/qcommerce/_components/admin/optionValues/nested'
+  import optionValuesForm from '@imagina/qcommerce/_pages/admin/optionValues/form'
 
   export default {
     components: {
       nestedoptionValues,
+      optionValuesForm,
     },
     data() {
       return {
@@ -40,17 +57,24 @@
         optionValues: [],
         modalNewItem: false,
         modalUpdateItem: false,
+        dialogNewValue: false,
         itemUpdate: {},
         itemDelete: {},
+        id: -1,
       }
     },
     created() {
       this.$nextTick(() => {
         this.getItems()
         this.$root.$on('updateoptionValues', this.handlerUpdateoptionValues)
+        this.$root.$on('showEdit',this.showEdit)
       })
     },
     methods: {
+      showEdit(id){
+        this.id = id
+        this.dialogNewValue = true
+      },
       getItems(refresh = false) {
         this.loading = true
         let optionId = this.$route.params.id
@@ -99,6 +123,10 @@
       },
       handlerUpdateoptionValues(event) {
         this.getItems()
+      },
+      closeNewModal(){
+          this.dialogNewValue = false
+          this.getItems(true)
       }
     }
   }

@@ -48,6 +48,9 @@
     watch: {
       $route(to, from) {
         this.initForm()
+      },
+      id(){
+        this.initForm()
       }
     },
     mounted() {
@@ -73,7 +76,7 @@
       dataLocale() {
         return {
           fields: {
-            optionId: this.$route.params.optionId,
+            optionId: this.optionId || this.$route.params.optionId,
             sortOrder: 1,
           },
           fieldsTranslatable: {
@@ -82,12 +85,24 @@
         }
       }
     },
+    props:{
+      optionId:{
+        default: 0,
+      },
+      id:{
+        default: 0,
+      }
+    },
     methods: {
       async initForm() {
         this.loading = true
         this.success = false
         this.locale = this.$clone(this.dataLocale)
-        this.itemId = this.$route.params.id
+        if(this.id==0){
+          this.itemId = this.$route.params.id || 0
+        }else{
+          this.itemId = this.id>-1?this.id:0
+        }
         if (this.locale.success) this.$refs.localeComponent.vReset()
         await this.getData()
         this.getoptionValues()
@@ -97,7 +112,8 @@
       getData() {
         return new Promise((resolve, reject) => {
           const itemId = this.$clone(this.itemId)
-          if (itemId) {
+          //console.warn(itemId)
+          if (itemId > 0) {
             let configName = 'apiRoutes.qcommerce.optionValues'
             //Params
             let params = {
@@ -130,7 +146,10 @@
           let configName = 'apiRoutes.qcommerce.optionValues'
           this.$crud.create(configName, this.getDataForm()).then(response => {
             this.$alert.success({message: `${this.$tr('ui.message.recordCreated')} ID: ${response.data.id}`})
-            this.$router.push({name: 'qcommerce.admin.options.edit', params: {id: this.$route.params.optionId}})
+            if(this.$route.params.optionId) {
+              this.$router.push({name: 'qcommerce.admin.options.edit', params: {id: this.$route.params.optionId}})
+            }
+            this.$emit('updated')
           }).catch(error => {
             this.loading = false
             this.$alert.error({message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom'})
@@ -142,6 +161,7 @@
           this.loading = true
           let configName = 'apiRoutes.qcommerce.optionValues'
           this.$crud.update(configName, this.itemId, this.getDataForm()).then(response => {
+            this.$emit('updated')
             this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
             //this.initForm()
             this.loading = false
@@ -169,7 +189,7 @@
             params: {
               filter: {
                 allTranslations: true,
-                optionId : this.$route.params.optionId
+                optionId : this.$route.params.optionId || this.optionId
               }
             },
           }
