@@ -3,7 +3,7 @@
     <!--Form-->
     <div class="row q-col-gutter-sm">
       <!--Form Left-->
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-md-6">
         <div class="border q-pa-sm">
           <!--Header-->
           <div style="height: 36px" class="q-mb-sm">
@@ -25,7 +25,7 @@
         </div>
       </div>
       <!--Form Right-->
-      <div class="col-12 col-md-8">
+      <div class="col-12 col-md-6">
         <!--Message to select a option-->
         <div v-if="template.currentOption == null" class="q-pa-lg">
           <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
@@ -181,7 +181,7 @@
           let configName = 'apiRoutes.qcommerce.products'
           let params = {remember: false, params: {include: 'productOptions', fields: 'id'}}
           this.$crud.show(configName, this.productId, params).then(response => {
-            this.productOptions = this.$clone(response.data.productOptions)//Set product Options
+            this.productOptions = this.$clone(this.arrayToTree(response.data.productOptions))//Set product Options
             this.productOptionValues = this.$clone(response.data.optionValues)//Set product options values
             this.loading = false
             resolve(true)
@@ -332,6 +332,7 @@
           this.setParentValues()//Get parent values
         }
         this.$refs.optionList.vRefresh()//Refresh List options
+        this.updateOrder()
       },
       //Order in select options to parent
       setParentOptions() {
@@ -386,7 +387,37 @@
           response.keyDescription = (index + 1) + '.' + options[index].description
         }
         return response
-      }
+      },
+      updateOrder() {
+        let newdata = []
+        this.treeToArray(this.productOptions, newdata)
+        this.loading = true
+        this.$crud.create('apiRoutes.qcommerce.productOptionOrder', {options: newdata})
+          .then(response => {
+            this.loading = false
+            this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
+          })
+          .catch(error => {
+            this.loading = false
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+          })
+      },
+      arrayToTree(elements, parentId = 0) {
+        return elements.filter(element => {
+          if (element.parentId == parentId) {
+            return element['children'] = this.arrayToTree(elements, element.id)
+          }
+        })
+      },
+      treeToArray(items, response, parentId = null) {
+        let elements = [...items]
+        elements.forEach((element, index) => {
+          element.position = index
+          element.parentId = parentId
+          response.push(element)
+          if (element.children.length) this.treeToArray(element.children, response, element.id)
+        })
+      },
     }
   }
 </script>

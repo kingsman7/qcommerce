@@ -80,11 +80,16 @@
         let optionId = this.$route.params.id
         let params = {
           refresh: refresh,
-          params: {include: 'optionValues'},
+          params: {
+              filter:{
+                  optionId: optionId,
+                  order: {field: 'sort_order', way: 'asc'}
+              }
+          },
         }
 
-        this.$crud.show('apiRoutes.qcommerce.options', optionId, params).then(response => {
-          this.optionValues = response.data.optionValues
+        this.$crud.index('apiRoutes.qcommerce.optionValues', params).then(response => {
+          this.optionValues = response.data
           this.loading = false
         }).catch(error => {
           this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
@@ -95,7 +100,7 @@
         let newdata = []
         this.treeToArray(this.optionValues, newdata)
         this.loading = true
-        this.$crud.create('apiRoutes.qcommerce.optionValuesOrdener', {optionValues: newdata})
+        this.$crud.create('apiRoutes.qcommerce.optionValuesOrdener', {values: newdata})
           .then(response => {
             this.loading = false
             this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
@@ -118,7 +123,7 @@
           element.position = index
           element.parentId = parentId
           response.push(element)
-          if (element.children.length) this.treeToArray(element.children, response, element.id)
+          if (element.children && element.children.length) this.treeToArray(element.children, response, element.id)
         })
       },
       handlerUpdateoptionValues(event) {

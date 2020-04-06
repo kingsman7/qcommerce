@@ -389,7 +389,7 @@
           fields: {
             parentId: null,
             status: 1,
-            categoryId: null,
+            categoryId: 0,
             categories: [],
             addedById: this.$store.state.quserAuth.userId,
             sku: 0,
@@ -419,6 +419,8 @@
             },
             //taxClassId: null,
             //manufacturerId: null,
+            metaTitle: '',
+            metaDescription: '',
           },
           fieldsTranslatable: {
             name: '',
@@ -507,7 +509,7 @@
           //Request
           this.$crud.index(configName, params).then(response => {
             this.optionsTemplate.categories = this.$array.tree(response.data)
-            //this.locale.fields.categoryId =  response.data.length ? response.data[0].id : null
+            this.locale.fields.categoryId =  response.data.length ? response.data[0].id : null
             this.loadingCategory = false
             resolve(true)
           }).catch(error => {
