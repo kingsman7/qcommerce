@@ -16,6 +16,8 @@ export default {
   updateOrder : 'Actualizar Orden',
   newStore : 'Nueva Tienda',
   updateStore : 'Actualizar Tienda',
+  newManufacturer : 'Nuevo Fabricante',
+  updateManufacturer : 'Actualizar Fabricante',
   newCoupon: 'Nuevo Cupon',
   updateCoupon: 'Actualizar Cupon',
 

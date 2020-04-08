@@ -3,21 +3,12 @@
     <p>
       <b>New status</b>
     </p>
-    <q-field
-      helper="Helper"
-      :error="$v.form.status.$error"
-      error-label="We need a valid email">
-      Status
-      <tree-select v-model="form.status" :options="statuses"/>
-    </q-field>
-
-    <q-field
-      helper="Helper"
-      :error="$v.form.comment.$error"
-      error-label="We need a valid email">
-      <q-input  rows="3" type="textarea" v-model="form.comment" stack-label="Comment"/>
-    </q-field>
-
+    <div class="q-py-xs">
+        <tree-select v-model="form.status" :options="statuses" :placeholder="$tr('ui.form.status')"/>
+    </div>
+    <div class="q-py-xs">
+        <q-input :label="$tr('ui.form.comment')" outlined error-message="We need a comment"  rows="3" type="textarea" v-model="form.comment" stack-label="Comment"/>
+    </div>
     <div class="q-mt-md">
       <q-btn label="save" color="primary" icon="save" @click="saveOrderHistoryStatus()"/>
     </div>

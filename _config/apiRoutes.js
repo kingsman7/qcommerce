@@ -22,4 +22,5 @@ export default {
 	orderStatusHistory : `${urlBase}/order-status-history`,
   	coupons : `${urlBase}/coupons`,
     stores : `${urlBase}/stores`,
+	manufacturers : `${urlBase}/manufacturers`,
 }
