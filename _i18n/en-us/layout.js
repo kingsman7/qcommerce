@@ -16,6 +16,8 @@ export default {
   updateOrder : 'Update Order',
   newStore : 'New Store',
   updateStore : 'Update Store',
+  newTaxClass : 'New Tax Class',
+  updateTaxClass : 'Update Tax Class',
   newManufacturer : 'New Manufacturer',
   updateManufacturer : 'Update Manufacturer',
   newCoupon: 'New Coupon',

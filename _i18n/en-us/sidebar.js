@@ -20,6 +20,8 @@ export default {
   adminManufacturers : 'Manufacturers',
   adminManufacturersCreate : 'Create Manufacturer',
   adminManufacturersEdit : 'Edit Manufacturers',
+  adminTaxClassesCreate : 'New Tax Class',
+  adminTaxClassesEdit : 'Edit Tax Class',
   adminCoupons: 'Coupons',
   createCoupons: 'Create cupon',
   editCoupons: 'Edit cupon',

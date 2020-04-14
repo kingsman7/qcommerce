@@ -171,7 +171,19 @@ export default {
         page: () => import('@imagina/qcommerce/_pages/admin/manufacturer/index'),
         layout: () => import('@imagina/qsite/_layouts/master.vue'),
         title: 'qcommerce.sidebar.adminManufacturers',
-        icon: 'fas fa-store',
+        icon: 'fas fa-industry',
+        authenticated: true,
+    },
+    //Tax Class list
+    taxClasses: {
+        permission: null,
+        activated: true,
+        path: '/ecommerce/tax-classes',
+        name: 'qcommerce.admin.taxClasses',
+        page: () => import('@imagina/qcommerce/_pages/admin/taxClass/index'),
+        layout: () => import('@imagina/qsite/_layouts/master.vue'),
+        title: 'qcommerce.sidebar.adminTaxClasses',
+        icon: 'fas fa-percentage',
         authenticated: true,
     },
     coupons: {

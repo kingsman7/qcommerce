@@ -18,6 +18,8 @@ export default {
   updateStore : 'Actualizar Tienda',
   newManufacturer : 'Nuevo Fabricante',
   updateManufacturer : 'Actualizar Fabricante',
+  newTaxClass : 'Nueva Clase de impuesto',
+  updateTaxClass : 'Actualizar Clase de impuesto',
   newCoupon: 'Nuevo Cupon',
   updateCoupon: 'Actualizar Cupon',
 

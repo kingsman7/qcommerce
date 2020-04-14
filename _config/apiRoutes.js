@@ -20,7 +20,8 @@ export default {
 	orders : `${urlBase}/orders`,
 	orderStatus : `${urlBase}/order-statuses`,
 	orderStatusHistory : `${urlBase}/order-status-history`,
-  	coupons : `${urlBase}/coupons`,
-    stores : `${urlBase}/stores`,
+  coupons : `${urlBase}/coupons`,
+  stores : `${urlBase}/stores`,
 	manufacturers : `${urlBase}/manufacturers`,
+  taxClasses : `${urlBase}/tax-classes`,
 }

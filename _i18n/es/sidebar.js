@@ -16,8 +16,12 @@ export default {
   adminStoresCreate : 'Nueva Tienda',
   adminStoresEdit : 'Editar Tienda',
   adminManufacturers : 'Fabricantes',
-  adminManufacturersCreate : 'Nueva Fabricante',
+  adminManufacturersCreate : 'Nuevo Fabricante',
   adminManufacturersEdit : 'Editar Fabricante',
+  adminTaxClasses : 'Clases de impuestos',
+  adminTaxClassesCreate : 'Nueva Clase de impuesto',
+  adminTaxClassesEdit : 'Editar Clase de Impuesto',
+
   adminOrders : 'Ordenes',
   orderIndex : 'Orden',
   adminCoupons: 'Cupones',

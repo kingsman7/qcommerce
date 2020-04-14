@@ -11,10 +11,10 @@
       crudData() {
         return {
           crudId: this.crudId,
-          apiRoute: 'apiRoutes.qcommerce.manufacturers',
-          permission: 'icommerce.manufacturers',
+          apiRoute: 'apiRoutes.qcommerce.taxClasses',
+          //permission: 'icommerce.manufacturers',
           create: {
-            title: this.$tr('qcommerce.layout.newManufacturer'),
+            title: this.$tr('qcommerce.layout.newTaxClass'),
           },
           read: {
             columns: [
@@ -29,7 +29,7 @@
             //requestParams: {include: 'parent'}
           },
           update: {
-            title: this.$tr('qcommerce.layout.updateManufacturer'),
+            title: this.$tr('qcommerce.layout.updateTaxClass'),
             //requestParams: {include: 'parent'}
           },
           delete: true,
@@ -42,24 +42,36 @@
               isTranslatable: true,
               props : {
                 label: `${this.$tr('ui.form.name')}*`,
+                rules: [
+                  val => !!val || this.$tr('ui.message.fieldRequired')
+                ],
               }
             },
-            status: {
-              value: null,
-              type: 'select',
-              isTranslatable: false,
+            description: {
+              value: '',
+              type: 'html',
+              isTranslatable: true,
               props : {
-                  label: `${this.$tr('ui.form.status')}*`,
-                  options : [
-                      {label: this.$tr('ui.label.enabled'), value: 1},
-                      {label: this.$tr('ui.label.disabled'), value: 0}
-                  ],
-                  rules: [
-                      val => !!val || this.$tr('ui.message.fieldRequired')
-                  ],
+                label: `${this.$tr('ui.form.description')}*`,
+                rules: [
+                  val => !!val || this.$tr('ui.message.fieldRequired')
+                ],
               }
             },
           },
+          /*formRight: {
+            mediasSingle: {
+              name: 'mediasSingle',
+              value: {},
+              type: 'media',
+              props : {
+                label: this.$tr('ui.form.firstImage'),
+                zone: 'mainimage',
+                entity: "Modules\\Icommerce\\Entities\\Store",
+                enitityId: null
+              }
+            },
+          },*/
         }
       },
       //Crud info
