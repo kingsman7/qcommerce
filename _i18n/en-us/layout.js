@@ -78,6 +78,7 @@ export default {
     link: 'Relations',
     content: 'Content',
     data: 'Data',
+    taxRate: 'Tax Rate',
 
     // Coupons
     code: 'Coupon Code',

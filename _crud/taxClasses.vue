@@ -15,6 +15,7 @@
           //permission: 'icommerce.manufacturers',
           create: {
             title: this.$tr('qcommerce.layout.newTaxClass'),
+            to: {name: 'qcommerce.admin.taxClasses.create'}
           },
           read: {
             columns: [
@@ -30,6 +31,7 @@
           },
           update: {
             title: this.$tr('qcommerce.layout.updateTaxClass'),
+            to: 'qcommerce.admin.taxClasses.edit'
             //requestParams: {include: 'parent'}
           },
           delete: true,

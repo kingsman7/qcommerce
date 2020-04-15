@@ -186,6 +186,30 @@ export default {
         icon: 'fas fa-percentage',
         authenticated: true,
     },
+    //Tax Class list
+    taxClassCreate: {
+      permission: null,
+      activated: true,
+      path: '/ecommerce/tax-classes/create',
+      name: 'qcommerce.admin.taxClasses.create',
+      page: () => import('@imagina/qcommerce/_pages/admin/taxClass/form'),
+      layout: () => import('@imagina/qsite/_layouts/master.vue'),
+      title: 'qcommerce.sidebar.adminTaxClassesCreate',
+      icon: 'fas fa-percentage',
+      authenticated: true,
+    },
+    //Tax Class list
+    taxClassEdit: {
+      permission: null,
+      activated: true,
+      path: '/ecommerce/tax-classes/:id',
+      name: 'qcommerce.admin.taxClasses.edit',
+      page: () => import('@imagina/qcommerce/_pages/admin/taxClass/form'),
+      layout: () => import('@imagina/qsite/_layouts/master.vue'),
+      title: 'qcommerce.sidebar.adminTaxClassesEdit',
+      icon: 'fas fa-percentage',
+      authenticated: true,
+    },
     coupons: {
         permission: 'icommerce.coupons.index',
         activated: true,
