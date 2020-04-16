@@ -297,14 +297,14 @@
                                                          :label="`${$tr('ui.form.quantity')}`"
                                                          :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
                                             </div>
-                                            <div class="col-2">
-                                                <q-input type="number" outlined dense v-model="discount.priority"
-                                                         :label="`${$tr('qcommerce.layout.form.priority')}`"
-                                                         :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
-                                            </div>
-                                            <div class="col-2">
+                                            <div class="col-1">
                                                 <q-input type="number" outlined dense v-model="discount.discount"
                                                          :label="`${$tr('qcommerce.layout.form.discount')}`"
+                                                         :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+                                            </div>
+                                            <div class="col-1">
+                                                <q-input type="number" outlined dense v-model="discount.priority"
+                                                         :label="`${$tr('qcommerce.layout.form.priority')}`"
                                                          :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
                                             </div>
                                             <div class="col-2">
@@ -333,7 +333,14 @@
                                                     </template>
                                                 </q-input>
                                             </div>
-                                            <div class="col-2 col-sm-1 text-right">
+                                            <div class="col-3">
+                                                <q-select outlined dense bg-color="white" v-model="discount.criteria"
+                                                          :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                                                          :label="`${$tr('qcommerce.layout.form.typeDiscount')}*`"
+                                                          emit-value map-options :options="optionsCriteria"
+                                                />
+                                            </div>
+                                            <div class="col-1 col-sm-1 text-right">
                                                 <q-btn color="negative" :loading="loading" @click="deleteDiscountItem(i)"
                                                        icon="fas fa-trash" />
                                             </div>
@@ -417,6 +424,10 @@
         loadingCategory: false,
         success: false,
         productId: false,
+        optionsCriteria: [
+          {label: 'Fixed Value', value: '0'},
+          {label: 'Percentage', value: '1'},
+        ],
         editorText: {
           toolbar: [
             ['bold', 'italic', 'strike', 'underline', 'removeFormat'],
@@ -455,6 +466,7 @@
           discount: 0,
           dateStart: '',
           dateEnd: '',
+          criteria: '',
         }
       },
       dataLocale() {
