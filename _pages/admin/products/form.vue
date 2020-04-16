@@ -287,14 +287,14 @@
                             <div class="q-pa-sm">
                                 <div class="row">
                                     <div class="col-12 text-right q-py-sm">
-                                        <q-btn color="positive" :loading="loading" @click="locale.formTemplate.discounts.push(defaultDiscounts)"
+                                        <q-btn color="positive" :loading="loading" @click="locale.formTemplate.discounts.push(defaultDiscount)"
                                                icon="fas fa-plus" />
                                     </div>
                                     <div v-if="locale.formTemplate.discounts" v-for="(discount,i) in locale.formTemplate.discounts" :key="i" class="col-12 q-py-xs">
                                         <div class="row q-col-gutter-sm">
                                             <div class="col-2">
                                                 <q-input type="number" outlined dense v-model="discount.quantity"
-                                                         :label="`${$tr('qcommerce.layout.form.quantity')}`"
+                                                         :label="`${$tr('ui.form.quantity')}`"
                                                          :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
                                             </div>
                                             <div class="col-2">
@@ -303,9 +303,35 @@
                                                          :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
                                             </div>
                                             <div class="col-2">
-                                                <q-input type="number" outlined dense v-model="rate.discount"
+                                                <q-input type="number" outlined dense v-model="discount.discount"
                                                          :label="`${$tr('qcommerce.layout.form.discount')}`"
                                                          :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+                                            </div>
+                                            <div class="col-2">
+                                                <q-input outlined dense v-model="discount.dateStart" mask="date"
+                                                         :label="`${$tr('qcommerce.layout.form.dateStart')}`"
+                                                         :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
+                                                    <template v-slot:append>
+                                                        <q-icon name="event" class="cursor-pointer">
+                                                            <q-popup-proxy ref="qDateStart" transition-show="scale" transition-hide="scale">
+                                                                <q-date v-model="discount.dateStart" @input="() => $refs.qDateStart.hide()" />
+                                                            </q-popup-proxy>
+                                                        </q-icon>
+                                                    </template>
+                                                </q-input>
+                                            </div>
+                                            <div class="col-2">
+                                                <q-input mask="date" outlined dense v-model="discount.dateEnd"
+                                                         :label="`${$tr('qcommerce.layout.form.dateEnd')}`"
+                                                         :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
+                                                    <template v-slot:append>
+                                                        <q-icon name="event" class="cursor-pointer">
+                                                            <q-popup-proxy ref="qDateEnd" transition-show="scale" transition-hide="scale">
+                                                                <q-date v-model="discount.dateEnd" @input="() => $refs.qDateEnd.hide()" />
+                                                            </q-popup-proxy>
+                                                        </q-icon>
+                                                    </template>
+                                                </q-input>
                                             </div>
                                             <div class="col-2 col-sm-1 text-right">
                                                 <q-btn color="negative" :loading="loading" @click="deleteDiscountItem(i)"
@@ -422,7 +448,7 @@
     },
     computed: {
       //Data locale component
-      defaultRate(){
+      defaultDiscount(){
         return {
           quantity: 0,
           priority: 0,
@@ -458,6 +484,7 @@
             points: 0,
             relatedProducts: [],
             productOptions: [],
+            discounts: [],
             mediasSingle: {},
             mediasMulti: {},
             options: {
@@ -576,7 +603,7 @@
             let params = {
               refresh: true,
               params: {
-                include: 'relatedProducts,categories,category,parent',
+                include: 'relatedProducts,categories,category,parent,discounts',
                 filter: {allTranslations: true}
               }
             }
@@ -654,6 +681,9 @@
           }
         }
         return response
+      },
+      deleteDiscountItem(i){
+        this.locale.formTemplate.discounts.splice(i,1)
       },
       //Action after created
       actionAfterCreated(id) {

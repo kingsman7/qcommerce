@@ -196,7 +196,6 @@
       },
       deleteRateItem(i){
         this.locale.formTemplate.rates.splice(i,1)
-        let rates = this.$clone(this.locale.formTemplate.rates);
       },
       orderDataItemToLocale(data) {
         let orderData = this.$clone(data)
