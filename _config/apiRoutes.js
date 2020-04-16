@@ -11,7 +11,7 @@ export default {
 	productOptionValues : `${urlBase}/product-option-values`,
 	options : `${urlBase}/options`,
 	optionValues : `${urlBase}/option-values`,
-    optionValuesOrdener : `${urlBase}/option-values/order`,
+  optionValuesOrdener : `${urlBase}/option-values/order`,
 	categories : `${urlBase}/categories`,
 	cart : `${urlBase}/carts`,
 	cartProducts : `${urlBase}/cart-products`,

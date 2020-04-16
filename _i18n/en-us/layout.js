@@ -16,10 +16,12 @@ export default {
   updateOrder : 'Update Order',
   newStore : 'New Store',
   updateStore : 'Update Store',
-  newTaxClass : 'New Tax Class',
-  updateTaxClass : 'Update Tax Class',
   newManufacturer : 'New Manufacturer',
   updateManufacturer : 'Update Manufacturer',
+  newTaxClass : 'New Tax Class',
+  updateTaxClass : 'Update Tax Class',
+  newTaxRate : 'New Tax Rate',
+  updateTaxRate : 'Update Tax Rate',
   newCoupon: 'New Coupon',
   updateCoupon: 'Update Coupon',
 
@@ -79,6 +81,9 @@ export default {
     content: 'Content',
     data: 'Data',
     taxRate: 'Tax Rate',
+    taxBased: 'Based on',
+    priority: 'Priority',
+    rate: 'Rate',
 
     // Coupons
     code: 'Coupon Code',

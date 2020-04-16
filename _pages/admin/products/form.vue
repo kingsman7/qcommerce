@@ -190,9 +190,9 @@
                                   :append-to-body="true"
                                   v-model="locale.formTemplate.options.masterRecord"
                                   :options="[
-                        {label: this.$tr('ui.label.yes'), id: 1},
-                        {label: this.$tr('ui.label.no'), id: 0},
-                      ]"
+                                    {label: this.$tr('ui.label.yes'), id: 1},
+                                    {label: this.$tr('ui.label.no'), id: 0},
+                                  ]"
                                   placeholder=""
                           />
                         </div>
@@ -210,7 +210,7 @@
                         />
                         <!--Crud category-->
                         <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
-                              type="select" @created="getCategories" :crud-props="{label:`${$tr('ui.form.category')}*`, value: locale.formTemplate.categoryId}" v-model="locale.formTemplate.categoryId"/>
+                              type="select" @created="getCategories" :crud-props="{label:`${$tr('ui.form.category')}*`}" v-model="locale.formTemplate.categoryId"/>
                         <!--Categories-->
                         <div class="input-title relative-position q-mb-sm">
                           {{`${$trp('ui.form.category')}`}}
@@ -279,6 +279,44 @@
                       </div>
                     </q-card-section>
                   </q-card>
+                </q-expansion-item>
+                <q-expansion-item bordered class="q-my-md q-mx-sm rounded-borders" header-class="text-primary" icon="settings" expand-icon="fas fa-plus" expanded-icon="fas fa-minus" :label="$trp('qcommerce.layout.form.discount')">
+                    <q-separator />
+                    <q-card>
+                        <q-card-section class="q-pa-sm">
+                            <div class="q-pa-sm">
+                                <div class="row">
+                                    <div class="col-12 text-right q-py-sm">
+                                        <q-btn color="positive" :loading="loading" @click="locale.formTemplate.discounts.push(defaultDiscounts)"
+                                               icon="fas fa-plus" />
+                                    </div>
+                                    <div v-if="locale.formTemplate.discounts" v-for="(discount,i) in locale.formTemplate.discounts" :key="i" class="col-12 q-py-xs">
+                                        <div class="row q-col-gutter-sm">
+                                            <div class="col-2">
+                                                <q-input type="number" outlined dense v-model="discount.quantity"
+                                                         :label="`${$tr('qcommerce.layout.form.quantity')}`"
+                                                         :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+                                            </div>
+                                            <div class="col-2">
+                                                <q-input type="number" outlined dense v-model="discount.priority"
+                                                         :label="`${$tr('qcommerce.layout.form.priority')}`"
+                                                         :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+                                            </div>
+                                            <div class="col-2">
+                                                <q-input type="number" outlined dense v-model="rate.discount"
+                                                         :label="`${$tr('qcommerce.layout.form.discount')}`"
+                                                         :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+                                            </div>
+                                            <div class="col-2 col-sm-1 text-right">
+                                                <q-btn color="negative" :loading="loading" @click="deleteDiscountItem(i)"
+                                                       icon="fas fa-trash" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </q-card-section>
+                    </q-card>
                 </q-expansion-item>
               </q-list>
             </div>
@@ -384,6 +422,15 @@
     },
     computed: {
       //Data locale component
+      defaultRate(){
+        return {
+          quantity: 0,
+          priority: 0,
+          discount: 0,
+          dateStart: '',
+          dateEnd: '',
+        }
+      },
       dataLocale() {
         return {
           fields: {

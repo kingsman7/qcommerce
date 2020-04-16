@@ -186,7 +186,7 @@ export default {
         icon: 'fas fa-percentage',
         authenticated: true,
     },
-    //Tax Class list
+    //Tax Class create
     taxClassCreate: {
       permission: null,
       activated: true,
@@ -198,7 +198,7 @@ export default {
       icon: 'fas fa-percentage',
       authenticated: true,
     },
-    //Tax Class list
+    //Tax Class edit
     taxClassEdit: {
       permission: null,
       activated: true,
@@ -209,6 +209,18 @@ export default {
       title: 'qcommerce.sidebar.adminTaxClassesEdit',
       icon: 'fas fa-percentage',
       authenticated: true,
+    },
+    //Tax Rate list
+    taxRates: {
+        permission: null,
+        activated: true,
+        path: '/ecommerce/tax-rates',
+        name: 'qcommerce.admin.taxRates',
+        page: () => import('@imagina/qcommerce/_pages/admin/taxRate/index'),
+        layout: () => import('@imagina/qsite/_layouts/master.vue'),
+        title: 'qcommerce.sidebar.adminTaxRates',
+        icon: 'fas fa-percentage',
+        authenticated: true,
     },
     coupons: {
         permission: 'icommerce.coupons.index',

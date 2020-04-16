@@ -18,8 +18,10 @@ export default {
   updateStore : 'Actualizar Tienda',
   newManufacturer : 'Nuevo Fabricante',
   updateManufacturer : 'Actualizar Fabricante',
-  newTaxClass : 'Nueva Clase de impuesto',
-  updateTaxClass : 'Actualizar Clase de impuesto',
+  newTaxClass : 'Nueva Clase de Impuesto',
+  updateTaxClass : 'Actualizar Clase de Impuesto',
+  newTaxRate : 'Nueva Tasa de Impuesto',
+  updateTaxRate : 'Actualizar Tasa de Impuesto',
   newCoupon: 'Nuevo Cupon',
   updateCoupon: 'Actualizar Cupon',
 
@@ -79,6 +81,9 @@ export default {
     content: 'Contenido',
     data: 'Datos',
     taxRate: 'Tasa de impuesto',
+    taxBased: 'Basado en',
+    priority: 'Prioridad',
+    rate: 'Tasa',
 
     // Cupones
     code: 'Codigo de Cupon',
