@@ -196,6 +196,9 @@
                                   placeholder=""
                           />
                         </div>
+                        <!--Crud manufacturer-->
+                        <crud :crud-data="import('@imagina/qcommerce/_crud/manufacturers')"
+                             type="select" :crud-props="{label:`${$tr('ui.form.manufacturer')}*`}" v-model="locale.formTemplate.manufacturerId"/>
                         <!--Parent-->
                         <div class="input-title">{{`${$tr('ui.form.parent')}`}}</div>
                         <tree-select
@@ -280,7 +283,7 @@
                     </q-card-section>
                   </q-card>
                 </q-expansion-item>
-                <q-expansion-item bordered class="q-my-md q-mx-sm rounded-borders" header-class="text-primary" icon="settings" expand-icon="fas fa-plus" expanded-icon="fas fa-minus" :label="$trp('qcommerce.layout.form.discount')">
+                <q-expansion-item bordered class="q-my-md q-mx-sm rounded-borders" header-class="text-primary" icon="fas fa-gift" expand-icon="fas fa-plus" expanded-icon="fas fa-minus" :label="$trp('qcommerce.layout.form.discount')">
                     <q-separator />
                     <q-card>
                         <q-card-section class="q-pa-sm">
@@ -314,7 +317,7 @@
                                                     <template v-slot:append>
                                                         <q-icon name="event" class="cursor-pointer">
                                                             <q-popup-proxy ref="qDateStart" transition-show="scale" transition-hide="scale">
-                                                                <q-date v-model="discount.dateStart" @input="() => $refs.qDateStart.hide()" />
+                                                                <q-date v-model="discount.dateStart" />
                                                             </q-popup-proxy>
                                                         </q-icon>
                                                     </template>
@@ -327,7 +330,7 @@
                                                     <template v-slot:append>
                                                         <q-icon name="event" class="cursor-pointer">
                                                             <q-popup-proxy ref="qDateEnd" transition-show="scale" transition-hide="scale">
-                                                                <q-date v-model="discount.dateEnd" @input="() => $refs.qDateEnd.hide()" />
+                                                                <q-date v-model="discount.dateEnd" />
                                                             </q-popup-proxy>
                                                         </q-icon>
                                                     </template>
@@ -425,8 +428,8 @@
         success: false,
         productId: false,
         optionsCriteria: [
-          {label: 'Fixed Value', value: '0'},
-          {label: 'Percentage', value: '1'},
+          {label: 'Fixed Value', value: 'fixed'},
+          {label: 'Percentage', value: 'percentage'},
         ],
         editorText: {
           toolbar: [
@@ -461,12 +464,14 @@
       //Data locale component
       defaultDiscount(){
         return {
+          productId: this.$route.params.id || 0,
           quantity: 0,
           priority: 0,
           discount: 0,
           dateStart: '',
           dateEnd: '',
           criteria: '',
+          id: 0,
         }
       },
       dataLocale() {
@@ -475,6 +480,7 @@
             parentId: null,
             status: 1,
             categoryId: 0,
+            manufacturerId: 0,
             categories: [],
             addedById: this.$store.state.quserAuth.userId,
             sku: 0,
@@ -675,6 +681,7 @@
           this.loading = true
           let configName = 'apiRoutes.qcommerce.products'
           this.$crud.update(configName, this.productId, this.getDataForm()).then(response => {
+            this.updateDiscounts(this.productId)
             this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
             this.initForm()
           }).catch(error => {
@@ -682,6 +689,26 @@
             this.$alert.error({message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom'})
           })
         }
+      },
+      //update discounts
+      updateDiscounts(id) {
+        let currentDiscounts = this.$clone(this.locale.formTemplate.discounts)
+
+        currentDiscounts.map(item =>{
+          let itemSaving = this.$clone(item)
+          itemSaving.productId = id
+          let configName = 'apiRoutes.qcommerce.productDiscounts'
+          if(item.id > 0) {
+            this.$crud.update(configName, item.id, item).then(response => {
+            }).catch(error => {
+            })
+          }else{
+            this.$crud.create(configName, item).then(response => {
+            }).catch(error => {
+            })
+          }
+          return itemSaving
+        });
       },
       //Get just values not null from form
       getDataForm() {
@@ -695,11 +722,26 @@
         return response
       },
       deleteDiscountItem(i){
-        this.locale.formTemplate.discounts.splice(i,1)
+        this.$q.dialog({
+          title: this.$tr('qcommerce.layout.message.deleteProductDiscount'),
+          message: this.$tr('qcommerce.layout.message.warnDeleteProductDiscount'),
+          cancel: true,
+          persistent: true
+        }).onOk(() => {
+          let discountId = this.$clone(this.locale.formTemplate.discounts[i].id)
+          this.locale.formTemplate.discounts.splice(i,1)
+          if(discountId > 0){
+            let configName = 'apiRoutes.qcommerce.productDiscounts'
+            this.$crud.delete(configName, item.id, this.getDataForm()).then(response =>{
+            }).catch({
+            })
+          }
+        })
       },
       //Action after created
       actionAfterCreated(id) {
         setTimeout(() => {
+          this.updateDiscounts(id)
           let action = this.buttonActions.value
           switch (action) {
             case 1://redirect to index products

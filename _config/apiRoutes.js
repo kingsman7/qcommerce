@@ -25,4 +25,5 @@ export default {
 	manufacturers : `${urlBase}/manufacturers`,
   taxClasses : `${urlBase}/tax-classes`,
 	taxRates : `${urlBase}/tax-rates`,
+  productDiscounts : `${urlBase}/product-discounts`,
 }

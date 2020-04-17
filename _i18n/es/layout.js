@@ -106,7 +106,9 @@ export default {
     warnAddOpt : 'Para agregar opciones, primero debe crear el producto',
     noOptions : 'No hay opciones agregadas',
     noDeleteOption : 'No puede borrar está opción, es padre de {name}',
-    selectProduct : 'Seleccione una opción de producto'
+    selectProduct : 'Seleccione una opción de producto',
+    deleteProductDiscount: 'Eliminar descuento del producto',
+    warnDeleteProductDiscount : 'Está intentando eliminar un descuento para este producto. ¿Está Seguro?'
   },
   options:{
     yes: 'Sí',
