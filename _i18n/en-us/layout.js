@@ -10,6 +10,8 @@ export default {
   updateOptionValue : 'Update Option Value',
   newProductOptionValue : 'New Product Option Value',
   updateProductOptionValue : 'Update Product Option Value',
+  newProductDiscount : 'New Product Discount',
+  updateProductDiscount : 'Update Product Discount',
   updatePaymentMethod : 'Update Payment Method',
   updateShippingMethod : 'Update Shipping Method',
   newOrder : 'New Order',
@@ -84,6 +86,10 @@ export default {
     taxBased: 'Based on',
     priority: 'Priority',
     rate: 'Rate',
+    criteria: 'Discount Type',
+    manufacturer: 'Manufacturer',
+    customerGroup: 'Customer Group',
+    taxClass: 'Tax Class',
 
     // Coupons
     code: 'Coupon Code',
@@ -108,8 +114,7 @@ export default {
     noOptions : 'There are no added options',
     noDeleteOption : 'You can not delete this option, you are the father of {name}',
     selectProduct : 'Select a product option',
-    deleteProductDiscount: 'Delete product discount',
-    warnDeleteProductDiscount : 'You\'re trying to delete a product discount. Are you sure?'
+    warnAddDiscount : 'To add discounts, you must first create the product',
   },
   options:{
     yes: 'Yes',

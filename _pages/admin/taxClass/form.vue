@@ -33,7 +33,9 @@
                   />-->
                   <!--Crud tax rate-->
                   <crud :crud-data="import('@imagina/qcommerce/_crud/taxRates')"
-                        type="select" :crud-props="{label:`${$tr('qcommerce.layout.form.taxRate')}*`}" v-model="rate.taxRateId"/>
+                        type="select" :crud-props="{label:`${$tr('qcommerce.layout.form.taxRate')}*`}"
+                        v-model="rate.taxRateId" :config="{options: {label: 'name', value: 'id'}}"
+                  />
                 </div>
                 <div class="col-4">
                   <q-select outlined dense bg-color="white" v-model="rate.based"

@@ -10,6 +10,8 @@ export default {
   updateOptionValue : 'Actualizar valor de Opción',
   newProductOptionValue : 'Nuevo valor de Opción de producto',
   updateProductOptionValue : 'Actualizar valor de Opción de producto',
+  newProductDiscount : 'Nuevo Descuento de producto',
+  updateProductDiscount : 'Actualizar Descuento producto',
   updatePaymentMethod : 'Actualizar metodo de pago',
   updateShippingMethod : 'Actualizar metodo de envio',
   newOrder : 'Nuevo Orden',
@@ -18,8 +20,8 @@ export default {
   updateStore : 'Actualizar Tienda',
   newManufacturer : 'Nuevo Fabricante',
   updateManufacturer : 'Actualizar Fabricante',
-  newTaxClass : 'Nueva Clase de Impuesto',
-  updateTaxClass : 'Actualizar Clase de Impuesto',
+  newTaxClass : 'Nuevo Tipo de Impuesto',
+  updateTaxClass : 'Actualizar Tipo de Impuesto',
   newTaxRate : 'Nueva Tasa de Impuesto',
   updateTaxRate : 'Actualizar Tasa de Impuesto',
   newCoupon: 'Nuevo Cupon',
@@ -84,6 +86,10 @@ export default {
     taxBased: 'Basado en',
     priority: 'Prioridad',
     rate: 'Tasa',
+    criteria: 'Tipo de Descuento',
+    manufacturer: 'Fabricante',
+    customerGroup: 'Grupo de Usuario',
+    taxClass: 'Tipo de Impuesto',
 
     // Cupones
     code: 'Codigo de Cupon',
@@ -107,8 +113,7 @@ export default {
     noOptions : 'No hay opciones agregadas',
     noDeleteOption : 'No puede borrar está opción, es padre de {name}',
     selectProduct : 'Seleccione una opción de producto',
-    deleteProductDiscount: 'Eliminar descuento del producto',
-    warnDeleteProductDiscount : 'Está intentando eliminar un descuento para este producto. ¿Está Seguro?'
+    warnAddDiscount : 'Para agregar descuentos, primero debe crear el producto',
   },
   options:{
     yes: 'Sí',

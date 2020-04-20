@@ -197,8 +197,15 @@
                           />
                         </div>
                         <!--Crud manufacturer-->
+                        <crud :crud-data="import('@imagina/qcommerce/_crud/taxClasses')"
+                                type="select" :crud-props="{label:`${$tr('qcommerce.layout.form.taxClass')}`,value: $clone(locale.formTemplate.taxClassId)}" v-model="locale.formTemplate.taxClassId"
+                                :config="{options: {label: 'name', value: 'id'}}"
+                        />
+                        <!--Crud manufacturer-->
                         <crud :crud-data="import('@imagina/qcommerce/_crud/manufacturers')"
-                             type="select" :crud-props="{label:`${$tr('ui.form.manufacturer')}*`}" v-model="locale.formTemplate.manufacturerId"/>
+                             type="select" :crud-props="{label:`${$tr('qcommerce.layout.form.manufacturer')}`,value: $clone(locale.formTemplate.manufacturerId)}" v-model="locale.formTemplate.manufacturerId"
+                             :config="{options: {label: 'name', value: 'id'}}"
+                        />
                         <!--Parent-->
                         <div class="input-title">{{`${$tr('ui.form.parent')}`}}</div>
                         <tree-select
@@ -213,7 +220,7 @@
                         />
                         <!--Crud category-->
                         <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
-                              type="select" @created="getCategories" :crud-props="{label:`${$tr('ui.form.category')}*`}" v-model="locale.formTemplate.categoryId"/>
+                              type="select" @created="getCategories" :crud-props="{label:`${$tr('ui.form.category')}*`,value: $clone(locale.formTemplate.categoryId)}" v-model="locale.formTemplate.categoryId"/>
                         <!--Categories-->
                         <div class="input-title relative-position q-mb-sm">
                           {{`${$trp('ui.form.category')}`}}
@@ -287,69 +294,19 @@
                     <q-separator />
                     <q-card>
                         <q-card-section class="q-pa-sm">
-                            <div class="q-pa-sm">
-                                <div class="row">
-                                    <div class="col-12 text-right q-py-sm">
-                                        <q-btn color="positive" :loading="loading" @click="locale.formTemplate.discounts.push(defaultDiscount)"
-                                               icon="fas fa-plus" />
-                                    </div>
-                                    <div v-if="locale.formTemplate.discounts" v-for="(discount,i) in locale.formTemplate.discounts" :key="i" class="col-12 q-py-xs">
-                                        <div class="row q-col-gutter-sm">
-                                            <div class="col-2">
-                                                <q-input type="number" outlined dense v-model="discount.quantity"
-                                                         :label="`${$tr('ui.form.quantity')}`"
-                                                         :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
-                                            </div>
-                                            <div class="col-1">
-                                                <q-input type="number" outlined dense v-model="discount.discount"
-                                                         :label="`${$tr('qcommerce.layout.form.discount')}`"
-                                                         :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
-                                            </div>
-                                            <div class="col-1">
-                                                <q-input type="number" outlined dense v-model="discount.priority"
-                                                         :label="`${$tr('qcommerce.layout.form.priority')}`"
-                                                         :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
-                                            </div>
-                                            <div class="col-2">
-                                                <q-input outlined dense v-model="discount.dateStart" mask="date"
-                                                         :label="`${$tr('qcommerce.layout.form.dateStart')}`"
-                                                         :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
-                                                    <template v-slot:append>
-                                                        <q-icon name="event" class="cursor-pointer">
-                                                            <q-popup-proxy ref="qDateStart" transition-show="scale" transition-hide="scale">
-                                                                <q-date v-model="discount.dateStart" />
-                                                            </q-popup-proxy>
-                                                        </q-icon>
-                                                    </template>
-                                                </q-input>
-                                            </div>
-                                            <div class="col-2">
-                                                <q-input mask="date" outlined dense v-model="discount.dateEnd"
-                                                         :label="`${$tr('qcommerce.layout.form.dateEnd')}`"
-                                                         :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
-                                                    <template v-slot:append>
-                                                        <q-icon name="event" class="cursor-pointer">
-                                                            <q-popup-proxy ref="qDateEnd" transition-show="scale" transition-hide="scale">
-                                                                <q-date v-model="discount.dateEnd" />
-                                                            </q-popup-proxy>
-                                                        </q-icon>
-                                                    </template>
-                                                </q-input>
-                                            </div>
-                                            <div class="col-3">
-                                                <q-select outlined dense bg-color="white" v-model="discount.criteria"
-                                                          :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                                                          :label="`${$tr('qcommerce.layout.form.typeDiscount')}*`"
-                                                          emit-value map-options :options="optionsCriteria"
-                                                />
-                                            </div>
-                                            <div class="col-1 col-sm-1 text-right">
-                                                <q-btn color="negative" :loading="loading" @click="deleteDiscountItem(i)"
-                                                       icon="fas fa-trash" />
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="q-pa-sm" v-if="productId">
+                                <crud
+                                    :crud-data="import('@imagina/qcommerce/_crud/productDiscounts')"
+                                    :custom-data="{read: {requestParams: {filter: {productId: productId} } }, formRight:{productId: {value: productId} } }"
+                                />
+                            </div>
+                            <div v-else class="text-center q-pa-sm">
+                                <div class="q-my-md">
+                                    <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
+                                    {{`${$tr('qcommerce.layout.message.warnAddDiscount')}...`}}
                                 </div>
+                                <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
+                                       @click="buttonActions.value = 4; createItem()" color="positive"/>
                             </div>
                         </q-card-section>
                     </q-card>
@@ -427,10 +384,6 @@
         loadingCategory: false,
         success: false,
         productId: false,
-        optionsCriteria: [
-          {label: 'Fixed Value', value: 'fixed'},
-          {label: 'Percentage', value: 'percentage'},
-        ],
         editorText: {
           toolbar: [
             ['bold', 'italic', 'strike', 'underline', 'removeFormat'],
@@ -461,26 +414,12 @@
       }
     },
     computed: {
-      //Data locale component
-      defaultDiscount(){
-        return {
-          productId: this.$route.params.id || 0,
-          quantity: 0,
-          priority: 0,
-          discount: 0,
-          dateStart: '',
-          dateEnd: '',
-          criteria: '',
-          id: 0,
-        }
-      },
       dataLocale() {
         return {
           fields: {
-            parentId: null,
+            parentId: '',
             status: 1,
-            categoryId: 0,
-            manufacturerId: 0,
+            categoryId: '',
             categories: [],
             addedById: this.$store.state.quserAuth.userId,
             sku: 0,
@@ -493,7 +432,7 @@
             width: 0,
             height: 0,
             minimum: 1,
-            reference: null,
+            reference: '',
             shipping: false,
             subtract: false,
             freeshipping: false,
@@ -509,8 +448,8 @@
               masterRecord: 0,
               video: null
             },
-            //taxClassId: null,
-            //manufacturerId: null,
+            taxClassId: '',
+            manufacturerId: '',
             metaTitle: '',
             metaDescription: '',
           },
@@ -621,7 +560,7 @@
             let params = {
               refresh: true,
               params: {
-                include: 'relatedProducts,categories,category,parent,discounts',
+                include: 'relatedProducts,categories,category,parent,discounts,manufacturer',
                 filter: {allTranslations: true}
               }
             }
@@ -656,9 +595,6 @@
         if (data.relatedProducts && data.relatedProducts.length) {
           this.optionsTemplate.relatedProducts = this.$array.tree(data.relatedProducts,{label: 'name',id: 'id'})
         }
-
-        console.log(orderData)
-
         this.locale.form = this.$clone(orderData)
       },
       //Create Product
@@ -681,7 +617,6 @@
           this.loading = true
           let configName = 'apiRoutes.qcommerce.products'
           this.$crud.update(configName, this.productId, this.getDataForm()).then(response => {
-            this.updateDiscounts(this.productId)
             this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
             this.initForm()
           }).catch(error => {
@@ -689,26 +624,6 @@
             this.$alert.error({message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom'})
           })
         }
-      },
-      //update discounts
-      updateDiscounts(id) {
-        let currentDiscounts = this.$clone(this.locale.formTemplate.discounts)
-
-        currentDiscounts.map(item =>{
-          let itemSaving = this.$clone(item)
-          itemSaving.productId = id
-          let configName = 'apiRoutes.qcommerce.productDiscounts'
-          if(item.id > 0) {
-            this.$crud.update(configName, item.id, item).then(response => {
-            }).catch(error => {
-            })
-          }else{
-            this.$crud.create(configName, item).then(response => {
-            }).catch(error => {
-            })
-          }
-          return itemSaving
-        });
       },
       //Get just values not null from form
       getDataForm() {
@@ -721,27 +636,9 @@
         }
         return response
       },
-      deleteDiscountItem(i){
-        this.$q.dialog({
-          title: this.$tr('qcommerce.layout.message.deleteProductDiscount'),
-          message: this.$tr('qcommerce.layout.message.warnDeleteProductDiscount'),
-          cancel: true,
-          persistent: true
-        }).onOk(() => {
-          let discountId = this.$clone(this.locale.formTemplate.discounts[i].id)
-          this.locale.formTemplate.discounts.splice(i,1)
-          if(discountId > 0){
-            let configName = 'apiRoutes.qcommerce.productDiscounts'
-            this.$crud.delete(configName, item.id, this.getDataForm()).then(response =>{
-            }).catch({
-            })
-          }
-        })
-      },
       //Action after created
       actionAfterCreated(id) {
         setTimeout(() => {
-          this.updateDiscounts(id)
           let action = this.buttonActions.value
           switch (action) {
             case 1://redirect to index products
