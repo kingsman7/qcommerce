@@ -98,15 +98,15 @@
         optionsBased: [
           {
             value: '1',
-            label: 'Shipping Address'
+            label: this.$tr('qcommerce.layout.options.taxRateBased.shippingAddress'),
           },
           {
             value: '2',
-            label: 'Payment Address'
+            label: this.$tr('qcommerce.layout.options.taxRateBased.paymentAddress'),
           },
           {
             value: '3',
-            label: 'Store Address'
+            label: this.$tr('qcommerce.layout.options.taxRateBased.storeAddress'),
           }
         ]
       }

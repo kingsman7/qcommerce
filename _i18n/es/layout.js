@@ -120,5 +120,10 @@ export default {
     no: 'No',
     fixedValue: 'Valor fijo',
     percentage: 'Porcentaje',
+    taxRateBased:{
+      shippingAddress: 'Dirección de Envío',
+      paymentAddress: 'Dirección de Pago',
+      storeAddress: 'Dirección de la tienda',
+    }
   }
 }
