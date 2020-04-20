@@ -118,5 +118,7 @@ export default {
   options:{
     yes: 'Sí',
     no: 'No',
+    fixedValue: 'Valor fijo',
+    percentage: 'Porcentaje',
   }
 }

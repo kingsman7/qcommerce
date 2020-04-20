@@ -41,8 +41,8 @@
                       :label="`${$tr('qcommerce.layout.form.typeDiscount')}*`" style="width: 100%;"
                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                       emit-value map-options :options="[
-                        {label: 'Fixed Value', value: '0'},
-                        {label: 'Percentage', value: '1'},
+                        {label: this.$tr('qcommerce.layout.options.fixedValue'), value: '0'},
+                        {label: this.$tr('qcommerce.layout.options.percentage'), value: '1'},
                       ]"/>
 
             <q-input v-model="form.discount" type="number" outlined dense

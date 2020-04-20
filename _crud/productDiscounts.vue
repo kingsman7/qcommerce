@@ -121,8 +121,8 @@
               props : {
                 label: `${this.$tr('qcommerce.layout.form.criteria')}*`,
                 options:[
-                  {label: 'Fixed Value', value: 'fixed'},
-                  {label: 'Percentage', value: 'percentage'},
+                  {label: this.$tr('qcommerce.layout.options.fixedValue'), value: 'fixed'},
+                  {label: this.$tr('qcommerce.layout.options.percentage'), value: 'percentage'},
                 ],
                 rules: [
                   val => !!val || this.$tr('ui.message.fieldRequired')
