@@ -21,6 +21,9 @@
 | Orders  | apiRoutes.qcommerce.orders |
 | Order Status  | apiRoutes.qcommerce.orderStatus |
 | Order Status History  | apiRoutes.qcommerce.orderStatusHistory |
+| Tax Classes  | apiRoutes.qcommerce.taxClasses |
+| Tax Rates  | apiRoutes.qcommerce.taxRates |
+| Manufacturers  | apiRoutes.qcommerce.manufacturers  |
 
 ## Pages
 
@@ -47,6 +50,9 @@
   | Option Values | qcommerce.admin.options.values | - |
   | Payment Methods | qcommerce.admin.payment.methods | - |
   | Shipping Methods | qcommerce.admin.shipping.methods | - |
+  | Tax Classes | qcommerce.admin.taxClasses | - |
+  | Tax Rates | qcommerce.admin.taxRates | - |
+  | Manufacturers | qcommerce.admin.manufacturers | - |
   
 ## Components  
 

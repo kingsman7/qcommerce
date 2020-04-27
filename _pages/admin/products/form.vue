@@ -198,12 +198,12 @@
                         </div>
                         <!--Crud manufacturer-->
                         <crud :crud-data="import('@imagina/qcommerce/_crud/taxClasses')"
-                                type="select" :crud-props="{label:`${$tr('qcommerce.layout.form.taxClass')}`,value: $clone(locale.formTemplate.taxClassId)}" v-model="locale.formTemplate.taxClassId"
+                                type="select" :crud-props="{label:`${$tr('qcommerce.layout.form.taxClass')}`}" v-model="locale.formTemplate.taxClassId"
                                 :config="{options: {label: 'name', value: 'id'}}"
                         />
                         <!--Crud manufacturer-->
                         <crud :crud-data="import('@imagina/qcommerce/_crud/manufacturers')"
-                             type="select" :crud-props="{label:`${$tr('qcommerce.layout.form.manufacturer')}`,value: $clone(locale.formTemplate.manufacturerId)}" v-model="locale.formTemplate.manufacturerId"
+                             type="select" :crud-props="{label:`${$tr('qcommerce.layout.form.manufacturer')}`}" v-model="locale.formTemplate.manufacturerId"
                              :config="{options: {label: 'name', value: 'id'}}"
                         />
                         <!--Parent-->
@@ -220,7 +220,7 @@
                         />
                         <!--Crud category-->
                         <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
-                              type="select" @created="getCategories" :crud-props="{label:`${$tr('ui.form.category')}*`,value: $clone(locale.formTemplate.categoryId)}" v-model="locale.formTemplate.categoryId"/>
+                              type="select" @created="getCategories" :crud-props="{label:`${$tr('ui.form.category')}*`}" v-model="locale.formTemplate.categoryId"/>
                         <!--Categories-->
                         <div class="input-title relative-position q-mb-sm">
                           {{`${$trp('ui.form.category')}`}}
@@ -369,6 +369,9 @@
     watch: {
       $route(to, from) {
         this.initForm()
+      },
+      'locale.form'(value){
+        //console.warn(value)
       }
     },
     mounted() {
@@ -419,7 +422,7 @@
           fields: {
             parentId: '',
             status: 1,
-            categoryId: '',
+            categoryId: 0,
             categories: [],
             addedById: this.$store.state.quserAuth.userId,
             sku: 0,
@@ -448,8 +451,8 @@
               masterRecord: 0,
               video: null
             },
-            taxClassId: '',
-            manufacturerId: '',
+            taxClassId: 0,
+            manufacturerId: 0,
             metaTitle: '',
             metaDescription: '',
           },
