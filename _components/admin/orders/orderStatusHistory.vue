@@ -22,11 +22,11 @@
     data () {
       return {
         columns: [
-          { name: 'title', label: 'Status', field: row => row.status.title, align: 'left' },
-          { name: 'comment', label: 'comment', field: row => row.comment || '-', align: 'left' },
+          { name: 'title', label: this.$tr('ui.form.status'), field: row => row.status.title, align: 'left' },
+          { name: 'comment', label: this.$tr('ui.form.comment'), field: row => row.comment || '-', align: 'left' },
           {
             name: 'created_at',
-            label: 'Date',
+            label: this.$trp('ui.form.createdAt'),
             field: 'created_at',
             format: val => val ? this.$d(this.$moment(val,"YYYY-MM-DD HH:mm").toDate(),'long',this.$q.i18n.lang) : "-",
             align: 'left'

@@ -26,6 +26,7 @@ export default {
   updateTaxRate : 'Actualizar Tasa de Impuesto',
   newCoupon: 'Nuevo Cupon',
   updateCoupon: 'Actualizar Cupon',
+  newStatus : 'Nuevo Estado',
 
   orderAccountInformation: 'Información de pedido y cuenta',
   orderStatus: 'Estado del pedido',

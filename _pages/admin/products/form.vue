@@ -422,7 +422,7 @@
           fields: {
             parentId: '',
             status: 1,
-            categoryId: 0,
+            categoryId: null,
             categories: [],
             addedById: this.$store.state.quserAuth.userId,
             sku: 0,
@@ -451,8 +451,8 @@
               masterRecord: 0,
               video: null
             },
-            taxClassId: 0,
-            manufacturerId: 0,
+            taxClassId: null,
+            manufacturerId: null,
             metaTitle: '',
             metaDescription: '',
           },
@@ -570,6 +570,12 @@
             //Request
             this.$crud.show(configName, productId, params).then(response => {
               this.orderDataItemToLocale(response.data)
+              setTimeout(()=>{
+                this.locale.form.categoryId = response.data.categoryId
+                this.locale.form.taxClassId = response.data.taxClassId
+                this.locale.form.parentId = response.data.parentId
+                this.locale.form.manufacturerId = response.data.manufacturerId
+              },1000)
               resolve(true)//Resolve
             }).catch(error => {
               this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
