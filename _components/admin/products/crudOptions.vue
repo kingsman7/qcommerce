@@ -3,15 +3,19 @@
     <!--Form-->
     <div class="row q-col-gutter-sm">
       <!--Form Left-->
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-4">
         <div class="border q-pa-sm">
           <!--Header-->
-          <div style="height: 36px" class="q-mb-sm">
+          <div class="q-mb-sm">
             <!--Title-->
-            <div class="float-left q-py-sm">{{$tr('qcommerce.layout.productOptions')}}</div>
+            <div class="q-py-sm">{{$tr('qcommerce.layout.productOptions')}}</div>
             <!--Button add Option-->
-            <q-btn icon="fas fa-pen" :label="$tr('qcommerce.layout.newOption')" color="positive"
-                   class="float-right btn-small" @click="addOption()"/>
+            <!--Options-->
+              <crud :crud-data="import('@imagina/qcommerce/_crud/productOptions')" v-model="modal.optionSelected"
+                    type="select" @created="getOptions" :crud-props="{label : `${$tr('ui.form.option')} *`}"
+                    :config="{options : {label : 'description', value : 'id'}}" @input="createProductOption()"/>
+            <!--<q-btn icon="fas fa-pen" :label="$tr('qcommerce.layout.newOption')" color="positive"
+                   class="float-right btn-small" @click="addOption()"/>-->
           </div>
           <!--Message not option selected-->
           <div v-if="!productOptions.length" class="text-grey-8">
@@ -25,7 +29,7 @@
         </div>
       </div>
       <!--Form Right-->
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-8">
         <!--Message to select a option-->
         <div v-if="template.currentOption == null" class="q-pa-lg">
           <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
@@ -84,35 +88,6 @@
         </div>
       </div>
     </div>
-
-    <!--Modal-->
-    <q-dialog v-model="modal.show">
-      <q-card class="backend-page" style="max-width: 400px !important;">
-        <!--Header-->
-        <q-toolbar class="bg-primary text-white">
-          <q-toolbar-title>{{$tr('qcommerce.layout.newOption')}}</q-toolbar-title>
-          <q-btn flat v-close-popup icon="fas fa-times"/>
-        </q-toolbar>
-
-        <!--Content-->
-        <div class="bg-white q-pa-sm">
-          <!--Parent-->
-          <div v-if="modal.parentOption" class="q-mb-md">
-            <div class="input-title">{{$tr('ui.form.parent')}}</div>
-            <q-icon color="primary" name="fas fa-caret-right"></q-icon>
-            {{modal.parentOption.description}}
-          </div>
-          <!--Options-->
-          <crud :crud-data="import('@imagina/qcommerce/_crud/productOptions')" v-model="modal.optionSelected"
-                type="select" @created="getOptions" :crud-props="{label : `${$tr('ui.form.option')} *`}"
-                :config="{options : {label : 'description', value : 'id'}}" @input="createProductOption()"/>
-
-          <!--Loading-->
-          <inner-loading :visible="modal.loading"/>
-        </div>
-      </q-card>
-    </q-dialog>
-
     <!--Loading-->
     <inner-loading :visible="loading"/>
   </div>

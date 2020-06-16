@@ -41,7 +41,15 @@
               },
               {name: 'actions', label: this.$tr('ui.form.actions'), align: 'left'},
             ],
-            requestParams: {include: 'category'},
+            requestParams: {
+                include: 'category',
+                filter: {
+                    order: {
+                        field: 'created_at',
+                        way: 'desc',
+                    },
+                },
+            },
             filters: {
               categoryId: {
                 label: `${this.$tr('ui.form.category')}:`,

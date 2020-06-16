@@ -699,6 +699,36 @@
 </script>
 <style lang="stylus">
   .productForm
+    #mediaForm
+      .col-12.col-md-6.relative-position
+        height: 200px
+        text-align center
+        padding 10px
+        margin 0 5px
+        border: 1px solid rgba(0,0,0,0.12)
+        border-radius 5px
+        @media (min-width: 1024px)
+          width: 16.666666666666666667%!important
+        .img-fluid
+          width auto
+          height 100%
+      .q-scrollarea
+        height 200px!important
+        .column
+          height 200px
+          padding 10px
+          margin 0 5px
+          border: 1px solid rgba(0,0,0,0.12)
+          border-radius 5px
+          .image-multiple
+            background-repeat no-repeat
+            background-size 100% auto
+            background-position center center
+            height 100%
+            overflow hidden
+
+    .label
+      text-transform capitalize
     .q-expansion-item
       border 1px solid rgba(0,0,0,0.12);
 </style>

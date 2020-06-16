@@ -2,7 +2,7 @@
   <div class="backend-page row q-col-gutter-x-md">
     <div class="col-md-5">
       <div class="box">
-        <formMenu/>
+        <formOptions/>
       </div>
     </div>
     <div class="col-md-7">
@@ -15,12 +15,12 @@
 
 <script>
   // Components
-  import formMenu from '@imagina/qcommerce/_components/admin/options/form'
+  import formOptions from '@imagina/qcommerce/_components/admin/options/form'
   import indexValuesByOptions from '@imagina/qcommerce/_components/admin/optionValues/indexValuesByOptions'
 
   export default {
     components: {
-      formMenu,
+      formOptions,
         indexValuesByOptions
     }
   }
