@@ -55,11 +55,13 @@
               props : {
                 label: `${this.$tr('ui.form.type')}*`,
                 options : [
-                  {label: 'Text', value: 'text'},
-                  {label: 'Textarea', value: 'textarea'},
-                  {label: 'Select', value: 'select'},
-                  {label: 'Radio', value: 'radio'},
-                  {label: 'Checkbox', value: 'checkbox'},
+                    {label: 'Text', value: 'text'},
+                    {label: 'Textarea', value: 'textarea'},
+                    {label: 'Select', value: 'select'},
+                    {label: 'Radio', value: 'radio'},
+                    {label: 'Checkbox', value: 'checkbox'},
+                    {label: 'Image', value: 'image'},
+                    {label: 'Color', value: 'color'},
                 ],
                 rules: [
                   val => !!val || this.$tr('ui.message.fieldRequired')

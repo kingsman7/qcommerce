@@ -28,7 +28,7 @@
             name: 'created_at',
             label: this.$trp('ui.form.createdAt'),
             field: 'created_at',
-            format: val => val ? this.$d(this.$moment(val,"YYYY-MM-DD HH:mm").toDate(),'long',this.$q.i18n.lang) : "-",
+            format: val => val ? this.$d(this.$moment(val,"YYYY-MM-DD HH:mm").toDate(),'long') : "-",
             align: 'left'
           },
         ]
