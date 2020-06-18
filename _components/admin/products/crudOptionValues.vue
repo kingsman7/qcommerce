@@ -54,7 +54,7 @@
                 {{`${$tr('qcommerce.layout.form.optionValue')} *`}}
                 <!--Crud Option Value-->
                 <crud :crud-data="import('@imagina/qcommerce/_crud/productOptionValues')"
-                      type="button-create" @created="getOptionValues" class="absolute-right"/>
+                      type="button-create" @created="getOptionValues" class="absolute-right" :custom-data="{read: {requestParams: {filter: {optionId: form.optionId} } }, formLeft: { optionId: { value: form.optionId } } }"/>
               </div>
               <q-field v-model="form.optionValueId" borderless
                        :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
@@ -73,7 +73,7 @@
                   {{`${$tr('qcommerce.layout.form.parentOptionValue')} *`}}
                   <!--Crud Option Value-->
                   <crud :crud-data="import('@imagina/qcommerce/_crud/productOptionValues')"
-                        type="button-create" @created="getOptionValues" class="absolute-right"/>
+                        type="button-create" @created="getOptionValues" class="absolute-right" :custom-data="{read: {requestParams: {filter: {optionId: form.optionId} } }, formLeft: { optionId: { value: form.optionId } } }"/>
                 </div>
                 <q-field v-model="form.parentOptionValueId" borderless
                          :rules="[val => !!val || $tr('ui.message.fieldRequired')]">

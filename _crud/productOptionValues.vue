@@ -69,21 +69,6 @@
                 ],
               }
             },
-            optionId: {
-              value: null,
-              type: 'select',
-              isTranslatable: false,
-              props : {
-                label: `${this.$tr('ui.form.option')}*`,
-                rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
-                ],
-              },
-              loadOptions: {
-                apiRoute: 'apiRoutes.qcommerce.options',
-                select: { label: 'description', id: 'id' }
-              }
-            },
             sortOrder: {
               value: 0,
               type: 'input',
