@@ -38,9 +38,6 @@
           delete: true,
           formLeft: {
             id: {value: ''},
-            geozoneId: {
-              value: 1
-            },
             storeId: {
               value: 1
             },
@@ -84,6 +81,18 @@
                   val => !!val || this.$tr('ui.message.fieldRequired')
                 ],
               }
+            },
+            geozoneId: {
+              value: null,
+              type: 'select',
+              loadOptions: {
+                  apiRoute: 'apiRoutes.qlocations.geozones',
+                  select: {label: 'name', id: 'id'},
+              },
+              props: {
+                  label: this.$tr('qlocations.layout.form.geozone'),
+                  clearable: true,
+              },
             },
           },
           /*formRight: {

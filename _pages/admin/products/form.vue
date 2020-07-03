@@ -422,7 +422,7 @@
           fields: {
             parentId: '',
             status: 1,
-            categoryId: null,
+            categoryId: 0,
             categories: [],
             addedById: this.$store.state.quserAuth.userId,
             sku: 0,
@@ -543,7 +543,7 @@
           //Request
           this.$crud.index(configName, params).then(response => {
             this.optionsTemplate.categories = this.$array.tree(response.data)
-            this.locale.fields.categoryId =  response.data.length ? response.data[0].id : null
+            //this.locale.fields.categoryId =  response.data.length ? response.data[0].id : null
             this.loadingCategory = false
             resolve(true)
           }).catch(error => {
@@ -570,12 +570,6 @@
             //Request
             this.$crud.show(configName, productId, params).then(response => {
               this.orderDataItemToLocale(response.data)
-              setTimeout(()=>{
-                this.locale.form.categoryId = response.data.categoryId
-                this.locale.form.taxClassId = response.data.taxClassId
-                this.locale.form.parentId = response.data.parentId
-                this.locale.form.manufacturerId = response.data.manufacturerId
-              },1000)
               resolve(true)//Resolve
             }).catch(error => {
               this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
@@ -604,7 +598,14 @@
         if (data.relatedProducts && data.relatedProducts.length) {
           this.optionsTemplate.relatedProducts = this.$array.tree(data.relatedProducts,{label: 'name',id: 'id'})
         }
+        console.warn(orderData)
         this.locale.form = this.$clone(orderData)
+          setTimeout(()=>{
+              this.locale.form.categoryId = orderData.categoryId
+              this.locale.form.taxClassId = orderData.taxClassId
+              this.locale.form.parentId = orderData.parentId
+              this.locale.form.manufacturerId = orderData.manufacturerId
+          },3000)
       },
       //Create Product
       async createItem() {

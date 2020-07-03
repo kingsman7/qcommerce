@@ -18,10 +18,14 @@
           <q-field borderless v-model="locale.formTemplate.description" :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <q-editor class="full-width" v-model="locale.formTemplate.description" />
           </q-field>
-          <div class="row">
+          <div class="row" v-if="this.itemId">
             <div class="col-12 text-right q-py-sm">
               <q-btn color="positive" :loading="loading" @click="locale.formTemplate.rates.push(defaultRate)"
-                     icon="fas fa-plus" />
+                     icon="fas fa-plus">
+                <q-tooltip>
+                  {{ $tr('qcommerce.layout.newTaxRate') }}
+                </q-tooltip>
+              </q-btn>
             </div>
             <div v-if="locale.formTemplate.rates" v-for="(rate,i) in locale.formTemplate.rates" :key="i" class="col-12 q-py-xs">
               <div class="row q-col-gutter-sm">
@@ -56,6 +60,9 @@
               </div>
             </div>
           </div>
+          <div class="row" v-else>
+
+          </div>
           <q-page-sticky
                   position="bottom-right"
                   :offset="[18, 18]">
@@ -67,9 +74,9 @@
                    :label="$tr('ui.label.create')" type="submit"/>
           </q-page-sticky>
         </q-form>
-        <inner-loading :visible="loading"/>
       </div>
     </div>
+    <inner-loading :visible="loading"/>
   </div>
 </template>
 
@@ -139,11 +146,12 @@
         this.itemId = this.$route.params.id
         if (this.locale.success) this.$refs.localeComponent.vReset()
         await this.getData()
-        await this.getTaxRates()
+        //await this.getTaxRates()
+        console.warn(this.locale.form)
         this.success = true
         this.loading = false
       },
-      getData() {
+      async getData() {
         return new Promise((resolve, reject) => {
           const itemId = this.$clone(this.itemId)
           if (itemId) {
@@ -170,38 +178,15 @@
           }
         })
       },
-      getTaxRates() {
-        return new Promise((resolve, reject) => {
-            let configName = 'apiRoutes.qcommerce.taxRates'
-            //Params
-            let params = {
-              refresh: true,
-              params: {
-                filter: {allTranslations: true}
-              }
-            }
-            //Request
-            this.$crud.index(configName, params).then(response => {
-              this.optionsRate =  response.data.map(item => {
-                return {
-                  value: item.id,
-                  label: item.name,
-                }
-              })
-              resolve(true)
-            }).catch(error => {
-              this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
-              this.loading = false
-              reject(false)//Resolve
-            })
-        })
-      },
       deleteRateItem(i){
         this.locale.formTemplate.rates.splice(i,1)
       },
       orderDataItemToLocale(data) {
         let orderData = this.$clone(data)
         this.locale.form = this.$clone(orderData)
+        setTimeout(()=>{
+          this.locale.form.rates = orderData.rates
+        },1000)
       },
       async updateItem() {
         if (await this.$refs.localeComponent.validateForm()) {
@@ -209,6 +194,7 @@
           let configName = 'apiRoutes.qcommerce.taxClasses'
           this.$crud.update(configName, this.itemId, this.getDataForm()).then(response => {
             this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
+            this.$router.push({name: 'qcommerce.admin.taxClasses.index'})
             //this.initForm()
             this.loading = false
           }).catch(error => {
@@ -223,6 +209,7 @@
           let configName = 'apiRoutes.qcommerce.taxClasses'
           this.$crud.create(configName, this.getDataForm()).then(response => {
             this.$alert.success({message: `${this.$tr('ui.message.recordCreated')}`})
+            this.$router.push({name: 'qcommerce.admin.taxClasses.index'})
             //this.initForm()
             this.loading = false
           }).catch(error => {
@@ -235,10 +222,10 @@
         let response = this.locale.form
         for (var item in response) {
           let valueItem = response[item]
-          if (valueItem == null || valueItem == undefined)
+          if (valueItem == null || valueItem == undefined || valueItem.length === 0)
             delete response[item]
         }
-        response.selectable = JSON.stringify(response.selectable)
+        //response.selectable = JSON.stringify(response.selectable)
         return response
       },
     }
