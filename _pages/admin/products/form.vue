@@ -219,8 +219,17 @@
                                 label="name"
                         />
                         <!--Crud category-->
-                        <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
-                              type="select" @created="getCategories" :crud-props="{label:`${$tr('ui.form.category')}*`}" v-model="locale.formTemplate.categoryId"/>
+                        <div class="input-title">{{`${$tr('ui.form.category')}`}}</div>
+                        <tree-select
+                                v-model="locale.formTemplate.categoryId"
+                                class="q-mb-md"
+                                :options="optionsTemplate.categories"
+                                placeholder=""
+                                label="title"
+                        />
+                        <!--<crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
+                              type="select" @created="getCategories" :crud-props="{label:`${$tr('ui.form.category')}*`}" v-model="locale.formTemplate.categoryId"/>-->
+
                         <!--Categories-->
                         <div class="input-title relative-position q-mb-sm">
                           {{`${$trp('ui.form.category')}`}}
