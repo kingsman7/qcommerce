@@ -221,7 +221,7 @@
                                   placeholder=""
                           />
                         </div>
-                        <!--Crud taxClasses-->
+                        <!--Crud manufacturer-->
                         <crud :crud-data="import('@imagina/qcommerce/_crud/taxClasses')"
                                 type="select" :crud-props="{label:`${$tr('qcommerce.layout.form.taxClass')}`}" v-model="locale.formTemplate.taxClassId"
                                 :config="{options: {label: 'name', value: 'id'}}"
@@ -725,8 +725,6 @@
 </script>
 <style lang="stylus">
   .productForm
-    .q-card
-      box-shadow none
     #mediaForm
       .col-12.col-md-6.relative-position
         height: 200px
@@ -759,6 +757,4 @@
       text-transform capitalize
     .q-expansion-item
       border 1px solid rgba(0,0,0,0.12);
-    .q-item__section--side > .q-icon
-      font-size 13px
 </style>
