@@ -146,6 +146,20 @@
                 enitityId: null
               }
             },
+              view : {
+                  value: 1,
+                  isFakeField : true,
+                  type: 'select',
+                  props : {
+                      label: 'Vista de categoria',
+                      options: [
+                          {label: 'Masonry', value: 0},
+                          {label: 'Cuatro Columnas', value: 1},
+                          {label: 'Tres Columnas', value: 2},
+                          {label: 'Dos Columnas', value: 3},
+                      ]
+                  }
+              },
           },
         }
       },

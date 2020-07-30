@@ -32,12 +32,14 @@
           <!--Form right-->
           <div class="col-12 col-md-4" v-if="locale.success">
             <!--Status-->
-            <q-select v-model="locale.formTemplate.status"
+            <q-select v-model="locale.formTemplate.active"
                       :options="[
                         {label:$tr('ui.label.enabled'),value:true},
                         {label:$tr('ui.label.disabled'),value:false}
                       ]"
                       outlined dense
+                      map-options
+                      emit-value
                       :label="$tr('ui.form.status')"/>
             <!--Main Image-->
             <div class="input-title">
@@ -112,7 +114,7 @@
         return {
           fields: {
             init: '',
-            status: false,
+            active:false,
             mediasSingle: {}
           },
           fieldsTranslatable: {

@@ -83,7 +83,7 @@ export default {
         authenticated: true,
     },
     optionValuesCreate: {
-        permission: null,
+        permission: 'icommerce.optionvalues.create',
         activated: true,
         path: '/ecommerce/product-options/values/:optionId',
         name: 'qcommerce.admin.optionValues.create',
@@ -94,7 +94,7 @@ export default {
         authenticated: true,
     },
     optionValuesUpdate: {
-        permission: null,
+        permission: 'icommerce.optionvalues.update',
         activated: true,
         path: '/ecommerce/product-options/:optionId/value/:id',
         name: 'qcommerce.admin.optionValues.update',
@@ -152,7 +152,7 @@ export default {
     },
     //Stores list
     stores: {
-        permission: null,
+        permission: 'icommerce.stores.index',
         activated: true,
         path: '/ecommerce/stores',
         name: 'qcommerce.admin.stores',
@@ -164,7 +164,7 @@ export default {
     },
     //Manufacturers list
     manufacturers: {
-        permission: null,
+        permission: 'icommerce.manufacturers.index',
         activated: true,
         path: '/ecommerce/manufacturers',
         name: 'qcommerce.admin.manufacturers',
@@ -176,7 +176,7 @@ export default {
     },
     //Tax Class list
     taxClasses: {
-        permission: null,
+        permission: 'icommerce.taxclasses.index',
         activated: true,
         path: '/ecommerce/tax-classes',
         name: 'qcommerce.admin.taxClasses',
@@ -212,7 +212,7 @@ export default {
     },
     //Tax Rate list
     taxRates: {
-        permission: null,
+        permission: 'icommerce.taxrates.index',
         activated: true,
         path: '/ecommerce/tax-rates',
         name: 'qcommerce.admin.taxRates',

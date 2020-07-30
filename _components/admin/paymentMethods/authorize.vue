@@ -55,7 +55,7 @@
                       outlined dense
                       :label="$tr('qcommerce.layout.form.mode')"/>
             <!--Status-->
-            <q-select v-model="locale.formTemplate.status"
+            <q-select v-model="locale.formTemplate.active"
                       :options="[
                         {label:$tr('ui.label.enabled'),value:true},
                         {label:$tr('ui.label.disabled'),value:false}
@@ -134,12 +134,12 @@
       dataLocale() {
         return {
           fields: {
-            apilogin: '',
-            transactionkey: '',
-            clientkey: '',
+            apiLogin: '',
+            transactionKey: '',
+            clientKey: '',
             mode: 'sandbox',
             init: '',
-            status: false,
+            active: false,
             mediasSingle: {}
           },
           fieldsTranslatable: {
