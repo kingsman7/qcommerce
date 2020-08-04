@@ -146,6 +146,17 @@
                 enitityId: null
               }
             },
+            mediasSingle2: {
+              name: 'mediasSingle',
+              value: {},
+              type: 'media',
+              props : {
+                label: this.$tr('ui.form.secondaryImage'),
+                zone: 'secondaryimage',
+                entity: "Modules\\Icommerce\\Entities\\Category",
+                enitityId: null
+              }
+            },
               view : {
                   value: 1,
                   isFakeField : true,

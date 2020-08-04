@@ -43,7 +43,6 @@
                             </q-field>
                             <!--Meta Title-->
                             <q-input v-model="locale.formTemplate.metaTitle" outlined dense
-                                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                                      :label="`${$tr('ui.form.metaTitle')} (${locale.language})`"/>
                             <!--Meta Description-->
                             <q-input v-model="locale.formTemplate.metaDescription" type="textarea"
@@ -757,4 +756,6 @@
       text-transform capitalize
     .q-expansion-item
       border 1px solid rgba(0,0,0,0.12);
+    .q-item__section--side > .q-icon
+      font-size 14px
 </style>
