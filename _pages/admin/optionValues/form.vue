@@ -1,7 +1,6 @@
 <template>
-  <div class="row gutter-x-sm relative-position q-layout-page layout-padding  q-mb-lg backend-page"
-       v-if="success">
-    <div class="col-12 box">
+  <div class="row gutter-x-sm relative-position q-mb-lg">
+    <div class="col-12" v-if="success">
       <div class="row">
         <div class="col-12 q-mb-md">
           <locales v-model="locale" ref="localeComponent" :form="$refs.formContent"/>
@@ -11,28 +10,51 @@
                 @validation-error="$alert.error($tr('ui.message.formInvalid'))">
           <!--Form left-->
           <div class="col-12" v-if="locale.success">
-            <q-input outlined dense v-model="locale.formTemplate.description"
-                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                     :label="`${$tr('ui.form.description')} (${locale.language})*`"/>
-            <div class="input-title">{{$tr('ui.form.image')}}</div>
-            <upload-media
-                    v-model="locale.formTemplate.mediasSingle"
-                    entity="Modules\Icommerce\Entities\OptionValue"
-                    :entity-id="itemId ? itemId : null"
-                    zone='mainimage'
-            />
+            <div class="row q-col-gutter-md">
+              <div class="col-12 col-md-6">
+                <q-input outlined dense v-model="locale.formTemplate.description"
+                         :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                         :label="`${$tr('ui.form.description')} (${locale.language})*`"/>
+              </div>
+              <div class="col-12 col-md-6">
+                <q-select outlined dense v-model="locale.formTemplate.options.type"
+                          :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                          :label="`${$tr('ui.form.type')} *`"
+                          :options="typeOptions"
+                          map-options
+                          emit-value
+                />
+                <q-input outlined dense v-model="locale.formTemplate.options.color" v-if="locale.form.options.type === 2"
+                         :rules="['anyColor']"
+                         :label="`${$tr('qcommerce.layout.form.color')} *`">
+                  <template v-slot:append>
+                    <q-icon name="colorize" class="cursor-pointer">
+                      <q-popup-proxy transition-show="scale" transition-hide="scale">
+                        <q-color v-model="locale.formTemplate.options.color" />
+                      </q-popup-proxy>
+                    </q-icon>
+                  </template>
+                </q-input>
+                <div v-else>
+                  <div class="input-title">{{$tr('ui.form.image')}}</div>
+                  <upload-media
+                        v-model="locale.formTemplate.mediasSingle"
+                        entity="Modules\Icommerce\Entities\OptionValue"
+                        :entity-id="itemId ? itemId : null"
+                        zone='mainimage'
+                  />
+                </div>
+              </div>
+            </div>
           </div>
           <!--Button Actions-->
           <div class="col-12 text-right">
-            <q-btn v-if="itemId" color="positive" :loading="loading" icon="fas fa-edit"
-                   :label="$tr('ui.label.update')" type="submit" rounded/>
-            <q-btn v-else color="positive" :loading="loading" icon="fas fa-edit"
-                   :label="$tr('ui.label.create')" type="submit" rounded/>
+            <q-btn color="positive" :loading="loading" icon="fas fa-edit"
+                   :label="itemId ? $tr('ui.label.update') : $tr('ui.label.create') " type="submit" rounded/>
           </div>
         </q-form>
       </div>
     </div>
-
     <inner-loading :visible="loading"/>
   </div>
 </template>
@@ -70,6 +92,10 @@
         itemId: false,
         optionValues: [],
         pages: [],
+        typeOptions:[
+          {label: this.$tr('ui.label.image'), value:1},
+          {label: this.$tr('qcommerce.layout.form.color'), value:2},
+        ]
       }
     },
     computed: {
@@ -78,6 +104,12 @@
           fields: {
             optionId: this.optionId || this.$route.params.optionId,
             sortOrder: 1,
+            options:{
+              type: 1,
+              color: null,
+            },
+            mediasSingle: {},
+            mediasMulti: {},
           },
           fieldsTranslatable: {
             description: '',

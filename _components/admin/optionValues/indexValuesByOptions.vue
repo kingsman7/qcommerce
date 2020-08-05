@@ -23,7 +23,7 @@
              color="positive" class="q-ml-xs"/>
     </div>
 
-    <q-dialog v-model="dialogNewValue">
+    <q-dialog v-model="dialogNewValue" full-width full-height>
       <q-card>
           <q-toolbar class="bg-primary text-white">
               <q-avatar>

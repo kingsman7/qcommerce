@@ -108,6 +108,7 @@ export default {
     quantityTotal: 'Quantity Total',
     quantityTotalCustomer: 'Quantity Total Per Customer',
     status: 'Status',
+    color: 'Color',
 
   },
   message : {
