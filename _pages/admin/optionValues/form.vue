@@ -24,17 +24,24 @@
                           map-options
                           emit-value
                 />
-                <q-input outlined dense v-model="locale.formTemplate.options.color" v-if="locale.form.options.type === 2"
-                         :rules="['anyColor']"
-                         :label="`${$tr('qcommerce.layout.form.color')} *`">
-                  <template v-slot:append>
-                    <q-icon name="colorize" class="cursor-pointer">
-                      <q-popup-proxy transition-show="scale" transition-hide="scale">
-                        <q-color v-model="locale.formTemplate.options.color" />
-                      </q-popup-proxy>
-                    </q-icon>
-                  </template>
-                </q-input>
+                <div class="row q-col-gutter-xs" v-if="locale.form.options.type === 2">
+                  <div class="col-8 col-md-10">
+                    <q-input outlined dense v-model="locale.formTemplate.options.color"
+                             :rules="['anyColor']"
+                             :label="`${$tr('qcommerce.layout.form.color')} *`">
+                      <template v-slot:append>
+                        <q-icon name="colorize" class="cursor-pointer">
+                          <q-popup-proxy transition-show="scale" transition-hide="scale">
+                            <q-color v-model="locale.formTemplate.options.color" />
+                          </q-popup-proxy>
+                        </q-icon>
+                      </template>
+                    </q-input>
+                  </div>
+                  <div class="col-4 col-md-2">
+                    <q-chip class="full-width no-border-radius q-ma-none" :style="'height: 40px;background-color: '+locale.formTemplate.options.color" />
+                  </div>
+                </div>
                 <div v-else>
                   <div class="input-title">{{$tr('ui.form.image')}}</div>
                   <upload-media
@@ -106,7 +113,7 @@
             sortOrder: 1,
             options:{
               type: 1,
-              color: null,
+              color: '#000000',
             },
             mediasSingle: {},
             mediasMulti: {},
