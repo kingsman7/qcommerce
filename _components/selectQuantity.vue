@@ -1,110 +1,61 @@
 <template>
-  <div id="selectQuantityComponent">
-    <!--Butotn subtract-->
-    <q-btn @click="subtract()" icon="remove" color="grey-4"/>
-    <!--Input-->
-    <q-input v-model="response" type="number"
-             @focus="tmpResponse = response"
-             @keyup.enter="vEnter()" @blur="vBlur()"/>
-    <!--Butotn add-->
-    <q-btn @click="add()" icon="add" color="grey-4"/>
-  </div>
+  <q-input class="quantityInput" outlined v-model="response" :label="labelData" dense
+           color="primary" :style="`width : ${width}`">
+    <template v-slot:prepend>
+      <q-btn size="10px" round dense flat icon="fas fa-minus" @click="response -= 1"/>
+    </template>
+    <template v-slot:append>
+      <q-btn size="10px" color="primary" round dense flat icon="fas fa-plus" @click="response += 1"/>
+    </template>
+  </q-input>
 </template>
 <script>
-  import _cloneDeep from 'lodash.clonedeep'
-
   export default {
     props: {
-      value: {default: 1},
-      min: {type: Number, default: 1},
-      max: {type: Number, default: 9999},
+      label: {default: false},
+      value: {default: 0},
+      min: {default: 0},
+      max: {default: 10},
+      width: {default: '100px'}
     },
     components: {},
     watch: {
-      value() {
-        this.init()
-      },
-      response(newValue, oldValue) {
-        if (newValue != oldValue) this.vEmit()
+      response(value) {
+        let quantity = parseInt(value)
+        let min = parseInt(this.min)
+        let max = parseInt(this.max)
+
+        //Validate values
+        if (!quantity) this.response = min
+        if (quantity < min) this.response = min
+        if (quantity > max) this.response = max
+
+        //Emit response
+        this.$emit('input', this.response)
       }
     },
     mounted() {
       this.$nextTick(function () {
-        this.init()
+        this.response = this.$clone(this.value)
       })
     },
     data() {
       return {
-        response: 0,
-        tmpResponse: 0
+        response: 1
       }
     },
-    methods: {
-      //Init form
-      init() {
-        this.response = _cloneDeep(this.value)
-        this.checkValue()
-      },
-      //Check if response is between min and max
-      checkValue() {
-        if (parseInt(this.response) < parseInt(this.min)) {
-          this.response = this.min
-          return false
-        }
-        if (parseInt(this.response) > parseInt(this.max)) {
-          this.response = this.max
-          return false
-        }
-        return true
-      },
-      //Subtract to response
-      subtract() {
-        if (parseInt(this.response) > parseInt(this.min)) {
-          this.response--
-          this.vBtn()
-        } else this.response = this.min
-      },
-      //Add to response
-      add() {
-        if (parseInt(this.response) < parseInt(this.max)) {
-          this.response++
-          this.vBtn()
-        } else this.response = this.max
-      },
-      //Emit input event
-      vEmit() {
-        if (this.checkValue()) this.$emit('input', this.response)
-      },
-      //Emit blur event
-      vBlur() {
-        if (this.tmpResponse != this.response) this.$emit('blur', this.response)
-      },
-      //Emit enter event
-      vEnter() {
-        if (this.tmpResponse != this.response) this.$emit('enter', this.response)
-      },
-      //Emit btn action event
-      vBtn() {
-        this.$emit('btn', this.response)
+    computed: {
+      labelData() {
+        this.label || this.$tr('store.layout.label.quantity')
       }
-    }
+    },
+    methods: {}
   }
 </script>
 <style lang="stylus">
-  #selectQuantityComponent
-    .q-btn
-      border-radius 0px !important
-      color $grey-8 !important
-      min-height 27px !important
-      width 27px !important
-      padding 0px
-
-    .q-input
-      display inline-flex
-      padding 0px
-
+  .quantityInput
+    .q-field__control
+      padding 0 6px
       input
-        width 45px
-        height 15px
         text-align center
 </style>

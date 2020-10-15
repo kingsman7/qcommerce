@@ -4,13 +4,10 @@
       <div class="content-option" v-if="option.productOptionValues &&  option.productOptionValues.length">
         <!--Title Option-->
         <div class="title-option q-title q-mb-sm">
-          <q-icon name="fas fa-caret-right" color="primary"></q-icon>
+          <q-icon name="fas fa-caret-right" color="primary"/>
           {{option.description}}
-          <q-chip pointing="left" v-if="option.required"
-                  icon="fas fa-exclamation-triangle"
-                  color="negative" class="chip-required">
-            Opción requerida
-          </q-chip>
+          <!--Label required-->
+          <q-chip v-if="option.required" :label="$tr('ui.label.required')" size="xs" color="negative" outline/>
         </div>
         <!-- If option type is select -->
         <div v-if="option.type == 'select'">
@@ -23,24 +20,16 @@
         </div>
         <!-- If option type is radio -->
         <div v-if="option.type == 'radio'" class="row text-center">
-          <div v-for="(value, key) in option.productOptionValues" class="col-12 col-md-4" :key="key">
-            <!--Image-->
-            <img :src="value.mainImage.path" style="cursor: pointer"
-                 @click="section[option.id].singleOption = value.optionValueId;
-                  setOptions(option.id,[section[option.id].singleOption])"
-                 v-if="value.mainImage && value.mainImage.path"> <br>
-            <!--Radio-->
-            <q-radio v-model="section[option.id].singleOption" :val="value.optionValueId"
-                     @input="setOptions(option.id,[section[option.id].singleOption])">
-              <p class="inline-block q-body-2 q-pl-xs q-ma-none">{{getLabel(value)}}</p>
-            </q-radio>
+          <div class="text-left q-gutter-sm">
+            <q-radio v-for="(value, key) in option.productOptionValues" :key="key"
+                     v-model="section[option.id].singleOption" :val="value.optionValueId" dense
+                     @input="setOptions(option.id,[section[option.id].singleOption])" :label="getLabel(value)"/>
           </div>
         </div>
         <!-- If option type is checkbox -->
         <div v-if="option.type == 'checkbox'">
           <q-checkbox
             @input="setOptions(option.id,section[option.id].multiOption)"
-            style="display: block;"
             v-for="(value, index2) in option.productOptionValues"
             :key="index2"
             v-model="section[option.id].multiOption"
@@ -179,7 +168,7 @@
       //Conver options to format select
       getOptionsSelect(options) {
         if (options && options.length) {
-          let response = this.$helper.array.tree(options, {label: 'optionValue', id: 'optionValueId'})
+          let response = this.$array.tree(options, {label: 'optionValue', id: 'optionValueId'})
           //Add price to label
           response.forEach((item, index) => {
             let valueOption = options.find(opt => opt.optionValueId == item.id)
@@ -228,23 +217,15 @@
 
 <style lang="stylus">
   #recursiveListOptionsComponent
-    .chip-required
-      min-height 16px !important
-      height 25px
-
-      &:before
-        left 3px
-
-      .q-chip-side
-        margin-right 0px
-
-        .q-icon
-          font-size 13px
-
     .content-option
-      border-bottom 1px solid $grey-4
-      padding 15px 0px
+      padding 10px 0px
 
       .title-option
+        text-transform capitalize
+        font-size 14px
         text-align left
+
+    .q-radio__label, .q-checkbox__label
+      font-size 12px
+      color $grey
 </style>

@@ -31,7 +31,15 @@
               },
               {name: 'actions', label: this.$tr('ui.form.actions'), align: 'left'},
             ],
-            requestParams: {include: 'parent'}
+            requestParams: {
+                include: 'parent',
+                filter: {
+                    order: {
+                        field: 'created_at',
+                        way: 'desc',
+                    },
+                },
+            }
           },
           update: {
             title: this.$tr('qcommerce.layout.updateCategory'),
@@ -129,6 +137,7 @@
             },
             mediasSingle: {
               name: 'mediasSingle',
+              testId : 'mediasSingle',
               value: {},
               type: 'media',
               props : {
@@ -138,6 +147,32 @@
                 enitityId: null
               }
             },
+            mediasSingle2: {
+              name: 'mediasSingle',
+              testId : 'mediasSingle2',
+              value: {},
+              type: 'media',
+              props : {
+                label: this.$tr('ui.form.secondaryImage'),
+                zone: 'secondaryimage',
+                entity: "Modules\\Icommerce\\Entities\\Category",
+                enitityId: null
+              }
+            },
+              view : {
+                  value: 1,
+                  isFakeField : true,
+                  type: 'select',
+                  props : {
+                      label: 'Vista de categoria',
+                      options: [
+                          {label: 'Masonry', value: 0},
+                          {label: 'Cuatro Columnas', value: 1},
+                          {label: 'Tres Columnas', value: 2},
+                          {label: 'Dos Columnas', value: 3},
+                      ]
+                  }
+              },
           },
         }
       },

@@ -7,47 +7,47 @@
     <q-list no-border class="backend-page">
       <!--Quantity-->
       <q-item class="q-pa-none input-quantity">
-        <q-item-main label="CANTIDAD" class="q-title"/>
-        <q-item-side right>
+        <q-item-section label="CANTIDAD" class="q-title"/>
+        <q-item-section right>
           <div class="q-my-sm">
             <select-quantity v-model="template.quantity"/>
           </div>
-        </q-item-side>
+        </q-item-section>
       </q-item>
       <!--Price-->
       <q-item class="q-pa-none" v-if="additionalPrice">
-        <q-item-main label="PRECIO" class="q-subheading"/>
-        <q-item-side right>
+        <q-item-section label="PRECIO" class="q-subheading"/>
+        <q-item-section right>
           <p class="q-ma-none text-primary q-subheading">
             $ {{$n(price) }}
           </p>
-        </q-item-side>
+        </q-item-section>
       </q-item>
       <!--Price Additional-->
       <q-item class="q-pa-none" v-if="additionalPrice">
-        <q-item-main label="ADICIONAL" class="q-subheading"/>
-        <q-item-side right>
+        <q-item-section label="ADICIONAL" class="q-subheading"/>
+        <q-item-section right>
           <p class="q-ma-none text-primary q-subheading">
             $ {{$n(template.productOptions.total) }}
           </p>
-        </q-item-side>
+        </q-item-section>
       </q-item>
       <!--Total-->
       <q-item class="q-pa-none">
-        <q-item-main label="TOTAL" class="q-title"/>
-        <q-item-side right>
+        <q-item-section label="TOTAL" class="q-title"/>
+        <q-item-section right>
           <p class="q-ma-none text-primary">
             $ {{$n(template.total * template.quantity) }}
           </p>
-        </q-item-side>
+        </q-item-section>
       </q-item>
       <!--Add to cart-->
       <q-item class="text-center q-pb-none">
-        <q-item-main>
+        <q-item-section>
           <q-btn @click="addCart()" icon="shopping_cart"
                  label="AÑADIR" color="positive"
                  :disable="addCartDisable"/>
-        </q-item-main>
+        </q-item-section>
       </q-item>
     </q-list>
 
@@ -139,7 +139,7 @@
         }
         //Request
         commerceServices.crud.index('apiRoutes.qcommerce.productOptions', params).then(response => {
-          this.template.options = this.$helper.array.builTree(response.data)
+          this.template.options = this.$array.builTree(response.data)
           this.loading = false
         }).catch(error => {
           console.error(error)

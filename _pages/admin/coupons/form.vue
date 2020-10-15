@@ -23,9 +23,9 @@
                         :label="`${$tr('qcommerce.layout.form.type')}*`" style="width: 100%;"
                         :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                         emit-value map-options :options="[
-                            {label: 'Coupon for Order', value: 1},
-                            {label: 'Coupon for Product', value: 2},
-                            {label: 'Coupon for Category', value: 3},
+                            {label: 'Coupon for Order', value: '1'},
+                            {label: 'Coupon for Product', value: '2'},
+                            {label: 'Coupon for Category', value: '3'},
                           ]"/>
 
               <q-select outlined dense bg-color="white" v-model="form.productId" v-if="form.type == 2"
@@ -41,8 +41,8 @@
                       :label="`${$tr('qcommerce.layout.form.typeDiscount')}*`" style="width: 100%;"
                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                       emit-value map-options :options="[
-                        {label: 'Fixed Value', value: '0'},
-                        {label: 'Percentage', value: '1'},
+                        {label: this.$tr('qcommerce.layout.options.fixedValue'), value: '0'},
+                        {label: this.$tr('qcommerce.layout.options.percentage'), value: '1'},
                       ]"/>
 
             <q-input v-model="form.discount" type="number" outlined dense
@@ -64,8 +64,8 @@
                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                       :label="`${$tr('qcommerce.layout.form.status')}*`" style="width: 100%;"
                       emit-value map-options :options="[
-                        {label: 'Active', value: 1},
-                        {label: 'Inactive', value: 2},
+                        {label: 'Active', value: '1'},
+                        {label: 'Inactive', value: '2'},
                       ]"/>
 
             <q-input dense mask="date" bg-color="white" v-model="form.dateStart" color="primary"
@@ -162,8 +162,8 @@
     },
     watch: {
       'form.type': function (val) {
-        this.form.categoryId = null
-        this.form.productId = null
+        /*this.form.categoryId = null
+        this.form.productId = null*/
       }
     },
     mounted () {
@@ -224,7 +224,7 @@
           .then(response => {
             this.products.data = response.data.map(item => {
               return {
-                id: item.id,
+                value: item.id,
                 label: item.name,
               }
             })

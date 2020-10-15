@@ -41,7 +41,7 @@
             <q-tooltip :delay="300">{{$tr('ui.label.edit')}}</q-tooltip>
           </q-btn>
           <!--status button-->
-          <q-toggle color="positive" v-model="props.row.active" class="q-px-xs" @input="update(props.row)">
+          <q-toggle color="positive" v-model="props.row.status" class="q-px-xs" @input="update(props.row)">
             <q-tooltip :delay="300">{{`${$tr('ui.label.enabled')}/${$tr('ui.label.disabled')}`}}</q-tooltip>
           </q-toggle>
         </q-td>
@@ -61,6 +61,7 @@
   import icommercepayu from '@imagina/qcommerce/_components/admin/paymentMethods/payu'
   import icommercecheckmo from '@imagina/qcommerce/_components/admin/paymentMethods/checkmo'
   import icommerceauthorize from '@imagina/qcommerce/_components/admin/paymentMethods/authorize'
+  import icommercecredibanco from '@imagina/qcommerce/_components/admin/paymentMethods/credibanco'
 
   export default {
     props: {},
@@ -68,7 +69,8 @@
       icommercepaypal,
       icommercepayu,
       icommercecheckmo,
-      icommerceauthorize
+      icommerceauthorize,
+      icommercecredibanco
     },
     watch: {},
     mounted() {

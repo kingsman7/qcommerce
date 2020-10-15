@@ -32,7 +32,7 @@
           <!--Form right-->
           <div class="col-12 col-md-4" v-if="locale.success">
             <!--Status-->
-            <q-select v-model="locale.formTemplate.active"
+            <q-select v-model="locale.formTemplate.status"
                       :options="[
                         {label:$tr('ui.label.enabled'),value:true},
                         {label:$tr('ui.label.disabled'),value:false}
@@ -113,7 +113,7 @@
         return {
           fields: {
             init: '',
-            active: false,
+            status: false,
             mediasSingle: {}
           },
           fieldsTranslatable: {
@@ -144,7 +144,7 @@
           this.loading = true
           let data = _cloneDeep(this.locale.form)
           data['options'] = {
-            init: data['init']
+            init: data.init
           }
           //Request
           this.$crud.update('apiRoutes.qcommerce.paymentMethods', this.item.id, data).then(response => {

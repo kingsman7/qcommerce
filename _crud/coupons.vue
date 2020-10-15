@@ -8,7 +8,7 @@
           permission: 'icommerce.coupons',
           create: {
             title: this.$tr('qcommerce.layout.newCoupon'),
-            to: 'create'
+            to: {name: 'qcommerce.admin.coupons.create'}
           },
           read: {
             columns: [
@@ -24,7 +24,7 @@
             filters: {},
           },
           update: {
-            to : 'edit'
+            to : 'qcommerce.admin.coupons.edit'
           },
           delete: true,
           formLeft: {},

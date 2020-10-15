@@ -19,7 +19,7 @@ export default {
 		name: 'products.index.by.category',
 		page: () => import('@imagina/qcommerce/_pages/frontend/products/index'),
 		layout: () => import('src/layouts/master'),
-		title: 'Product Index',
+		title: 'qcommerce.sidebar.adminProducts',
 		icon: 'fas fa-boxes',
 		//authenticated: true,
 	},

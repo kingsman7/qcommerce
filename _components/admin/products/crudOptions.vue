@@ -6,12 +6,16 @@
       <div class="col-12 col-md-4">
         <div class="border q-pa-sm">
           <!--Header-->
-          <div style="height: 36px" class="q-mb-sm">
+          <div class="q-mb-sm">
             <!--Title-->
-            <div class="float-left q-py-sm">{{$tr('qcommerce.layout.productOptions')}}</div>
+            <div class="q-py-sm">{{$tr('qcommerce.layout.productOptions')}}</div>
             <!--Button add Option-->
-            <q-btn icon="fas fa-pen" :label="$tr('qcommerce.layout.newOption')" color="positive"
-                   class="float-right btn-small" @click="addOption()"/>
+            <!--Options-->
+              <crud :crud-data="import('@imagina/qcommerce/_crud/productOptions')" v-model="modal.optionSelected"
+                    type="select" @created="getOptions" :crud-props="{label : `${$tr('ui.form.option')} *`}"
+                    :config="{options : {label : 'description', value : 'id'}}" @input="createProductOption()"/>
+            <!--<q-btn icon="fas fa-pen" :label="$tr('qcommerce.layout.newOption')" color="positive"
+                   class="float-right btn-small" @click="addOption()"/>-->
           </div>
           <!--Message not option selected-->
           <div v-if="!productOptions.length" class="text-grey-8">
@@ -84,35 +88,6 @@
         </div>
       </div>
     </div>
-
-    <!--Modal-->
-    <q-dialog v-model="modal.show">
-      <q-card class="backend-page" style="max-width: 400px !important;">
-        <!--Header-->
-        <q-toolbar class="bg-primary text-white">
-          <q-toolbar-title>{{$tr('qcommerce.layout.newOption')}}</q-toolbar-title>
-          <q-btn flat v-close-popup icon="fas fa-times"/>
-        </q-toolbar>
-
-        <!--Content-->
-        <div class="bg-white q-pa-sm">
-          <!--Parent-->
-          <div v-if="modal.parentOption" class="q-mb-md">
-            <div class="input-title">{{$tr('ui.form.parent')}}</div>
-            <q-icon color="primary" name="fas fa-caret-right"></q-icon>
-            {{modal.parentOption.description}}
-          </div>
-          <!--Options-->
-          <crud :crud-data="import('@imagina/qcommerce/_crud/productOptions')" v-model="modal.optionSelected"
-                type="select" @created="getOptions" :crud-props="{label : `${$tr('ui.form.option')} *`}"
-                :config="{options : {label : 'description', value : 'id'}}" @input="createProductOption()"/>
-
-          <!--Loading-->
-          <inner-loading :visible="modal.loading"/>
-        </div>
-      </q-card>
-    </q-dialog>
-
     <!--Loading-->
     <inner-loading :visible="loading"/>
   </div>
@@ -179,9 +154,9 @@
         return new Promise((resolve, reject) => {
           this.loading = true
           let configName = 'apiRoutes.qcommerce.products'
-          let params = {remember: false, params: {include: 'productOptions', fields: 'id'}}
+          let params = {refresh: true, params: {include: 'productOptions', fields: 'id'}}
           this.$crud.show(configName, this.productId, params).then(response => {
-            this.productOptions = this.$clone(response.data.productOptions)//Set product Options
+            this.productOptions = this.$clone(this.arrayToTree(response.data.productOptions))//Set product Options
             this.productOptionValues = this.$clone(response.data.optionValues)//Set product options values
             this.loading = false
             resolve(true)
@@ -222,7 +197,8 @@
           let dataOption = {//Data to create option
             productId: this.productId,
             optionId: this.modal.optionSelected.toString(),
-            parentId: this.modal.parentOption.id || 0
+            parentId: this.modal.parentOption.id || 0,
+            required : 0
           }
 
           //Request
@@ -251,7 +227,7 @@
         this.loading = true
         let configName = 'apiRoutes.qcommerce.productOptions'//Config Name
         let form = this.$clone(this.template.form)//Get form
-        if (!form.parentId) form.parentId = null//Set null as default parent
+        if (!form.parentId) form.parentId = 0//Set null as default parent
         if (!form.parentOptionValueId) form.parentOptionValueId = null//Set null as default parent option
 
         //Request
@@ -332,6 +308,7 @@
           this.setParentValues()//Get parent values
         }
         this.$refs.optionList.vRefresh()//Refresh List options
+        this.updateOrder()
       },
       //Order in select options to parent
       setParentOptions() {
@@ -386,7 +363,38 @@
           response.keyDescription = (index + 1) + '.' + options[index].description
         }
         return response
-      }
+      },
+      updateOrder() {
+        return false
+        let newdata = []
+        this.treeToArray(this.productOptions, newdata)
+        this.loading = true
+        this.$crud.create('apiRoutes.qcommerce.productOptionOrder', {options: newdata})
+          .then(response => {
+            this.loading = false
+            this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
+          })
+          .catch(error => {
+            this.loading = false
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+          })
+      },
+      arrayToTree(elements, parentId = 0) {
+        return elements.filter(element => {
+          if (element.parentId == parentId) {
+            return element['children'] = this.arrayToTree(elements, element.id)
+          }
+        })
+      },
+      treeToArray(items, response, parentId = null) {
+        let elements = [...items]
+        elements.forEach((element, index) => {
+          element.position = index
+          element.parentId = parentId
+          response.push(element)
+          if (element.children.length) this.treeToArray(element.children, response, element.id)
+        })
+      },
     }
   }
 </script>

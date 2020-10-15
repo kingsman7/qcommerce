@@ -54,7 +54,7 @@
                 {{`${$tr('qcommerce.layout.form.optionValue')} *`}}
                 <!--Crud Option Value-->
                 <crud :crud-data="import('@imagina/qcommerce/_crud/productOptionValues')"
-                      type="button-create" @created="getOptionValues" class="absolute-right"/>
+                      type="button-create" @created="getOptionValues" class="absolute-right" :custom-data="{read: {requestParams: {filter: {optionId: form.optionId} } }, formLeft: { optionId: { value: form.optionId } } }"/>
               </div>
               <q-field v-model="form.optionValueId" borderless
                        :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
@@ -73,7 +73,7 @@
                   {{`${$tr('qcommerce.layout.form.parentOptionValue')} *`}}
                   <!--Crud Option Value-->
                   <crud :crud-data="import('@imagina/qcommerce/_crud/productOptionValues')"
-                        type="button-create" @created="getOptionValues" class="absolute-right"/>
+                        type="button-create" @created="getOptionValues" class="absolute-right" :custom-data="{read: {requestParams: {filter: {optionId: form.optionId} } }, formLeft: { optionId: { value: form.optionId } } }"/>
                 </div>
                 <q-field v-model="form.parentOptionValueId" borderless
                          :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
@@ -301,7 +301,7 @@
         return new Promise((resolve, reject) => {
           let configName = 'apiRoutes.qcommerce.productOptionValues'
           let params = {
-            remember: false,
+            refresh: true,
             params: { include: '', filter: { productOptionId: this.productOption.id } }
           }
           this.$crud.index(configName, params).then(response => {
