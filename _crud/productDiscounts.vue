@@ -17,6 +17,7 @@
           crudId: this.crudId,
           apiRoute: 'apiRoutes.qcommerce.productDiscounts',
           //permission: 'icommerce.manufacturers',
+          extraFormFields: 'crud-fields.Icommerce.productDiscounts',
           create: {
             title: this.$tr('qcommerce.layout.newProductDiscount'),
           },
@@ -24,12 +25,12 @@
             columns: [
               {name: 'id', label: this.$tr('ui.form.id'), field: 'id', style: 'width: 50px'},
               {name: 'quantity', label: this.$tr('ui.form.quantity'), field: 'quantity', align: 'left'},
-              
+
               {
                 name: 'discount', label: this.$tr('qcommerce.layout.form.discount'), field: 'discount', align: 'left',
                 format: (val,row) => val ? row.criteria == 'percentage' ? this.$n(val/100, 'percent') : this.$trc(val) : '-',
               },
-              
+
               {
                 name: 'criteria', label: this.$tr('qcommerce.layout.form.discountType'), field: 'criteria', align: 'left',
                 format: val => val ? this.$tr('qcommerce.layout.options.'+val) : '-',
@@ -38,7 +39,7 @@
                 name: 'department', label: this.$tr('qcommerce.layout.form.usersGroup'), field: 'department', align: 'left',
                 format: val => val ? val.title : 'All',
               },
-              
+
               {name: 'priority', label: this.$tr('qcommerce.layout.form.priority'), field: 'priority', align: 'left'},
               {
                 name: 'date_start', label: this.$tr('qcommerce.layout.form.dateStart'), field: 'dateStart', align: 'left',
@@ -48,7 +49,7 @@
                 name: 'date_end', label: this.$tr('qcommerce.layout.form.dateEnd'), field: 'dateEnd', align: 'left',
                 format: val => val ? this.$trd(val) : '-',
               },
-              
+
               {
                 name: 'created_at', label: this.$tr('ui.form.createdAt'), field: 'createdAt', align: 'left',
                 format: val => val ? this.$trd(val) : '-',
@@ -142,7 +143,7 @@
                 label: `${this.$tr('qcommerce.layout.form.dateEnd')}*`,
               }
             },
-  
+
             priority: {
               value: '',
               type: 'input',
@@ -156,7 +157,7 @@
                 type: 'number',
               }
             },
-            
+
           },
         }
       },

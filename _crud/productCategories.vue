@@ -13,6 +13,7 @@
           crudId: this.crudId,
           apiRoute: 'apiRoutes.qcommerce.categories',
           permission: 'icommerce.categories',
+          extraFormFields: 'crud-fields.Icommerce.productCategories',
           create: {
             title: this.$tr('qcommerce.layout.newCategory'),
           },
@@ -32,13 +33,13 @@
               {name: 'actions', label: this.$tr('ui.form.actions'), align: 'left'},
             ],
             requestParams: {
-                include: 'parent',
-                filter: {
-                    order: {
-                        field: 'created_at',
-                        way: 'desc',
-                    },
+              include: 'parent',
+              filter: {
+                order: {
+                  field: 'created_at',
+                  way: 'desc',
                 },
+              },
             }
           },
           update: {
@@ -53,7 +54,7 @@
               value: '',
               type: 'input',
               isTranslatable: true,
-              props : {
+              props: {
                 label: `${this.$tr('ui.form.title')}*`,
                 rules: [
                   val => !!val || this.$tr('ui.message.fieldRequired')
@@ -64,7 +65,7 @@
               value: '',
               type: 'input',
               isTranslatable: true,
-              props : {
+              props: {
                 label: `${this.$tr('ui.form.slug')}*`,
                 rules: [
                   val => !!val || this.$tr('ui.message.fieldRequired')
@@ -75,7 +76,7 @@
               value: '',
               type: 'html',
               isTranslatable: true,
-              props : {
+              props: {
                 label: `${this.$tr('ui.form.description')}*`,
                 rules: [
                   val => !!val || this.$tr('ui.message.fieldRequired')
@@ -86,7 +87,7 @@
               value: '',
               type: 'input',
               isTranslatable: true,
-              props : {
+              props: {
                 label: this.$tr('ui.form.metaTitle'),
               }
             },
@@ -94,17 +95,17 @@
               value: '',
               type: 'input',
               isTranslatable: true,
-              props : {
+              props: {
                 label: this.$tr('ui.form.metaDescription'),
               }
             },
           },
           formRight: {
-            masterRecord : {
+            masterRecord: {
               value: '0',
-              isFakeField : true,
+              isFakeField: true,
               type: 'select',
-              props : {
+              props: {
                 label: this.$tr('ui.form.masterRecord'),
                 options: [
                   {label: this.$tr('ui.label.yes'), value: '1'},
@@ -120,10 +121,10 @@
                 select: {label: 'title', id: 'id'},
                 requestParams: {include: 'parent'}
               },
-              props : {
+              props: {
                 label: this.$tr('ui.form.parent'),
                 clearable: true,
-                options : [
+                options: [
                   {label: this.$tr('ui.label.disabled'), value: 0},
                 ],
               }
@@ -131,16 +132,16 @@
             showMenu: {
               value: false,
               type: 'checkbox',
-              props : {
+              props: {
                 label: this.$tr('qcommerce.layout.form.showInMenu'),
               }
             },
             mediasSingle: {
               name: 'mediasSingle',
-              testId : 'mediasSingle',
+              testId: 'mediasSingle',
               value: {},
               type: 'media',
-              props : {
+              props: {
                 label: this.$tr('ui.form.firstImage'),
                 zone: 'mainimage',
                 entity: "Modules\\Icommerce\\Entities\\Category",
@@ -149,30 +150,30 @@
             },
             mediasSingle2: {
               name: 'mediasSingle',
-              testId : 'mediasSingle2',
+              testId: 'mediasSingle2',
               value: {},
               type: 'media',
-              props : {
+              props: {
                 label: this.$tr('ui.form.secondaryImage'),
                 zone: 'secondaryimage',
                 entity: "Modules\\Icommerce\\Entities\\Category",
                 enitityId: null
               }
             },
-              view : {
-                  value: 1,
-                  isFakeField : true,
-                  type: 'select',
-                  props : {
-                      label: 'Vista de categoria',
-                      options: [
-                          {label: 'Masonry', value: 0},
-                          {label: 'Cuatro Columnas', value: 1},
-                          {label: 'Tres Columnas', value: 2},
-                          {label: 'Dos Columnas', value: 3},
-                      ]
-                  }
-              },
+            view: {
+              value: 1,
+              isFakeField: true,
+              type: 'select',
+              props: {
+                label: 'Vista de categoria',
+                options: [
+                  {label: 'Masonry', value: 0},
+                  {label: 'Cuatro Columnas', value: 1},
+                  {label: 'Tres Columnas', value: 2},
+                  {label: 'Dos Columnas', value: 3},
+                ]
+              }
+            },
           },
         }
       },

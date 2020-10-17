@@ -13,6 +13,7 @@
           crudId: this.crudId,
           apiRoute: 'apiRoutes.qcommerce.taxRates',
           //permission: 'icommerce.manufacturers',
+          extraFormFields: 'crud-fields.Icommerce.taxRates',
           create: {
             title: this.$tr('qcommerce.layout.newTaxRate'),
             //to: {name: 'qcommerce.admin.taxRates.create'}

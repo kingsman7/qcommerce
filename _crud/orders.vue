@@ -6,6 +6,7 @@
         return {
           apiRoute: 'apiRoutes.qcommerce.orders',
           permission: 'icommerce.orders',
+          extraFormFields: 'crud-fields.Icommerce.orders',
           create: false,
           read: {
             columns: [
