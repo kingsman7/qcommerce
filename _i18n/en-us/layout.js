@@ -110,7 +110,7 @@ export default {
     quantityTotalCustomer: 'Quantity Total Per Customer',
     status: 'Status',
     color: 'Color',
-
+    sortOrder: 'Order',
   },
   message : {
     warnAddOpt : 'To add options, you must first create the product',

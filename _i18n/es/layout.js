@@ -113,6 +113,8 @@ export default {
     quantityTotalCustomer: 'Cantidad Total de Cupones por Cliente',
     status: 'Estado',
     color: 'Color',
+    sortOrder: 'Orden',
+    
   },
   message : {
     warnAddOpt : 'Para agregar opciones, primero debe crear el producto',
