@@ -136,6 +136,23 @@
                 label: this.$tr('qcommerce.layout.form.showInMenu'),
               }
             },
+            featured: {
+              value: '0',
+              type: 'checkbox',
+              props: {
+                label: this.$tr('qcommerce.layout.form.featured'),
+                trueValue : '1',
+                falseValue : '0',
+              }
+            },
+            sortOrder: {
+              value: '',
+              type: 'input',
+              props: {
+                label: this.$tr('qcommerce.layout.form.sortOrder'),
+                type: 'number'
+              }
+            },
             mediasSingle: {
               name: 'mediasSingle',
               testId: 'mediasSingle',
