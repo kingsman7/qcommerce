@@ -23,6 +23,9 @@
               {name: 'name', label: this.$tr('ui.form.name'), field: 'title', align: 'rigth'},
               {name: 'slug', label: this.$tr('ui.form.slug'), field: 'slug', align: 'left'},
               {
+                name: 'status', label: this.$tr('ui.form.status'), field: 'status'
+              },
+              {
                 name: 'parent', label: this.$tr('ui.form.parent'), field: 'parent', align: 'left',
                 format: val => val ? (val.title ? val.title : '-') : '-'
               },
@@ -113,6 +116,21 @@
                 ]
               }
             },
+            status: {
+              value: '1',
+              type: 'select',
+              isTranslatable: false,
+              props : {
+                label: `${this.$tr('ui.form.status')}*`,
+                options : [
+                  {label: this.$tr('ui.label.enabled'), value: '1'},
+                  {label: this.$tr('ui.label.disabled'), value: '0'}
+                ],
+                rules: [
+                  val => !!val || this.$tr('ui.message.fieldRequired')
+                ],
+              }
+            },
             parentId: {
               value: '0',
               type: 'select',
@@ -146,7 +164,7 @@
               }
             },
             sortOrder: {
-              value: '',
+              value: '0',
               type: 'input',
               props: {
                 label: this.$tr('qcommerce.layout.form.sortOrder'),

@@ -114,7 +114,7 @@ export default {
     status: 'Estado',
     color: 'Color',
     featured : 'Destacado',
-    sortOrder : 'Orden de clasificación',
+    sortOrder : 'Orden de prioridad',
   },
   message : {
     warnAddOpt : 'Para agregar opciones, primero debe crear el producto',

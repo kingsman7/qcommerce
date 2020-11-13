@@ -540,8 +540,8 @@
             manufacturerId: null,
             metaTitle: '',
             metaDescription: '',
-            featured: false,
-            sortOrder: null
+            featured: '0',
+            sortOrder: '0'
           },
           fieldsTranslatable: {
             name: '',
