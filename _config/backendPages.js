@@ -301,4 +301,16 @@ export default {
     icon: 'fas fa-ticket-alt',
     authenticated: true,
   },
+  priceLists: {
+    permission: 'icommerce.productlists.index',
+    activated: true,
+    path: '/priceLists',
+    name: 'qcommerce.admin.priceLists.index',
+    page: () => import('@imagina/qcommerce/_pages/admin/priceLists/index'),
+    layout: () => import('@imagina/qsite/_layouts/master.vue'),
+    title: 'qcommerce.sidebar.adminPriceLists',
+    icon: 'fas fa-dollar-sign',
+    authenticated: true,
+    subHeader: {refresh: true}
+  },
 }

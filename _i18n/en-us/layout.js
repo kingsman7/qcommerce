@@ -27,6 +27,8 @@ export default {
   newCoupon: 'New Coupon',
   updateCoupon: 'Update Coupon',
   newStatus : 'New Status',
+  newPriceList: 'New Price List',
+  updatePriceList: 'Update Price List',
 
   orderAccountInformation: 'Order & Account Information',
   orderStatus: 'Order Status',
@@ -111,6 +113,10 @@ export default {
     status: 'Status',
     color: 'Color',
     sortOrder: 'Order',
+    operationPrefix: 'Operation',
+    value: 'Value | Values',
+    priceLists: 'Price Lists',
+
   },
   message : {
     warnAddOpt : 'To add options, you must first create the product',

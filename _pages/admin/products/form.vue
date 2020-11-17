@@ -104,8 +104,42 @@
                           <!--SKU-->
                           <q-input data-testid="sku" outlined dense v-model="locale.formTemplate.sku" :label="$tr('ui.form.sku')"/>
                           <!--Price-->
-                          <q-input data-testid="price" v-model="locale.formTemplate.price" outlined dense
-                                   :label="$tr('ui.form.price')" type="number"/>
+                          <!--Price List Enable-->
+                          <div class="full-width" v-if="priceListEnable==='1'">
+                            <div class="row q-py-sm">
+                              <div class="col-8">
+                                {{ $tr('qcommerce.layout.form.priceLists') }}
+                              </div>
+                              <div class="col-4 text-right">
+                                <q-btn icon="fas fa-plus" color="positive" size="sm" @click="()=> { locale.form.priceLists.push({price: 0, priceListId: null}) }">
+                                  <q-tooltip>
+                                    {{ $tr('ui.label.add') }}
+                                  </q-tooltip>
+                                </q-btn>
+                              </div>
+                            </div>
+                            <div class="row q-col-gutter-md q-pt-md" v-for="(list, i) in locale.formTemplate.priceLists">
+                              <div class="col-4">
+                                <q-input data-testid="price" v-model="list.price" outlined dense
+                                         :label="$tr('ui.form.price')" type="number"/>
+                              </div>
+                              <div class="col-6">
+                                <dynamic-field :field="dynamicFields.priceLists" v-model="list.priceListId" />
+                              </div>
+                              <div class="col-2 text-right">
+                                <q-btn icon="fas fa-trash" color="negative" size="sm" class="q-mt-sm" @click="locale.form.priceLists.splice(i,1)" >
+                                  <q-tooltip>
+                                    {{ $tr('ui.label.delete') }}
+                                  </q-tooltip>
+                                </q-btn>
+                              </div>
+                            </div>
+                          </div>
+                          <!--Price List not enabled-->
+                          <div class="full-width" v-else>
+                            <q-input data-testid="price" v-model="locale.formTemplate.price" outlined dense
+                                     :label="$tr('ui.form.price')" type="number"/>
+                          </div>
                           <!--Quantity-->
                           <q-input data-testid="quantity" outlined dense v-model="locale.formTemplate.quantity"
                                    :label="$tr('ui.form.quantity')" type="number"/>
@@ -344,7 +378,7 @@
                   <q-separator/>
                   <q-card>
                     <q-card-section class="q-pa-sm">
-                      <div class="q-pa-sm" v-if="productId">
+                      <!--<div class="q-pa-sm" v-if="productId">
                         <crud
                           :crud-data="import('@imagina/qcommerce/_crud/productDiscounts')"
                           :custom-data="{read: {requestParams: {include: 'department', filter: {productId: productId} } }, formRight:{productId: {value: productId} } }"
@@ -357,7 +391,8 @@
                         </div>
                         <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
                                @click="buttonActions.value = 4, createItem()" color="positive"/>
-                      </div>
+                      </div>-->
+                      <dynamic-field v-model="locale.formTemplate.productDiscounts" :field="dynamicFields.productDiscounts" />
                     </q-card-section>
                   </q-card>
                 </q-expansion-item>
@@ -483,7 +518,8 @@
         buttonActions: {label: '', value: 1},
         modalShow: {
           category: false
-        }
+        },
+        priceListEnable: this.$store.getters['qsiteApp/getSettingValueByName']('icommerce::product-price-list'),
       }
     },
     computed: {
@@ -514,7 +550,10 @@
             points: 0,
             relatedProducts: [],
             productOptions: [],
-            discounts: [],
+            productDiscounts: [],
+            priceLists: [
+              {price: 0, priceListId: null}
+            ],
             mediasSingle: {},
             mediasMulti: {},
             options: {
@@ -586,6 +625,34 @@
       //Dynamic fields
       dynamicFields() {
         return {
+          productDiscounts: {
+            value: null,
+            type: 'select',
+            testId: 'productDiscounts',
+            props: {
+              label: this.$tr('qcommerce.layout.form.discount') + '*',
+              rules: [val => !!val || this.$tr('ui.message.fieldRequired')],
+              clearable: true,
+              multiple: true,
+            },
+            loadOptions: {
+              apiRoute: 'apiRoutes.qdiscountable.discounts',
+              select: {label: 'formatValue',id: 'id'}
+            }
+          },
+          priceLists: {
+            value: null,
+            type: 'select',
+            testId: 'priceLists',
+            props: {
+              label: this.$tr('qcommerce.layout.form.priceLists') + '*',
+              clearable: true,
+            },
+            loadOptions: {
+              apiRoute: 'apiRoutes.qcommerce.priceLists',
+              select: {label: 'name',id: 'id'}
+            }
+          },
           category: {
             value: null,
             type: 'treeSelect',
@@ -667,7 +734,7 @@
             let params = {
               refresh: true,
               params: {
-                include: 'relatedProducts,categories,category,parent,discounts,manufacturer',
+                include: 'relatedProducts,categories,category,parent,discounts,manufacturer,priceLists',
                 filter: {allTranslations: true}
               }
             }
@@ -698,6 +765,11 @@
         orderData.relatedProducts.forEach((item, key) => {
           orderData.relatedProducts[key] = item.id
         })
+
+        orderData.priceLists.forEach((item, key) => {
+          orderData.priceLists[key] = {priceListId: item.id, price: item.price}
+        })
+
         //Set default related products options
         if (data.relatedProducts && data.relatedProducts.length) {
           this.optionsTemplate.relatedProducts = this.$array.tree(data.relatedProducts, {label: 'name', id: 'id'})

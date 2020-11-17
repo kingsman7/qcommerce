@@ -18,6 +18,7 @@ export default [
       //pages.qcommerce.manufacturers,//Manufacturers
       //pages.qcommerce.taxClasses,//Tax Classes
       //pages.qcommerce.taxRates,//Tax Rates
+      pages.qcommerce.priceLists,//Price Lists
     ]
   },
 ]

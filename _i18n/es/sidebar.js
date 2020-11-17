@@ -30,4 +30,7 @@ export default {
   adminTaxRates : 'Tasas de Impuesto',
   adminTaxRatesCreate : 'Nueva Tasa de Impuesto',
   adminTaxRatesEdit : 'Editar Tasa de Impuesto',
+  adminPriceLists: 'Listas de Precios',
+  adminPriceListsCreate: 'Crear Lista de Precios',
+  adminPriceListsEdit: 'Editar Lista de Precios',
 }
