@@ -97,7 +97,7 @@ export default {
     manufacturer: 'Fabricante',
     customerGroup: 'Grupo de Usuario',
     taxClass: 'Tipo de Impuesto',
-
+    
     // Cupones
     code: 'Codigo de Cupon',
     type: 'Tipo',
@@ -115,7 +115,8 @@ export default {
     quantityTotalCustomer: 'Cantidad Total de Cupones por Cliente',
     status: 'Estado',
     color: 'Color',
-    sortOrder: 'Orden',
+    featured : 'Destacado',
+    sortOrder : 'Orden de clasificación',
     operationPrefix: 'Operación',
     value: 'Valor | Valores',
     priceLists: 'Listas de Precios',

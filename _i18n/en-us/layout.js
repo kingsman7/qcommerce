@@ -26,7 +26,7 @@ export default {
   updateTaxRate : 'Update Tax Rate',
   newCoupon: 'New Coupon',
   updateCoupon: 'Update Coupon',
-  newStatus : 'New Status',
+  newStatus: 'New Status',
   newPriceList: 'New Price List',
   updatePriceList: 'Update Price List',
 
@@ -112,7 +112,8 @@ export default {
     quantityTotalCustomer: 'Quantity Total Per Customer',
     status: 'Status',
     color: 'Color',
-    sortOrder: 'Order',
+    featured: 'Featured',
+    sortOrder: 'Sort Order',
     operationPrefix: 'Operation',
     value: 'Value | Values',
     priceLists: 'Price Lists',
