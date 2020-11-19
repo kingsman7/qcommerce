@@ -43,6 +43,20 @@
                   way: 'desc',
                 },
               },
+            },
+            filters : {
+              parentId: {
+                value: null,
+                type: 'treeSelect',
+                loadOptions: {
+                  apiRoute: 'apiRoutes.qcommerce.categories',
+                  select: {label: 'title', id: 'id'},
+                },
+                props: {
+                  label: this.$tr('ui.form.parent'),
+                  clearable: true
+                }
+              },
             }
           },
           update: {
@@ -120,9 +134,9 @@
               value: '1',
               type: 'select',
               isTranslatable: false,
-              props : {
+              props: {
                 label: `${this.$tr('ui.form.status')}*`,
-                options : [
+                options: [
                   {label: this.$tr('ui.label.enabled'), value: '1'},
                   {label: this.$tr('ui.label.disabled'), value: '0'}
                 ],
@@ -133,17 +147,16 @@
             },
             parentId: {
               value: '0',
-              type: 'select',
+              type: 'treeSelect',
               loadOptions: {
                 apiRoute: 'apiRoutes.qcommerce.categories',
-                select: {label: 'title', id: 'id'},
-                requestParams: {include: 'parent'}
+                select: {label: 'title', id: 'id'}
               },
               props: {
                 label: this.$tr('ui.form.parent'),
-                clearable: true,
+                clearable: false,
                 options: [
-                  {label: this.$tr('ui.label.disabled'), value: 0},
+                  {label: this.$tr('ui.label.disabled'), id: '0'},
                 ],
               }
             },
@@ -159,8 +172,8 @@
               type: 'checkbox',
               props: {
                 label: this.$tr('qcommerce.layout.form.featured'),
-                trueValue : '1',
-                falseValue : '0',
+                trueValue: '1',
+                falseValue: '0',
               }
             },
             sortOrder: {
