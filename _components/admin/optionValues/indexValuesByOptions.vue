@@ -3,10 +3,11 @@
     <div class="col-md-12 ">
       <div class="float-right">
         <q-btn :to="{name: 'qcommerce.admin.options'}" icon="fas fa-arrow-alt-circle-left"
-               color="primary" class="q-ml-xs"/>
-        <q-btn @click="id = -1;dialogNewValue=true" icon="fas fa-edit"
+               color="primary" class="q-ml-xs" round unelevated/>
+        <q-btn @click="id = -1,dialogNewValue=true" icon="fas fa-edit" rounded unelevated
                :label="$tr('qcommerce.layout.newOptionValue')" color="positive" class="q-ml-xs"/>
-        <q-btn @click="getItems(true)" icon="fas fa-sync-alt" color="info" class="q-ml-xs">
+        <q-btn @click="getItems(true)" icon="fas fa-sync-alt" color="info" class="q-ml-xs"
+               rounded unelevated>
           <q-tooltip :delay="300">
             {{$tr('ui.label.refresh')}}
           </q-tooltip>
@@ -20,21 +21,22 @@
 
     <div class="col-12 text-right q-mt-sm">
       <q-btn v-if="optionValues.length" @click="updateOrder" icon="fas fa-save" :label="$tr('ui.label.save')"
-             color="positive" class="q-ml-xs"/>
+             color="positive" class="q-ml-xs" rounded unelevated/>
     </div>
 
     <q-dialog v-model="dialogNewValue">
       <q-card>
-          <q-toolbar class="bg-primary text-white">
-              <q-avatar>
-                  <q-icon name="fa fa-stream" />
-              </q-avatar>
-              <q-toolbar-title><span class="text-weight-bold">{{ this.id > 0?$tr('qcommerce.sidebar.adminValuesEdit'):$tr('qcommerce.sidebar.adminValuesCreate') }}</span></q-toolbar-title>
-              <q-btn flat round dense icon="close" v-close-popup />
-          </q-toolbar>
-          <q-card-section>
-              <option-values-form :option-id="$route.params.id" :id="id" @updated="closeNewModal"></option-values-form>
-          </q-card-section>
+        <q-toolbar class="bg-primary text-white">
+          <q-avatar>
+            <q-icon name="fa fa-stream"/>
+          </q-avatar>
+          <q-toolbar-title><span class="text-weight-bold">{{ this.id > 0?$tr('qcommerce.sidebar.adminValuesEdit'):$tr('qcommerce.sidebar.adminValuesCreate') }}</span>
+          </q-toolbar-title>
+          <q-btn flat round dense icon="close" v-close-popup/>
+        </q-toolbar>
+        <q-card-section>
+          <option-values-form :option-id="$route.params.id" :id="id" @updated="closeNewModal"></option-values-form>
+        </q-card-section>
       </q-card>
     </q-dialog>
 
@@ -67,11 +69,11 @@
       this.$nextTick(() => {
         this.getItems()
         this.$root.$on('updateoptionValues', this.handlerUpdateoptionValues)
-        this.$root.$on('showEdit',this.showEdit)
+        this.$root.$on('showEdit', this.showEdit)
       })
     },
     methods: {
-      showEdit(id){
+      showEdit(id) {
         this.id = id
         this.dialogNewValue = true
       },
@@ -81,10 +83,10 @@
         let params = {
           refresh: refresh,
           params: {
-              filter:{
-                  optionId: optionId,
-                  order: {field: 'sort_order', way: 'asc'}
-              }
+            filter: {
+              optionId: optionId,
+              order: {field: 'sort_order', way: 'asc'}
+            }
           },
         }
 
@@ -103,6 +105,7 @@
         this.$crud.create('apiRoutes.qcommerce.optionValuesOrdener', {values: newdata})
           .then(response => {
             this.loading = false
+            this.getItems(true)
             this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
           })
           .catch(error => {
@@ -120,7 +123,7 @@
       treeToArray(items, response, parentId = null) {
         let elements = [...items]
         elements.forEach((element, index) => {
-          element.position = index
+          element.sortOrder = index
           element.parentId = parentId
           response.push(element)
           if (element.children && element.children.length) this.treeToArray(element.children, response, element.id)
@@ -129,9 +132,9 @@
       handlerUpdateoptionValues(event) {
         this.getItems()
       },
-      closeNewModal(){
-          this.dialogNewValue = false
-          this.getItems(true)
+      closeNewModal() {
+        this.dialogNewValue = false
+        this.getItems(true)
       }
     }
   }

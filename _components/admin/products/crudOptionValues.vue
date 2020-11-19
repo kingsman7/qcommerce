@@ -50,7 +50,7 @@
             <!--Form left-->
             <div class="col-12 col-md-6">
               <!--Option Value-->
-              <div class="input-title relative-position q-mb-sm">
+              <div class="input-title relative-position q-mb-md">
                 {{`${$tr('qcommerce.layout.form.optionValue')} *`}}
                 <!--Crud Option Value-->
                 <crud :crud-data="import('@imagina/qcommerce/_crud/productOptionValues')"
@@ -95,8 +95,7 @@
               <div class="input-title">
                 {{`${$tr('qcommerce.layout.form.subtractFromStock')}`}}
               </div>
-              <q-field v-model="form.subtract" borderless
-                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
+              <q-field v-model="form.subtract" borderless>
                 <tree-select
                   :clearable="false"
                   :append-to-body="true"

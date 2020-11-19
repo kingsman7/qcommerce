@@ -9,13 +9,6 @@
           <div class="q-mb-sm">
             <!--Title-->
             <div class="q-py-sm">{{$tr('qcommerce.layout.productOptions')}}</div>
-            <!--Button add Option-->
-            <!--Options-->
-              <crud :crud-data="import('@imagina/qcommerce/_crud/productOptions')" v-model="modal.optionSelected"
-                    type="select" @created="getOptions" :crud-props="{label : `${$tr('ui.form.option')} *`}"
-                    :config="{options : {label : 'description', value : 'id'}}" @input="createProductOption()"/>
-            <!--<q-btn icon="fas fa-pen" :label="$tr('qcommerce.layout.newOption')" color="positive"
-                   class="float-right btn-small" @click="addOption()"/>-->
           </div>
           <!--Message not option selected-->
           <div v-if="!productOptions.length" class="text-grey-8">
@@ -26,6 +19,10 @@
                              ref="optionList" @input="setDataOption()" v-else
                              @add="addOption(template.currentOption)"
                              @delete="deleteOption(template.currentOption)"/>
+          <!--Add new option-->
+          <div class="text-right q-mt-md">
+            <q-btn :label="$tr('ui.label.add')" rounded unelevated color="green" @click="modal.show = true" />
+          </div>
         </div>
       </div>
       <!--Form Right-->
@@ -90,6 +87,36 @@
     </div>
     <!--Loading-->
     <inner-loading :visible="loading"/>
+    <!--Modal-->
+    <q-dialog v-model="modal.show" class="backend-page">
+      <q-card>
+        <!--Header-->
+        <q-toolbar class="bg-primary text-white">
+          <q-toolbar-title>
+            <q-icon name="fa fa-folder" class="q-mr-sm"/>
+            <label>Nueva opción de producto</label>
+          </q-toolbar-title>
+          <q-btn flat v-close-popup icon="fas fa-times"/>
+        </q-toolbar>
+
+        <!--Content-->
+        <div class="relative-position q-pa-md">
+          <!--Parent-->
+          <div v-if="modal.parentOption" class="q-mb-md">
+            <div class="input-title">Parent</div>
+            <q-icon color="primary" name="fas fa-caret-right"></q-icon>
+            {{modal.parentOption.description}}
+          </div>
+          <!--Options-->
+          <div class="input-title">Option *</div>
+          <crud :crud-data="import('@imagina/qcommerce/_crud/productOptions')" v-model="modal.optionSelected"
+                type="select" @created="getOptions" :crud-props="{label : `${$tr('ui.form.option')} *`}"
+                :config="{options : {label : 'description', value : 'id'}}" @input="createProductOption()"/>
+          <!--Loading-->
+          <inner-loading :visible="modal.loading"/>
+        </div>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
@@ -122,6 +149,7 @@
           formOption: false
         },
         productOptions: [],//Options
+        productOptionsRoot: [],//Options
         productOptionValues: [],//Option values
         template: {
           optionSelected: null,
@@ -157,6 +185,7 @@
           let params = {refresh: true, params: {include: 'productOptions', fields: 'id'}}
           this.$crud.show(configName, this.productId, params).then(response => {
             this.productOptions = this.$clone(this.arrayToTree(response.data.productOptions))//Set product Options
+            this.productOptionsRoot = this.$clone(response.data.productOptions)//Set product Options
             this.productOptionValues = this.$clone(response.data.optionValues)//Set product options values
             this.loading = false
             resolve(true)
@@ -198,7 +227,7 @@
             productId: this.productId,
             optionId: this.modal.optionSelected.toString(),
             parentId: this.modal.parentOption.id || 0,
-            required : 0
+            required: 0
           }
 
           //Request
@@ -354,7 +383,7 @@
       },
       //Find option by parameter
       findOption(value, field = 'id') {
-        const options = this.$clone(this.productOptions)//Get all options
+        const options = this.$clone(this.productOptionsRoot)//Get all options
         let response = false //Default response
         let index = options.findIndex(item => item[field] == value)//Find if this option is parent
         if (index >= 0) {

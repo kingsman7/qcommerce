@@ -17,9 +17,9 @@
                 :options="[
                   /*{label: 'Text', value: 'text'},
                   {label: 'Textarea', value: 'textarea'},*/
-                  {label: 'Select', value: 'select'},
-                  {label: 'Radio', value: 'radio'},
-                  {label: 'Checkbox', value: 'checkbox'},
+                  {label: 'Selección unica (Selector)', value: 'select'},
+                  {label: 'Selección unica (Lista)', value: 'radio'},
+                  {label: 'Selección multiple (Lista)', value: 'checkbox'},
                   /*{label: 'Image', value: 'image'},
                   {label: 'Color', value: 'color'},*/
                 ]" outlined dense emit-value map-options/>
