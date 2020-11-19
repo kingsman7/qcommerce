@@ -525,12 +525,8 @@
         optionsTemplate: {
           categories: [],
           products: [],
-<<<<<<< HEAD
-          relatedProducts: []
-=======
           relatedProducts: [],
           priceLists: [],
->>>>>>> 2b1e086 (+UPDATE: Manufacturers index refresh icon)
         },
         buttonActions: {label: '', value: 1},
         modalShow: {
@@ -716,10 +712,7 @@
         if (this.locale.success) this.$refs.localeComponent.vReset()//Reset locale
         await this.getData()//Get Data Item
         await this.getCategories()//Get categories
-<<<<<<< HEAD
-=======
         await this.getPriceLists()//Get Price lists
->>>>>>> 2b1e086 (+UPDATE: Manufacturers index refresh icon)
         this.success = true//Activate status of page
         this.updateOptions
         this.loading = false
@@ -747,8 +740,6 @@
           })
         })
       },
-<<<<<<< HEAD
-=======
       //Get product categories
       getPriceLists() {
         return new Promise((resolve, reject) => {
@@ -769,7 +760,6 @@
           })
         })
       },
->>>>>>> 2b1e086 (+UPDATE: Manufacturers index refresh icon)
       //Get product if is edit
       getData() {
         return new Promise((resolve, reject) => {
@@ -915,8 +905,6 @@
           let title = this.$clone(this.locale.formTemplate.name)
           this.locale.formTemplate.slug = this.$clone(this.$helper.getSlug(title))
         }
-<<<<<<< HEAD
-=======
       },
       checkPriceList(id = null) {
         if (id) {
@@ -952,7 +940,6 @@
           console.warn(priceLists)
           this.locale.formTemplate.priceLists = priceLists
         }
->>>>>>> 2b1e086 (+UPDATE: Manufacturers index refresh icon)
       }
     }
   }
