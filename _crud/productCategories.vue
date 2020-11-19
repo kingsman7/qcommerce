@@ -129,18 +129,6 @@
                 ],
               }
             },
-            sortOrder: {
-              value: 0,
-              type: 'input',
-              isTranslatable: false,
-              props: {
-                label: `${this.$tr('qcommerce.layout.form.sortOrder')}`,
-                type: 'number',
-                rules: [
-                  val => val >= 0 || this.$tr('ui.message.fieldRequired')
-                ],
-              }
-            },
             showMenu: {
               value: false,
               type: 'checkbox',

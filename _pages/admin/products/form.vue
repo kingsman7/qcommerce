@@ -106,6 +106,8 @@
                           <q-input data-testid="sku" outlined dense v-model="locale.formTemplate.sku"
                                    :label="$tr('ui.form.sku')"/>
                           <!--Price-->
+                          <q-input data-testid="price" outlined dense type="number" v-model="locale.formTemplate.price"
+                                   :label="$tr('ui.form.price')" @input="calculateAllPriceLists" />
                           <!--Price List Enable-->
                           <div class="full-width" v-if="priceListEnable==='1'">
                             <div class="row q-py-sm">
@@ -121,12 +123,12 @@
                               </div>
                             </div>
                             <div class="row q-col-gutter-md q-pt-md" v-for="(list, i) in locale.formTemplate.priceLists">
+                              <div class="col-6">
+                                <dynamic-field :field="dynamicFields.priceLists" v-model="list.priceListId" @input="list.price = calculatePriceFromlist(list.priceListId)" />
+                              </div>
                               <div class="col-4">
                                 <q-input data-testid="price" v-model="list.price" outlined dense
-                                         :label="$tr('ui.form.price')" type="number"/>
-                              </div>
-                              <div class="col-6">
-                                <dynamic-field :field="dynamicFields.priceLists" v-model="list.priceListId" />
+                                         :label="$tr('ui.form.price')" type="number" :readonly="checkPriceList(list.priceListId)"/>
                               </div>
                               <div class="col-2 text-right">
                                 <q-btn icon="fas fa-trash" color="negative" size="sm" class="q-mt-sm" @click="locale.form.priceLists.splice(i,1)" >
@@ -136,11 +138,6 @@
                                 </q-btn>
                               </div>
                             </div>
-                          </div>
-                          <!--Price List not enabled-->
-                          <div class="full-width" v-else>
-                            <q-input data-testid="price" v-model="locale.formTemplate.price" outlined dense
-                                     :label="$tr('ui.form.price')" type="number"/>
                           </div>
                           <!--Quantity-->
                           <q-input data-testid="quantity" outlined dense v-model="locale.formTemplate.quantity"
@@ -528,7 +525,12 @@
         optionsTemplate: {
           categories: [],
           products: [],
+<<<<<<< HEAD
           relatedProducts: []
+=======
+          relatedProducts: [],
+          priceLists: [],
+>>>>>>> 2b1e086 (+UPDATE: Manufacturers index refresh icon)
         },
         buttonActions: {label: '', value: 1},
         modalShow: {
@@ -714,6 +716,10 @@
         if (this.locale.success) this.$refs.localeComponent.vReset()//Reset locale
         await this.getData()//Get Data Item
         await this.getCategories()//Get categories
+<<<<<<< HEAD
+=======
+        await this.getPriceLists()//Get Price lists
+>>>>>>> 2b1e086 (+UPDATE: Manufacturers index refresh icon)
         this.success = true//Activate status of page
         this.updateOptions
         this.loading = false
@@ -741,6 +747,29 @@
           })
         })
       },
+<<<<<<< HEAD
+=======
+      //Get product categories
+      getPriceLists() {
+        return new Promise((resolve, reject) => {
+          this.loadingCategory = true
+          let configName = 'apiRoutes.qcommerce.priceLists'
+          let params = {//Params to request
+            refresh: true,
+          }
+
+          //Request
+          this.$crud.index(configName, params).then(response => {
+            this.optionsTemplate.priceLists = response.data
+            //this.locale.fields.categoryId = response.data.length ? response.data[0].id : null
+            resolve(true)
+          }).catch(error => {
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+            reject(true)
+          })
+        })
+      },
+>>>>>>> 2b1e086 (+UPDATE: Manufacturers index refresh icon)
       //Get product if is edit
       getData() {
         return new Promise((resolve, reject) => {
@@ -886,6 +915,44 @@
           let title = this.$clone(this.locale.formTemplate.name)
           this.locale.formTemplate.slug = this.$clone(this.$helper.getSlug(title))
         }
+<<<<<<< HEAD
+=======
+      },
+      checkPriceList(id = null) {
+        if (id) {
+          let selectedPriceList = this.$array.findByTag(this.optionsTemplate.priceLists, 'id', id)
+          return selectedPriceList.criteria == 'percentage'
+        }
+        return false
+      },
+      calculatePriceFromlist(id = null){
+        if (id) {
+          let selectedPriceList = this.$array.findByTag(this.optionsTemplate.priceLists, 'id', id)
+          let price = parseInt(this.$clone(this.locale.form.price))
+          if (selectedPriceList.criteria == 'percentage') {
+            if (selectedPriceList.operationPrefix == '-') {
+              return price - (price * (selectedPriceList.value / 100))
+            } else {
+              return price + (price * (selectedPriceList.value / 100))
+            }
+          }else{
+            return 0
+          }
+        }
+        return 0
+      },
+      calculateAllPriceLists(){
+        if(this.locale.form.priceLists.length > 0) {
+          let priceLists = this.locale.form.priceLists.map(item => {
+            return {
+              priceListId: item.priceListId,
+              price: this.calculatePriceFromlist(item.priceListId)
+            }
+          })
+          console.warn(priceLists)
+          this.locale.formTemplate.priceLists = priceLists
+        }
+>>>>>>> 2b1e086 (+UPDATE: Manufacturers index refresh icon)
       }
     }
   }

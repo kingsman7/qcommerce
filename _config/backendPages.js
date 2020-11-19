@@ -210,6 +210,7 @@ export default {
     title: 'qcommerce.sidebar.adminManufacturers',
     icon: 'fas fa-industry',
     authenticated: true,
+    subHeader: {refresh: true}
   },
   //Tax Class list
   taxClasses: {

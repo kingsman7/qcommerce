@@ -96,11 +96,11 @@
               value: '0',
               type: 'select',
               loadOptions: {
-                apiRoute: 'apiRoutes.quser.roles',
-                select: {label: 'name', id: 'id'}
+                apiRoute: 'apiRoutes.quser.departments',
+                select: {label: 'title', id: 'id'}
               },
               props: {
-                label: `${this.$tr('ui.label.role')}:`,
+                label: `${this.$tr('ui.label.department')}:`,
                 clearable : true,
                 options:[
                   {label: this.$trp('ui.label.all'), value: 0, id: 0}
@@ -108,7 +108,7 @@
               }
             },
             relatedEntity:{
-              value: 'Modules\\Iprofile\\Entities\\Role'
+              value: 'Modules\\Iprofile\\Entities\\Department'
             }
           }
         }
