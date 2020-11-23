@@ -116,7 +116,7 @@ export default {
     status: 'Estado',
     color: 'Color',
     featured : 'Destacado',
-    sortOrder : 'Orden de clasificación',
+    sortOrder : 'Orden de prioridad',
     operationPrefix: 'Operación',
     value: 'Valor | Valores',
     priceLists: 'Listas de Precios',

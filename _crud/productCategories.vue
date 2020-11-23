@@ -23,6 +23,9 @@
               {name: 'name', label: this.$tr('ui.form.name'), field: 'title', align: 'rigth'},
               {name: 'slug', label: this.$tr('ui.form.slug'), field: 'slug', align: 'left'},
               {
+                name: 'status', label: this.$tr('ui.form.status'), field: 'status'
+              },
+              {
                 name: 'parent', label: this.$tr('ui.form.parent'), field: 'parent', align: 'left',
                 format: val => val ? (val.title ? val.title : '-') : '-'
               },
@@ -39,6 +42,20 @@
                   field: 'created_at',
                   way: 'desc',
                 },
+              },
+            },
+            filters : {
+              parentId: {
+                value: null,
+                type: 'treeSelect',
+                loadOptions: {
+                  apiRoute: 'apiRoutes.qcommerce.categories',
+                  select: {label: 'title', id: 'id'},
+                },
+                props: {
+                  label: this.$tr('ui.form.parent'),
+                  clearable: true
+                }
               },
             }
           },
@@ -113,19 +130,33 @@
                 ]
               }
             },
+            status: {
+              value: '1',
+              type: 'select',
+              isTranslatable: false,
+              props: {
+                label: `${this.$tr('ui.form.status')}*`,
+                options: [
+                  {label: this.$tr('ui.label.enabled'), value: '1'},
+                  {label: this.$tr('ui.label.disabled'), value: '0'}
+                ],
+                rules: [
+                  val => !!val || this.$tr('ui.message.fieldRequired')
+                ],
+              }
+            },
             parentId: {
               value: '0',
-              type: 'select',
+              type: 'treeSelect',
               loadOptions: {
                 apiRoute: 'apiRoutes.qcommerce.categories',
-                select: {label: 'title', id: 'id'},
-                requestParams: {include: 'parent'}
+                select: {label: 'title', id: 'id'}
               },
               props: {
                 label: this.$tr('ui.form.parent'),
-                clearable: true,
+                clearable: false,
                 options: [
-                  {label: this.$tr('ui.label.disabled'), value: 0},
+                  {label: this.$tr('ui.label.disabled'), id: '0'},
                 ],
               }
             },
@@ -141,12 +172,12 @@
               type: 'checkbox',
               props: {
                 label: this.$tr('qcommerce.layout.form.featured'),
-                trueValue : '1',
-                falseValue : '0',
+                trueValue: '1',
+                falseValue: '0',
               }
             },
             sortOrder: {
-              value: '',
+              value: '0',
               type: 'input',
               props: {
                 label: this.$tr('qcommerce.layout.form.sortOrder'),

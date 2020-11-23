@@ -62,6 +62,7 @@
   import icommercecheckmo from '@imagina/qcommerce/_components/admin/paymentMethods/checkmo'
   import icommerceauthorize from '@imagina/qcommerce/_components/admin/paymentMethods/authorize'
   import icommercecredibanco from '@imagina/qcommerce/_components/admin/paymentMethods/credibanco'
+  import icommercexpay from '@imagina/qcommerce/_components/admin/paymentMethods/xPay'
 
   export default {
     props: {},
@@ -70,7 +71,8 @@
       icommercepayu,
       icommercecheckmo,
       icommerceauthorize,
-      icommercecredibanco
+      icommercecredibanco,
+      icommercexpay
     },
     watch: {},
     mounted() {

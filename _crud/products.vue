@@ -57,6 +57,18 @@
                   apiRoute: 'apiRoutes.qcommerce.categories'
                 }
               },
+              manufacturers: {
+                value: null,
+                type: 'select',
+                props: {
+                  label: `${this.$tr('qcommerce.layout.form.manufacturer')}:`,
+                  clearable: true,
+                },
+                loadOptions: {
+                  apiRoute: 'apiRoutes.qcommerce.manufacturers',
+                  select: {label: 'name', id: 'id'}
+                }
+              },
               status: {
                 value: '1',
                 type: 'select',
