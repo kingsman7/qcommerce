@@ -625,7 +625,8 @@
               label: this.$trp('ui.form.category') + '*',
               rules: [val => !!val || $tr('ui.message.fieldRequired')],
               clearable: false,
-              multiple: true
+              multiple: true,
+              valueConsistsOf : 'ALL'
             },
             loadOptions: {
               apiRoute: 'apiRoutes.qcommerce.categories',

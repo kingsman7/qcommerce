@@ -44,7 +44,8 @@
       return {
         columns: [
           { name: 'cantidad', label: 'Cantidad', field: 'quantity', align: 'left' },
-          { name: 'codigo', label: 'Codigo', field: 'id', align: 'left' },
+          { name: 'productId', label: 'ID', field: 'productId', align: 'left' },
+          { name: 'sku', label: 'SKU', field: 'reference', align: 'left' },
           { name: 'description', label: 'Description', align: 'left' },
           {
             name: 'valor',
