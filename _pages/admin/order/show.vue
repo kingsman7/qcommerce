@@ -63,6 +63,14 @@
                     {{order.customer.email}}
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    {{$tr('ui.form.phone')}}
+                  </div>
+                  <div class="col-md-6">
+                    {{$helper.maskPhone(order.telephone)}}
+                  </div>
+                </div>
               </q-card-section>
             </q-card>
           </div>
