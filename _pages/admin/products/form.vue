@@ -532,7 +532,7 @@
         modalShow: {
           category: false
         },
-        priceListEnable: this.$store.getters['qsiteApp/getSettingValueByName']('icommerce::product-price-list'),
+        priceListEnable: this.$store.getters['qsiteApp/getSettingValueByName']('icommerce::product-price-list-enable'),
       }
     },
     computed: {
