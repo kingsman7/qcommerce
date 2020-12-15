@@ -802,10 +802,11 @@
         orderData.relatedProducts.forEach((item, key) => {
           orderData.relatedProducts[key] = item.id
         })
-
-        orderData.priceLists.forEach((item, key) => {
-          orderData.priceLists[key] = {priceListId: item.id, price: item.price}
-        })
+        if(orderData.priceLists) {
+          orderData.priceLists.forEach((item, key) => {
+            orderData.priceLists[key] = {priceListId: item.id, price: item.price}
+          })
+        }
 
         //Set default related products options
         if (data.relatedProducts && data.relatedProducts.length) {
