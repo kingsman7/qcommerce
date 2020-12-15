@@ -303,7 +303,7 @@ export default {
     authenticated: true,
   },
   priceLists: {
-    permission: 'icommerce.productlists.index',
+    permission: 'icommerce.productlists.manage',
     activated: true,
     path: '/priceLists',
     name: 'qcommerce.admin.priceLists.index',
