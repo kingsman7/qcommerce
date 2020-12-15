@@ -27,6 +27,8 @@ export default {
   newCoupon: 'Nuevo Cupon',
   updateCoupon: 'Actualizar Cupon',
   newStatus : 'Nuevo Estado',
+  newPriceList: 'Nueva Lista de Precios',
+  updatePriceList: 'Actualizar Lista de Precios',
 
   orderAccountInformation: 'Información de pedido y cuenta',
   orderStatus: 'Estado del pedido',
@@ -95,7 +97,7 @@ export default {
     manufacturer: 'Fabricante',
     customerGroup: 'Grupo de Usuario',
     taxClass: 'Tipo de Impuesto',
-
+    
     // Cupones
     code: 'Codigo de Cupon',
     type: 'Tipo',
@@ -115,6 +117,10 @@ export default {
     color: 'Color',
     featured : 'Destacado',
     sortOrder : 'Orden de prioridad',
+    operationPrefix: 'Operación',
+    value: 'Valor | Valores',
+    priceLists: 'Listas de Precios',
+    
   },
   message : {
     warnAddOpt : 'Para agregar opciones, primero debe crear el producto',
@@ -129,6 +135,8 @@ export default {
     fixedValue: 'Valor fijo',
     fixed: 'Valor fijo',
     percentage: 'Porcentaje',
+    add: 'Sumar',
+    subtract: 'Restar',
     taxRateBased:{
       shippingAddress: 'Dirección de Envío',
       paymentAddress: 'Dirección de Pago',

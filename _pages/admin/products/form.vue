@@ -106,8 +106,39 @@
                           <q-input data-testid="sku" outlined dense v-model="locale.formTemplate.sku"
                                    :label="$tr('ui.form.sku')"/>
                           <!--Price-->
-                          <q-input data-testid="price" v-model="locale.formTemplate.price" outlined dense
-                                   :label="$tr('ui.form.price')" type="number"/>
+                          <q-input data-testid="price" outlined dense type="number" v-model="locale.formTemplate.price"
+                                   :label="$tr('ui.form.price')" @input="calculateAllPriceLists" />
+                          <!--Price List Enable-->
+                          <div class="full-width" v-if="priceListEnable==='1'">
+                            <div class="row q-py-sm">
+                              <div class="col-8">
+                                {{ $tr('qcommerce.layout.form.priceLists') }}
+                              </div>
+                              <div class="col-4 text-right">
+                                <q-btn icon="fas fa-plus" color="positive" size="sm" @click="()=> { locale.form.priceLists.push({price: 0, priceListId: null}) }">
+                                  <q-tooltip>
+                                    {{ $tr('ui.label.add') }}
+                                  </q-tooltip>
+                                </q-btn>
+                              </div>
+                            </div>
+                            <div class="row q-col-gutter-md q-pt-md" v-for="(list, i) in locale.formTemplate.priceLists">
+                              <div class="col-6">
+                                <dynamic-field :field="dynamicFields.priceLists" v-model="list.priceListId" @input="list.price = calculatePriceFromlist(list.priceListId)" />
+                              </div>
+                              <div class="col-4">
+                                <q-input data-testid="price" v-model="list.price" outlined dense
+                                         :label="$tr('ui.form.price')" type="number" :readonly="checkPriceList(list.priceListId)"/>
+                              </div>
+                              <div class="col-2 text-right">
+                                <q-btn icon="fas fa-trash" color="negative" size="sm" class="q-mt-sm" @click="locale.form.priceLists.splice(i,1)" >
+                                  <q-tooltip>
+                                    {{ $tr('ui.label.delete') }}
+                                  </q-tooltip>
+                                </q-btn>
+                              </div>
+                            </div>
+                          </div>
                           <!--Quantity-->
                           <q-input data-testid="quantity" outlined dense v-model="locale.formTemplate.quantity"
                                    :label="$tr('ui.form.quantity')" type="number"/>
@@ -373,6 +404,7 @@
                         <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
                                @click="buttonActions.value = 4, createItem()" color="positive"/>
                       </div>
+                      <!--<dynamic-field v-model="locale.formTemplate.productDiscounts" :field="dynamicFields.productDiscounts" />-->
                     </q-card-section>
                   </q-card>
                 </q-expansion-item>
@@ -493,12 +525,14 @@
         optionsTemplate: {
           categories: [],
           products: [],
-          relatedProducts: []
+          relatedProducts: [],
+          priceLists: [],
         },
         buttonActions: {label: '', value: 1},
         modalShow: {
           category: false
-        }
+        },
+        priceListEnable: this.$store.getters['qsiteApp/getSettingValueByName']('icommerce::product-price-list-enable'),
       }
     },
     computed: {
@@ -529,7 +563,10 @@
             points: 0,
             relatedProducts: [],
             productOptions: [],
-            discounts: [],
+            productDiscounts: [],
+            priceLists: [
+              {price: 0, priceListId: null}
+            ],
             mediasSingle: {},
             mediasMulti: {},
             options: {
@@ -603,6 +640,34 @@
       //Dynamic fields
       dynamicFields() {
         return {
+          productDiscounts: {
+            value: null,
+            type: 'select',
+            testId: 'productDiscounts',
+            props: {
+              label: this.$tr('qcommerce.layout.form.discount') + '*',
+              rules: [val => !!val || this.$tr('ui.message.fieldRequired')],
+              clearable: true,
+              multiple: true,
+            },
+            loadOptions: {
+              apiRoute: 'apiRoutes.qdiscountable.discounts',
+              select: {label: 'formatValue',id: 'id'}
+            }
+          },
+          priceLists: {
+            value: null,
+            type: 'select',
+            testId: 'priceLists',
+            props: {
+              label: this.$tr('qcommerce.layout.form.priceLists') + '*',
+              clearable: true,
+            },
+            loadOptions: {
+              apiRoute: 'apiRoutes.qcommerce.priceLists',
+              select: {label: 'name',id: 'id'}
+            }
+          },
           category: {
             value: null,
             type: 'treeSelect',
@@ -648,6 +713,7 @@
         if (this.locale.success) this.$refs.localeComponent.vReset()//Reset locale
         await this.getData()//Get Data Item
         await this.getCategories()//Get categories
+        await this.getPriceLists()//Get Price lists
         this.success = true//Activate status of page
         this.updateOptions
         this.loading = false
@@ -675,6 +741,26 @@
           })
         })
       },
+      //Get product categories
+      getPriceLists() {
+        return new Promise((resolve, reject) => {
+          this.loadingCategory = true
+          let configName = 'apiRoutes.qcommerce.priceLists'
+          let params = {//Params to request
+            refresh: true,
+          }
+
+          //Request
+          this.$crud.index(configName, params).then(response => {
+            this.optionsTemplate.priceLists = response.data
+            //this.locale.fields.categoryId = response.data.length ? response.data[0].id : null
+            resolve(true)
+          }).catch(error => {
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+            reject(true)
+          })
+        })
+      },
       //Get product if is edit
       getData() {
         return new Promise((resolve, reject) => {
@@ -685,7 +771,7 @@
             let params = {
               refresh: true,
               params: {
-                include: 'relatedProducts,categories,category,parent,discounts,manufacturer',
+                include: 'relatedProducts,categories,category,parent,discounts,manufacturer,priceLists',
                 filter: {allTranslations: true}
               }
             }
@@ -716,6 +802,12 @@
         orderData.relatedProducts.forEach((item, key) => {
           orderData.relatedProducts[key] = item.id
         })
+        if(orderData.priceLists) {
+          orderData.priceLists.forEach((item, key) => {
+            orderData.priceLists[key] = {priceListId: item.id, price: item.price}
+          })
+        }
+
         //Set default related products options
         if (data.relatedProducts && data.relatedProducts.length) {
           this.optionsTemplate.relatedProducts = this.$array.tree(data.relatedProducts, {label: 'name', id: 'id'})
@@ -814,6 +906,41 @@
         if (!this.productId) {
           let title = this.$clone(this.locale.formTemplate.name)
           this.locale.formTemplate.slug = this.$clone(this.$helper.getSlug(title))
+        }
+      },
+      checkPriceList(id = null) {
+        if (id) {
+          let selectedPriceList = this.$array.findByTag(this.optionsTemplate.priceLists, 'id', id)
+          return selectedPriceList.criteria == 'percentage'
+        }
+        return false
+      },
+      calculatePriceFromlist(id = null){
+        if (id) {
+          let selectedPriceList = this.$array.findByTag(this.optionsTemplate.priceLists, 'id', id)
+          let price = parseInt(this.$clone(this.locale.form.price))
+          if (selectedPriceList.criteria == 'percentage') {
+            if (selectedPriceList.operationPrefix == '-') {
+              return price - (price * (selectedPriceList.value / 100))
+            } else {
+              return price + (price * (selectedPriceList.value / 100))
+            }
+          }else{
+            return 0
+          }
+        }
+        return 0
+      },
+      calculateAllPriceLists(){
+        if(this.locale.form.priceLists.length > 0) {
+          let priceLists = this.locale.form.priceLists.map(item => {
+            return {
+              priceListId: item.priceListId,
+              price: this.calculatePriceFromlist(item.priceListId)
+            }
+          })
+          console.warn(priceLists)
+          this.locale.formTemplate.priceLists = priceLists
         }
       }
     }

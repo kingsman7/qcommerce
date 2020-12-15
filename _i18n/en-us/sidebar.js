@@ -30,4 +30,7 @@ export default {
   adminTaxRates : 'Tax Rates',
   adminTaxRatesCreate : 'New Tax Rate',
   adminTaxRatesEdit : 'Edit Tax Rate',
+  adminPriceLists: 'Price Lists',
+  adminPriceListsCreate: 'Create Price Lists',
+  adminPriceListsEdit: 'Edit Price Lists',
 }
