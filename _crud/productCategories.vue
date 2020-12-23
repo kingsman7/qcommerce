@@ -61,7 +61,7 @@
           },
           update: {
             title: this.$tr('qcommerce.layout.updateCategory'),
-            requestParams: {include: 'parent'}
+            requestParams: {include: 'parent,discounts'}
           },
           delete: true,
           formLeft: {
@@ -222,6 +222,21 @@
                 ]
               }
             },
+            discounts: {
+              value: null,
+              type: 'select',
+              testId: 'discounts',
+              props: {
+                label: this.$tr('qcommerce.layout.form.discount') + '*',
+                rules: [val => !!val || this.$tr('ui.message.fieldRequired')],
+                clearable: true,
+                multiple: true,
+              },
+              loadOptions: {
+                apiRoute: 'apiRoutes.discountable.discounts',
+                select: {label: 'name', id: 'id'}
+              }
+            }
           },
         }
       },

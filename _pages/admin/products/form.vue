@@ -390,7 +390,7 @@
                   <q-separator/>
                   <q-card>
                     <q-card-section class="q-pa-sm">
-                      <div class="q-pa-sm" v-if="productId">
+                      <!--<div class="q-pa-sm" v-if="productId">
                         <crud
                           :crud-data="import('@imagina/qcommerce/_crud/productDiscounts')"
                           :custom-data="{read: {requestParams: {include: 'department', filter: {productId: productId} } }, formRight:{productId: {value: productId} } }"
@@ -403,7 +403,8 @@
                         </div>
                         <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
                                @click="buttonActions.value = 4, createItem()" color="positive"/>
-                      </div>
+                      </div>-->
+                      <dynamic-field v-model="locale.formTemplate.discounts" :field="dynamicFields.discounts" />
                       <!--<dynamic-field v-model="locale.formTemplate.productDiscounts" :field="dynamicFields.productDiscounts" />-->
                     </q-card-section>
                   </q-card>
@@ -532,7 +533,7 @@
         modalShow: {
           category: false
         },
-        priceListEnable: this.$store.getters['qsiteApp/getSettingValueByName']('icommerce::product-price-list-enable'),
+        priceListEnable: this.$auth.hasAccess('icommerce.productlists.manage') && this.$store.getters['qsiteApp/getSettingValueByName']('icommerce::product-price-list-enable'),
       }
     },
     computed: {
@@ -563,7 +564,7 @@
             points: 0,
             relatedProducts: [],
             productOptions: [],
-            productDiscounts: [],
+            discounts: [],
             priceLists: [
               {price: 0, priceListId: null}
             ],
@@ -640,10 +641,10 @@
       //Dynamic fields
       dynamicFields() {
         return {
-          productDiscounts: {
+          discounts: {
             value: null,
             type: 'select',
-            testId: 'productDiscounts',
+            testId: 'discounts',
             props: {
               label: this.$tr('qcommerce.layout.form.discount') + '*',
               rules: [val => !!val || this.$tr('ui.message.fieldRequired')],
@@ -651,8 +652,8 @@
               multiple: true,
             },
             loadOptions: {
-              apiRoute: 'apiRoutes.qdiscountable.discounts',
-              select: {label: 'formatValue',id: 'id'}
+              apiRoute: 'apiRoutes.discountable.discounts',
+              select: {label: 'name', id: 'id'}
             }
           },
           priceLists: {
