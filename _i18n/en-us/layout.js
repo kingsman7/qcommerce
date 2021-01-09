@@ -125,6 +125,7 @@ export default {
     noDeleteOption : 'You can not delete this option, you are the father of {name}',
     selectProduct : 'Select a product option',
     warnAddDiscount : 'To add discounts, you must first create the product',
+    viewProduct : 'View product'
   },
   options:{
     yes: 'Yes',

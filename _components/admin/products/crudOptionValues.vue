@@ -9,7 +9,7 @@
       <div slot="top-right">
         <!--Button new record-->
         <q-btn icon="fas fa-edit" color="positive" :label="$tr('qcommerce.layout.newOptionValue')"
-               @click="modal.itemId = false; modal.show = true" class="btn-small"/>
+               @click="modal.itemId = false; modal.show = true" class="btn-small" unelevated rounded/>
       </div>
 
       <!--= Custom Columns =-->
@@ -91,6 +91,19 @@
               <q-input v-model="form.quantity" type="number" outlined dense
                        :label="`${$tr('ui.form.quantity')} *`"
                        :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+              <div class="input-title">{{$tr('ui.form.stock')}}</div>
+              <tree-select
+                data-testid="stockStatus"
+                :clearable="false"
+                :append-to-body="true"
+                :options="[
+                  {label: this.$tr('ui.label.available'), id: 1},
+                  {label: this.$tr('ui.label.soldOut'), id: 0}
+                ]"
+                value-consists-of="BRANCH_PRIORITY"
+                v-model="form.stockStatus"
+                class="q-mb-md"
+              />
               <!--Subtrack-->
               <div class="input-title">
                 {{`${$tr('qcommerce.layout.form.subtractFromStock')}`}}
@@ -228,6 +241,7 @@
           optionValueId: null,
           parentOptionValueId: null,
           quantity: null,
+          stockStatus: 1,
           subtract: 1,
           price: null,
           pricePrefix: '+',

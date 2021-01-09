@@ -97,7 +97,7 @@ export default {
     manufacturer: 'Fabricante',
     customerGroup: 'Grupo de Usuario',
     taxClass: 'Tipo de Impuesto',
-    
+
     // Cupones
     code: 'Codigo de Cupon',
     type: 'Tipo',
@@ -120,7 +120,7 @@ export default {
     operationPrefix: 'Operación',
     value: 'Valor | Valores',
     priceLists: 'Listas de Precios',
-    
+
   },
   message : {
     warnAddOpt : 'Para agregar opciones, primero debe crear el producto',
@@ -128,6 +128,7 @@ export default {
     noDeleteOption : 'No puede borrar está opción, es padre de {name}',
     selectProduct : 'Seleccione una opción de producto',
     warnAddDiscount : 'Para agregar descuentos, primero debe crear el producto',
+    viewProduct : 'Ver producto'
   },
   options:{
     yes: 'Sí',
