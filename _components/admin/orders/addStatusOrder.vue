@@ -10,7 +10,7 @@
         <q-input :label="$tr('ui.form.comment')" outlined error-message="We need a comment"  rows="3" type="textarea" v-model="form.comment" label="Comment"/>
     </div>
     <div class="q-py-xs">
-      <span>Notificar al Cleinte</span>
+      <span>Notificar al Cliente</span>
       <q-toggle
               v-model="form.notify"
               checked-icon="check"
@@ -21,7 +21,7 @@
       />
     </div>
     <div class="q-mt-md">
-      <q-btn label="save" color="primary" icon="save" @click="saveOrderHistoryStatus()"/>
+      <q-btn unelevated rounded label="save" color="primary" icon="save" @click="saveOrderHistoryStatus()"/>
     </div>
 
   </div>
