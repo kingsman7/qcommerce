@@ -390,7 +390,7 @@
                   <q-separator/>
                   <q-card>
                     <q-card-section class="q-pa-sm">
-                      <!--<div class="q-pa-sm" v-if="productId">
+                      <div class="q-pa-sm" v-if="productId">
                         <crud
                           :crud-data="import('@imagina/qcommerce/_crud/productDiscounts')"
                           :custom-data="{read: {requestParams: {include: 'department', filter: {productId: productId} } }, formRight:{productId: {value: productId} } }"
@@ -403,8 +403,8 @@
                         </div>
                         <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
                                @click="buttonActions.value = 4, createItem()" color="positive"/>
-                      </div>-->
-                      <dynamic-field v-model="locale.formTemplate.discounts" :field="dynamicFields.discounts" />
+                      </div>
+                      <!--<dynamic-field v-model="locale.formTemplate.discounts" :field="dynamicFields.discounts" />-->
                       <!--<dynamic-field v-model="locale.formTemplate.productDiscounts" :field="dynamicFields.productDiscounts" />-->
                     </q-card-section>
                   </q-card>
@@ -641,7 +641,7 @@
       //Dynamic fields
       dynamicFields() {
         return {
-          discounts: {
+          /*discounts: {
             value: null,
             type: 'select',
             testId: 'discounts',
@@ -652,10 +652,10 @@
               multiple: true,
             },
             loadOptions: {
-              apiRoute: 'apiRoutes.discountable.discounts',
+              apiRoute: 'apiRoutes.qdiscountable.discounts',
               select: {label: 'name', id: 'id'}
             }
-          },
+          },*/
           priceLists: {
             value: null,
             type: 'select',
