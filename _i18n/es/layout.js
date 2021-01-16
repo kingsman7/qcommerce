@@ -12,6 +12,7 @@ export default {
   updateProductOptionValue : 'Actualizar valor de Opción de producto',
   newProductDiscount : 'Nuevo Descuento de producto',
   updateProductDiscount : 'Actualizar Descuento producto',
+  newPaymentMethod : 'Nuevo metodo de pago',
   updatePaymentMethod : 'Actualizar metodo de pago',
   updateShippingMethod : 'Actualizar metodo de envio',
   newOrder : 'Nuevo Orden',
