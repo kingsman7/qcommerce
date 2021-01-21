@@ -308,7 +308,7 @@ export default {
     authenticated: true,
   },
   priceLists: {
-    permission: 'icommerce.productlists.manage',
+    permission: 'icommercepricelist.pricelists.manage',
     activated: true,
     path: '/priceLists',
     name: 'qcommerce.admin.priceLists.index',

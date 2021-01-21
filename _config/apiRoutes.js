@@ -1,6 +1,7 @@
 const moduleName = 'icommerce';
 const moduleVersion = 'v3';
 const urlBase = `/${moduleName}/${moduleVersion}`
+const urlBase2 = `/${moduleName}pricelist/${moduleVersion}`
 
 export default {
 	urlBase : urlBase,
@@ -26,5 +27,5 @@ export default {
   taxClasses : `${urlBase}/tax-classes`,
 	taxRates : `${urlBase}/tax-rates`,
   productDiscounts : `${urlBase}/product-discounts`,
-	priceLists : `${urlBase}/price-lists`,
+	priceLists : `${urlBase2}/price-lists`,
 }

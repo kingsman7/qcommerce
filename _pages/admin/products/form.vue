@@ -109,7 +109,7 @@
                           <q-input data-testid="price" outlined dense type="number" v-model="locale.formTemplate.price"
                                    :label="$tr('ui.form.price')" @input="calculateAllPriceLists" />
                           <!--Price List Enable-->
-                          <div class="full-width" v-if="priceListEnable==='1'">
+                          <div class="full-width" v-if="priceListEnable">
                             <div class="row q-py-sm">
                               <div class="col-8">
                                 {{ $tr('qcommerce.layout.form.priceLists') }}
@@ -533,7 +533,7 @@
         modalShow: {
           category: false
         },
-        priceListEnable: this.$auth.hasAccess('icommerce.productlists.manage') && this.$store.getters['qsiteApp/getSettingValueByName']('icommerce::product-price-list-enable'),
+        priceListEnable: this.$auth.hasAccess('icommercepricelist.pricelists.manage'),
       }
     },
     computed: {
@@ -714,7 +714,8 @@
         if (this.locale.success) this.$refs.localeComponent.vReset()//Reset locale
         await this.getData()//Get Data Item
         await this.getCategories()//Get categories
-        await this.getPriceLists()//Get Price lists
+        if(this.priceListEnable)
+          await this.getPriceLists()//Get Price lists
         this.success = true//Activate status of page
         this.updateOptions
         this.loading = false
