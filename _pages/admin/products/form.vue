@@ -251,7 +251,7 @@
                           <br />
                           <!--is call-->
                           <q-toggle
-                              data-testid="subtract"
+                              data-testid="isCall"
                               v-model="locale.formTemplate.isCall"
                               true-value="1"
                               false-value="0"
