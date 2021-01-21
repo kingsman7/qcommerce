@@ -248,6 +248,16 @@
                             :label="$tr('qcommerce.layout.form.featured')"
                             color="primary"
                           />
+                          <br />
+                          <!--is call-->
+                          <q-toggle
+                              data-testid="subtract"
+                              v-model="locale.formTemplate.isCall"
+                              true-value="1"
+                              false-value="0"
+                              :label="$tr('qcommerce.layout.form.isCall')"
+                              color="primary"
+                          />
                         </div>
                       </div>
                     </q-card-section>
@@ -390,21 +400,25 @@
                   <q-separator/>
                   <q-card>
                     <q-card-section class="q-pa-sm">
-                      <div class="q-pa-sm" v-if="productId">
-                        <crud
-                          :crud-data="import('@imagina/qcommerce/_crud/productDiscounts')"
-                          :custom-data="{read: {requestParams: {include: 'department', filter: {productId: productId} } }, formRight:{productId: {value: productId} } }"
-                        />
-                      </div>
-                      <div v-else class="text-center q-pa-sm">
-                        <div class="q-my-md">
-                          <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
-                          {{`${$tr('qcommerce.layout.message.warnAddDiscount')}...`}}
+                      <!--<div class="full-width" v-if="$auth.hasAccess('discountable.discounts.manage')">
+                        <dynamic-field v-model="locale.formTemplate.discounts" :field="dynamicFields.discounts" />
+                      </div>-->
+                      <div class="full-width">
+                        <div class="q-pa-sm" v-if="productId">
+                          <crud
+                            :crud-data="import('@imagina/qcommerce/_crud/productDiscounts')"
+                            :custom-data="{read: {requestParams: {include: 'department', filter: {productId: productId} } }, formRight:{productId: {value: productId} } }"
+                          />
                         </div>
-                        <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
-                               @click="buttonActions.value = 4, createItem()" color="positive"/>
+                        <div v-else class="text-center q-pa-sm">
+                          <div class="q-my-md">
+                            <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
+                            {{`${$tr('qcommerce.layout.message.warnAddDiscount')}...`}}
+                          </div>
+                          <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
+                                 @click="buttonActions.value = 4, createItem()" color="positive"/>
+                        </div>
                       </div>
-                      <!--<dynamic-field v-model="locale.formTemplate.discounts" :field="dynamicFields.discounts" />-->
                       <!--<dynamic-field v-model="locale.formTemplate.productDiscounts" :field="dynamicFields.productDiscounts" />-->
                     </q-card-section>
                   </q-card>
@@ -641,7 +655,7 @@
       //Dynamic fields
       dynamicFields() {
         return {
-          /*discounts: {
+          discounts: {
             value: null,
             type: 'select',
             testId: 'discounts',
@@ -655,7 +669,7 @@
               apiRoute: 'apiRoutes.qdiscountable.discounts',
               select: {label: 'name', id: 'id'}
             }
-          },*/
+          },
           priceLists: {
             value: null,
             type: 'select',

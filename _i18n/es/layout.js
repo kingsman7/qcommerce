@@ -96,6 +96,7 @@ export default {
     usersGroup: 'Grupo de Usuarios',
     manufacturer: 'Fabricante',
     customerGroup: 'Grupo de Usuario',
+    customerGroupExclude: 'Grupos de Usuario Excluidos:',
     taxClass: 'Tipo de Impuesto',
 
     // Cupones
@@ -116,10 +117,12 @@ export default {
     status: 'Estado',
     color: 'Color',
     featured : 'Destacado',
+    isCall: 'Producto para Cotizar',
     sortOrder : 'Orden de prioridad',
     operationPrefix: 'Operación',
     value: 'Valor | Valores',
     priceLists: 'Listas de Precios',
+    criteria: 'Criterio de Descuento',
 
   },
   message : {

@@ -102,7 +102,7 @@
               props : {
                 clearable: true,
                 multiple: true,
-                label: `${this.$tr('qcommerce.layout.form.customerGroup')}*`,
+                label: `${this.$tr('qcommerce.layout.form.customerGroupExclude')}`,
               }
             },
             quantity: {
@@ -159,7 +159,7 @@
             },
 
             priority: {
-              value: '',
+              value: 0,
               type: 'input',
               props : {
                 min: 0,
