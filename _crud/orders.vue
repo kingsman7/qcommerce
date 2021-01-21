@@ -56,19 +56,11 @@ export default {
                 apiRoute: 'apiRoutes.qcommerce.orderStatus'
               }
             },
-          },
-          actions: [
-            {
-              icon: 'fas fa-info-circle',
-              color: 'info',
-              route: 'qcommerce.admin.shipping.orders.show',
-              action: () => {
-
-              }
-            }
-          ]
+          }
         },
-        update: false,
+        update: {
+          to : 'qcommerce.admin.shipping.orders.show'
+        },
         delete: false,
         formLeft: {},
       }
