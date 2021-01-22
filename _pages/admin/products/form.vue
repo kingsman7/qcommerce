@@ -109,7 +109,7 @@
                           <q-input data-testid="price" outlined dense type="number" v-model="locale.formTemplate.price"
                                    :label="$tr('ui.form.price')" @input="calculateAllPriceLists" />
                           <!--Price List Enable-->
-                          <div class="full-width" v-if="priceListEnable==='1'">
+                          <div class="full-width" v-if="priceListEnable">
                             <div class="row q-py-sm">
                               <div class="col-8">
                                 {{ $tr('qcommerce.layout.form.priceLists') }}
@@ -247,6 +247,16 @@
                             false-value="0"
                             :label="$tr('qcommerce.layout.form.featured')"
                             color="primary"
+                          />
+                          <br />
+                          <!--is call-->
+                          <q-toggle
+                              data-testid="isCall"
+                              v-model="locale.formTemplate.isCall"
+                              true-value="1"
+                              false-value="0"
+                              :label="$tr('qcommerce.layout.form.isCall')"
+                              color="primary"
                           />
                         </div>
                       </div>
@@ -390,19 +400,24 @@
                   <q-separator/>
                   <q-card>
                     <q-card-section class="q-pa-sm">
-                      <div class="q-pa-sm" v-if="productId">
-                        <crud
-                          :crud-data="import('@imagina/qcommerce/_crud/productDiscounts')"
-                          :custom-data="{read: {requestParams: {include: 'department', filter: {productId: productId} } }, formRight:{productId: {value: productId} } }"
-                        />
-                      </div>
-                      <div v-else class="text-center q-pa-sm">
-                        <div class="q-my-md">
-                          <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
-                          {{`${$tr('qcommerce.layout.message.warnAddDiscount')}...`}}
+                      <!--<div class="full-width" v-if="$auth.hasAccess('discountable.discounts.manage')">
+                        <dynamic-field v-model="locale.formTemplate.discounts" :field="dynamicFields.discounts" />
+                      </div>-->
+                      <div class="full-width">
+                        <div class="q-pa-sm" v-if="productId">
+                          <crud
+                            :crud-data="import('@imagina/qcommerce/_crud/productDiscounts')"
+                            :custom-data="{read: {requestParams: {include: 'department', filter: {productId: productId} } }, formRight:{productId: {value: productId} } }"
+                          />
                         </div>
-                        <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
-                               @click="buttonActions.value = 4, createItem()" color="positive"/>
+                        <div v-else class="text-center q-pa-sm">
+                          <div class="q-my-md">
+                            <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
+                            {{`${$tr('qcommerce.layout.message.warnAddDiscount')}...`}}
+                          </div>
+                          <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
+                                 @click="buttonActions.value = 4, createItem()" color="positive"/>
+                        </div>
                       </div>
                       <!--<dynamic-field v-model="locale.formTemplate.productDiscounts" :field="dynamicFields.productDiscounts" />-->
                     </q-card-section>
@@ -532,7 +547,7 @@
         modalShow: {
           category: false
         },
-        priceListEnable: this.$store.getters['qsiteApp/getSettingValueByName']('icommerce::product-price-list-enable'),
+        priceListEnable: this.$auth.hasAccess('icommercepricelist.pricelists.manage'),
       }
     },
     computed: {
@@ -563,7 +578,7 @@
             points: 0,
             relatedProducts: [],
             productOptions: [],
-            productDiscounts: [],
+            discounts: [],
             priceLists: [
               {price: 0, priceListId: null}
             ],
@@ -640,10 +655,10 @@
       //Dynamic fields
       dynamicFields() {
         return {
-          productDiscounts: {
+          discounts: {
             value: null,
             type: 'select',
-            testId: 'productDiscounts',
+            testId: 'discounts',
             props: {
               label: this.$tr('qcommerce.layout.form.discount') + '*',
               rules: [val => !!val || this.$tr('ui.message.fieldRequired')],
@@ -652,7 +667,7 @@
             },
             loadOptions: {
               apiRoute: 'apiRoutes.qdiscountable.discounts',
-              select: {label: 'formatValue',id: 'id'}
+              select: {label: 'name', id: 'id'}
             }
           },
           priceLists: {
@@ -713,7 +728,8 @@
         if (this.locale.success) this.$refs.localeComponent.vReset()//Reset locale
         await this.getData()//Get Data Item
         await this.getCategories()//Get categories
-        await this.getPriceLists()//Get Price lists
+        if(this.priceListEnable)
+          await this.getPriceLists()//Get Price lists
         this.success = true//Activate status of page
         this.updateOptions
         this.loading = false
