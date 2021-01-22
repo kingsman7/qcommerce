@@ -144,5 +144,8 @@ export default {
       paymentAddress: 'Dirección de Pago',
       storeAddress: 'Dirección de la tienda',
     }
+  },
+  quickCard : {
+    lastOrders : 'Tienda - Ultimas Ordenes'
   }
 }
