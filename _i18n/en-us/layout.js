@@ -94,6 +94,7 @@ export default {
     usersGroup: 'Users Group',
     manufacturer: 'Manufacturer',
     customerGroup: 'Customer Group',
+    customerGroupExclude: 'Excluded Customer Groups:',
     taxClass: 'Tax Class',
 
     // Coupons
@@ -114,10 +115,12 @@ export default {
     status: 'Status',
     color: 'Color',
     featured: 'Featured',
+    isCall: 'Product for Quote',
     sortOrder: 'Sort Order',
     operationPrefix: 'Operation',
     value: 'Value | Values',
     priceLists: 'Price Lists',
+    criteria: 'Discount criteria',
 
   },
   message : {

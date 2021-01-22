@@ -5,8 +5,8 @@
       crudData() {
         return {
           apiRoute: 'apiRoutes.qcommerce.priceLists',
-          permission: 'icommerce.productlists',
-          extraFormFields: 'crud-fields.Icommerce.priceLists',
+          permission: 'icommercepricelist.pricelists',
+          extraFormFields: 'crud-fields.Icommercepricelists.priceLists',
           create: {
             title: this.$tr('qcommerce.layout.newPriceList'),
           },

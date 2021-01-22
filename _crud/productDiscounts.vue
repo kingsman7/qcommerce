@@ -76,8 +76,8 @@
           delete: true,
           formLeft: {
             id: {value: ''},
-            departmentId: {
-              value: '',
+            includeDepartments: {
+              value: [0],
               type: 'select',
               loadOptions: {
                 apiRoute: 'apiRoutes.quser.departments',
@@ -85,10 +85,24 @@
               },
               props : {
                 clearable: true,
+                multiple: true,
                 label: `${this.$tr('qcommerce.layout.form.customerGroup')}*`,
                 options:[{
-                  label: 'All', value: ''
+                  label: 'All', value: 0
                 }],
+              }
+            },
+            excludeDepartments: {
+              value: [],
+              type: 'select',
+              loadOptions: {
+                apiRoute: 'apiRoutes.quser.departments',
+                select: {label: 'title', id: 'id'},
+              },
+              props : {
+                clearable: true,
+                multiple: true,
+                label: `${this.$tr('qcommerce.layout.form.customerGroupExclude')}`,
               }
             },
             quantity: {
@@ -145,7 +159,7 @@
             },
 
             priority: {
-              value: '',
+              value: 0,
               type: 'input',
               props : {
                 min: 0,
