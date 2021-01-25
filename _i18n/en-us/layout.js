@@ -121,7 +121,7 @@ export default {
     value: 'Value | Values',
     priceLists: 'Price Lists',
     criteria: 'Discount criteria',
-
+    soonToSoldOut : 'Soon to sold out'
   },
   message: {
     warnAddOpt: 'To add options, you must first create the product',
@@ -143,6 +143,7 @@ export default {
     }
   },
   quickCard: {
-    lastOrders: 'Commerce - Last Orders'
+    lastOrders: 'Commerce - Last Orders',
+    productsToSoldOut : 'Tienda - Products to sold out',
   }
 }

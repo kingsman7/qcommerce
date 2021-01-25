@@ -124,7 +124,7 @@ export default {
     value: 'Valor | Valores',
     priceLists: 'Listas de Precios',
     criteria: 'Criterio de Descuento',
-
+    soonToSoldOut : 'Pronto por agotarse'
   },
   message : {
     warnAddOpt : 'Para agregar opciones, primero debe crear el producto',
@@ -149,6 +149,7 @@ export default {
     }
   },
   quickCard : {
-    lastOrders : 'Tienda - Ultimas Ordenes'
+    lastOrders : 'Tienda - Ultimas Ordenes',
+    productsToSoldOut : 'Tienda - Productos por agotar',
   }
 }

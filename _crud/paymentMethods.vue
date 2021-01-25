@@ -13,7 +13,9 @@ export default {
         crudId: this.crudId,
         apiRoute: 'apiRoutes.qcommerce.paymentMethods',
         permission: 'icommerce.payment-methods',
-        create: false,
+        create: {
+          title: this.$tr('qcommerce.layout.newPaymentMethod')
+        },
         read: {
           columns: [
             {name: 'id', label: this.$tr('ui.form.id'), field: 'id', style: 'width: 50px'},
@@ -36,7 +38,59 @@ export default {
           title: this.$tr('qcommerce.layout.updatePaymentMethod')
         },
         delete: false,
-        formLeft: {},
+        formLeft: {
+          id: {value: ''},
+          parentName: {value: 'icommercecheckmo'},
+          init: {
+            value: 'Modules\\Icommercecheckmo\\Http\\Controllers\\Api\\IcommerceCheckmoApiController',
+            isFakeField: true
+          },
+          title: {
+            value: '',
+            type: 'input',
+            isTranslatable: true,
+            props: {
+              label: `${this.$tr('ui.form.title')}*`,
+              rules: [
+                val => !!val || this.$tr('ui.message.fieldRequired')
+              ],
+            },
+          },
+          description: {
+            value: '',
+            type: 'input',
+            isTranslatable: true,
+            props: {
+              label: `${this.$tr('ui.form.description')}*`,
+              type: 'textarea',
+              rows: "3",
+              rules: [
+                val => !!val || this.$tr('ui.message.fieldRequired')
+              ],
+            },
+          },
+          status: {
+            value: '1',
+            type: 'select',
+            props: {
+              label: this.$tr('ui.form.status'),
+              options: [
+                {label: this.$tr('ui.label.enabled'), value: '1'},
+                {label: this.$tr('ui.label.disabled'), value: '0'}
+              ]
+            },
+          },
+          mediasSingle: {
+            value: {},
+            type: 'media',
+            props: {
+              label: this.$tr('ui.form.image'),
+              zone: 'mainimage',
+              entity: "Modules\\Icommerce\\Entities\\PaymentMethod",
+              entityId: null
+            }
+          }
+        },
         formRight: {},
       }
     },

@@ -99,7 +99,14 @@ export default {
                   {label: this.$tr('ui.label.soldOut'), value: 0}
                 ],
               },
-            }
+            },
+            soonToSoldOut: {
+              value: false,
+              type: 'checkbox',
+              props: {
+                label: `${this.$tr('qcommerce.layout.form.soonToSoldOut')}:`
+              },
+            },
           },
           actions: [
             {
