@@ -19,7 +19,7 @@
             <q-item v-for="(item, index) in block.values" :key="index" class="q-px-none">
               <q-item-section>
                 <q-item-label>{{ item.label }}</q-item-label>
-                <q-item-label caption>{{ item.value }}</q-item-label>
+                <q-item-label caption v-html="item.value"/>
               </q-item-section>
             </q-item>
           </q-list>
