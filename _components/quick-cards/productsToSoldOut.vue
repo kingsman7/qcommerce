@@ -44,7 +44,13 @@ export default {
             format: val => val ? `${this.$tr('ui.label.quantity')}: ${val}` : ''
           },
         },
-        actionTo: 'qcommerce.admin.products.index'
+        actionTo: 'qcommerce.admin.products.index',
+        itemAction: (item) => {
+          this.$router.push({
+            name: 'qcommerce.admin.products.edit',
+            params: {id: item.id}
+          })
+        }
       }
     }
   },

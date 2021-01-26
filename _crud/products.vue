@@ -104,7 +104,7 @@ export default {
               value: false,
               type: 'checkbox',
               props: {
-                label: `${this.$tr('qcommerce.layout.form.soonToSoldOut')}:`
+                label: `${this.$tr('qcommerce.layout.form.soonToSoldOut')}`
               },
             },
           },

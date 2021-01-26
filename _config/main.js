@@ -2,12 +2,14 @@ export default {
   //Quick Cards
   quickCards: [
     {
-      component: () => import('@imagina/qcommerce/_components/quick-cards/lastOrders'),
-      active: true
+      active: true,
+      permission: 'icommerce.orders.index',
+      component: () => import('@imagina/qcommerce/_components/quick-cards/lastOrders')
     },
     {
-      component: () => import('@imagina/qcommerce/_components/quick-cards/productsToSoldOut'),
-      active: true
+      active: true,
+      permission: 'icommerce.products.index',
+      component: () => import('@imagina/qcommerce/_components/quick-cards/productsToSoldOut')
     }
   ]
 }

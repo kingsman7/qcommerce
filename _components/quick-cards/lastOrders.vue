@@ -22,7 +22,7 @@ export default {
   computed: {
     quickCardParams() {
       return {
-        type : 'list-v',
+        type: 'list-v',
         title: this.$tr('qcommerce.layout.quickCard.lastOrders'),
         icon: 'fas fa-cash-register',
         apiRoute: 'apiRoutes.qcommerce.orders',
@@ -30,11 +30,17 @@ export default {
           filter: {order: {way: 'desc'}}
         },
         information: {
-          text1: {field: 'createdAt', format: val => this.$trd(val, {type : 'long'})},
+          text1: {field: 'createdAt', format: val => this.$trd(val, {type: 'long'})},
           text2: {field: 'customer', format: val => val ? val.fullName : ''},
           text3: {format: val => val ? val.statusName : ''},
         },
-        actionTo: 'qcommerce.admin.shipping.orders.index'
+        actionTo: 'qcommerce.admin.shipping.orders.index',
+        itemAction: (item) => {
+          this.$router.push({
+            name: 'qcommerce.admin.shipping.orders.show',
+            params: {id: item.id}
+          })
+        }
       }
     }
   },
