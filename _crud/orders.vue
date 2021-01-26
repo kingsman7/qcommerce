@@ -18,7 +18,12 @@ export default {
               format: val => val ? val.fullName : '-',
               align: 'left'
             },
-            {name: 'total', label: this.$tr('qcommerce.layout.form.total'), field: 'total'},
+            {
+              name: 'total',
+              label: this.$tr('qcommerce.layout.form.total'),
+              field: 'total',
+              format: val => val ? `$${this.$trn(val)}` : ''
+            },
             {name: 'statusName', label: this.$tr('ui.form.status'), field: 'statusName'},
             //{name: 'paymentCity', label: this.$tr('qcommerce.layout.form.city'), field: 'paymentCity'},
             //{name: 'paymentCountry', label: this.$tr('qcommerce.layout.form.country'), field: 'paymentCountry'},
@@ -59,7 +64,7 @@ export default {
           }
         },
         update: {
-          to : 'qcommerce.admin.shipping.orders.show'
+          to: 'qcommerce.admin.shipping.orders.show'
         },
         delete: false,
         formLeft: {},
