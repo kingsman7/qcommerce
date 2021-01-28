@@ -593,6 +593,7 @@
             metaTitle: '',
             metaDescription: '',
             featured: '0',
+            isCall: '0',
             sortOrder: '0'
           },
           fieldsTranslatable: {
