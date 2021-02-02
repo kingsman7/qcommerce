@@ -934,7 +934,7 @@
       },
       calculatePriceFromlist(id = null){
         if (id) {
-          let selectedPriceList = this.$array.findByTag(this.optionsTemplate.priceLists, 'id', id)
+          let selectedPriceList = this.$array.findByTag(this.locale.form.priceLists, 'id', id)
           let price = parseInt(this.$clone(this.locale.form.price))
           if (selectedPriceList.criteria == 'percentage') {
             if (selectedPriceList.operationPrefix == '-') {
@@ -943,7 +943,7 @@
               return price + (price * (selectedPriceList.value / 100))
             }
           }else{
-            return 0
+            return selectedPriceList.price
           }
         }
         return 0
