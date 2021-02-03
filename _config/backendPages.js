@@ -1,7 +1,7 @@
 export default {
   //Product List
   products: {
-    permission: 'icommerce.products.index',
+    permission: 'icommerce.products.manage',
     activated: true,
     path: '/ecommerce/products',
     name: 'qcommerce.admin.products.index',
@@ -47,7 +47,7 @@ export default {
   },
   //Categories list
   categories: {
-    permission: 'icommerce.categories.index',
+    permission: 'icommerce.categories.manage',
     activated: true,
     path: '/ecommerce/product-categories',
     name: 'qcommerce.admin.categories',
@@ -64,7 +64,7 @@ export default {
   },
   //Product options
   options: {
-    permission: 'icommerce.options.index',
+    permission: 'icommerce.options.manage',
     activated: true,
     path: '/ecommerce/product-options',
     name: 'qcommerce.admin.options',
@@ -161,7 +161,7 @@ export default {
     }
   },
   orders: {
-    permission: 'icommerce.orders.index',
+    permission: 'icommerce.orders.manage',
     activated: true,
     path: '/orders',
     name: 'qcommerce.admin.shipping.orders.index',
@@ -207,7 +207,7 @@ export default {
   },
   //Manufacturers list
   manufacturers: {
-    permission: 'icommerce.manufacturers.index',
+    permission: 'icommerce.manufacturers.manage',
     activated: true,
     path: '/ecommerce/manufacturers',
     name: 'qcommerce.admin.manufacturers',
