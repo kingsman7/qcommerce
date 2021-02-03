@@ -542,6 +542,7 @@
           products: [],
           relatedProducts: [],
           priceLists: [],
+          savedPriceLists: [],
         },
         buttonActions: {label: '', value: 1},
         modalShow: {
@@ -831,6 +832,7 @@
         }
 
         this.locale.form = this.$clone(orderData)
+        this.calculateAllPriceLists()
         setTimeout(() => {
           /*this.locale.formTemplate.categoryId = orderData.categoryId
           this.locale.formTemplate.taxClassId = orderData.taxClassId
@@ -934,7 +936,7 @@
       },
       calculatePriceFromlist(id = null){
         if (id) {
-          let selectedPriceList = this.$array.findByTag(this.locale.form.priceLists, 'id', id)
+          let selectedPriceList = this.$array.findByTag(this.optionsTemplate.priceLists, 'id', id)
           let price = parseInt(this.$clone(this.locale.form.price))
           if (selectedPriceList.criteria == 'percentage') {
             if (selectedPriceList.operationPrefix == '-') {
@@ -943,6 +945,7 @@
               return price + (price * (selectedPriceList.value / 100))
             }
           }else{
+            let selectedPriceList = this.$array.findByTag(this.optionsTemplate.savedPriceLists, 'priceListId', id)
             return selectedPriceList.price
           }
         }
@@ -950,14 +953,14 @@
       },
       calculateAllPriceLists(){
         if(this.locale.form.priceLists.length > 0) {
+          this.optionsTemplate.savedPriceLists = this.locale.form.priceLists
           let priceLists = this.locale.form.priceLists.map(item => {
             return {
               priceListId: item.priceListId,
               price: this.calculatePriceFromlist(item.priceListId)
             }
           })
-          console.warn(priceLists)
-          this.locale.formTemplate.priceLists = priceLists
+          this.locale.form.priceLists = priceLists
         }
       }
     }
