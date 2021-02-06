@@ -293,6 +293,7 @@
                               :crud-props="{label:`${$tr('qcommerce.layout.form.taxClass')}`, 'data-testid': 'taxClassId'}"
                               v-model="locale.formTemplate.taxClassId"
                               :config="{options: {label: 'name', value: 'id'}}"
+                              v-if="false"
                         />
                         <!--Crud manufacturer-->
                         <crud :crud-data="import('@imagina/qcommerce/_crud/manufacturers')"
@@ -302,7 +303,7 @@
                               :config="{options: {label: 'name', value: 'id'}}"
                         />
                         <!--Parent-->
-                        <div class="input-title">{{`${$tr('ui.form.parent')}`}}</div>
+                        <div class="input-title" v-if="false">{{`${$tr('ui.form.parent')}`}}</div>
                         <tree-select
                           data-testid="parentId"
                           v-model="locale.formTemplate.parentId"
@@ -313,6 +314,7 @@
                           :default-options="optionsTemplate.products"
                           placeholder=""
                           label="name"
+                          v-if="false"
                         />
                         <!-- &lt;!&ndash;Crud category&ndash;&gt;
                          <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
