@@ -763,23 +763,19 @@
       },
       //Get product categories
       getPriceLists() {
-        return new Promise((resolve, reject) => {
-          this.loadingCategory = true
           let configName = 'apiRoutes.qcommerce.priceLists'
           let params = {//Params to request
             refresh: true,
           }
-
           //Request
           this.$crud.index(configName, params).then(response => {
+            this.priceListEnable = true
             this.optionsTemplate.priceLists = response.data
             //this.locale.fields.categoryId = response.data.length ? response.data[0].id : null
-            resolve(true)
           }).catch(error => {
-            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
-            reject(true)
+            this.priceListEnable = false
+
           })
-        })
       },
       //Get product if is edit
       getData() {
@@ -801,6 +797,7 @@
               resolve(true)//Resolve
             }).catch(error => {
               this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+              console.error(error)
               this.loading = false
               reject(false)//Resolve
             })
@@ -953,16 +950,18 @@
         }
         return 0
       },
-      calculateAllPriceLists(){
-        if(this.locale.form.priceLists.length > 0) {
-          this.optionsTemplate.savedPriceLists = this.locale.form.priceLists
-          let priceLists = this.locale.form.priceLists.map(item => {
-            return {
-              priceListId: item.priceListId,
-              price: this.calculatePriceFromlist(item.priceListId)
-            }
-          })
-          this.locale.form.priceLists = priceLists
+      calculateAllPriceLists() {
+        if (this.locale.form.priceLists){
+          if (this.locale.form.priceLists.length > 0) {
+            this.optionsTemplate.savedPriceLists = this.locale.form.priceLists
+            let priceLists = this.locale.form.priceLists.map(item => {
+              return {
+                priceListId: item.priceListId,
+                price: this.calculatePriceFromlist(item.priceListId)
+              }
+            })
+            this.locale.form.priceLists = priceLists
+          }
         }
       }
     }
