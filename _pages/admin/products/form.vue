@@ -128,7 +128,7 @@
                               </div>
                               <div class="col-4">
                                 <q-input data-testid="price" v-model="list.price" outlined dense
-                                         :label="$tr('ui.form.price')" type="number" :readonly="checkPriceList(list.priceListId)"/>
+                                         :label="$tr('ui.form.price')" type="number" :readonly="checkPriceList(list.priceListId)" :rules="[val => !!val || $tr('ui.message.fieldRequired')]" />
                               </div>
                               <div class="col-2 text-right">
                                 <q-btn icon="fas fa-trash" color="negative" size="sm" class="q-mt-sm" @click="locale.form.priceLists.splice(i,1)" >
@@ -583,7 +583,6 @@
             productOptions: [],
             discounts: [],
             priceLists: [
-              {price: 0, priceListId: null}
             ],
             mediasSingle: {},
             mediasMulti: {},
@@ -680,7 +679,7 @@
             testId: 'priceLists',
             props: {
               label: this.$tr('qcommerce.layout.form.priceLists') + '*',
-              clearable: true,
+              rules: [val => !!val || this.$tr('ui.message.fieldRequired')],
             },
             loadOptions: {
               apiRoute: 'apiRoutes.qcommerce.priceLists',
