@@ -74,7 +74,6 @@
 
   //Plugins
   import _cloneDeep from 'lodash.clonedeep'
-  import {alert} from '@imagina/qhelper/_plugins/alert'
 
   //components
   import uploadImg from '@imagina/qmedia/_components/form'

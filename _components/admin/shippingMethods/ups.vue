@@ -101,7 +101,6 @@
   //Plugins
   import {required} from 'vuelidate/lib/validators'
   import _cloneDeep from 'lodash.clonedeep'
-  import {alert} from '@imagina/qhelper/_plugins/alert'
 
   //Components
   import uploadImg from '@imagina/qmedia/_components/form'

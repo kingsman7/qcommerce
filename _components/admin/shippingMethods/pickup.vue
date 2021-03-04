@@ -69,7 +69,6 @@
 <script>
   //Plugins
   import _cloneDeep from 'lodash.clonedeep'
-  import {alert} from '@imagina/qhelper/_plugins/alert'
 
   //Component
   import uploadImg from '@imagina/qmedia/_components/form'
