@@ -80,8 +80,7 @@
   import methodsPayment from '@imagina/qcommerce/_components/frontend/checkout/methodsPayment'
 
   // Helpers
-  import {helper} from '@imagina/qhelper/_plugins/helper';
-  import alert from '@imagina/qhelper/_plugins/alert'
+  import alert from '@imagina/qsite/_plugins/alert'
 
   // Services
   import eCommerceService from '@imagina/qcommerce/_services/index'
@@ -113,7 +112,7 @@
     },
     methods:{
       async initCheckout(){
-        let sessionData = await helper.storage.get.item('sessionData')
+        let sessionData = await this.$cache.get.item('sessionData')
         this.dataCheckout.cart = this.$store.state.qcommerceCart.cart;
         this.dataCheckout.user = sessionData.userData
         /*if(!this.dataCheckout.user){
@@ -142,7 +141,7 @@
         this.loading = false
       },
       isAddressValidated(){
-        helper.storage.get.item('dataAddress').then(response => {
+        this.$cache.get.item('dataAddress').then(response => {
           if (response == null) {
             alert.error('No ha validado cobertura','top')
           }

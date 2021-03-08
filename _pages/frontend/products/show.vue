@@ -60,8 +60,6 @@
   // Services
   import icommerceService from '@imagina/qcommerce/_services/index';
 
-  import {helper} from '@imagina/qhelper/_plugins/helper'
-
   export default {
     props: {},
     components: {

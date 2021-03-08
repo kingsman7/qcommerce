@@ -57,7 +57,7 @@
 <script>
   import Treeselect from '@riophae/vue-treeselect'
   import '@riophae/vue-treeselect/dist/vue-treeselect.css'
-  import {helper} from '@imagina/qhelper/_plugins/helper'
+
   export default {
     data(){
       return{
@@ -100,7 +100,7 @@
     },
     methods:{
       getAddress(){
-				helper.storage.get.item('dataAddress').then(res => {
+				this.$cache.get.item('dataAddress').then(res => {
           if (res !== null) {
 						this.addrees = res
           }

@@ -26,7 +26,6 @@
 </template>
 
 <script>
-  import {helper} from '@imagina/qhelper/_plugins/helper'
   export default {
     data(){
       return{
@@ -61,12 +60,12 @@
 			priceShipping(){
 				if(this.addrees.coverage.price != null){
 					return `Costo $${this.$n(this.addrees.coverage.price)}`
-				} 
+				}
 			}
 		},
     methods:{
       getAddress(){
-				helper.storage.get.item('dataAddress').then(res => {
+				this.$cache.get.item('dataAddress').then(res => {
           if (res !== null) {
 						this.addrees = res
           }
