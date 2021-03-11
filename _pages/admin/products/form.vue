@@ -287,6 +287,14 @@
                             placeholder=""
                           />
                         </div>
+                        <!--Crud item types-->
+                        <crud :crud-data="import('@imagina/qcommerce/_crud/itemTypes')"
+                              type="select"
+                              :crud-props="{label:`${$tr('qcommerce.layout.form.itemType')}`, 'data-testid': 'itemTypeId'}"
+                              v-model="locale.formTemplate.itemTypeId"
+                              :config="{options: {label: 'title', value: 'id'}}"
+                              v-if="this.$auth.hasAccess('icommerce.itemtypes.manage')"
+                        />
                         <!--Crud manufacturer-->
                         <crud :crud-data="import('@imagina/qcommerce/_crud/taxClasses')"
                               type="select"
@@ -600,7 +608,8 @@
             metaDescription: '',
             featured: '0',
             isCall: '0',
-            sortOrder: '0'
+            sortOrder: '0',
+            itemTypeId: 1,
           },
           fieldsTranslatable: {
             name: '',

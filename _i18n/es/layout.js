@@ -30,6 +30,8 @@ export default {
   newStatus : 'Nuevo Estado',
   newPriceList: 'Nueva Lista de Precios',
   updatePriceList: 'Actualizar Lista de Precios',
+  newItemType: 'Nuevo Tipo',
+  updateItemType: 'Actualizar Tipo',
 
   orderAccountInformation: 'Información de pedido y cuenta',
   orderStatus: 'Estado del pedido',
@@ -124,7 +126,8 @@ export default {
     value: 'Valor | Valores',
     priceLists: 'Listas de Precios',
     criteria: 'Criterio de Descuento',
-    soonToSoldOut : 'Pronto por agotarse'
+    soonToSoldOut : 'Pronto por agotarse',
+    itemType: 'Tipo'
   },
   message : {
     warnAddOpt : 'Para agregar opciones, primero debe crear el producto',

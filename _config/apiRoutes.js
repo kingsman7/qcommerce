@@ -27,5 +27,6 @@ export default {
   taxClasses : `${urlBase}/tax-classes`,
 	taxRates : `${urlBase}/tax-rates`,
   productDiscounts : `${urlBase}/product-discounts`,
+	itemTypes: `${urlBase}/item-types`,
 	priceLists : `${urlBase2}/price-lists`,
 }
