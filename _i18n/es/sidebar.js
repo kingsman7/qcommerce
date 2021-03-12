@@ -33,4 +33,7 @@ export default {
   adminPriceLists: 'Listas de Precios',
   adminPriceListsCreate: 'Crear Lista de Precios',
   adminPriceListsEdit: 'Editar Lista de Precios',
+  adminItemTypes: 'Tipos',
+  adminItemTypesCreate: 'Crear Tipos',
+  adminItemTypesEdit: 'Editar Tipos',
 }

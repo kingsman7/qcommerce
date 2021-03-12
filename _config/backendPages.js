@@ -322,4 +322,17 @@ export default {
     authenticated: true,
     subHeader: {refresh: true}
   },
+  itemTypes: {
+    permission: 'icommerce.itemtypes.manage',
+    activated: true,
+    path: '/itemTypes',
+    name: 'qcommerce.admin.itemTypes.index',
+    crud: import('@imagina/qcommerce/_crud/itemTypes'),
+    page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
+    layout: () => import('@imagina/qsite/_layouts/master.vue'),
+    title: 'qcommerce.sidebar.adminItemTypes',
+    icon: 'fas fa-list',
+    authenticated: true,
+    subHeader: {refresh: true}
+  },
 }
