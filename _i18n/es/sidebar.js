@@ -33,4 +33,6 @@ export default {
   adminPriceLists: 'Listas de Precios',
   adminPriceListsCreate: 'Crear Lista de Precios',
   adminPriceListsEdit: 'Editar Lista de Precios',
+
+  panelOrders : 'Mis Compras'
 }

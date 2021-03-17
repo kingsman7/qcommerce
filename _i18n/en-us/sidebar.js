@@ -17,7 +17,6 @@ export default {
   adminCoupons: 'Coupons',
   createCoupons: 'Create cupon',
   editCoupons: 'Edit cupon',
-
   adminStores : 'Stores',
   adminStoresCreate : 'Create Store',
   adminStoresEdit : 'Edit Store',
@@ -33,4 +32,6 @@ export default {
   adminPriceLists: 'Price Lists',
   adminPriceListsCreate: 'Create Price Lists',
   adminPriceListsEdit: 'Edit Price Lists',
+
+  panelOrders : 'My Orders'
 }
