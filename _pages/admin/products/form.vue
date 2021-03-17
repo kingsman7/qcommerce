@@ -287,6 +287,14 @@
                             placeholder=""
                           />
                         </div>
+                        <!--Crud item types-->
+                        <crud :crud-data="import('@imagina/qcommerce/_crud/itemTypes')"
+                              type="select"
+                              :crud-props="{label:`${$tr('qcommerce.layout.form.itemType')}`, 'data-testid': 'itemTypeId'}"
+                              v-model="locale.formTemplate.itemTypeId"
+                              :config="{options: {label: 'title', value: 'id'}}"
+                              v-if="this.$auth.hasAccess('icommerce.itemtypes.manage')"
+                        />
                         <!--Crud manufacturer-->
                         <crud :crud-data="import('@imagina/qcommerce/_crud/taxClasses')"
                               type="select"
@@ -341,6 +349,9 @@
                           placeholder=""
                           label="name"
                         />
+                      </div>
+                      <div class="q-pa-sm" v-for="(item, index) in optionsTemplate.extraFields">
+                        <dynamic-field :field="item" v-model="locale.formTemplate[index]" />
                       </div>
                     </q-card-section>
                   </q-card>
@@ -545,6 +556,7 @@
           relatedProducts: [],
           priceLists: [],
           savedPriceLists: [],
+          extraFields: {},
         },
         buttonActions: {label: '', value: 1},
         modalShow: {
@@ -596,7 +608,8 @@
             metaDescription: '',
             featured: '0',
             isCall: '0',
-            sortOrder: '0'
+            sortOrder: '0',
+            itemTypeId: 1,
           },
           fieldsTranslatable: {
             name: '',
@@ -726,7 +739,13 @@
         this.success = false//Disable status of page
         this.vTab = 'tab-data'
         this.buttonActions = {label: this.options.btn.saveAndReturn, value: 1}
-        this.locale = this.$clone(this.dataLocale)//Add fields
+        await this.getExtraFields()
+        let dataLocale = this.$clone(this.dataLocale)
+        let extraFields = this.optionsTemplate.extraFields
+        for(let x in extraFields){
+          dataLocale.fields[x] = extraFields[x].value || null
+        }
+        this.locale = this.$clone(dataLocale)//Add fields
         this.productId = this.$route.params.id//Update param from route
         if (this.locale.success) this.$refs.localeComponent.vReset()//Reset locale
         await this.getData()//Get Data Item
@@ -827,6 +846,22 @@
         //Set default related products options
         if (data.relatedProducts && data.relatedProducts.length) {
           this.optionsTemplate.relatedProducts = this.$array.tree(data.relatedProducts, {label: 'name', id: 'id'})
+        }
+
+        let extraFields = this.optionsTemplate.extraFields
+        for(let x in extraFields){
+          if(extraFields[x].props.multiple) {
+            if (!orderData[x]) {
+              orderData[x] = extraFields[x].value || null
+            }
+          }else{
+            if (orderData[x]){
+              let extraFieldData = this.$clone(orderData[x])
+              orderData[x] = extraFieldData.id
+            }else{
+              orderData[x] = extraFields[x].value || null
+            }
+          }
         }
 
         this.locale.form = this.$clone(orderData)
@@ -962,6 +997,27 @@
             this.locale.form.priceLists = priceLists
           }
         }
+      },
+      getExtraFields(){
+        return new Promise((resolve, reject) => {
+          let configName = 'apiRoutes.qsite.configFields'
+          let params = {//Params to request
+            refresh: true,
+            params:{
+              filter: {
+                configFieldName: "crud-fields.Icommerce.products.productables"
+              }
+            }
+          }
+          //Request
+          this.$crud.index(configName, params).then(response => {
+            this.optionsTemplate.extraFields = this.$clone(response.data)
+            resolve(true)
+          }).catch(error => {
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+            reject(true)
+          })
+        })
       }
     }
   }

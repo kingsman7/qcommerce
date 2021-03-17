@@ -30,6 +30,8 @@ export default {
   newStatus: 'New Status',
   newPriceList: 'New Price List',
   updatePriceList: 'Update Price List',
+  newItemType: 'New Item Type',
+  updateItemType: 'Update Item Type',
 
   orderAccountInformation: 'Order & Account Information',
   orderStatus: 'Order Status',
@@ -121,7 +123,8 @@ export default {
     value: 'Value | Values',
     priceLists: 'Price Lists',
     criteria: 'Discount criteria',
-    soonToSoldOut : 'Soon to sold out'
+    soonToSoldOut : 'Soon to sold out',
+    itemType: 'Item Type'
   },
   message: {
     warnAddOpt: 'To add options, you must first create the product',
