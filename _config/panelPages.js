@@ -18,7 +18,7 @@ export default {
     permission: 'icommerce.orders.index',
     activated: true,
     path: '/store/orders/:id',
-    name: 'qcommerce.panel.shipping.orders.show',
+    name: 'qcommerce.shipping.orders.show',
     page: () => import('@imagina/qcommerce/_pages/admin/order/show'),
     layout: () => import('@imagina/qsite/_layouts/master'),
     title: 'qcommerce.sidebar.orderIndex',

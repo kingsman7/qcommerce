@@ -1,9 +1,11 @@
 <template>
   <div id="pageId" class="q-pa-md">
     <!--TITLE-->
-    <div class="text-h5 text-primary q-pb-md text-right">
-      <q-icon v-if="$route.meta.icon" :name="$route.meta.icon"/>
-      {{ $tr($route.meta.title) }} #{{ $route.params.id.toString().padStart(5, '0') }}
+    <div class="box q-mb-md" style="min-height: auto">
+      <div class="box-title">
+        <q-icon v-if="$route.meta.icon" :name="$route.meta.icon"/>
+        {{ $tr($route.meta.title) }} #{{ $route.params.id.toString().padStart(5, '0') }}
+      </div>
     </div>
 
     <!--Dynamic blocks-->
@@ -12,8 +14,11 @@
       <div v-for="(block, key) in order.informationBlocks" :key="key" class="col-12 col-md-6">
         <div class="box">
           <!--Title-->
-          <div class="text-h6">{{ block.title }}</div>
-          <q-separator/>
+          <div class="box-title">
+            <q-icon v-if="block.icon" :name="block.icon"/>
+            {{ block.title }}
+          </div>
+          <q-separator class="q-my-sm"/>
           <!--Values-->
           <q-list>
             <q-item v-for="(item, index) in block.values" :key="index" class="q-px-none">
@@ -27,64 +32,44 @@
       </div>
     </div>
 
-    <!--Order Items-->
-    <div class="row q-mt-md">
-      <div class="col-md-12 backend-page">
-        <div class="row gutter-x-sm">
-          <div class="col-md-12">
-
-            <q-card class="box-table q-px-md">
-              <q-card-section>
-                <div class="text-h5">{{ $tr('qcommerce.layout.itemsOrdered') }}</div>
-              </q-card-section>
-              <q-separator/>
-              <q-card-section>
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <orderItems :items="order.items"/>
-                  </div>
-                </div>
-              </q-card-section>
-            </q-card>
-          </div>
-        </div>
+    <!--Products-->
+    <div class="box q-mt-md">
+      <div class="box-title">
+        {{ $trp('ui.label.product') }}
       </div>
+      <q-separator class="q-mt-sm q-mb-md"/>
+      <!--Products Table-->
+      <orderItems :items="order.items"/>
     </div>
 
     <!--Actions-->
     <div class="row q-mt-md q-col-gutter-md">
-      <div class="col-12 col-md-6 backend-page">
+      <div class="col-12 col-md-6">
         <div class="row gutter-x-sm">
-          <div class="col-md-12">
-
-            <q-card class="box-table q-px-md">
-              <q-card-section>
-                <div class="text-h5">{{ $tr('qcommerce.layout.orderHistory') }}</div>
-              </q-card-section>
-              <q-separator/>
-              <q-card-section>
-                <order-status-history :items="order.histories"/>
-                <addStatusOrder @orderHistoryCreated="getOrder()"/>
-              </q-card-section>
-            </q-card>
-
+          <div class="box col-md-12">
+            <div class="box-title">
+              {{ $tr('qcommerce.layout.orderHistory') }}
+            </div>
+            <q-separator class="q-mt-sm q-mb-md"/>
+            <div>
+              <order-status-history :items="order.histories"/>
+              <addStatusOrder v-if="$auth.hasAccess('icommerce.orders.edit')" @orderHistoryCreated="getOrder()"/>
+            </div>
           </div>
         </div>
       </div>
+
       <div class="col-12 col-md-6 backend-page">
         <div class="row gutter-x-sm">
           <div class="col-12">
-            <q-card class="box-table q-px-md">
-              <q-card-section>
-                <div class="text-h5">{{ $tr('qcommerce.layout.orderTotal') }}</div>
-              </q-card-section>
-              <q-separator class="q-mx-sm"/>
-              <q-card-section>
-
+            <div class="box">
+              <div class="box-title">
+                Total
+              </div>
+              <q-separator class="q-mt-sm q-mb-md"/>
+              <div>
                 <div class="row">
                   <div class="col-md-12">
-
                     <div class="row">
                       <div class="row q-mb-sm full-width">
                         <div class="col-6 secondary-font">
@@ -114,9 +99,8 @@
                     </div>
                   </div>
                 </div>
-              </q-card-section>
-            </q-card>
-
+              </div>
+            </div>
           </div>
         </div>
       </div>

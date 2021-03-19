@@ -36,5 +36,5 @@ export default {
   adminItemTypesCreate: 'Create Item Types',
   adminItemTypesEdit: 'Edit Item Types',
 
-  panelOrders : 'My Orders'
+  panelOrders : 'My Purchases'
 }

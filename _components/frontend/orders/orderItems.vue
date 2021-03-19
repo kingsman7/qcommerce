@@ -66,18 +66,17 @@
 
       thead
         th
-          color $primary
+          color $blue-grey
       td, th
         font-family $secondaryFont !important
         font-size 14px
         color $tertiary
-        font-weight bold
 
     .option-content
       margin-left 20px
 
       .option-title
-        color $grey-10
+        color $blue-$grey
         font-weight bold
         font-size 14px
 

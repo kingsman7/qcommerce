@@ -179,7 +179,7 @@ export default {
     permission: 'icommerce.orders.index',
     activated: true,
     path: '/order/:id',
-    name: 'qcommerce.admin.shipping.orders.show',
+    name: 'qcommerce.shipping.orders.show',
     page: () => import('@imagina/qcommerce/_pages/admin/order/show'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
     title: 'qcommerce.sidebar.orderIndex',
