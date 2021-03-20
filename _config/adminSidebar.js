@@ -13,7 +13,7 @@ export default [
       pages.qcommerce.paymentMethods,//products options
       pages.qcommerce.shippingMethods,//products options
       pages.qcommerce.orders,//Orders
-      //pages.qcommerce.coupons,//Coupons
+      pages.qcommerce.coupons,//Coupons
       //pages.qcommerce.stores,//Stores
       pages.qcommerce.manufacturers,//Manufacturers
       //pages.qcommerce.taxClasses,//Tax Classes
