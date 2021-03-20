@@ -127,7 +127,8 @@ export default {
     priceLists: 'Listas de Precios',
     criteria: 'Criterio de Descuento',
     soonToSoldOut : 'Pronto por agotarse',
-    itemType: 'Tipo'
+    itemType: 'Tipo',
+    minimumOrderAmount: 'Monto mínimo del pedido',
   },
   message : {
     warnAddOpt : 'Para agregar opciones, primero debe crear el producto',
