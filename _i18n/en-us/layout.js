@@ -94,7 +94,7 @@ export default {
     rate: 'Rate',
     discountType: 'Discount Type',
     usersGroup: 'Users Group',
-    manufacturer: 'Manufacturer',
+    manufacturer: 'Manufacturer | Manufacturers',
     customerGroup: 'Customer Group',
     customerGroupExclude: 'Excluded Customer Groups:',
     taxClass: 'Tax Class',
@@ -126,6 +126,8 @@ export default {
     soonToSoldOut : 'Soon to sold out',
     itemType: 'Item Type',
     minimumOrderAmount: 'Minimum Amount for order',
+    allOrder: 'Apply to all order?',
+    productHint: 'Please type the product name',
   },
   message: {
     warnAddOpt: 'To add options, you must first create the product',
