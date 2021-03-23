@@ -251,8 +251,8 @@
     },
     mounted () {
       this.$nextTick(() => {
-        this.$root.$on('page.data.refresh', () => this.getData())
         this.initForm()
+        this.$root.$on('page.data.refresh', () => this.initForm())
       })
     },
     methods: {
