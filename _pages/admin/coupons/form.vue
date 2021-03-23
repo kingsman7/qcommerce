@@ -50,7 +50,7 @@
                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
             />
 
-            <div v-if="form.type=='0'">
+            <div v-show="form.type=='0'">
 
               <q-select outlined dense v-model="form.products" use-input
                         emit-value map-options
@@ -82,8 +82,8 @@
                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                       :label="`${$tr('qcommerce.layout.form.status')}*`" style="width: 100%;"
                       emit-value map-options :options="[
-                        {label: this.$tr('ui.label.enabled'), value: 1},
-                        {label: this.$tr('ui.label.disabled'), value: 2},
+                        {label: this.$tr('ui.label.enabled'), value: '1'},
+                        {label: this.$tr('ui.label.disabled'), value: '2'},
                       ]"/>
 
             <q-input dense mask="date" bg-color="white" v-model="form.dateStart" color="primary"
@@ -117,6 +117,7 @@
                         {label: this.$tr('ui.label.no'), value: '0'},
                       ]"
                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                      v-if="false"
             />
 
 
@@ -227,7 +228,8 @@
           typeDiscount: null,
           logged: '0',
           shipping: '0',
-          minimumOrderAmount: '',
+          minimumOrderAmount: '0',
+          quantityProducts: '0',
           dateStart: '',
           dateEnd: '',
           quantityTotal: '',
@@ -249,13 +251,13 @@
     },
     mounted () {
       this.$nextTick(() => {
+        this.$root.$on('page.data.refresh', () => this.getData())
         this.initForm()
       })
     },
     methods: {
       initForm () {
         if (this.$route.params.id) this.getData()
-        this.$root.$on('page.data.refresh', () => this.getData())
       },
       getData () {
         this.loading = true
@@ -263,17 +265,24 @@
           refresh: true,
           params: {
             //include: 'categories,products,manufacturers'
-            include: 'categories,products'
+            include: 'categories,products,manufacturers'
           }
         }
         this.$crud.show('apiRoutes.qcommerce.coupons', this.$route.params.id, params)
           .then(response => {
-            Object.assign(this.form, { ...response.data })
+            let data = this.$clone(response.data)
+            for(let x in data){
+              data[x] = Array.isArray(response.data[x]) ? response.data[x] : (response.data[x] != null ? response.data[x].toString() : null)
+            }
+            Object.assign(this.form, { ...data })
             setTimeout(() => {
-              if(this.form.products.length) this.getProductsFromBack()
+               if(this.form.products)
+                 if(this.form.products.length > 0)
+                   this.getProductsFromBack()
               this.loading = false
             }, 1000)
           }).catch(error => {
+          console.error(error)
           this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
           this.loading = false
         })
@@ -296,6 +305,7 @@
         })
       },
       getProductsFromBack() {
+        this.form.products = this.form.products.map(item => item.id)
         let params = {params: {take: 100, filter: {ids: this.form.products}}}
         //Request
         this.$crud.index('apiRoutes.qcommerce.products', params).then(response => {
