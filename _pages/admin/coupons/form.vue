@@ -37,7 +37,7 @@
                      :label="`${$tr('qcommerce.layout.form.quantityTotalCustomer')} *`"/>
 
             <q-input v-model="form.minimumOrderAmount" type="number" outlined dense
-                     :label="`${$tr('qcommerce.layout.form.minimumOrderAmount')} *`" />
+                     :label="`${$tr('qcommerce.layout.form.minimumOrderAmount')} *`" v-if="false" />
 
             <q-select outlined dense v-model="form.products" use-input
                       emit-value map-options
@@ -166,7 +166,7 @@
           },
           categories: {
             value: [],
-            type: 'select',
+            type: 'treeSelect',
             loadOptions: {
               apiRoute: 'apiRoutes.qcommerce.categories',
               select: {label: 'title', id: 'id'},
@@ -174,7 +174,6 @@
             props : {
               clearable: true,
               multiple: true,
-              useChips: true,
               label: `${this.$trp('ui.label.category')}`,
             }
           },
