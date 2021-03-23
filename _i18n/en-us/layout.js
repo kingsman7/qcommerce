@@ -124,7 +124,8 @@ export default {
     priceLists: 'Price Lists',
     criteria: 'Discount criteria',
     soonToSoldOut : 'Soon to sold out',
-    itemType: 'Item Type'
+    itemType: 'Item Type',
+    minimumOrderAmount: 'Minimum Amount for order',
   },
   message: {
     warnAddOpt: 'To add options, you must first create the product',

@@ -286,6 +286,9 @@ export default {
     title: 'qcommerce.sidebar.adminCoupons',
     icon: 'fas fa-ticket-alt',
     authenticated: true,
+    subHeader: {
+      refresh: true,
+    }
   },
   couponsCreate: {
     permission: 'icommerce.coupons.create',
@@ -297,6 +300,10 @@ export default {
     title: 'qcommerce.sidebar.createCoupons',
     icon: 'fas fa-ticket-alt',
     authenticated: true,
+    subHeader: {
+      refresh: true,
+      breadcrumb: ['qcommerce.coupons']
+    }
   },
   couponsEdit: {
     permission: 'icommerce.coupons.edit',
@@ -308,6 +315,10 @@ export default {
     title: 'qcommerce.sidebar.editCoupons',
     icon: 'fas fa-ticket-alt',
     authenticated: true,
+    subHeader: {
+      refresh: true,
+      breadcrumb: ['qcommerce.coupons']
+    }
   },
   priceLists: {
     permission: 'icommercepricelist.pricelists.manage',
