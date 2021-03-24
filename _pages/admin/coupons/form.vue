@@ -20,9 +20,11 @@
             <q-select outlined dense bg-color="white" v-model="form.typeDiscount"
                       :label="`${$tr('qcommerce.layout.form.typeDiscount')}*`" style="width: 100%;"
                       emit-value map-options :options="[
-                        {label: this.$tr('qcommerce.layout.options.fixedValue'), value: 0},
-                        {label: this.$tr('qcommerce.layout.options.percentage'), value: 1},
-                      ]"/>
+                        {label: this.$tr('qcommerce.layout.options.fixedValue'), value: '0'},
+                        {label: this.$tr('qcommerce.layout.options.percentage'), value: '1'},
+                      ]"
+                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+            />
 
             <q-input v-model="form.discount" type="number" outlined dense
                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
@@ -37,26 +39,40 @@
                      :label="`${$tr('qcommerce.layout.form.quantityTotalCustomer')} *`"/>
 
             <q-input v-model="form.minimumOrderAmount" type="number" outlined dense
-                     :label="`${$tr('qcommerce.layout.form.minimumOrderAmount')} *`" />
+                     :label="`${$tr('qcommerce.layout.form.minimumOrderAmount')} *`" v-if="false" />
 
-            <q-select outlined dense v-model="form.products" use-input
-                      emit-value map-options
-                      input-debounce="800" :options="productList" @filter="getProducts"
-                      :label="`${$trp('ui.label.product')}`"
-                      multiple use-chips
-                      style="width: 100%">
-              <template v-slot:no-option>
-                <q-item>
-                  <q-item-section class="text-grey">
-                    {{ $tr('ui.message.searchNotFound') }}
-                  </q-item-section>
-                </q-item>
-              </template>
-            </q-select>
+            <q-select outlined dense bg-color="white" v-model="form.type"
+                      :label="`${$tr('qcommerce.layout.form.allOrder')}*`" style="width: 100%;"
+                      emit-value map-options :options="[
+                        {label: this.$tr('ui.label.no'), value: '0'},
+                        {label: this.$tr('ui.label.yes'), value: '1'},
+                      ]"
+                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+            />
 
-            <dynamic-field :field="dynamicFields.categories" v-model="form.categories" />
+            <div v-show="form.type=='0'">
 
-            <dynamic-field :field="dynamicFields.manufacturers" v-model="form.manufacturers" />
+              <q-select outlined dense v-model="form.products" use-input
+                        emit-value map-options
+                        input-debounce="800" :options="productList" @filter="getProducts"
+                        :label="`${$trp('ui.label.product')}`"
+                        multiple use-chips
+                        style="width: 100%"
+                        :hint="`${$tr('qcommerce.layout.form.productHint')}`"
+              >
+                <template v-slot:no-option>
+                  <q-item>
+                    <q-item-section class="text-grey">
+                      {{ $tr('ui.message.searchNotFound') }}
+                    </q-item-section>
+                  </q-item>
+                </template>
+              </q-select>
+
+              <dynamic-field :field="dynamicFields.categories" v-model="form.categories" />
+
+              <dynamic-field :field="dynamicFields.manufacturers" v-model="form.manufacturers" />
+            </div>
 
           </div>
 
@@ -66,8 +82,8 @@
                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                       :label="`${$tr('qcommerce.layout.form.status')}*`" style="width: 100%;"
                       emit-value map-options :options="[
-                        {label: this.$tr('ui.label.enabled'), value: 1},
-                        {label: this.$tr('ui.label.disabled'), value: 2},
+                        {label: this.$tr('ui.label.enabled'), value: '1'},
+                        {label: this.$tr('ui.label.disabled'), value: '2'},
                       ]"/>
 
             <q-input dense mask="date" bg-color="white" v-model="form.dateStart" color="primary"
@@ -95,19 +111,24 @@
             </q-input>
 
             <q-select outlined dense bg-color="white" v-model="form.shipping"
-                      :label="`${$tr('qcommerce.layout.form.shipping')}*`" style="width: 100%;"
+                      :label="`${$tr('qcommerce.layout.form.freeShipping')}*`" style="width: 100%;"
                       emit-value map-options :options="[
-                        {label: this.$tr('ui.label.yes'), value: 1},
-                        {label: this.$tr('ui.label.no'), value: 0},
-                      ]"/>
+                        {label: this.$tr('ui.label.yes'), value: '1'},
+                        {label: this.$tr('ui.label.no'), value: '0'},
+                      ]"
+                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                      v-if="false"
+            />
 
 
             <q-select outlined dense bg-color="white" v-model="form.logged"
                       :label="`${$tr('qcommerce.layout.form.logged')}*`" style="width: 100%;"
                       emit-value map-options :options="[
-                        {label: this.$tr('ui.label.yes'), value: 1},
-                        {label: this.$tr('ui.label.no'), value: 0},
-                      ]"/>
+                        {label: this.$tr('ui.label.yes'), value: '1'},
+                        {label: this.$tr('ui.label.no'), value: '0'},
+                      ]"
+                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+            />
 
             <dynamic-field :field="dynamicFields.includeDepartments" v-model="form.includeDepartments" />
             <dynamic-field :field="dynamicFields.excludeDepartments" v-model="form.excludeDepartments" />
@@ -166,7 +187,7 @@
           },
           categories: {
             value: [],
-            type: 'select',
+            type: 'treeSelect',
             loadOptions: {
               apiRoute: 'apiRoutes.qcommerce.categories',
               select: {label: 'title', id: 'id'},
@@ -174,7 +195,6 @@
             props : {
               clearable: true,
               multiple: true,
-              useChips: true,
               label: `${this.$trp('ui.label.category')}`,
             }
           },
@@ -204,16 +224,17 @@
           id: '',
           code: '',
           discount: '',
-          type: 1,
+          type: '1',
           typeDiscount: null,
-          logged: null,
-          shipping: null,
-          minimumOrderAmount: '',
+          logged: '0',
+          shipping: '0',
+          minimumOrderAmount: '0',
+          quantityProducts: '0',
           dateStart: '',
           dateEnd: '',
           quantityTotal: '',
           quantityTotalCustomer: '',
-          status: null,
+          status: 1,
           includeDepartments: [0],
           excludeDepartments: [],
           categories: [],
@@ -231,12 +252,12 @@
     mounted () {
       this.$nextTick(() => {
         this.initForm()
+        this.$root.$on('page.data.refresh', () => this.initForm())
       })
     },
     methods: {
       initForm () {
         if (this.$route.params.id) this.getData()
-        this.$root.$on('page.data.refresh', () => this.getData())
       },
       getData () {
         this.loading = true
@@ -244,17 +265,24 @@
           refresh: true,
           params: {
             //include: 'categories,products,manufacturers'
-            include: 'categories,products'
+            include: 'categories,products,manufacturers'
           }
         }
         this.$crud.show('apiRoutes.qcommerce.coupons', this.$route.params.id, params)
           .then(response => {
-            Object.assign(this.form, { ...response.data })
+            let data = this.$clone(response.data)
+            for(let x in data){
+              data[x] = Array.isArray(response.data[x]) ? response.data[x] : (response.data[x] != null ? response.data[x].toString() : null)
+            }
+            Object.assign(this.form, { ...data })
             setTimeout(() => {
-              if(this.form.products.length) this.getProductsFromBack()
+               if(this.form.products)
+                 if(this.form.products.length > 0)
+                   this.getProductsFromBack()
               this.loading = false
             }, 1000)
           }).catch(error => {
+          console.error(error)
           this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
           this.loading = false
         })
@@ -277,6 +305,7 @@
         })
       },
       getProductsFromBack() {
+        this.form.products = this.form.products.map(item => item.id)
         let params = {params: {take: 100, filter: {ids: this.form.products}}}
         //Request
         this.$crud.index('apiRoutes.qcommerce.products', params).then(response => {
