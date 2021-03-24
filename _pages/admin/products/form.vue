@@ -293,7 +293,7 @@
                               :crud-props="{label:`${$tr('qcommerce.layout.form.itemType')}`, 'data-testid': 'itemTypeId'}"
                               v-model="locale.formTemplate.itemTypeId"
                               :config="{options: {label: 'title', value: 'id'}}"
-                              v-if="this.$auth.hasAccess('icommerce.itemtypes.manage')"
+                              v-if="false"
                         />
                         <!--Crud manufacturer-->
                         <crud :crud-data="import('@imagina/qcommerce/_crud/taxClasses')"
