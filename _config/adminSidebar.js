@@ -19,7 +19,7 @@ export default [
       //pages.qcommerce.taxClasses,//Tax Classes
       //pages.qcommerce.taxRates,//Tax Rates
       pages.qcommerce.priceLists,//Price Lists
-      pages.qcommerce.itemTypes,//Price Lists
+      //pages.qcommerce.itemTypes,//Item Types
     ]
   },
 ]
