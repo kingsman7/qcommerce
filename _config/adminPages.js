@@ -277,7 +277,7 @@ export default {
     }
   },
   coupons: {
-    permission: 'icommerce.coupons.index',
+    permission: 'icommerce.coupons.manage',
     activated: true,
     path: '/coupons',
     name: 'qcommerce.admin.coupons.index',
