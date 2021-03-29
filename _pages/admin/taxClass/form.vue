@@ -194,7 +194,7 @@
           let configName = 'apiRoutes.qcommerce.taxClasses'
           this.$crud.update(configName, this.itemId, this.getDataForm()).then(response => {
             this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
-            this.$router.push({name: 'qcommerce.admin.taxClasses.index'})
+            this.$router.push({name: 'qcommerce.admin.taxClasses'})
             //this.initForm()
             this.loading = false
           }).catch(error => {
@@ -209,7 +209,7 @@
           let configName = 'apiRoutes.qcommerce.taxClasses'
           this.$crud.create(configName, this.getDataForm()).then(response => {
             this.$alert.success({message: `${this.$tr('ui.message.recordCreated')}`})
-            this.$router.push({name: 'qcommerce.admin.taxClasses.index'})
+            this.$router.push({name: 'qcommerce.admin.taxClasses'})
             //this.initForm()
             this.loading = false
           }).catch(error => {
