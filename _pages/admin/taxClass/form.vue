@@ -93,6 +93,7 @@
     mounted() {
       this.$nextTick(function () {
         this.initForm()
+        this.$root.$on('page.data.refresh', () => this.initForm())//Listen refresh event
       })
     },
     data() {
