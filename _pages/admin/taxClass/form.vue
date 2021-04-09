@@ -18,7 +18,7 @@
           <q-field borderless v-model="locale.formTemplate.description" :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <q-editor class="full-width" v-model="locale.formTemplate.description" />
           </q-field>
-          <div class="row" v-if="this.itemId">
+          <div class="row">
             <div class="col-12 text-right q-py-sm">
               <q-btn color="positive" :loading="loading" @click="locale.formTemplate.rates.push(defaultRate)"
                      icon="fas fa-plus">
@@ -59,9 +59,6 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row" v-else>
-
           </div>
           <q-page-sticky
                   position="bottom-right"
