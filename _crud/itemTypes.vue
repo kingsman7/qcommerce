@@ -6,7 +6,7 @@
         return {
           apiRoute: 'apiRoutes.qcommerce.itemTypes',
           permission: 'icommerce.itemtypes',
-          extraFormFields: 'crud-fields.Icommerce.itemTypes',
+          extraFormFields: 'Icommerce.crud-fields.itemTypes',
           create: {
             title: this.$tr('qcommerce.layout.newItemType'),
           },

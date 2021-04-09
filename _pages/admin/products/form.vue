@@ -1000,12 +1000,12 @@
       },
       getExtraFields(){
         return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.qsite.configFields'
+          let configName = 'apiRoutes.qsite.configs'
           let params = {//Params to request
             refresh: true,
             params:{
               filter: {
-                configFieldName: "crud-fields.Icommerce.products.productables"
+                configName: "Icommerce.crud-fields.products.productables"
               }
             }
           }

@@ -17,7 +17,7 @@
           crudId: this.crudId,
           apiRoute: 'apiRoutes.qcommerce.productDiscounts',
           //permission: 'icommerce.manufacturers',
-          extraFormFields: 'crud-fields.Icommerce.productDiscounts',
+          extraFormFields: 'Icommerce.crud-fields.productDiscounts',
           create: {
             title: this.$tr('qcommerce.layout.newProductDiscount'),
           },

@@ -14,7 +14,7 @@
         return {
           apiRoute: 'apiRoutes.qcommerce.coupons',
           permission: 'icommerce.coupons',
-          extraFormFields: 'crud-fields.Icommerce.coupons',
+          extraFormFields: 'Icommerce.crud-fields.coupons',
           create: {
             title: this.$tr('qcommerce.layout.newCoupon'),
             to: {name: 'qcommerce.admin.coupons.create'}

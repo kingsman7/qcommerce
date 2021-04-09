@@ -13,7 +13,7 @@
           crudId: this.crudId,
           apiRoute: 'apiRoutes.qcommerce.categories',
           permission: 'icommerce.categories',
-          extraFormFields: 'crud-fields.Icommerce.productCategories',
+          extraFormFields: 'Icommerce.crud-fields.productCategories',
           create: {
             title: this.$tr('qcommerce.layout.newCategory'),
           },

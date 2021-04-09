@@ -13,7 +13,7 @@
           crudId: this.crudId,
           apiRoute: 'apiRoutes.qcommerce.manufacturers',
           permission: 'icommerce.manufacturers',
-          extraFormFields: 'crud-fields.Icommerce.manufacturers',
+          extraFormFields: 'Icommerce.crud-fields.manufacturers',
           create: {
             title: this.$tr('qcommerce.layout.newManufacturer'),
           },

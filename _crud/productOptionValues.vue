@@ -12,7 +12,7 @@
           crudId: this.crudId,
           apiRoute: 'apiRoutes.qcommerce.optionValues',
           permission: 'icommerce.optionvalues',
-          extraFormFields: 'crud-fields.Icommerce.productOptionsValues',
+          extraFormFields: 'Icommerce.crud-fields.productOptionsValues',
           create: {
             title: this.$tr('qcommerce.layout.newOptionValue'),
           },

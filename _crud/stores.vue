@@ -12,7 +12,7 @@
         return {
           crudId: this.crudId,
           apiRoute: 'apiRoutes.qcommerce.stores',
-          extraFormFields: 'crud-fields.Icommerce.stores',
+          extraFormFields: 'Icommerce.crud-fields.stores',
           //permission: 'icommerce.stores',
           create: {
             title: this.$tr('qcommerce.layout.newStore'),
