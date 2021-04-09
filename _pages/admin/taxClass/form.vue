@@ -132,7 +132,7 @@
         return {
           taxRateId: '',
           based: '',
-          priority: 0
+          priority: '0'
         }
       }
     },
