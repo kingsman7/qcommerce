@@ -84,7 +84,7 @@
               }
             },
             geozoneId: {
-              value: null,
+              value: '1',
               type: 'select',
               loadOptions: {
                   apiRoute: 'apiRoutes.qlocations.geozones',

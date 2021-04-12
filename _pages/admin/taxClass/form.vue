@@ -131,7 +131,7 @@
       defaultRate(){
         return {
           taxRateId: '',
-          based: '',
+          based: '2',
           priority: '0'
         }
       }
@@ -144,8 +144,6 @@
         this.itemId = this.$route.params.id
         if (this.locale.success) this.$refs.localeComponent.vReset()
         await this.getData()
-        //await this.getTaxRates()
-        console.warn(this.locale.form)
         this.success = true
         this.loading = false
       },

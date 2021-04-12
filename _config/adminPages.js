@@ -227,7 +227,7 @@ export default {
     name: 'qcommerce.admin.taxClasses',
     page: () => import('@imagina/qcommerce/_pages/admin/taxClass/index'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminTaxClasses',
+    title: 'qcommerce.sidebar.adminTaxes',
     icon: 'fas fa-percentage',
     authenticated: true,
     subHeader: {
