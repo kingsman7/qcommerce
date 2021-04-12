@@ -24,6 +24,7 @@ export default {
   adminManufacturers : 'Fabricantes',
   adminManufacturersCreate : 'Nuevo Fabricante',
   adminManufacturersEdit : 'Editar Fabricante',
+  adminTaxes : 'Impuestos',
   adminTaxClasses : 'Grupos de impuestos',
   adminTaxClassesCreate : 'Nuevo Grupo de Impuesto',
   adminTaxClassesEdit : 'Editar Grupo de Impuesto',
