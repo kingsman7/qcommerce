@@ -21,8 +21,8 @@ export default {
   updateStore : 'Actualizar Tienda',
   newManufacturer : 'Nuevo Fabricante',
   updateManufacturer : 'Actualizar Fabricante',
-  newTaxClass : 'Nuevo Tipo de Impuesto',
-  updateTaxClass : 'Actualizar Tipo de Impuesto',
+  newTaxClass : 'Nuevo Grupo de Impuesto',
+  updateTaxClass : 'Actualizar Grupo de Impuesto',
   newTaxRate : 'Nueva Tasa de Impuesto',
   updateTaxRate : 'Actualizar Tasa de Impuesto',
   newCoupon: 'Nuevo Cupon',
@@ -100,7 +100,7 @@ export default {
     manufacturer: 'Fabricante | Fabricantes',
     customerGroup: 'Grupo de Usuario',
     customerGroupExclude: 'Grupos de Usuario Excluidos:',
-    taxClass: 'Tipo de Impuesto',
+    taxClass: 'Grupo de Impuesto',
 
     // Cupones
     code: 'Codigo de Cupon',

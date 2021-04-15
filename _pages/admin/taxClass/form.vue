@@ -18,7 +18,7 @@
           <q-field borderless v-model="locale.formTemplate.description" :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
             <q-editor class="full-width" v-model="locale.formTemplate.description" />
           </q-field>
-          <div class="row" v-if="this.itemId">
+          <div class="row">
             <div class="col-12 text-right q-py-sm">
               <q-btn color="positive" :loading="loading" @click="locale.formTemplate.rates.push(defaultRate)"
                      icon="fas fa-plus">
@@ -60,9 +60,6 @@
               </div>
             </div>
           </div>
-          <div class="row" v-else>
-
-          </div>
           <q-page-sticky
                   position="bottom-right"
                   :offset="[18, 18]">
@@ -93,6 +90,7 @@
     mounted() {
       this.$nextTick(function () {
         this.initForm()
+        this.$root.$on('page.data.refresh', () => this.initForm())//Listen refresh event
       })
     },
     data() {
@@ -133,8 +131,8 @@
       defaultRate(){
         return {
           taxRateId: '',
-          based: '',
-          priority: 0
+          based: '2',
+          priority: '0'
         }
       }
     },
@@ -146,8 +144,6 @@
         this.itemId = this.$route.params.id
         if (this.locale.success) this.$refs.localeComponent.vReset()
         await this.getData()
-        //await this.getTaxRates()
-        console.warn(this.locale.form)
         this.success = true
         this.loading = false
       },
@@ -194,7 +190,7 @@
           let configName = 'apiRoutes.qcommerce.taxClasses'
           this.$crud.update(configName, this.itemId, this.getDataForm()).then(response => {
             this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
-            this.$router.push({name: 'qcommerce.admin.taxClasses.index'})
+            this.$router.push({name: 'qcommerce.admin.taxClasses'})
             //this.initForm()
             this.loading = false
           }).catch(error => {
@@ -209,7 +205,7 @@
           let configName = 'apiRoutes.qcommerce.taxClasses'
           this.$crud.create(configName, this.getDataForm()).then(response => {
             this.$alert.success({message: `${this.$tr('ui.message.recordCreated')}`})
-            this.$router.push({name: 'qcommerce.admin.taxClasses.index'})
+            this.$router.push({name: 'qcommerce.admin.taxClasses'})
             //this.initForm()
             this.loading = false
           }).catch(error => {

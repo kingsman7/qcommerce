@@ -16,7 +16,7 @@ export default [
       pages.qcommerce.coupons,//Coupons
       //pages.qcommerce.stores,//Stores
       pages.qcommerce.manufacturers,//Manufacturers
-      //pages.qcommerce.taxClasses,//Tax Classes
+      pages.qcommerce.taxClasses,//Tax Classes
       //pages.qcommerce.taxRates,//Tax Rates
       pages.qcommerce.priceLists,//Price Lists
       //pages.qcommerce.itemTypes,//Item Types

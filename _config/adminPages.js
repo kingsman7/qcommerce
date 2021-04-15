@@ -221,13 +221,13 @@ export default {
   },
   //Tax Class list
   taxClasses: {
-    permission: 'icommerce.taxclasses.index',
+    permission: 'icommerce.taxclasses.manage',
     activated: true,
     path: '/ecommerce/tax-classes',
     name: 'qcommerce.admin.taxClasses',
     page: () => import('@imagina/qcommerce/_pages/admin/taxClass/index'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminTaxClasses',
+    title: 'qcommerce.sidebar.adminTaxes',
     icon: 'fas fa-percentage',
     authenticated: true,
     subHeader: {
@@ -236,7 +236,7 @@ export default {
   },
   //Tax Class create
   taxClassCreate: {
-    permission: null,
+    permission: 'icommerce.taxclasses.create',
     activated: true,
     path: '/ecommerce/tax-classes/create',
     name: 'qcommerce.admin.taxClasses.create',
@@ -248,7 +248,7 @@ export default {
   },
   //Tax Class edit
   taxClassEdit: {
-    permission: null,
+    permission: 'icommerce.taxclasses.edit',
     activated: true,
     path: '/ecommerce/tax-classes/:id',
     name: 'qcommerce.admin.taxClasses.edit',
@@ -263,7 +263,7 @@ export default {
   },
   //Tax Rate list
   taxRates: {
-    permission: 'icommerce.taxrates.index',
+    permission: 'icommerce.taxrates.manage',
     activated: true,
     path: '/ecommerce/tax-rates',
     name: 'qcommerce.admin.taxRates',

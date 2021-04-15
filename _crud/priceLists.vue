@@ -6,7 +6,7 @@
         return {
           apiRoute: 'apiRoutes.qcommerce.priceLists',
           permission: 'icommercepricelist.pricelists',
-          extraFormFields: 'Icommercepricelists.crud-fields.priceList',
+          extraFormFields: 'crud-fields.Icommercepricelist.priceLists',
           create: {
             title: this.$tr('qcommerce.layout.newPriceList'),
           },

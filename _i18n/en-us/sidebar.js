@@ -23,6 +23,7 @@ export default {
   adminManufacturers : 'Manufacturers',
   adminManufacturersCreate : 'Create Manufacturer',
   adminManufacturersEdit : 'Edit Manufacturers',
+  adminTaxes : 'Taxes',
   adminTaxClasses : 'Tax Classes',
   adminTaxClassesCreate : 'New Tax Class',
   adminTaxClassesEdit : 'Edit Tax Class',
