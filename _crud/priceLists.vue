@@ -4,6 +4,7 @@
     computed: {
       crudData() {
         return {
+          entityName: config("main.qcommerce.entityNames.priceList"),
           apiRoute: 'apiRoutes.qcommerce.priceLists',
           permission: 'icommercepricelist.pricelists',
           extraFormFields: 'Icommercepricelist.crud-fields.priceLists',

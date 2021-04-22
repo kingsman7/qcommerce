@@ -11,6 +11,7 @@ export default {
     crudData() {
       return {
         crudId: this.crudId,
+        entityName: config("main.qcommerce.entityNames.shippingMethod"),
         apiRoute: 'apiRoutes.qcommerce.shippingMethods',
         permission: 'icommerce.shipping-methods',
         create: false,

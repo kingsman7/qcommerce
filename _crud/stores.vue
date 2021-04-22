@@ -11,6 +11,7 @@
       crudData() {
         return {
           crudId: this.crudId,
+          entityName: config("main.qcommerce.entityNames.store"),
           apiRoute: 'apiRoutes.qcommerce.stores',
           extraFormFields: 'Icommerce.crud-fields.stores',
           //permission: 'icommerce.stores',

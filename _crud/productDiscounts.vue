@@ -15,6 +15,7 @@
       crudData() {
         return {
           crudId: this.crudId,
+          entityName: config("main.qcommerce.entityNames.productDiscount"),
           apiRoute: 'apiRoutes.qcommerce.productDiscounts',
           //permission: 'icommerce.manufacturers',
           extraFormFields: 'Icommerce.crud-fields.productDiscounts',

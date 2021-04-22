@@ -12,6 +12,7 @@
     computed: {
       crudData() {
         return {
+          entityName: config("main.qcommerce.entityNames.coupon"),
           apiRoute: 'apiRoutes.qcommerce.coupons',
           permission: 'icommerce.coupons',
           extraFormFields: 'Icommerce.crud-fields.coupons',

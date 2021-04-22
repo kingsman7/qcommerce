@@ -11,6 +11,7 @@
       crudData() {
         return {
           crudId: this.crudId,
+          entityName: config("main.qcommerce.entityNames.taxClass"),
           apiRoute: 'apiRoutes.qcommerce.taxClasses',
           //permission: 'icommerce.manufacturers',
           extraFormFields: 'Icommerce.crud-fields.taxClasses',

@@ -11,6 +11,7 @@ export default {
     crudData() {
       return {
         crudId: this.crudId,
+        entityName: config("main.qcommerce.entityNames.paymentMethod"),
         apiRoute: 'apiRoutes.qcommerce.paymentMethods',
         permission: 'icommerce.payment-methods',
         create: {

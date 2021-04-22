@@ -10,6 +10,7 @@
       crudData () {
         return {
           crudId: this.crudId,
+          entityName: config("main.qcommerce.entityNames.productOptionValue"),
           apiRoute: 'apiRoutes.qcommerce.optionValues',
           permission: 'icommerce.optionvalues',
           extraFormFields: 'Icommerce.crud-fields.productOptionsValues',

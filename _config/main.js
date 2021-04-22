@@ -1,4 +1,22 @@
 export default {
+  //Entities
+  entityNames: {
+    coupon: 'coupon',
+    itemType: 'itemType',
+    manufacturer: 'manufacturer',
+    order: 'order',
+    paymentMethod: 'paymentMethod',
+    priceList: 'priceList',
+    productCategory: 'productCategory',
+    productDiscount: 'productDiscount',
+    productOption: 'productOption',
+    productOptionValue: 'productOptionValue',
+    product: 'product',
+    shippingMethod: 'shippingMethod',
+    store: 'store',
+    taxClass: 'taxClass',
+    taxRate: 'taxRate',
+  },
   //Quick Cards
   quickCards: [
     {

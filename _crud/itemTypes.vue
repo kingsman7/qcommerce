@@ -4,6 +4,7 @@
     computed: {
       crudData() {
         return {
+          entityName: config("main.qcommerce.entityNames.itemTypes"),
           apiRoute: 'apiRoutes.qcommerce.itemTypes',
           permission: 'icommerce.itemtypes',
           extraFormFields: 'Icommerce.crud-fields.itemTypes',

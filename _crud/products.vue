@@ -10,6 +10,7 @@ export default {
     crudData() {
       return {
         crudId: this.crudId,
+        entityName: config("main.qcommerce.entityNames.product"),
         apiRoute: 'apiRoutes.qcommerce.products',
         permission: 'icommerce.products',
         create: {

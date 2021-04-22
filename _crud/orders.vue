@@ -4,6 +4,7 @@ export default {
   computed: {
     crudData() {
       return {
+        entityName: config("main.qcommerce.entityNames.order"),
         apiRoute: 'apiRoutes.qcommerce.orders',
         permission: 'icommerce.orders',
         extraFormFields: 'Icommerce.crud-fields.orders',
