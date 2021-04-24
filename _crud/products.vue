@@ -108,6 +108,13 @@ export default {
                 label: `${this.$tr('qcommerce.layout.form.soonToSoldOut')}`
               },
             },
+            withDiscount: {
+              value: false,
+              type: 'checkbox',
+              props: {
+                label: `${this.$tr('qcommerce.layout.form.withDiscount')}`
+              },
+            },
           },
           actions: [
             {

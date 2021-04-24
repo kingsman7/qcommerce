@@ -131,6 +131,7 @@ export default {
     minimumOrderAmount: 'Monto mínimo del pedido',
     allOrder: 'Aplicar para toda la Orden?',
     productHint: 'Escriba el nombre de los productos deseados',
+    withDiscount: 'Con descuento'
   },
   message : {
     warnAddOpt : 'Para agregar opciones, primero debe crear el producto',

@@ -128,6 +128,7 @@ export default {
     minimumOrderAmount: 'Minimum Amount for order',
     allOrder: 'Apply to all order?',
     productHint: 'Please type the product name',
+    withDiscount: 'With discount'
   },
   message: {
     warnAddOpt: 'To add options, you must first create the product',
