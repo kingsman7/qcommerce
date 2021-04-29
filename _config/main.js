@@ -16,6 +16,7 @@ export default {
     store: 'store',
     taxClass: 'taxClass',
     taxRate: 'taxRate',
+    currencies: 'currencies'
   },
   //Quick Cards
   quickCards: [

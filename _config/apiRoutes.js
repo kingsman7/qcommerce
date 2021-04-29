@@ -29,4 +29,5 @@ export default {
   productDiscounts : `${urlBase}/product-discounts`,
 	itemTypes: `${urlBase}/item-types`,
 	priceLists : `${urlBase2}/price-lists`,
+	currencies : `${urlBase}/currencies`,
 }

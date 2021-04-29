@@ -346,4 +346,18 @@ export default {
     authenticated: true,
     subHeader: {refresh: true}
   },
+  //Product List
+  currency: {
+    permission: 'icommerce.currencies.manage',
+    activated: true,
+    path: '/ecommerce/currencies',
+    name: 'qcommerce.admin.currencies.index',
+    crud: import('@imagina/qcommerce/_crud/currencies'),
+    page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
+    layout: () => import('@imagina/qsite/_layouts/master.vue'),
+    title: 'qcommerce.sidebar.currencies',
+    icon: 'fas fa-donate',
+    authenticated: true,
+    subHeader: {refresh: true}
+  },
 }
