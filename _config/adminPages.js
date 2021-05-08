@@ -26,7 +26,10 @@ export default {
     authenticated: true,
     subHeader: {
       refresh: true,
-      breadcrumb: ['qcommerce.products']
+      breadcrumb: ['qcommerce.products'],
+      recommendations: {
+        name: 'commerceProduct'
+      }
     }
   },
   //Product Update
@@ -42,7 +45,10 @@ export default {
     authenticated: true,
     subHeader: {
       refresh: true,
-      breadcrumb: ['qcommerce.products']
+      breadcrumb: ['qcommerce.products'],
+      recommendations: {
+        name: 'commerceProduct'
+      }
     }
   },
   //Categories list
