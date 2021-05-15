@@ -14,6 +14,7 @@ export default {
         entityName: config("main.qcommerce.entityNames.paymentMethod"),
         apiRoute: 'apiRoutes.qcommerce.paymentMethods',
         permission: 'icommerce.payment-methods',
+        extraFormFields: 'Icommerce.crud-fields.paymentMethods',
         create: {
           title: this.$tr('qcommerce.layout.newPaymentMethod')
         },

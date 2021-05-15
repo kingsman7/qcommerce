@@ -13,6 +13,7 @@ export default {
         entityName: config("main.qcommerce.entityNames.currencies"),
         apiRoute: 'apiRoutes.qcommerce.currencies',
         permission: 'icommerce.currencies',
+        extraFormFields: 'Icommerce.crud-fields.currencies',
         create: {
           title: this.$tr('qcommerce.sidebar.newCurrencies'),
         },

@@ -14,6 +14,7 @@ export default {
         entityName: config("main.qcommerce.entityNames.shippingMethod"),
         apiRoute: 'apiRoutes.qcommerce.shippingMethods',
         permission: 'icommerce.shipping-methods',
+        extraFormFields: 'Icommerce.crud-fields.shippingMethods',
         create: false,
         read: {
           columns: [

@@ -13,6 +13,7 @@ export default {
         entityName: config("main.qcommerce.entityNames.product"),
         apiRoute: 'apiRoutes.qcommerce.products',
         permission: 'icommerce.products',
+        extraFormFields: 'Icommerce.crud-fields.products',
         create: {
           title: this.$tr('qcommerce.layout.newProduct'),
           to: {name: 'qcommerce.admin.products.create'}
