@@ -35,13 +35,13 @@
         <!--= Custom Columns =-->
         <q-td slot="body-cell-actions" slot-scope="props" :props="props">
           <!--Edit button-->
-          <q-btn color="positive" icon="fas fa-pen" size="sm"
+          <q-btn color="green" icon="fas fa-pen" size="sm"
                  v-if="$auth.hasAccess('icommerce.payment-methods.edit')"
                  @click="itemToEdit = props.row; formItemShow = true">
             <q-tooltip :delay="300">{{$tr('ui.label.edit')}}</q-tooltip>
           </q-btn>
           <!--status button-->
-          <q-toggle color="positive" v-model="props.row.status" class="q-px-xs" @input="update(props.row)">
+          <q-toggle color="green" v-model="props.row.status" class="q-px-xs" @input="update(props.row)">
             <q-tooltip :delay="300">{{`${$tr('ui.label.enabled')}/${$tr('ui.label.disabled')}`}}</q-tooltip>
           </q-toggle>
         </q-td>

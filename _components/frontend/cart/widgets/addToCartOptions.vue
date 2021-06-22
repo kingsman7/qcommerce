@@ -45,7 +45,7 @@
       <q-item class="text-center q-pb-none">
         <q-item-section>
           <q-btn @click="addCart()" icon="shopping_cart"
-                 label="AÑADIR" color="positive"
+                 label="AÑADIR" color="green"
                  :disable="addCartDisable"/>
         </q-item-section>
       </q-item>
@@ -160,7 +160,7 @@
           this.$store.dispatch('qcommerceCart/SET_PRODUCT_INTO_CART', formData).then(response => {
             this.$q.dialog({
               title: 'Producto agregado al carrito!',
-              color: 'positive',
+              color: 'green',
               ok: 'Ir al carrito',
               cancel: 'Seguir comprando'
             }).then(async data => {

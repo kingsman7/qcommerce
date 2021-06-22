@@ -20,7 +20,7 @@
           </q-field>
           <div class="row">
             <div class="col-12 text-right q-py-sm">
-              <q-btn color="positive" :loading="loading" @click="locale.formTemplate.rates.push(defaultRate)"
+              <q-btn color="green" :loading="loading" @click="locale.formTemplate.rates.push(defaultRate)"
                      icon="fas fa-plus">
                 <q-tooltip>
                   {{ $tr('qcommerce.layout.newTaxRate') }}
@@ -54,7 +54,7 @@
                            :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
                 </div>
                 <div class="col-2 col-sm-1 text-right">
-                  <q-btn color="negative" :loading="loading" @click="deleteRateItem(i)"
+                  <q-btn color="red" :loading="loading" @click="deleteRateItem(i)"
                          icon="fas fa-trash" />
                 </div>
               </div>
@@ -64,10 +64,10 @@
                   position="bottom-right"
                   :offset="[18, 18]">
             <!--Update button-->
-            <q-btn v-if="$route.params.id" color="positive" :loading="loading"
+            <q-btn v-if="$route.params.id" color="green" :loading="loading"
                    icon="fas fa-edit" :label="$tr('ui.label.update')" type="submit"/>
             <!--Save button-->
-            <q-btn v-else color="positive" :loading="loading" icon="fas fa-edit"
+            <q-btn v-else color="green" :loading="loading" icon="fas fa-edit"
                    :label="$tr('ui.label.create')" type="submit"/>
           </q-page-sticky>
         </q-form>

@@ -278,7 +278,7 @@
             title: option.keyDescription,
             preventClose: true,
             message: this.$tr('ui.message.deleteRecord'),
-            color: 'negative',
+            color: 'red',
             ok: this.$tr('ui.label.delete'),
             cancel: this.$tr('ui.label.cancel'),
           }).onOk(response => {//If comfirn delete action
@@ -309,7 +309,7 @@
           this.$q.dialog({
             message: this.$tr('qcommerce.layout.message.noDeleteOption', {name: option.keyDescription}),
             title: this.$tr('ui.label.warning'),
-            color: 'negative',
+            color: 'red',
           }).then(data => {
             return false//Response
           }).catch(data => {

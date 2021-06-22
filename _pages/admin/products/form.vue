@@ -119,7 +119,7 @@
                                 {{ $tr('qcommerce.layout.form.priceLists') }}
                               </div>
                               <div class="col-4 text-right">
-                                <q-btn icon="fas fa-plus" color="positive" size="sm"
+                                <q-btn icon="fas fa-plus" color="green" size="sm"
                                        @click="()=> { locale.form.priceLists.push({price: 0, priceListId: null}) }">
                                   <q-tooltip>
                                     {{ $tr('ui.label.add') }}
@@ -140,7 +140,7 @@
                                          :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
                               </div>
                               <div class="col-2 text-right">
-                                <q-btn icon="fas fa-trash" color="negative" size="sm" class="q-mt-sm"
+                                <q-btn icon="fas fa-trash" color="red" size="sm" class="q-mt-sm"
                                        @click="locale.form.priceLists.splice(i,1)">
                                   <q-tooltip>
                                     {{ $tr('ui.label.delete') }}
@@ -408,7 +408,7 @@
                             {{ `${$tr('qcommerce.layout.message.warnAddOpt')}...` }}
                           </div>
                           <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
-                                 @click="buttonActions.value = 4, createItem()" color="positive"/>
+                                 @click="buttonActions.value = 4, createItem()" color="green"/>
                         </div>
                       </div>
                     </q-card-section>
@@ -436,7 +436,7 @@
                             {{ `${$tr('qcommerce.layout.message.warnAddDiscount')}...` }}
                           </div>
                           <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
-                                 @click="buttonActions.value = 4, createItem()" color="positive"/>
+                                 @click="buttonActions.value = 4, createItem()" color="green"/>
                         </div>
                       </div>
                       <!--<dynamic-field v-model="locale.formTemplate.productDiscounts" :field="dynamicFields.productDiscounts" />-->
@@ -452,13 +452,13 @@
           <!--Update button-->
           <q-btn
             v-if="productId"
-            color="positive" :loading="loading"
+            color="green" :loading="loading"
             icon="fas fa-edit" :label="$tr('ui.label.update')" @click="updateItem()"
           />
           <!--Save button-->
           <q-btn-dropdown :label="buttonActions.label" split v-else :loading="loading"
                           content-style="min-width: 250px !important"
-                          color="positive" icon="fas fa-save" @click="createItem()" rounded align="right">
+                          color="green" icon="fas fa-save" @click="createItem()" rounded align="right">
             <q-list link>
               <q-item @click.native="buttonActions = {label : options.btn.saveAndReturn, value : 1}"
                       v-close-popup>

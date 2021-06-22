@@ -8,19 +8,19 @@
       </div>
       <div slot="top-right">
         <!--Button new record-->
-        <q-btn icon="fas fa-edit" color="positive" :label="$tr('qcommerce.layout.newOptionValue')"
+        <q-btn icon="fas fa-edit" color="green" :label="$tr('qcommerce.layout.newOptionValue')"
                @click="modal.itemId = false; modal.show = true" class="btn-small" unelevated rounded/>
       </div>
 
       <!--= Custom Columns =-->
       <q-td slot="body-cell-actions" slot-scope="props" :props="props">
         <!--Edit button-->
-        <q-btn color="positive" icon="fas fa-pen" size="sm"
+        <q-btn color="green" icon="fas fa-pen" size="sm"
                @click="modal.itemId = props.row.id; setItemUpdate()">
           <q-tooltip :delay="300">{{$tr('ui.label.edit')}}</q-tooltip>
         </q-btn>
         <!--Delete button-->
-        <q-btn color="negative" icon="fas fa-trash-alt" size="sm" class="q-ml-xs"
+        <q-btn color="red" icon="fas fa-trash-alt" size="sm" class="q-ml-xs"
                @click="deleteItem(props.row.id)">
           <q-tooltip :delay="300">{{$tr('ui.label.delete')}}</q-tooltip>
         </q-btn>
@@ -176,11 +176,11 @@
         <q-toolbar class="bg-white">
           <q-toolbar-title></q-toolbar-title>
           <!--Button Save-->
-          <q-btn icon="fas fa-save" color="positive"
+          <q-btn icon="fas fa-save" color="green"
                  v-if="!modal.itemId" :label="$tr('ui.label.save')"
                  :loading="loading" @click="$refs.formContent.submit()"/>
           <!--Button Update-->
-          <q-btn :label="$tr('ui.label.update')" icon="fas fa-pen" color="positive"
+          <q-btn :label="$tr('ui.label.update')" icon="fas fa-pen" color="green"
                  :loading="loading" @click="$refs.formContent.submit()" v-else/>
         </q-toolbar>
       </q-card>

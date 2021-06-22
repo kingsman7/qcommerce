@@ -23,7 +23,7 @@
                   /*{label: 'Image', value: 'image'},
                   {label: 'Color', value: 'color'},*/
                 ]" outlined dense emit-value map-options/>
-      <q-btn class="float-right" v-if="itemId" color="positive" :loading="loading"
+      <q-btn class="float-right" v-if="itemId" color="green" :loading="loading"
              icon="fas fa-save" :label="$tr('ui.label.save')" type="submit" rounded/>
     </q-form>
     <inner-loading :visible="loading"/>

@@ -63,7 +63,7 @@
       <q-toolbar color="white">
         <q-toolbar-title></q-toolbar-title>
         <!--Button Update-->
-        <q-btn :label="$tr('ui.label.update')" icon="fas fa-pen" color="positive"
+        <q-btn :label="$tr('ui.label.update')" icon="fas fa-pen" color="green"
                :loading="loading" @click="$refs.formContent.submit()"/>
       </q-toolbar>
     </q-card>

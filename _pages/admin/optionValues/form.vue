@@ -55,7 +55,7 @@
           </div>
           <!--Button Actions-->
           <div class="col-12 text-right">
-            <q-btn color="positive" :loading="loading" icon="fas fa-edit"
+            <q-btn color="green" :loading="loading" icon="fas fa-edit"
                    :label="itemId ? $tr('ui.label.update') : $tr('ui.label.create') " type="submit" rounded/>
           </div>
         </q-form>
