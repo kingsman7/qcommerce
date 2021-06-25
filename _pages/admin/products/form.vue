@@ -57,12 +57,12 @@
                         <q-card-section class="q-pa-sm">
                           <div class="q-pa-sm">
                             <q-select
-                              :clearable="false"
-                              emit-value map-options outlined dense
-                              :label="$tr('ui.form.status')"
-                              :options="options.status"
-                              v-model="locale.formTemplate.status"
-                              data-testid="status"
+                                :clearable="false"
+                                emit-value map-options outlined dense
+                                :label="$tr('ui.form.status')"
+                                :options="options.status"
+                                v-model="locale.formTemplate.status"
+                                data-testid="status"
                             />
                             <!--Categories-->
                             <div class="relative-position text-right">
@@ -159,13 +159,13 @@
                           <!--Status-->
                           <div class="input-title">{{ $tr('ui.form.stock') }}</div>
                           <tree-select
-                            data-testid="stockStatus"
-                            :clearable="false"
-                            :append-to-body="true"
-                            :options="options.stockStatus"
-                            value-consists-of="BRANCH_PRIORITY"
-                            v-model="locale.formTemplate.stockStatus"
-                            class="q-mb-md"
+                              data-testid="stockStatus"
+                              :clearable="false"
+                              :append-to-body="true"
+                              :options="options.stockStatus"
+                              value-consists-of="BRANCH_PRIORITY"
+                              v-model="locale.formTemplate.stockStatus"
+                              class="q-mb-md"
                           />
                           <!--sortOrder-->
                           <q-input data-testid="sortOrder" :label="$tr('qcommerce.layout.form.sortOrder')"
@@ -221,52 +221,52 @@
                                    v-model="locale.formTemplate.orderWeight"/>
                           <!--Requires shipping-->
                           <q-toggle
-                            data-testid="shipping"
-                            v-model="locale.formTemplate.shipping"
-                            :true-value="true"
-                            :false-value="false"
-                            :label="$tr('qcommerce.layout.form.requriedShipping')"
-                            color="primary"
+                              data-testid="shipping"
+                              v-model="locale.formTemplate.shipping"
+                              :true-value="true"
+                              :false-value="false"
+                              :label="$tr('qcommerce.layout.form.requriedShipping')"
+                              color="primary"
                           />
                           <br>
                           <!--Free shipping-->
                           <q-toggle
-                            data-testid="freeShipping"
-                            v-model="locale.formTemplate.freeshipping"
-                            :true-value="true"
-                            :false-value="false"
-                            :label="$tr('qcommerce.layout.form.freeShipping')"
-                            color="primary"
+                              data-testid="freeShipping"
+                              v-model="locale.formTemplate.freeshipping"
+                              :true-value="true"
+                              :false-value="false"
+                              :label="$tr('qcommerce.layout.form.freeShipping')"
+                              color="primary"
                           />
                           <br>
                           <!--Substrac from Stock-->
                           <q-toggle
-                            data-testid="subtract"
-                            v-model="locale.formTemplate.subtract"
-                            :true-value="true"
-                            :false-value="false"
-                            :label="$tr('qcommerce.layout.form.subtractFromStock')"
-                            color="primary"
+                              data-testid="subtract"
+                              v-model="locale.formTemplate.subtract"
+                              :true-value="true"
+                              :false-value="false"
+                              :label="$tr('qcommerce.layout.form.subtractFromStock')"
+                              color="primary"
                           />
                           <br>
                           <!--featured-->
                           <q-toggle
-                            data-testid="subtract"
-                            v-model="locale.formTemplate.featured"
-                            true-value="1"
-                            false-value="0"
-                            :label="$tr('qcommerce.layout.form.featured')"
-                            color="primary"
+                              data-testid="subtract"
+                              v-model="locale.formTemplate.featured"
+                              true-value="1"
+                              false-value="0"
+                              :label="$tr('qcommerce.layout.form.featured')"
+                              color="primary"
                           />
                           <br/>
                           <!--is call-->
                           <q-toggle
-                            data-testid="isCall"
-                            v-model="locale.formTemplate.isCall"
-                            true-value="1"
-                            false-value="0"
-                            :label="$tr('qcommerce.layout.form.isCall')"
-                            color="primary"
+                              data-testid="isCall"
+                              v-model="locale.formTemplate.isCall"
+                              true-value="1"
+                              false-value="0"
+                              :label="$tr('qcommerce.layout.form.isCall')"
+                              color="primary"
                           />
                         </div>
                       </div>
@@ -286,15 +286,15 @@
                             {{ `${$tr('ui.form.masterRecord')}` }}
                           </div>
                           <tree-select
-                            data-testid="masterRecord"
-                            :clearable="false"
-                            :append-to-body="true"
-                            v-model="locale.formTemplate.options.masterRecord"
-                            :options="[
+                              data-testid="masterRecord"
+                              :clearable="false"
+                              :append-to-body="true"
+                              v-model="locale.formTemplate.options.masterRecord"
+                              :options="[
                                     {label: this.$tr('ui.label.yes'), id: 1},
                                     {label: this.$tr('ui.label.no'), id: 0},
                                   ]"
-                            placeholder=""
+                              placeholder=""
                           />
                         </div>
                         <!--Crud item types-->
@@ -323,16 +323,16 @@
                         <!--Parent-->
                         <div class="input-title" v-if="false">{{ `${$tr('ui.form.parent')}` }}</div>
                         <tree-select
-                          data-testid="parentId"
-                          v-model="locale.formTemplate.parentId"
-                          :async="true"
-                          :append-to-body="true"
-                          class="q-mb-md"
-                          :load-options="searchProducts"
-                          :default-options="optionsTemplate.products"
-                          placeholder=""
-                          label="name"
-                          v-if="false"
+                            data-testid="parentId"
+                            v-model="locale.formTemplate.parentId"
+                            :async="true"
+                            :append-to-body="true"
+                            class="q-mb-md"
+                            :load-options="searchProducts"
+                            :default-options="optionsTemplate.products"
+                            placeholder=""
+                            label="name"
+                            v-if="false"
                         />
                         <!-- &lt;!&ndash;Crud category&ndash;&gt;
                          <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
@@ -349,15 +349,15 @@
                         <!--Related Products-->
                         <div class="input-title">{{ $tr('qcommerce.layout.form.relatedProducts') }}</div>
                         <tree-select
-                          data-testid="relatedProducts"
-                          v-model="locale.formTemplate.relatedProducts"
-                          :async="true"
-                          :multiple="true"
-                          :append-to-body="true"
-                          :load-options="searchProducts"
-                          :default-options="optionsTemplate.relatedProducts"
-                          placeholder=""
-                          label="name"
+                            data-testid="relatedProducts"
+                            v-model="locale.formTemplate.relatedProducts"
+                            :async="true"
+                            :multiple="true"
+                            :append-to-body="true"
+                            :load-options="searchProducts"
+                            :default-options="optionsTemplate.relatedProducts"
+                            placeholder=""
+                            label="name"
                         />
                       </div>
                     </q-card-section>
@@ -373,22 +373,22 @@
                         <!--Video-->
                         <q-input data-testid="optionsVideo" v-model="locale.formTemplate.options.video" outlined dense
                                  :label="$tr('ui.form.video')"/>
-                        <div class="input-title">{{ $tr('ui.form.image') }}</div>
                         <upload-media
-                          data-testid="mainImage"
-                          v-model="locale.formTemplate.mediasSingle"
-                          entity="Modules\Icommerce\Entities\Product"
-                          :entity-id="productId ? productId : null"
-                          zone='mainimage'
+                            data-testid="mainImage"
+                            v-model="locale.formTemplate.mediasSingle"
+                            entity="Modules\Icommerce\Entities\Product"
+                            :entity-id="productId ? productId : null"
+                            zone='mainimage'
+                            :label="$tr('ui.form.image')"
                         />
-                        <div class="input-title">{{ $tr('ui.form.gallery') }}</div>
                         <upload-media
-                          data-testid="gallery"
-                          multiple
-                          v-model="locale.formTemplate.mediasMulti"
-                          entity="Modules\Icommerce\Entities\Product"
-                          :entity-id="productId ? productId : null"
-                          zone='gallery'
+                            data-testid="gallery"
+                            multiple
+                            v-model="locale.formTemplate.mediasMulti"
+                            entity="Modules\Icommerce\Entities\Product"
+                            :entity-id="productId ? productId : null"
+                            zone='gallery'
+                            :label="$tr('ui.form.gallery')"
                         />
                       </div>
                     </q-card-section>
@@ -426,8 +426,8 @@
                       <div class="full-width">
                         <div class="q-pa-sm" v-if="productId">
                           <crud
-                            :crud-data="import('@imagina/qcommerce/_crud/productDiscounts')"
-                            :custom-data="{read: {requestParams: {include: 'department', filter: {productId: productId} } }, formRight:{productId: {value: productId} } }"
+                              :crud-data="import('@imagina/qcommerce/_crud/productDiscounts')"
+                              :custom-data="{read: {requestParams: {include: 'department', filter: {productId: productId} } }, formRight:{productId: {value: productId} } }"
                           />
                         </div>
                         <div v-else class="text-center q-pa-sm">
@@ -451,9 +451,9 @@
         <q-page-sticky position="bottom-right" :offset="[18, 18]">
           <!--Update button-->
           <q-btn
-            v-if="productId"
-            color="green" :loading="loading"
-            icon="fas fa-edit" :label="$tr('ui.label.update')" @click="updateItem()"
+              v-if="productId"
+              color="green" :loading="loading"
+              icon="fas fa-edit" :label="$tr('ui.label.update')" @click="updateItem()"
           />
           <!--Save button-->
           <q-btn-dropdown :label="buttonActions.label" split v-else :loading="loading"
