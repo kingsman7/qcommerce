@@ -3,6 +3,10 @@
     <q-no-ssr>
       <!--Content-->
       <div class="productForm relative-position q-mb-lg backend-page">
+        <!--Page Actions-->
+        <div class="box box-auto-height q-mb-md">
+          <page-actions :title="$tr($route.meta.title)"/>
+        </div>
         <!--Data-->
         <q-form autocorrect="off" autocomplete="off" ref="formContent" class="box"
                 @submit="(!itemId && !field) ? createItem() : updateItem()"
@@ -475,7 +479,6 @@
             </q-list>
           </q-btn-dropdown>
         </q-page-sticky>
-
         <!--Loading-->
         <inner-loading :visible="loading"/>
       </div>
