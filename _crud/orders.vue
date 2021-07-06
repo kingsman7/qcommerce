@@ -62,17 +62,7 @@ export default {
                 apiRoute: 'apiRoutes.qcommerce.orderStatus'
               }
             },
-          },
-          actions: [
-            {
-              label: 'test',
-              icon: 'fas fa-eye',
-              color: 'info',
-              vIf: this.$auth.hasAccess('icommerce.orders.edit') ? false : true,
-              route: 'qcommerce.shipping.orders.show',
-              tooltip : this.$tr('ui.label.view')
-            }
-          ]
+          }
         },
         update: {
           to: 'qcommerce.shipping.orders.show'
