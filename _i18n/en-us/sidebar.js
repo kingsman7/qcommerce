@@ -38,5 +38,14 @@ export default {
   adminItemTypesEdit: 'Edit Item Types',
 
   panelOrders: 'My Purchases',
-  currencies: 'Currencies'
+  newCurrencies: 'New Currencies',
+  updateCurrency: 'Update Currencies',
+  currencies: 'Currencies',
+  code: 'Code',
+  symbol_left: 'Symbol Left',
+  symbol_right: 'Symbol Right',
+  decimal_place: 'Decimal',
+  value: 'Value',
+  status: 'Status',
+  default_currency: 'Default Currency'
 }

@@ -113,6 +113,7 @@ export default {
     dateStart: 'Date Start',
     dateEnd: 'Date End',
     quantityTotal: 'Quantity Total',
+    quantitySold : 'Quantity Sold',
     quantityTotalCustomer: 'Quantity Total Per Customer',
     status: 'Status',
     color: 'Color',
@@ -128,7 +129,9 @@ export default {
     minimumOrderAmount: 'Minimum Amount for order',
     allOrder: 'Apply to all order?',
     productHint: 'Please type the product name',
-    withDiscount: 'With discount'
+    withDiscount: 'With discount',
+    symbolLeft: 'Símbolo Izquierdo',
+    symbolRight: 'Símbolo Derecho'
   },
   message: {
     warnAddOpt: 'To add options, you must first create the product',

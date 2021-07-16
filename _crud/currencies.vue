@@ -27,25 +27,25 @@ export default {
             {name: 'id', label: this.$tr('ui.form.id'), field: 'id', style: 'width: 50px'},
             {name: 'name', label: this.$tr('ui.form.name'), field: 'name', align: 'left'},
             {
-              name: 'code', label: this.$tr('qcommerce.sidebar.code'), field: 'code', style: 'width: 50px',
+              name: 'code', label: this.$tr('ui.label.code'), field: 'code', style: 'width: 50px',
               align: 'left',
             },
             {
-              name: 'symbol_left', label: this.$tr('qcommerce.sidebar.symbol_left'), field: 'symbolLeft',
+              name: 'symbol_left', label: this.$tr('qcommerce.layout.form.symbolLeft'), field: 'symbolLeft',
               align: 'left', maxLength: 1
             },
             {
-              name: 'symbol_right', label: this.$tr('qcommerce.sidebar.symbol_right'), field: 'symbolRight',
+              name: 'symbol_right', label: this.$tr('qcommerce.layout.form.symbolRight'), field: 'symbolRight',
               align: 'left', maxLength: 1
             },
-            {name: 'status', label: this.$tr('qcommerce.sidebar.status'), field: 'status', align: 'left'},
+            {name: 'status', label: this.$tr('ui.form.status'), field: 'status', align: 'left'},
             {
-              name: 'decimal_place', label: this.$tr('qcommerce.sidebar.decimal_place'), field: 'decimalPlace',
+              name: 'decimal_place', label: this.$tr('ui.label.decimal'), field: 'decimalPlace',
               align: 'right'
             },
-            {name: 'value', label: this.$tr('qcommerce.sidebar.value'), field: 'value', align: 'right'},
+            {name: 'value', label: this.$tr('ui.label.value'), field: 'value', align: 'right'},
             {
-              name: 'default_currency', label: this.$tr('qcommerce.sidebar.default_currency'),
+              name: 'default_currency', label: this.$tr('ui.form.default'),
               field: 'defaultCurrency', align: 'right',
               format: val => (val == 1) ? this.$tr('ui.label.yes') : this.$tr('ui.label.no')
             },
@@ -79,7 +79,7 @@ export default {
             value: '',
             type: 'input',
             props: {
-              label: `${this.$tr('qcommerce.sidebar.code')}*`,
+              label: `${this.$tr('ui.label.code')}*`,
               rules: [
                 val => !!val || this.$tr('ui.message.fieldRequired'),
                 val => !val || val.length >= 3 || this.$tr('ui.message.fieldMinLeng', {num: 3})
@@ -90,7 +90,7 @@ export default {
             value: '',
             type: 'input',
             props: {
-              label: `${this.$tr('qcommerce.sidebar.symbol_left')}*`,
+              label: `${this.$tr('qcommerce.layout.form.symbolLeft')}*`,
               rules: [
                 val => !val || val.length == 1 || this.$tr('ui.message.fieldMaxLeng', {num: 1})
               ],
@@ -100,7 +100,7 @@ export default {
             value: '',
             type: 'input',
             props: {
-              label: `${this.$tr('qcommerce.sidebar.symbol_right')}*`,
+              label: `${this.$tr('qcommerce.layout.form.symbolRight')}*`,
               rules: [
                 val => !val || val.length == 1 || this.$tr('ui.message.fieldMaxLeng', {num: 1})
               ],
@@ -111,7 +111,7 @@ export default {
             type: 'input',
             props: {
               type: 'number',
-              label: `${this.$tr('qcommerce.sidebar.decimal_place')}*`,
+              label: `${this.$tr('ui.label.decimal')}*`,
               rules: [
                 val => !val || val.length == 1 || this.$tr('ui.message.fieldMaxLeng', {num: 1})
               ],
@@ -122,7 +122,7 @@ export default {
             type: 'input',
             props: {
               type: 'number',
-              label: `${this.$tr('qcommerce.sidebar.value')}*`,
+              label: `${this.$tr('ui.label.value')}*`,
               rules: [
                 val => !!val || this.$tr('ui.message.fieldRequired')
               ],

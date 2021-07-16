@@ -59,12 +59,12 @@ export default {
               format: val => val ? this.$trd(val) : '-',
             },
             {
-              name: 'running', label: this.$tr('qcommerce.layout.form.running'), field: 'running', align: 'left',
-              format: val => val ? this.$tr('qcommerce.layout.options.yes') : this.$tr('qcommerce.layout.options.no'),
+              name: 'running', label: this.$tr('ui.form.status'), field: 'running', align: 'left',
+              format: val => val ? this.$tr('ui.label.enabled') : this.$tr('ui.label.disabled'),
             },
             {
-              name: 'finished', label: this.$tr('qcommerce.layout.form.finished'), field: 'finished', align: 'left',
-              format: val => val ? this.$tr('qcommerce.layout.options.yes') : this.$tr('qcommerce.layout.options.no'),
+              name: 'finished', label: this.$tr('ui.label.finished'), field: 'finished', align: 'left',
+              format: val => val ? this.$tr('ui.label.yes') : this.$tr('ui.label.no'),
             },
             {
               name: 'quantitySold',
