@@ -2,7 +2,7 @@
   <div id="productFormPage" ref="productFormPage">
     <!--Content-->
     <div class="productForm q-mb-lg backend-page row">
-      <div class="col-12 col-lg-9 offset-lg-1 relative-position">
+      <div class="col-12 col-lg-10 offset-lg-1 relative-position">
         <!--Page Actions-->
         <div class="box box-auto-height q-mb-md">
           <page-actions :title="$tr($route.meta.title)"/>
