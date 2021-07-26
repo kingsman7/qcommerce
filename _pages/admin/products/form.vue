@@ -155,6 +155,22 @@
                     <q-input data-testid="sortOrder" :label="$tr('qcommerce.layout.form.sortOrder')"
                              outlined dense
                              type="number" v-model="locale.formTemplate.sortOrder"/>
+                    <!--Extra fields-->
+                    <!--Fields-->
+                    <div v-for="(field, key) in  extraFields" :key="key" :ref="key">
+                      <!--Dynamic fake field-->
+                      <dynamic-field v-model="locale.formTemplate[field.fakeFieldName || 'options'][field.name || key]"
+                                     :key="key" v-if="field.isFakeField || field.fakeFieldName"
+                                     :field="{...field, testId : (field.testId || field.name || key)}"
+                                     :language="locale.language" :item-id="productId"
+                                     :ref="`field-${field.name || key}`"/>
+                      <!--Dynamic field-->
+                      <dynamic-field v-model="locale.formTemplate[field.name || key]" :key="key"
+                                     :field="{...field, testId : (field.testId  || field.name || key)}"
+                                     :language="locale.language" :item-id="productId"
+                                     :ref="`field-${field.name || key}`"
+                                     v-if="!field.isFakeField && !field.fakeFieldName"/>
+                    </div>
                   </div>
                   <!--Right-->
                   <div class="col-12 col-md-6">
@@ -533,6 +549,7 @@ export default {
         category: false
       },
       priceListEnable: this.$auth.hasAccess('icommercepricelist.pricelists.manage'),
+      extraFields: []
     }
   },
   computed: {
@@ -709,8 +726,7 @@ export default {
       this.success = false//Disable status of page
       this.vTab = 'tab-data'
       this.buttonActions = {label: this.options.btn.saveAndReturn, value: 1}
-      let dataLocale = this.$clone(this.dataLocale)
-      this.locale = this.$clone(dataLocale)//Add fields
+      await this.orderFields()//Order field to locale
       this.productId = this.$route.params.id//Update param from route
       if (this.locale.success) this.$refs.localeComponent.vReset()//Reset locale
       await this.getData()//Get Data Item
@@ -947,6 +963,52 @@ export default {
         }
       }
     },
+    //Get extra fields
+    getExtraFields() {
+      return new Promise((resolve, reject) => {
+        //Request params
+        let requestParams = {
+          refresh: true,
+          params: {filter: {configName: 'icommerce.crud-fields.products'}}
+        }
+        //Request
+        this.$crud.index('apiRoutes.qsite.configs', requestParams).then(response => {
+          //Add response to form
+          if (response.data && Object.keys(response.data).length) this.extraFields = this.$clone(response.data)
+          //Response
+          resolve(response.data)
+        }).catch(error => reject(error))
+      })
+    },
+    //Order fields
+    orderFields() {
+      return new Promise(async resolve => {
+        let dataLocale = this.$clone(this.dataLocale)
+        //Get extra fields
+        await this.getExtraFields()
+
+        //Assign each field by type (translatable, fake field, just field) and validation
+        Object.keys(this.extraFields).forEach((key) => {
+          let field = this.extraFields[key]
+          //Validate field permission
+          if (field.permission && !this.$auth.hasAccess(field.permission)) return
+          //Add to data locale to field
+          if (field.isTranslatable) {
+            dataLocale.fieldsTranslatable[field.name || key] = field.value
+          } else if (field.isFakeField) {
+            dataLocale.fields.options[field.name || key] = field.value
+          } else if (field.fakeFieldName) {
+            if (!dataLocale.fields[field.fakeFieldName]) dataLocale.fields[field.fakeFieldName] = {}
+            dataLocale.fields[field.fakeFieldName][field.name || key] = field.value
+          } else {
+            dataLocale.fields[field.name || key] = field.value
+          }
+        })
+
+        this.locale = this.$clone(dataLocale)//Add fields
+        return resolve(true)
+      })
+    }
   }
 }
 </script>
