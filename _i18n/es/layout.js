@@ -142,7 +142,11 @@ export default {
     noDeleteOption: 'No puede borrar está opción, es padre de {name}',
     selectProduct: 'Seleccione una opción de producto',
     warnAddDiscount: 'Para agregar descuentos, primero debe crear el producto',
-    viewProduct: 'Ver producto'
+    viewProduct: 'Ver producto',
+    btnAddProduct: 'Agregar Producto',
+    chooseProduct: 'Elegir Producto',
+    productSetup: 'Configuración de Producto',
+    addProductToQuote: 'Agregue productos a la cotización'
   },
   options: {
     yes: 'Sí',

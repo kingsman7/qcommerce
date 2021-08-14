@@ -20,7 +20,8 @@ export default [
       //pages.qcommerce.taxRates,//Tax Rates
       pages.qcommerce.priceLists,//Price Lists
       //pages.qcommerce.itemTypes,//Item Types
-      pages.qcommerce.currency //
+      pages.qcommerce.currency,
+      pages.qcommerce.quotes
     ]
   },
 ]

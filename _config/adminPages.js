@@ -366,4 +366,34 @@ export default {
     authenticated: true,
     subHeader: {refresh: true}
   },
+  //Quotes
+  quotes: {
+    permission: 'icommerce.quotes.manage',
+    activated: true,
+    path: '/icommerce/quotes',
+    name: 'qcommerce.admin.quotes.index',
+    crud: import('@imagina/qcommerce/_crud/quotes'),
+    page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
+    layout: () => import('@imagina/qsite/_layouts/master.vue'),
+    title: 'qcommerce.sidebar.adminQuotes',
+    icon: 'fas fa-file-invoice-dollar',
+    authenticated: true,
+    subHeader: {refresh: true}
+  },
+  //Create Quote
+  quoteCreate: {
+    permission: 'icommerce.quotes.create',
+    activated: true,
+    path: '/icommerce/quotes/create',
+    name: 'qcommerce.admin.quotes.create',
+    page: () => import('@imagina/qcommerce/_pages/admin/quotes/form'),
+    layout: () => import('@imagina/qsite/_layouts/master.vue'),
+    title: 'qcommerce.sidebar.adminQuoteCreate',
+    icon: 'fas fa-file-invoice-dollar',
+    authenticated: true,
+    subHeader: {
+      refresh: true,
+      breadcrumb: ['qcommerce.quotes']
+    }
+  }
 }

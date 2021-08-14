@@ -36,6 +36,8 @@ export default {
   adminItemTypes: 'Item Types',
   adminItemTypesCreate: 'Create Item Types',
   adminItemTypesEdit: 'Edit Item Types',
+  adminQuotes: 'Quotes',
+  adminQuoteCreate: 'Create Quote',
 
   panelOrders: 'My Purchases',
   newCurrencies: 'New Currencies',

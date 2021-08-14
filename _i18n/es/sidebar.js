@@ -17,6 +17,8 @@ export default {
   adminCoupons: 'Cupones',
   createCoupons: 'Crear cupon',
   editCoupons: 'Editar cupon',
+  adminQuotes: 'Cotizaciones',
+  adminQuoteCreate: 'Crear Cotización',
 
   adminStores: 'Tiendas',
   adminStoresCreate: 'Nueva Tienda',

@@ -113,7 +113,7 @@ export default {
     dateStart: 'Date Start',
     dateEnd: 'Date End',
     quantityTotal: 'Quantity Total',
-    quantitySold : 'Quantity Sold',
+    quantitySold: 'Quantity Sold',
     quantityTotalCustomer: 'Quantity Total Per Customer',
     status: 'Status',
     color: 'Color',
@@ -124,7 +124,7 @@ export default {
     value: 'Value | Values',
     priceLists: 'Price Lists',
     criteria: 'Discount criteria',
-    soonToSoldOut : 'Soon to sold out',
+    soonToSoldOut: 'Soon to sold out',
     itemType: 'Item Type',
     minimumOrderAmount: 'Minimum Amount for order',
     allOrder: 'Apply to all order?',
@@ -139,7 +139,11 @@ export default {
     noDeleteOption: 'You can not delete this option, you are the father of {name}',
     selectProduct: 'Select a product option',
     warnAddDiscount: 'To add discounts, you must first create the product',
-    viewProduct: 'View product'
+    viewProduct: 'View product',
+    btnAddProduct: 'Add Product',
+    chooseProduct: 'Choose Product',
+    productSetup: 'Product Setup',
+    addProductToQuote: 'Add Quote Products'
   },
   options: {
     yes: 'Yes',
@@ -154,6 +158,6 @@ export default {
   },
   quickCard: {
     lastOrders: 'Commerce - Last Orders',
-    productsToSoldOut : 'Tienda - Products to sold out',
+    productsToSoldOut: 'Tienda - Products to sold out',
   }
 }
