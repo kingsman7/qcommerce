@@ -125,7 +125,7 @@ export default {
     //Return settings to use
     settings() {
       return {
-        formId: 11//this.$store.getters['qsiteApp/getSettingValueByName']('icommerce::icommerceCartQuoteForm')
+        formId: this.$store.getters['qsiteApp/getSettingValueByName']('icommerce::icommerceCartQuoteForm')
       }
     },
     //Crud Products Custom Data

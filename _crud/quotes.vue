@@ -13,7 +13,7 @@ export default {
         crudId: this.crudId,
         //entityName: config("main.qcommerce.entityNames.productCategory"),
         apiRoute: 'apiRoutes.qcommerce.orders',
-        permission: 'icommerce.orders',
+        permission: 'icommerce.quotes',
         //extraFormFields: 'Icommerce.crud-fields.productCategories',
         create: {
           to: {name: 'qcommerce.admin.quotes.create'}
