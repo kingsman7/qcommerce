@@ -16,7 +16,7 @@
         <div class="col-6 text-right">${{ $trn(priceOptions) }}</div>
         <!--Total-->
         <div class="col-6 text-blue-grey">Total:</div>
-        <div class="col-6 text-right">${{ $trn((productData.price + priceOptions) || 0) }}</div>
+        <div class="col-6 text-right">${{ $trn((parseInt(productData.price) + parseInt(priceOptions)) || 0) }}</div>
       </div>
     </div>
     <!--Options-->

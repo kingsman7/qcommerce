@@ -70,7 +70,7 @@
                 <div class="col-6 text-right">{{ cartData.products.length }}</div>
                 <!--Total-->
                 <div class="col-6 text-blue-grey">Total:</div>
-                <div class="col-6 text-right">${{ $trn((cartData.total) || 0) }}</div>
+                <div class="col-6 text-right">${{ $trn((parseInt(cartData.total)) || 0) }}</div>
               </div>
               <q-separator class="q-my-sm"/>
               <!--Actions-->
