@@ -361,23 +361,10 @@
                   <!--Video-->
                   <q-input data-testid="optionsVideo" v-model="locale.formTemplate.options.video" outlined dense
                            :label="$tr('ui.form.video')"/>
-                  <upload-media
-                      data-testid="mainImage"
-                      v-model="locale.formTemplate.mediasSingle"
-                      entity="Modules\Icommerce\Entities\Product"
-                      :entity-id="productId ? productId : null"
-                      zone='mainimage'
-                      :label="$tr('ui.form.image')"
-                  />
-                  <upload-media
-                      data-testid="gallery"
-                      multiple
-                      v-model="locale.formTemplate.mediasMulti"
-                      entity="Modules\Icommerce\Entities\Product"
-                      :entity-id="productId ? productId : null"
-                      zone='gallery'
-                      :label="$tr('ui.form.gallery')"
-                  />
+                  <dynamic-field v-model="locale.formTemplate.mediasSingle" :field="dynamicFields.mainImage"
+                                 :item-id="productId"/>
+                  <dynamic-field v-model="locale.formTemplate.mediasMulti" :field="dynamicFields.gallery"
+                                 :item-id="productId"/>
                 </div>
               </q-expansion-item>
               <q-expansion-item icon="fas fa-cog" :label="$trp('ui.label.option')"
@@ -465,7 +452,6 @@
 
 <script>
 import recursiveList from '@imagina/qsite/_components/master/recursiveListSelect'
-import uploadMedia from '@imagina/qmedia/_components/form'
 import crudOptions from '@imagina/qcommerce/_components/admin/products/crudOptions'
 import ckEditor from '@imagina/qsite/_components/master/ckEditor'
 //Plugins
@@ -477,7 +463,6 @@ export default {
   components: {
     crudOptions,
     recursiveList,
-    uploadMedia,
     ckEditor
   },
   watch: {
@@ -716,6 +701,24 @@ export default {
             requestParams: {include: 'parent'}
           }
         },
+        mainImage: {
+          type: 'media',
+          props: {
+            label: this.$tr('ui.form.image'),
+            zone: 'mainimage',
+            entity: 'Modules\\Icommerce\\Entities\\Product',
+            entityId: this.productId ? this.productId : null
+          }
+        },
+        gallery: {
+          type: 'media',
+          props: {
+            label: this.$tr('ui.form.gallery'),
+            zone: 'gallery',
+            entity: 'Modules\\Icommerce\\Entities\\Product',
+            entityId: this.productId ? this.productId : null
+          }
+        }
       }
     }
   },
