@@ -79,6 +79,21 @@
                     <q-input data-testid="customUrl" v-model="locale.formTemplate.customUrl" outlined dense
                              :label="`${$tr('ui.form.customUrl')}`">
                     </q-input>
+                    <!--Extra fields-->
+                    <div v-for="(field, key) in  extraFields" :key="key" :ref="key">
+                      <!--Dynamic fake field-->
+                      <dynamic-field v-model="locale.formTemplate[field.fakeFieldName || 'options'][field.name || key]"
+                                     :key="key" v-if="field.isFakeField || field.fakeFieldName"
+                                     :field="{...field, testId : (field.testId || field.name || key)}"
+                                     :language="locale.language" :item-id="productId"
+                                     :ref="`field-${field.name || key}`"/>
+                      <!--Dynamic field-->
+                      <dynamic-field v-model="locale.formTemplate[field.name || key]" :key="key"
+                                     :field="{...field, testId : (field.testId  || field.name || key)}"
+                                     :language="locale.language" :item-id="productId"
+                                     :ref="`field-${field.name || key}`"
+                                     v-if="!field.isFakeField && !field.fakeFieldName"/>
+                    </div>
                   </div>
                 </div>
               </q-expansion-item>
@@ -155,22 +170,6 @@
                     <q-input data-testid="sortOrder" :label="$tr('qcommerce.layout.form.sortOrder')"
                              outlined dense
                              type="number" v-model="locale.formTemplate.sortOrder"/>
-                    <!--Extra fields-->
-                    <!--Fields-->
-                    <div v-for="(field, key) in  extraFields" :key="key" :ref="key">
-                      <!--Dynamic fake field-->
-                      <dynamic-field v-model="locale.formTemplate[field.fakeFieldName || 'options'][field.name || key]"
-                                     :key="key" v-if="field.isFakeField || field.fakeFieldName"
-                                     :field="{...field, testId : (field.testId || field.name || key)}"
-                                     :language="locale.language" :item-id="productId"
-                                     :ref="`field-${field.name || key}`"/>
-                      <!--Dynamic field-->
-                      <dynamic-field v-model="locale.formTemplate[field.name || key]" :key="key"
-                                     :field="{...field, testId : (field.testId  || field.name || key)}"
-                                     :language="locale.language" :item-id="productId"
-                                     :ref="`field-${field.name || key}`"
-                                     v-if="!field.isFakeField && !field.fakeFieldName"/>
-                    </div>
                   </div>
                   <!--Right-->
                   <div class="col-12 col-md-6">

@@ -40,7 +40,7 @@ export default {
             {
               name: 'quantity', label: this.$tr('ui.form.stock'), field: 'quantity', align: 'left',
               format: val => !val ? this.$tr('ui.label.soldOut') :
-                `${this.$tr('ui.label.available')} (${(val <= 100) ? val : '100+'})`
+                  `${this.$tr('ui.label.available')} (${(val <= 100) ? val : '100+'})`
             },
             {name: 'slug', label: this.$tr('ui.form.slug'), field: 'slug', align: 'left'},
             {
@@ -79,7 +79,7 @@ export default {
               }
             },
             status: {
-              value: '1',
+              value: null,
               type: 'select',
               props: {
                 label: `${this.$tr('ui.form.status')}:`,
@@ -91,7 +91,7 @@ export default {
               },
             },
             stockStatus: {
-              value: 1,
+              value: null,
               type: 'select',
               props: {
                 label: `${this.$tr('ui.form.stock')}:`,

@@ -16,10 +16,10 @@
             <q-item-section side>
               <div>
                 <q-btn icon="fas fa-plus" color="positive" v-if="permitChildren(item)"
-                       size="xs" @click="vEmitAddOption(item.id)">
+                       size="xs" @click="vEmitAddOption(item.id)" round unelevated>
                   <q-tooltip>{{`${$tr('ui.label.add')} ${$tr('ui.label.option')}`}}</q-tooltip>
                 </q-btn>
-                <q-btn icon="far fa-trash-alt" color="red"
+                <q-btn icon="far fa-trash-alt" color="red" round unelevated
                        class="q-ml-xs" size="xs" @click="vEmitDelete(item.id)">
                   <q-tooltip>{{`${$tr('ui.label.delete')}`}}</q-tooltip>
                 </q-btn>
