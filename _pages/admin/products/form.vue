@@ -418,7 +418,7 @@
         <q-page-sticky position="bottom-right" :offset="[18, 18]">
           <!--Update button-->
           <q-btn
-              v-if="productId"
+              v-if="productId" rounded unelevated
               color="green" :loading="loading"
               icon="fas fa-edit" :label="$tr('ui.label.update')" @click="updateItem()"
           />
@@ -546,7 +546,7 @@ export default {
           categories: [],
           addedById: this.$store.state.quserAuth.userId,
           sku: 0,
-          quantity: 0,
+          quantity: 1,
           stockStatus: 1,
           price: 0,
           dateAvailable: this.$moment().format('YYYY-MM-DD'),
@@ -861,6 +861,7 @@ export default {
         let configName = 'apiRoutes.qcommerce.products'
         this.$crud.update(configName, this.productId, this.getDataForm()).then(response => {
           this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
+          this.$router.push({name: 'qcommerce.admin.products.index'})
           this.initForm()
         }).catch(error => {
           this.loading = false
