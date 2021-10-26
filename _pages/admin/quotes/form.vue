@@ -23,10 +23,8 @@
             </div>
             <!--Form-->
             <master-modal v-model="modalCustomer" :title="$tr('ui.label.customer')">
-              <div class="box">
-                <dynamic-form v-model="form" :form-id="settings.formId" hide-title hide-progress-bar
-                              @submit="modalCustomer = false" default-col-class="col-12"/>
-              </div>
+              <dynamic-form v-model="form" :form-id="settings.formId" hide-title hide-progress-bar
+                            @submit="modalCustomer = false" default-col-class="col-12"/>
             </master-modal>
           </div>
           <!--Quote data-->
