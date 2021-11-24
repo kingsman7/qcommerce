@@ -30,13 +30,31 @@
     </div>
 
     <!--Products List-->
-    <div class="box q-mb-md">
-      <div class="box-title">
-        {{ $trp('ui.label.product') }}
-      </div>
-      <q-separator class="q-mt-sm q-mb-md"/>
-      <!--Products Table-->
-      <orderItems :items="order.items"/>
+    <div id="orderItemsContent" class="box box-auto-height q-mb-md">
+      <!--Product list-->
+      <q-table v-bind="tableConfig.props">
+        <!--Custom columns-->
+        <template v-slot:body-cell="props">
+          <!-- actions columns -->
+          <q-td v-if="props.col.name == 'actions'" :props="props">
+            <btn-menu :actions="tableConfig.actions" :action-data="props.row"/>
+          </q-td>
+          <!--Default columns-->
+          <q-td v-else :props="props" :title="props.value">
+            {{ props.value }}
+          </q-td>
+        </template>
+      </q-table>
+      <!--Rate product-->
+      <master-modal v-model="modalRating.show" :title="$tr('ui.label.rating')" :loading="modalRating.loading">
+        <!--Product Info-->
+        <div class="box box-auto-height q-mb-md">
+          <b class="text-blue-grey q-mr-sm">{{ $tr('ui.label.product') }}:</b>
+          {{ modalRating.item.title }}
+        </div>
+        <!--Rating form-->
+        <dynamic-form v-if="!modalRating.loading" v-bind="form.rating" @sent="modalRating.show = false; init()"/>
+      </master-modal>
     </div>
 
     <!--Actions-->
@@ -61,7 +79,7 @@
             {{ $tr('qcommerce.layout.newStatus') }}
           </div>
           <q-separator class="q-mt-sm q-mb-md"/>
-          <dynamic-form v-bind="formStatus" @sent="init()"/>
+          <dynamic-form v-bind="form.status" @sent="init()"/>
         </div>
       </div>
       <!--Chat-->
@@ -92,8 +110,8 @@ export default {
     addStatusOrder,
     advanceChat
   },
-  beforeDestroy() {
-    this.$root.$off('page.data.refresh')
+  mounted() {
+    this.init()
   },
   data() {
     return {
@@ -104,13 +122,23 @@ export default {
         },
         items: [],
       },
+      modalRating: {
+        loading: false,
+        show: false,
+        item: false,
+        itemRating: false
+      },
       conversation: false
     }
   },
-  mounted() {
-    this.init()
-  },
   computed: {
+    //Return settings to use
+    settings() {
+      return {
+        showReviewsProduct: (config('app.mode') == 'iadmin') ? false :
+            parseInt(this.$store.getters['qsiteApp/getSettingValueByName']('icommerce::showReviewsProduct') || 0)
+      }
+    },
     //Return orderID
     orderId() {
       return this.$clone(this.$route.params.id)
@@ -150,55 +178,164 @@ export default {
       //response
       return response
     },
+    //Table order items config
+    tableConfig() {
+      //instance response
+      let response = {
+        props: {
+          data: this.order.items,
+          pagination: {rowsPerPage: 0},
+          class: 'no-shadow',
+          hideBottom: true,
+          columns: [
+            {name: 'title', label: this.$tr('ui.form.product'), field: 'title', align: 'left'},
+            {name: 'id', label: 'ID', field: 'productId', align: 'left'},
+            {name: 'sku', label: 'SKU', field: 'reference', align: 'left'},
+            {name: 'quantity', label: this.$tr('ui.label.quantity'), field: 'quantity', align: 'left'},
+            {
+              name: 'price', label: this.$tr('ui.label.price'), field: 'total', align: 'center',
+              format: val => `$${this.$n(val || 0)}`
+            },
+            {
+              name: 'total', label: 'Total', field: 'total', align: 'center',
+              format: val => `$${this.$n(val || 0)}`
+            },
+          ]
+        },
+        actions: []
+      }
+
+      //Add rating action
+      if (this.settings.showReviewsProduct) {
+        response.actions.push({
+          label: this.$tr('ui.label.rate'),
+          icon: 'fas fa-check',
+          action: (item) => {
+            this.getProductRating(item)
+          }
+        })
+      }
+
+      //Addd actions column
+      if (response.actions.length)
+        response.props.columns.push({name: 'actions', label: this.$tr('ui.form.actions'), align: 'right'},)
+
+      //response
+      return response
+    },
     //validate if can edit order
     canEditOrder() {
       return ((config('app.mode') == 'iadmin') && this.$auth.hasAccess('icommerce.orders.edit')) ? true : false
     },
     //Edit order status form
-    formStatus() {
+    form() {
+      //Get itemRatingComments
+      let itemRatingComments = this.modalRating.itemRating?.comments || []
+
+      //Response
       return {
-        formType: 'grid',
-        sendTo: {
-          apiRoute: 'apiRoutes.qcommerce.orderStatusHistory',
-          extraData: {orderId: this.orderId}
-        },
-        blocks: [{
-          fields: {
-            status: {
-              value: null,
-              type: 'select',
-              required: true,
-              props: {
-                label: `${this.$tr('ui.form.status')}*`
+        status: {
+          formType: 'grid',
+          sendTo: {
+            apiRoute: 'apiRoutes.qcommerce.orderStatusHistory',
+            extraData: {orderId: this.orderId}
+          },
+          blocks: [{
+            fields: {
+              status: {
+                value: null,
+                type: 'select',
+                required: true,
+                props: {
+                  label: `${this.$tr('ui.form.status')}*`
+                },
+                loadOptions: {
+                  apiRoute: 'apiRoutes.qcommerce.orderStatus'
+                }
               },
-              loadOptions: {
-                apiRoute: 'apiRoutes.qcommerce.orderStatus'
-              }
-            },
-            notify: {
-              value: '0',
-              type: 'select',
-              required: true,
-              props: {
-                label: 'Notificar al Cliente*',
-                options: [
-                  {label: this.$tr('ui.label.yes'), value: 1},
-                  {label: this.$tr('ui.label.no'), value: 0},
-                ]
-              }
-            },
-            comment: {
-              value: null,
-              type: 'input',
-              colClass: 'col-12',
-              props: {
-                label: this.$tr('ui.form.comment'),
-                type: 'textarea',
-                rows: "3"
+              notify: {
+                value: '0',
+                type: 'select',
+                required: true,
+                props: {
+                  label: 'Notificar al Cliente*',
+                  options: [
+                    {label: this.$tr('ui.label.yes'), value: 1},
+                    {label: this.$tr('ui.label.no'), value: 0},
+                  ]
+                }
+              },
+              comment: {
+                value: null,
+                type: 'input',
+                colClass: 'col-12',
+                props: {
+                  label: this.$tr('ui.form.comment'),
+                  type: 'textarea',
+                  rows: "3"
+                }
               }
             }
-          }
-        }]
+          }]
+        },
+        rating: {
+          formType: 'grid',
+          noActions: this.modalRating.itemRating ? true : false,
+          sendTo: {
+            apiRoute: 'apiRoutes.qcommerce.ratings',
+            extraData: {
+              userId: this.$store.state.quserAuth.userId,
+              rateableId: this.modalRating.item?.productId || null,
+              rateableType: 'Modules\\Icommerce\\Entities\\Product'
+            }
+          },
+          blocks: [{
+            fields: {
+              rating: {
+                value: this.modalRating.itemRating?.rating || 3,
+                type: 'rating',
+                required: true,
+                colClass: 'col-12',
+                props: {
+                  label: `${this.$tr('ui.label.rating')}*`,
+                  readonly: this.modalRating.itemRating ? true : false
+                },
+                loadOptions: {
+                  apiRoute: 'apiRoutes.qcommerce.orderStatus'
+                }
+              },
+              comment: {
+                value: itemRatingComments[0]?.comment || null,
+                type: 'input',
+                colClass: 'col-12',
+                fakeFieldName: 'comment',
+                props: {
+                  label: this.$tr('ui.form.comment'),
+                  type: 'textarea',
+                  rows: "3",
+                  readonly: this.modalRating.itemRating ? true : false
+                }
+              },
+              mediasMulti: {
+                value: {},
+                type: 'media',
+                colClass: 'col-12',
+                fakeFieldName: 'comment',
+                fieldItemId: itemRatingComments[0]?.id || null,
+                props: {
+                  label: this.$trp('ui.form.image'),
+                  zone: 'gallery',
+                  entity: "Modules\\Icomments\\Entities\\Comment",
+                  entityId: itemRatingComments[0]?.id || null,
+                  accept: 'images',
+                  directUpload: true,
+                  maxFiles: 6,
+                  readonly: this.modalRating.itemRating ? true : false
+                }
+              },
+            }
+          }]
+        }
       }
     },
     //Return order status history
@@ -214,27 +351,25 @@ export default {
   },
   methods: {
     init() {
-      this.getData()
-      //Listen refresh event
-      this.$root.$on('page.data.refresh', () => this.getOrder())
+      this.getData(true)
     },
     //get data
-    getData() {
+    getData(refresh) {
       return new Promise(async (resolve, reject) => {
         this.loading = true
         await Promise.all([
-          this.getOrder(),
-          this.getChatConversation()
+          this.getOrder(refresh),
+          this.getChatConversation(refresh)
         ])
         this.loading = false
       })
     },
     //Get order data
-    getOrder() {
+    getOrder(refresh) {
       return new Promise((resolve, reject) => {
         //Request params
         let requestParams = {
-          refresh: true,
+          refresh: refresh,
           params: {include: 'shippingDepartment,shippingCountry,customer.addresses,customer.fields'}
         }
         //Request
@@ -247,10 +382,11 @@ export default {
       })
     },
     //get chateable
-    getChatConversation() {
+    getChatConversation(refresh) {
       return new Promise((resolve, reject) => {
         //Request Params
         let requestParams = {
+          refresh: refresh,
           params: {
             filter: {field: 'entity_id', entity_type: 'Modules\\Icommerce\\Entities\\Order'}
           }
@@ -261,6 +397,35 @@ export default {
           resolve(response.data)
         }).catch(error => {
           reject(error)
+        })
+      })
+    },
+    //rate order item
+    getProductRating(item) {
+      return new Promise((resolve, reject) => {
+        //Set data to modal
+        this.modalRating.loading = true
+        this.modalRating.item = item
+        this.modalRating.show = true
+
+        //request params
+        let requestParams = {
+          refresh: true,
+          params: {
+            include: 'comments',
+            filter: {
+              field: 'rateable_id',
+              userId: this.$store.state.quserAuth.userId,
+              rateableType: 'Modules\\Icommerce\\Entities\\Product'
+            }
+          }
+        }
+        //request
+        this.$crud.show('apiRoutes.qcommerce.ratings', item.productId, requestParams).then(response => {
+          this.modalRating.itemRating = this.$clone(response.data)
+          this.modalRating.loading = false
+        }).catch(error => {
+          this.modalRating.loading = false
         })
       })
     }
@@ -284,4 +449,11 @@ export default {
         margin 0px
         font-weight bold
         color $grey-8
+
+#orderItemsContent
+  thead
+    th
+      color $blue-grey
+      font-weight bold
+      font-size 15px
 </style>
