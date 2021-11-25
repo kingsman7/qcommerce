@@ -330,7 +330,8 @@ export default {
                   accept: 'images',
                   directUpload: true,
                   maxFiles: 6,
-                  readonly: this.modalRating.itemRating ? true : false
+                  readonly: this.modalRating.itemRating ? true : false,
+                  disk : 'rateable'
                 }
               },
             }
