@@ -378,7 +378,7 @@ export default {
           this.order = response.data
           resolve(response.data)
         }).catch(error => {
-          reject(error)
+          resolve(error)
         })
       })
     },
@@ -397,7 +397,7 @@ export default {
           this.conversation = this.$clone(response.data)
           resolve(response.data)
         }).catch(error => {
-          reject(error)
+          resolve(error)
         })
       })
     },
