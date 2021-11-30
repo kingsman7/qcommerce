@@ -411,7 +411,7 @@ export default {
     },
     arrayToTree(elements, parentId = 0) {
       return elements.filter(element => {
-        if (element.parentId == parentId) {
+        if ((element.parentId || 0) == parentId) {
           return element['children'] = this.arrayToTree(elements, element.id)
         }
       })
