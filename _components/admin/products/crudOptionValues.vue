@@ -4,7 +4,7 @@
     <q-table :data="table.data" :columns="columns" row-key="name">
       <!--Header-->
       <div slot="top-left">
-        <span class="input-title">{{$tr('qcommerce.layout.form.productOptionValues')}}</span>
+        <span class="input-title">{{ $tr('qcommerce.layout.form.productOptionValues') }}</span>
       </div>
       <div slot="top-right">
         <!--Button new record-->
@@ -17,12 +17,12 @@
         <!--Edit button-->
         <q-btn color="green" icon="fas fa-pen" size="sm"
                @click="modal.itemId = props.row.id; setItemUpdate()">
-          <q-tooltip :delay="300">{{$tr('ui.label.edit')}}</q-tooltip>
+          <q-tooltip :delay="300">{{ $tr('ui.label.edit') }}</q-tooltip>
         </q-btn>
         <!--Delete button-->
         <q-btn color="red" icon="fas fa-trash-alt" size="sm" class="q-ml-xs"
                @click="deleteItem(props.row.id)">
-          <q-tooltip :delay="300">{{$tr('ui.label.delete')}}</q-tooltip>
+          <q-tooltip :delay="300">{{ $tr('ui.label.delete') }}</q-tooltip>
         </q-btn>
       </q-td>
     </q-table>
@@ -34,10 +34,10 @@
         <!--Header-->
         <q-toolbar class="bg-primary text-white">
           <q-toolbar-title v-if="!modal.itemId">
-            {{$tr('qcommerce.layout.newProductOptionValue')}}
+            {{ $tr('qcommerce.layout.newProductOptionValue') }}
           </q-toolbar-title>
           <q-toolbar-title v-else>
-            {{`${$tr('qcommerce.layout.updateProductOptionValue')} ID: ${modal.itemId}`}}
+            {{ `${$tr('qcommerce.layout.updateProductOptionValue')} ID: ${modal.itemId}` }}
           </q-toolbar-title>
           <q-btn flat v-close-popup icon="fas fa-times"/>
         </q-toolbar>
@@ -51,71 +51,64 @@
             <div class="col-12 col-md-6">
               <!--Option Value-->
               <div class="input-title relative-position q-mb-md">
-                {{`${$tr('qcommerce.layout.form.optionValue')} *`}}
+                {{ `${$tr('qcommerce.layout.form.optionValue')} *` }}
                 <!--Crud Option Value-->
                 <crud :crud-data="import('@imagina/qcommerce/_crud/productOptionValues')"
-                      type="button-create" @created="getOptionValues" class="absolute-right" :custom-data="{read: {requestParams: {filter: {optionId: form.optionId} } }, formLeft: { optionId: { value: form.optionId } } }"/>
+                      type="button-create" @created="getOptionValues" class="absolute-right"
+                      :custom-data="{read: {requestParams: {filter: {optionId: form.optionId} } }, formLeft: { optionId: { value: form.optionId } } }"/>
               </div>
               <q-field v-model="form.optionValueId" borderless
                        :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
                 <tree-select
-                  :clearable="false"
-                  :options="options.values"
-                  :append-to-body="true"
-                  value-consists-of="BRANCH_PRIORITY"
-                  v-model="form.optionValueId"
-                  placeholder=""
+                    :clearable="false"
+                    :options="options.values"
+                    :append-to-body="true"
+                    value-consists-of="BRANCH_PRIORITY"
+                    v-model="form.optionValueId"
+                    placeholder=""
                 />
               </q-field>
               <!--Parent Option Value -->
               <div v-if="options.parentValues.length">
-                <div class="input-title relative-position q-mb-sm">
-                  {{`${$tr('qcommerce.layout.form.parentOptionValue')} *`}}
-                  <!--Crud Option Value-->
-                  <crud :crud-data="import('@imagina/qcommerce/_crud/productOptionValues')"
-                        type="button-create" @created="getOptionValues" class="absolute-right" :custom-data="{read: {requestParams: {filter: {optionId: form.optionId} } }, formLeft: { optionId: { value: form.optionId } } }"/>
-                </div>
-                <q-field v-model="form.parentOptionValueId" borderless
-                         :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
-                  <tree-select
-                    :clearable="false"
-                    :append-to-body="true"
-                    :options="options.parentValues"
-                    value-consists-of="BRANCH_PRIORITY"
-                    v-model="form.parentOptionValueId"
-                    placeholder=""
-                  />
-                </q-field>
+                <!-- parentProductOptionValueId => id -->
+                <dynamic-field v-model="form.parentOptionValueId" :field="{
+                  type : 'select',
+                  required : true,
+                  props : {
+                    label : `${$tr('qcommerce.layout.form.parentOptionValue')} *`,
+                    options : options.parentValues
+                  }
+                }"/>
               </div>
               <!--Quantity-->
               <q-input v-model="form.quantity" type="number" outlined dense
                        :label="`${$tr('ui.form.quantity')} *`"
                        :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
-              <div class="input-title">{{$tr('ui.form.stock')}}</div>
+              <div class="input-title">{{ $tr('ui.form.stock') }}</div>
               <tree-select
-                data-testid="stockStatus"
-                :clearable="false"
-                :append-to-body="true"
-                :options="[
+                  data-testid="stockStatus"
+                  :clearable="false"
+                  :append-to-body="true"
+                  :options="[
                   {label: this.$tr('ui.label.available'), id: 1},
                   {label: this.$tr('ui.label.soldOut'), id: 0}
                 ]"
-                value-consists-of="BRANCH_PRIORITY"
-                v-model="form.stockStatus"
-                class="q-mb-md"
+                  value-consists-of="BRANCH_PRIORITY"
+                  v-model="form.stockStatus"
+                  class="q-mb-md"
               />
               <!--Subtrack-->
               <div class="input-title">
-                {{`${$tr('qcommerce.layout.form.subtractFromStock')}`}}
+                {{ `${$tr('qcommerce.layout.form.subtractFromStock')}` }}
               </div>
               <q-field v-model="form.subtract" borderless>
                 <tree-select
-                  :clearable="false"
-                  :append-to-body="true"
-                  :options="options.subtract"
-                  value-consists-of="BRANCH_PRIORITY"
-                  v-model="form.subtract"
-                  placeholder="" class="q-mb-md"
+                    :clearable="false"
+                    :append-to-body="true"
+                    :options="options.subtract"
+                    value-consists-of="BRANCH_PRIORITY"
+                    v-model="form.subtract"
+                    placeholder="" class="q-mb-md"
                 />
               </q-field>
             </div>
@@ -123,12 +116,12 @@
             <div class="col-12 col-md-6">
               <!--Price-->
               <div class="content-prefix row">
-                <div class="input-title col-12">{{`${$tr('ui.form.price')} *`}}</div>
+                <div class="input-title col-12">{{ `${$tr('ui.form.price')} *` }}</div>
                 <div class="col-2"><!--Prefix-->
                   <tree-select
-                    :clearable="false"
-                    :options="options.prefix" v-model="form.pricePrefix"
-                    placeholder=""
+                      :clearable="false"
+                      :options="options.prefix" v-model="form.pricePrefix"
+                      placeholder=""
                   />
                 </div>
                 <div class="col-10 q-pl-sm"><!--Input-->
@@ -138,12 +131,12 @@
               </div>
               <!--Points-->
               <div class="content-prefix row">
-                <div class="input-title col-12">{{`${$trp('ui.form.point')} *`}}</div>
+                <div class="input-title col-12">{{ `${$trp('ui.form.point')} *` }}</div>
                 <div class="col-2"><!--Prefix-->
                   <tree-select
-                    :clearable="false"
-                    :options="options.prefix" v-model="form.pointsPrefix"
-                    placeholder=""
+                      :clearable="false"
+                      :options="options.prefix" v-model="form.pointsPrefix"
+                      placeholder=""
                   />
                 </div>
                 <div class="col-10 q-pl-sm"><!--Input-->
@@ -153,12 +146,12 @@
               </div>
               <!--weight-->
               <div class="content-prefix row">
-                <div class="input-title col-12">{{`${$tr('ui.form.weight')} *`}}</div>
+                <div class="input-title col-12">{{ `${$tr('ui.form.weight')} *` }}</div>
                 <div class="col-2"><!--Prefix-->
                   <tree-select
-                    :clearable="false"
-                    :options="options.prefix" v-model="form.weightPrefix"
-                    placeholder=""
+                      :clearable="false"
+                      :options="options.prefix" v-model="form.weightPrefix"
+                      placeholder=""
                   />
                 </div>
                 <div class="col-10 q-pl-sm"><!--Input-->
@@ -191,232 +184,258 @@
   </div>
 </template>
 <script>
-  export default {
-    props: {
-      productOption: { defalt: false },
-    },
-    watch: {
-      productOption: {
-        deep: true,
-        handler: function (newValue) {
-          this.initForm()
-        },
-      },
-      'modal.itemId': {
-        deep: true,
-        handler: function (newValue) {
-          if (!newValue) this.resetform()
-        },
-      }
-    },
-    mounted () {
-      this.$nextTick(function () {
+export default {
+  props: {
+    productOption: {defalt: false},
+  },
+  watch: {
+    productOption: {
+      deep: true,
+      handler: function (newValue) {
         this.initForm()
-      })
+      },
     },
-    data () {
+    'modal.itemId': {
+      deep: true,
+      handler: function (newValue) {
+        if (!newValue) this.resetform()
+      },
+    }
+  },
+  mounted() {
+    this.$nextTick(function () {
+      this.initForm()
+    })
+  },
+  data() {
+    return {
+      loading: false,
+      success: false,
+      optionId: null,
+      table: {
+        data: [],
+      },
+      modal: {
+        show: false,
+        itemId: false,
+        formOptionValue: false
+      },
+      form: {},
+      options: {}
+    }
+  },
+  computed: {
+    //Data form
+    dataForm() {
       return {
-        loading: false,
-        success: false,
+        productOptionId: null,
+        productId: null,
         optionId: null,
-        table: {
-          data: [],
-        },
-        modal: {
-          show: false,
-          itemId: false,
-          formOptionValue: false
-        },
-        form: {},
-        options: {}
+        optionValueId: null,
+        parentOptionValueId: null,
+        quantity: null,
+        stockStatus: 1,
+        subtract: 1,
+        price: null,
+        pricePrefix: '+',
+        points: null,
+        pointsPrefix: '+',
+        weight: null,
+        weightPrefix: '+',
       }
     },
-    computed: {
-      //Data form
-      dataForm () {
-        return {
-          productOptionId: null,
-          productId: null,
-          optionId: null,
-          optionValueId: null,
-          parentOptionValueId: null,
-          quantity: null,
-          stockStatus: 1,
-          subtract: 1,
-          price: null,
-          pricePrefix: '+',
-          points: null,
-          pointsPrefix: '+',
-          weight: null,
-          weightPrefix: '+',
-        }
-      },
-      //Data options
-      dataOptions () {
-        return {
-          values: [],
-          parentValues: [],
-          subtract: [
-            { label: this.$tr('ui.label.yes'), id: 1 },
-            { label: this.$tr('ui.label.no'), id: 0 },
-          ],
-          prefix: [
-            { label: '+', id: '+' },
-            { label: '-', id: '-' },
-          ]
-        }
-      },
-      //Columns translatables
-      columns () {
-        return [
-          { name: 'id', label: this.$tr('ui.form.id'), field: 'id' },
-          {
-            name: 'optionValue', label: this.$tr('qcommerce.layout.form.optionValue'),
-            field: 'optionValue', align: 'left'
-          },
-          {
-            name: 'parentOptionValue', label: this.$tr('qcommerce.layout.form.parentOptionValue'),
-            field: 'parentOptionValue', align: 'left'
-          },
-          { name: 'quantity', label: this.$tr('ui.form.quantity'), field: 'quantity' },
-          { name: 'price', label: this.$tr('ui.form.price'), field: 'price' },
-          { name: 'points', label: this.$trp('ui.form.point'), field: 'points' },
-          { name: 'weight', label: this.$trp('ui.form.weight'), field: 'weight' },
-          { name: 'actions', label: this.$trp('ui.form.actions') },
+    //Data options
+    dataOptions() {
+      return {
+        values: [],
+        parentValues: [],
+        subtract: [
+          {label: this.$tr('ui.label.yes'), id: 1},
+          {label: this.$tr('ui.label.no'), id: 0},
+        ],
+        prefix: [
+          {label: '+', id: '+'},
+          {label: '-', id: '-'},
         ]
       }
     },
-    methods: {
-      //Init form
-      async initForm () {
-        this.loading = true
-        this.success = false//Status component
-        this.modal.show = false//Close modal
-        await this.resetform()//Reset Form
-        await this.getData()//Get data
-        this.success = true//Status component
-        this.loading = false
-      },
-      //Reset Form
-      async resetform () {
-        this.form = this.$clone(this.dataForm)//Reset form
-        this.options = this.$clone(this.dataOptions)//Reset Options
-        //Assign data from product option to form
-        if (this.productOption) {
-          this.form.productOptionId = this.productOption.id
-          this.form.productId = this.productOption.productId
-          this.form.optionId = this.productOption.optionId
-        }
-        this.getOptionValues()//Get options values
-      },
-      //Get data
-      getData () {
-        return new Promise((resolve, reject) => {
-          let configName = 'apiRoutes.qcommerce.productOptionValues'
-          let params = {
-            refresh: true,
-            params: { include: '', filter: { productOptionId: this.productOption.id } }
-          }
-          this.$crud.index(configName, params).then(response => {
-            this.table.data = response.data
-            resolve(true)
-          }).catch(error => {
-            this.loading = false
-            this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
-            reject(error)
-          })
-        })
-      },
-      //Create Item
-      createItem () {
-        this.loading = true
+    //Columns translatables
+    columns() {
+      return [
+        {name: 'id', label: this.$tr('ui.form.id'), field: 'id'},
+        {
+          name: 'optionValue', label: this.$tr('qcommerce.layout.form.optionValue'),
+          field: 'optionValue', align: 'left'
+        },
+        {
+          name: 'parentOptionValue', label: this.$tr('qcommerce.layout.form.parentOptionValue'),
+          field: 'parentOptionValue', align: 'left'
+        },
+        {name: 'quantity', label: this.$tr('ui.form.quantity'), field: 'quantity'},
+        {name: 'price', label: this.$tr('ui.form.price'), field: 'price'},
+        {name: 'points', label: this.$trp('ui.form.point'), field: 'points'},
+        {name: 'weight', label: this.$trp('ui.form.weight'), field: 'weight'},
+        {name: 'actions', label: this.$trp('ui.form.actions')},
+      ]
+    }
+  },
+  methods: {
+    //Init form
+    async initForm() {
+      this.loading = true
+      this.success = false//Status component
+      this.modal.show = false//Close modal
+      await this.resetform()//Reset Form
+      await this.getData()//Get data
+      this.success = true//Status component
+      this.loading = false
+    },
+    //Reset Form
+    async resetform() {
+      this.form = this.$clone(this.dataForm)//Reset form
+      this.options = this.$clone(this.dataOptions)//Reset Options
+      //Assign data from product option to form
+      if (this.productOption) {
+        this.form.productOptionId = this.productOption.id
+        this.form.productId = this.productOption.productId
+        this.form.optionId = this.productOption.optionId
+      }
+      this.getOptionValues()//Get options values
+    },
+    //Get data
+    getData() {
+      return new Promise((resolve, reject) => {
         let configName = 'apiRoutes.qcommerce.productOptionValues'
-        this.$crud.create(configName, this.form).then(response => {
-          this.$alert.success({ message: this.$tr('ui.message.recordCreated'), pos: 'bottom' })
-          this.initForm()
-          this.loading = false
-        }).catch(error => {
-          this.$alert.error({ message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom' })
-          this.loading = false
-        })
-      },
-      //Update Item
-      updateItem () {
-        this.loading = true
-        let configname = 'apiRoutes.qcommerce.productOptionValues'
-        this.$crud.update(configname, this.modal.itemId, this.form).then(response => {
-          this.$alert.success({ message: this.$tr('ui.message.recordUpdated'), pos: 'bottom' })
-          this.initForm()
-          this.loading = false
-        }).catch(error => {
-          this.$alert.error({ message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom' })
-          this.loading = false
-        })
-      },
-      //Delete Item
-      deleteItem (itemId) {
-        this.loading = true
-        let configName = 'apiRoutes.qcommerce.productOptionValues'
-        this.$crud.delete(configName, itemId).then(response => {
-          this.$alert.success({ message: this.$tr('ui.message.recordDeleted'), pos: 'bottom' })
-          this.initForm()
-          this.loading = false
-        }).catch(error => {
-          this.$alert.error({ message: this.$tr('ui.message.recordNoDeleted'), pos: 'bottom' })
-          this.loading = false
-        })
-      },
-      //Set data to item update
-      setItemUpdate () {
-        const itemId = this.$clone(this.modal.itemId)
-        const item = this.table.data.find(item => item.id == itemId)
-        this.form = Object.assign({}, this.form, item)
-        this.modal.show = true
-      },
-      //Get option values
-      async getOptionValues () {
-        this.loading = true
-        //Sub funtion to get options
-        let getOptions = (optionId, itemName = 'values') => {
-          return new Promise((resolve, reject) => {
-            let configName = 'apiRoutes.qcommerce.optionValues'
-            let params = { refresh: true, params: { filter: { optionId: optionId } } }
-            this.$crud.index(configName, params).then(response => {
-              this.options[itemName] = []
-              response.data.forEach(item => {//Order values
-                this.options[itemName].push({ label: item.description, id: item.id })
-              })
-              resolve(true)
-            }).catch(error => {
-              this.loading = false
-              this.$helper.alert.error('Failed: ' + error)
-              reject(error)
-            })
-          })
+        let params = {
+          refresh: true,
+          params: {include: '', filter: {productOptionId: this.productOption.id}}
         }
+        this.$crud.index(configName, params).then(response => {
+          this.table.data = response.data
+          resolve(true)
+        }).catch(error => {
+          this.loading = false
+          this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+          reject(error)
+        })
+      })
+    },
+    //Create Item
+    createItem() {
+      //Get formData
+      let formData = this.$clone(this.form)
+      //Add parentProdOptValId
+      if (formData.parentOptionValueId) {
+        let parentOptValue = this.options.parentValuesData.find(item => item.optionValueId == formData.parentOptionValueId)
+        formData.parentProdOptValId = parentOptValue.id
+      }
 
-        if (this.productOption.optionId)//Get values from option
-        {
-          await getOptions(this.productOption.optionId)
-        }
-        if (this.productOption.parentOptionId)//Get values from parent option
-        {
-          await getOptions(this.productOption.parentOptionId, 'parentValues')
-        }
+      this.loading = true
+      let configName = 'apiRoutes.qcommerce.productOptionValues'
+      this.$crud.create(configName, formData).then(response => {
+        this.$alert.success({message: this.$tr('ui.message.recordCreated'), pos: 'bottom'})
+        this.initForm()
         this.loading = false
-      },
+      }).catch(error => {
+        this.$alert.error({message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom'})
+        this.loading = false
+      })
+    },
+    //Update Item
+    updateItem() {
+      this.loading = true
+      let configname = 'apiRoutes.qcommerce.productOptionValues'
+      this.$crud.update(configname, this.modal.itemId, this.form).then(response => {
+        this.$alert.success({message: this.$tr('ui.message.recordUpdated'), pos: 'bottom'})
+        this.initForm()
+        this.loading = false
+      }).catch(error => {
+        this.$alert.error({message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom'})
+        this.loading = false
+      })
+    },
+    //Delete Item
+    deleteItem(itemId) {
+      this.loading = true
+      let configName = 'apiRoutes.qcommerce.productOptionValues'
+      this.$crud.delete(configName, itemId).then(response => {
+        this.$alert.success({message: this.$tr('ui.message.recordDeleted'), pos: 'bottom'})
+        this.initForm()
+        this.loading = false
+      }).catch(error => {
+        this.$alert.error({message: this.$tr('ui.message.recordNoDeleted'), pos: 'bottom'})
+        this.loading = false
+      })
+    },
+    //Set data to item update
+    setItemUpdate() {
+      const itemId = this.$clone(this.modal.itemId)
+      const item = this.table.data.find(item => item.id == itemId)
+      this.form = Object.assign({}, this.form, item)
+      this.modal.show = true
+    },
+    //Get option values
+    async getOptionValues() {
+      this.loading = true
+
+      await Promise.all([
+        //Get option values
+        new Promise((resolve, reject) => {
+          this.options.values = []
+          //Request params
+          let requestParams = {
+            refresh: true,
+            params: {filter: {optionId: this.productOption.optionId}}
+          }
+          //Request
+          this.$crud.index('apiRoutes.qcommerce.optionValues', requestParams).then(response => {
+            //Set as options
+            this.options.values = response.data.map(item => {
+              return {label: item.description, id: item.id}
+            })
+            resolve(true)
+          }).catch(error => reject(error))
+        }),
+        //Get Parent Product option values
+        new Promise((resolve, reject) => {
+          this.options.parentValues = []
+          this.options.parentValuesData = []
+          //Validate parameters
+          if (!this.productOption.parentOptionId) return resolve(true)
+          //Request params
+          let requestParams = {
+            refresh: true,
+            params: {filter: {productOptionId: this.productOption.parentId}}
+          }
+          //Request
+          this.$crud.index('apiRoutes.qcommerce.productOptionValues', requestParams).then(response => {
+            this.options.parentValuesData = this.$clone(response.data)
+            //Set as options
+            this.options.parentValues = response.data.map(item => {
+              return {label: item.optionValue, value: item.optionValueId}
+            })
+            resolve(true)
+          }).catch(error => reject(error))
+        }),
+      ])
+
+      console.warn(this.options)
+
+      //Close loading
+      this.loading = false
     }
   }
+}
 </script>
 <style lang="stylus">
 
-  #crudOptionValues
-    .input-title
-      color #757575
-      font-size 14px
-      font-weight 500
-      line-height 18px
-      min-height 48px
-      padding 15px 16px
+#crudOptionValues
+  .input-title
+    color #757575
+    font-size 14px
+    font-weight 500
+    line-height 18px
+    min-height 48px
+    padding 15px 16px
 
 </style>
