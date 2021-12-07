@@ -2,6 +2,7 @@ const moduleName = 'icommerce';
 const moduleVersion = 'v3';
 const urlBase = `/${moduleName}/${moduleVersion}`
 const urlBase2 = `/${moduleName}pricelist/${moduleVersion}`
+const urlStripe = `/icommercestripe/v1`
 
 export default {
   urlBase: urlBase,
@@ -31,4 +32,8 @@ export default {
   priceLists: `${urlBase2}/price-lists`,
   currencies: `${urlBase}/currencies`,
   ratings: `rateable/v1/ratings`,
+  stripe: {
+    connect: `${urlStripe}/payout/connect`,
+    accountUser: `${urlStripe}/payout/connect/account/user`
+  }
 }
