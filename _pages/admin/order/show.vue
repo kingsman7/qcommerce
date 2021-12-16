@@ -136,7 +136,8 @@ export default {
     settings() {
       return {
         showReviewsProduct: (config('app.mode') == 'iadmin') ? false :
-            parseInt(this.$store.getters['qsiteApp/getSettingValueByName']('icommerce::showReviewsProduct') || 0)
+            parseInt(this.$store.getters['qsiteApp/getSettingValueByName']('icommerce::showReviewsProduct') || 0),
+        chatByOrderEnable: parseInt(this.$store.getters['qsiteApp/getSettingValueByName']('icommerce::chatByOrderEnable') || 0)
       }
     },
     //Return orderID
@@ -331,7 +332,7 @@ export default {
                   directUpload: true,
                   maxFiles: 6,
                   readonly: this.modalRating.itemRating ? true : false,
-                  disk : 'rateable'
+                  disk: 'rateable'
                 }
               },
             }
@@ -385,6 +386,9 @@ export default {
     //get chateable
     getChatConversation(refresh) {
       return new Promise((resolve, reject) => {
+        //Validate if request chat
+        if (!this.settings.chatByOrderEnable) return resolve(true)
+
         //Request Params
         let requestParams = {
           refresh: refresh,
