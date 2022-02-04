@@ -111,7 +111,11 @@
           <div class="input-title">Option *</div>
           <crud :crud-data="import('@imagina/qcommerce/_crud/productOptions')" v-model="modal.optionSelected"
                 type="select" @created="getOptions" :crud-props="{label : `${$tr('ui.form.option')} *`}"
-                :config="{options : {label : 'description', value : 'id'}}" @input="createProductOption()"/>
+                :config="{options : {label : 'description', value : 'id'}}"/>
+          <!--btn dave option-->
+          <div class="text-right q-mt-md">
+            <q-btn :label="$tr('ui.label.save')" color="green" rounded unelevated @click="createProductOption()"/>
+          </div>
           <!--Loading-->
           <inner-loading :visible="modal.loading"/>
         </div>
