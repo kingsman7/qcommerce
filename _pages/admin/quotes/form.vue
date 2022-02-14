@@ -10,7 +10,7 @@
           <div class="box box-auto-height q-mb-md">
             <!--Title-->
             <div class="row items-center">
-              <div class="col box-title">{{ $tr('ui.label.customer') }}</div>
+              <div class="col box-title">{{ $tr('isite.cms.label.customer') }}</div>
               <div class="col text-right">
                 <q-btn icon="fas fa-pen" @click="modalCustomer = true" color="green" round unelevated
                        class="btn-small"/>
@@ -22,7 +22,7 @@
               <label class="text-grey q-mr-sm">{{ keyField }}:</label> {{ form[keyField] }}
             </div>
             <!--Form-->
-            <master-modal v-model="modalCustomer" :title="$tr('ui.label.customer')">
+            <master-modal v-model="modalCustomer" :title="$tr('isite.cms.label.customer')">
               <dynamic-form v-model="form" :form-id="settings.formId" hide-title hide-progress-bar
                             @submit="modalCustomer = false" default-col-class="col-12"/>
             </master-modal>
@@ -33,7 +33,7 @@
             <div class="box box-auto-height q-mb-md">
               <!--Title-->
               <div class="row items-center">
-                <div class="col box-title">{{ $tr('ui.label.quote') }} | #{{ cartData.id }}</div>
+                <div class="col box-title">{{ $tr('isite.cms.label.quote') }} | #{{ cartData.id }}</div>
               </div>
               <!--Products-->
               <div v-for="(itemQuote, itemQuoteKey) in cartData.products" :key="itemQuoteKey">
@@ -58,13 +58,13 @@
             <div class="box box-auto-height q-mb-md">
               <!--Title-->
               <div class="row items-center">
-                <div class="col box-title">{{ $tr('ui.label.summary') }}</div>
+                <div class="col box-title">{{ $tr('isite.cms.label.summary') }}</div>
               </div>
               <q-separator class="q-my-sm"/>
               <!--Prices-->
               <div class="row">
                 <!--Quantity-->
-                <div class="col-6 text-blue-grey">{{ $tr('ui.label.quantity') }}:</div>
+                <div class="col-6 text-blue-grey">{{ $tr('isite.cms.label.quantity') }}:</div>
                 <div class="col-6 text-right">{{ cartData.products.length }}</div>
                 <!--Total-->
                 <div class="col-6 text-blue-grey">Total:</div>
@@ -73,13 +73,13 @@
               <q-separator class="q-my-sm"/>
               <!--Actions-->
               <div id="actionsSummary" class="text-right">
-                <q-btn :label="$tr('ui.label.send')" color="green" rounded unelevated @click="sendQuote"/>
+                <q-btn :label="$tr('isite.cms.label.send')" color="green" rounded unelevated @click="sendQuote"/>
               </div>
             </div>
           </div>
           <!--Empty quote-->
           <div v-else class="box box-auto-height text-center">
-            <div class="q-mb-sm">{{ $tr('qcommerce.layout.message.addProductToQuote') }}</div>
+            <div class="q-mb-sm">{{ $tr('icommerce.cms.message.addProductToQuote') }}</div>
             <q-icon name="fas fa-arrow-alt-circle-right" color="cyan" size="40px"/>
           </div>
         </div>
@@ -130,7 +130,7 @@ export default {
     crudProductsProps() {
       return {
         crudData: import('@imagina/qcommerce/_crud/products'),
-        title: this.$trp('ui.label.product'),
+        title: this.$trp('isite.cms.label.product'),
         customData: {
           create: false,
           read: {
@@ -149,7 +149,7 @@ export default {
                 value: null,
                 type: 'treeSelect',
                 props: {
-                  label: `${this.$tr('ui.form.category')}:`,
+                  label: `${this.$tr('isite.cms.form.category')}:`,
                   clearable: true,
                 },
                 loadOptions: {
@@ -206,7 +206,7 @@ export default {
       this.$eventBus.$on('qcommerce.quote.addProduct', product => {
         this.$refs.selectProductConfig.load({
           productId: product.id,
-          actionLabel: this.$tr('ui.label.add'),
+          actionLabel: this.$tr('isite.cms.label.add'),
           callBack: (productData) => this.addProduct(productData)
         })
       })
@@ -217,7 +217,7 @@ export default {
         {
           icon: 'fas fa-pen',
           color: 'red',
-          label: `${this.$tr('ui.label.show')} / ${this.$tr('ui.label.edit')}`,
+          label: `${this.$tr('isite.cms.label.show')} / ${this.$tr('isite.cms.label.edit')}`,
           action: () => {
             this.$refs.selectProductConfig.load({
               productId: itemQuote.product.id,
@@ -234,10 +234,10 @@ export default {
                 }
                 //Request
                 this.$crud.update('apiRoutes.qcommerce.cartProducts', itemQuote.id, requestData).then(response => {
-                  this.$alert.info({message: this.$tr('ui.message.recordUpdated')})
+                  this.$alert.info({message: this.$tr('isite.cms.message.recordUpdated')})
                   this.getCart()
                 }).catch(error => {
-                  this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
+                  this.$alert.error({message: this.$tr('isite.cms.message.recordNoUpdated')})
                   this.loading = false
                 })
               }
@@ -248,14 +248,14 @@ export default {
         {
           icon: 'fas fa-trash-alt',
           color: 'red',
-          label: this.$tr('ui.label.delete'),
+          label: this.$tr('isite.cms.label.delete'),
           action: () => {
             this.loading = true
             this.$crud.delete('apiRoutes.qcommerce.cartProducts', itemQuote.id).then(response => {
-              this.$alert.info({message: this.$tr('ui.message.recordDeleted')})
+              this.$alert.info({message: this.$tr('isite.cms.message.recordDeleted')})
               this.getCart()
             }).catch(error => {
-              this.$alert.error({message: this.$tr('ui.message.recordNoDeleted')})
+              this.$alert.error({message: this.$tr('isite.cms.message.recordNoDeleted')})
               this.loading = false
             })
           }
@@ -276,11 +276,11 @@ export default {
         }
         //Request
         this.$crud.create('apiRoutes.qcommerce.cartProducts', requestData).then(response => {
-          this.$alert.info({message: `${this.$tr('ui.message.recordCreated')}`})
+          this.$alert.info({message: `${this.$tr('isite.cms.message.recordCreated')}`})
           this.getCart()
           resolve(response.data)
         }).catch(error => {
-          this.$alert.error({message: `${this.$tr('ui.message.recordNoCreated')}`})
+          this.$alert.error({message: `${this.$tr('isite.cms.message.recordNoCreated')}`})
           this.loading = false
           reject(error)
         })
@@ -308,10 +308,10 @@ export default {
         }
         //Request
         this.$crud.create('apiRoutes.qcommerce.orders', requestData).then(response => {
-          this.$alert.info({message: `${this.$tr('ui.message.recordCreated')}`})
+          this.$alert.info({message: `${this.$tr('isite.cms.message.recordCreated')}`})
           this.$router.push({name: 'qcommerce.admin.quotes.index'})
         }).catch(error => {
-          this.$alert.error({message: `${this.$tr('ui.message.recordNoCreated')}`})
+          this.$alert.error({message: `${this.$tr('isite.cms.message.recordNoCreated')}`})
           this.loading = false
         })
       })

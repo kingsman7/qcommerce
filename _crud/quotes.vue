@@ -20,25 +20,25 @@ export default {
         },
         read: {
           columns: [
-            {name: 'id', label: this.$tr('ui.form.id'), field: 'id', align: 'left'},
+            {name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', align: 'left'},
             {
-              name: 'customer', label: this.$tr('ui.form.name'), align: 'left',
+              name: 'customer', label: this.$tr('isite.cms.form.name'), align: 'left',
               format: (val, row) => `${row.firstName} ${row.lastName}`
             },
             {
               name: 'total',
-              label: this.$tr('qcommerce.layout.form.total'),
+              label: this.$tr('icommerce.cms.form.total'),
               field: 'total',
               align: 'left',
               format: val => val ? `$${this.$trn(val)}` : ''
             },
-            {name: 'statusName', label: this.$tr('ui.form.status'), field: 'statusName',align: 'left'},
+            {name: 'statusName', label: this.$tr('isite.cms.form.status'), field: 'statusName',align: 'left'},
             {
-              name: 'created_at', label: this.$tr('ui.form.createdAt'), field: 'createdAt', align: 'right',
+              name: 'created_at', label: this.$tr('isite.cms.form.createdAt'), field: 'createdAt', align: 'right',
               format: val => val ? this.$trd(val) : '-',
             },
             {
-              name: 'updated_at', label: this.$tr('ui.form.updatedAt'), field: 'updatedAt', align: 'right',
+              name: 'updated_at', label: this.$tr('isite.cms.form.updatedAt'), field: 'updatedAt', align: 'right',
               format: val => val ? this.$trd(val) : '-',
             }
           ],

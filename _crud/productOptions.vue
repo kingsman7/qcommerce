@@ -15,23 +15,23 @@
           permission: 'icommerce.options',
           extraFormFields: 'Icommerce.crud-fields.productOptions',
           create: {
-            title: this.$tr('qcommerce.layout.newOption'),
+            title: this.$tr('icommerce.cms.newOption'),
           },
           read: {
             columns: [
-              {name: 'id', label: this.$tr('ui.form.id'), field: 'id', style: 'width: 50px'},
-              {name: 'description', label: this.$tr('ui.form.description'), field: 'description', align: 'rigth'},
-              {name: 'type', label: this.$tr('ui.form.type'), field: 'type', align: 'left'},
+              {name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', style: 'width: 50px'},
+              {name: 'description', label: this.$tr('isite.cms.form.description'), field: 'description', align: 'rigth'},
+              {name: 'type', label: this.$tr('isite.cms.form.type'), field: 'type', align: 'left'},
               {
-                name: 'created_at', label: this.$tr('ui.form.createdAt'), field: 'createdAt', align: 'left',
+                name: 'created_at', label: this.$tr('isite.cms.form.createdAt'), field: 'createdAt', align: 'left',
                 format: val => val ? this.$trd(val) : '-',
               },
-              {name: 'actions', label: this.$tr('ui.form.actions'), align: 'left'},
+              {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left'},
             ],
             requestParams: {include: ''}
           },
           update: {
-            title: this.$tr('qcommerce.layout.updateOption'),
+            title: this.$tr('icommerce.cms.updateOption'),
             requestParams: {include: ''},
             to : 'qcommerce.admin.options.edit',
           },
@@ -44,9 +44,9 @@
               type: 'input',
               isTranslatable: true,
               props : {
-                label: `${this.$tr('ui.form.description')}*`,
+                label: `${this.$tr('isite.cms.form.description')}*`,
                 rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
+                  val => !!val || this.$tr('isite.cms.message.fieldRequired')
                 ],
               }
             },
@@ -55,7 +55,7 @@
               type: 'select',
               isTranslatable: false,
               props : {
-                label: `${this.$tr('ui.form.type')}*`,
+                label: `${this.$tr('isite.cms.form.type')}*`,
                 options : [
                     {label: 'Text', value: 'text'},
                     {label: 'Textarea', value: 'textarea'},
@@ -66,7 +66,7 @@
                     {label: 'Color', value: 'color'},
                 ],
                 rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
+                  val => !!val || this.$tr('isite.cms.message.fieldRequired')
                 ],
               }
             },
@@ -76,7 +76,7 @@
               isTranslatable: false,
               props : {
                 type : 'number',
-                label: this.$tr('ui.form.sort'),
+                label: this.$tr('isite.cms.form.sort'),
               }
             },
           },

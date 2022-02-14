@@ -7,7 +7,7 @@
           <q-icon name="fas fa-caret-right" color="primary"/>
           {{option.description}}
           <!--Label required-->
-          <q-chip v-if="option.required" :label="$tr('ui.label.required')" size="xs" color="red" outline/>
+          <q-chip v-if="option.required" :label="$tr('isite.cms.label.required')" size="xs" color="red" outline/>
         </div>
         <!-- If option type is select -->
         <div v-if="option.type == 'select'">

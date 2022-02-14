@@ -46,10 +46,10 @@
         </template>
       </q-table>
       <!--Rate product-->
-      <master-modal v-model="modalRating.show" :title="$tr('ui.label.rating')" :loading="modalRating.loading">
+      <master-modal v-model="modalRating.show" :title="$tr('isite.cms.label.rating')" :loading="modalRating.loading">
         <!--Product Info-->
         <div class="box box-auto-height q-mb-md">
-          <b class="text-blue-grey q-mr-sm">{{ $tr('ui.label.product') }}:</b>
+          <b class="text-blue-grey q-mr-sm">{{ $tr('isite.cms.label.product') }}:</b>
           {{ modalRating.item.title }}
         </div>
         <!--Rating form-->
@@ -64,7 +64,7 @@
         <!--Tracking info-->
         <div id="trackingOrderStatusContent" class="box box-auto-height">
           <div class="box-title">
-            {{ $tr('qcommerce.layout.orderHistory') }}
+            {{ $tr('icommerce.cms.orderHistory') }}
           </div>
           <q-separator class="q-mt-sm q-mb-md"/>
           <!--timeline-->
@@ -85,7 +85,7 @@
       <!--Chat-->
       <div class="col-12 col-md-6" v-if="conversation">
         <div class="box">
-          <div class="box-title">{{ $trp('ui.label.message') }}</div>
+          <div class="box-title">{{ $trp('isite.cms.label.message') }}</div>
           <q-separator class="q-mt-sm q-mb-md"/>
           <advance-chat :room-id="conversation.id"/>
         </div>
@@ -189,12 +189,12 @@ export default {
           class: 'no-shadow',
           hideBottom: true,
           columns: [
-            {name: 'title', label: this.$tr('ui.form.product'), field: 'title', align: 'left'},
+            {name: 'title', label: this.$tr('isite.cms.form.product'), field: 'title', align: 'left'},
             {name: 'id', label: 'ID', field: 'productId', align: 'left'},
             {name: 'sku', label: 'SKU', field: 'reference', align: 'left'},
-            {name: 'quantity', label: this.$tr('ui.label.quantity'), field: 'quantity', align: 'left'},
+            {name: 'quantity', label: this.$tr('isite.cms.label.quantity'), field: 'quantity', align: 'left'},
             {
-              name: 'price', label: this.$tr('ui.label.price'), field: 'total', align: 'center',
+              name: 'price', label: this.$tr('isite.cms.label.price'), field: 'total', align: 'center',
               format: val => `$${this.$n(val || 0)}`
             },
             {
@@ -209,7 +209,7 @@ export default {
       //Add rating action
       if (this.settings.showReviewsProduct) {
         response.actions.push({
-          label: this.$tr('ui.label.rate'),
+          label: this.$tr('isite.cms.label.rate'),
           icon: 'fas fa-check',
           action: (item) => {
             this.getProductRating(item)
@@ -219,7 +219,7 @@ export default {
 
       //Addd actions column
       if (response.actions.length)
-        response.props.columns.push({name: 'actions', label: this.$tr('ui.form.actions'), align: 'right'},)
+        response.props.columns.push({name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'right'},)
 
       //response
       return response
@@ -248,7 +248,7 @@ export default {
                 type: 'select',
                 required: true,
                 props: {
-                  label: `${this.$tr('ui.form.status')}*`
+                  label: `${this.$tr('isite.cms.form.status')}*`
                 },
                 loadOptions: {
                   apiRoute: 'apiRoutes.qcommerce.orderStatus'
@@ -261,8 +261,8 @@ export default {
                 props: {
                   label: 'Notificar al Cliente*',
                   options: [
-                    {label: this.$tr('ui.label.yes'), value: 1},
-                    {label: this.$tr('ui.label.no'), value: 0},
+                    {label: this.$tr('isite.cms.label.yes'), value: 1},
+                    {label: this.$tr('isite.cms.label.no'), value: 0},
                   ]
                 }
               },
@@ -271,7 +271,7 @@ export default {
                 type: 'input',
                 colClass: 'col-12',
                 props: {
-                  label: this.$tr('ui.form.comment'),
+                  label: this.$tr('isite.cms.form.comment'),
                   type: 'textarea',
                   rows: "3"
                 }
@@ -298,7 +298,7 @@ export default {
                 required: true,
                 colClass: 'col-12',
                 props: {
-                  label: `${this.$tr('ui.label.rating')}*`,
+                  label: `${this.$tr('isite.cms.label.rating')}*`,
                   readonly: this.modalRating.itemRating ? true : false
                 },
                 loadOptions: {
@@ -311,7 +311,7 @@ export default {
                 colClass: 'col-12',
                 fakeFieldName: 'comment',
                 props: {
-                  label: this.$tr('ui.form.comment'),
+                  label: this.$tr('isite.cms.form.comment'),
                   type: 'textarea',
                   rows: "3",
                   readonly: this.modalRating.itemRating ? true : false
@@ -324,7 +324,7 @@ export default {
                 fakeFieldName: 'comment',
                 fieldItemId: itemRatingComments[0]?.id || null,
                 props: {
-                  label: this.$trp('ui.form.image'),
+                  label: this.$trp('isite.cms.form.image'),
                   zone: 'gallery',
                   entity: "Modules\\Icomments\\Entities\\Comment",
                   entityId: itemRatingComments[0]?.id || null,

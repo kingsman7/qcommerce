@@ -4,13 +4,13 @@
     <div class="relative-position q-mb-lg backend-page">
       <div class="box">
         <q-form @submit="$route.params.id ? updateItem() : createItem()" ref="formContent"
-                @validation-error="$alert.error($tr('ui.message.formInvalid'))"
+                @validation-error="$alert.error($tr('isite.cms.message.formInvalid'))"
                 class="row q-col-gutter-x-md" autocomplete="off">
           <!-- Left Form -->
           <div class="col-md-8">
             <!--Code-->
-            <q-input v-model="form.code" type="text" outlined dense :label="$tr('qcommerce.layout.form.code')"
-                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
+            <q-input v-model="form.code" type="text" outlined dense :label="$tr('icommerce.cms.form.code')"
+                     :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]">
               <template v-slot:after>
                 <q-btn @click="generateCoupon()" round size="sm" color="primary" icon="fas fa-qrcode">
                   <q-tooltip>Generate Code</q-tooltip>
@@ -18,24 +18,24 @@
               </template>
             </q-input>
             <q-select outlined dense bg-color="white" v-model="form.typeDiscount"
-                      :label="`${$tr('qcommerce.layout.form.typeDiscount')}*`" style="width: 100%;"
+                      :label="`${$tr('icommerce.cms.form.typeDiscount')}*`" style="width: 100%;"
                       emit-value map-options :options="[
-                        {label: this.$tr('qcommerce.layout.options.fixedValue'), value: '0'},
-                        {label: this.$tr('qcommerce.layout.options.percentage'), value: '1'},
+                        {label: this.$tr('icommerce.cms.options.fixedValue'), value: '0'},
+                        {label: this.$tr('icommerce.cms.options.percentage'), value: '1'},
                       ]"
-                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                      :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
             />
 
             <q-input v-model="form.discount" type="number" outlined dense
-                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                     :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
                      :label="`${$tr('qcommerce.layout.form.discount')} *`"/>
 
             <q-input v-model="form.quantityTotal" type="number" outlined dense
-                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                     :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
                      :label="`${$tr('qcommerce.layout.form.quantityTotal')} *`"/>
 
             <q-input v-model="form.quantityTotalCustomer" type="number" outlined dense
-                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                     :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
                      :label="`${$tr('qcommerce.layout.form.quantityTotalCustomer')} *`"/>
 
             <q-input v-model="form.minimumOrderAmount" type="number" outlined dense
@@ -44,10 +44,10 @@
             <q-select outlined dense bg-color="white" v-model="form.type"
                       :label="`${$tr('qcommerce.layout.form.allOrder')}*`" style="width: 100%;"
                       emit-value map-options :options="[
-                        {label: this.$tr('ui.label.no'), value: '0'},
-                        {label: this.$tr('ui.label.yes'), value: '1'},
+                        {label: this.$tr('isite.cms.label.no'), value: '0'},
+                        {label: this.$tr('isite.cms.label.yes'), value: '1'},
                       ]"
-                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                      :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
             />
 
             <div v-show="form.type=='0'">
@@ -55,7 +55,7 @@
               <q-select outlined dense v-model="form.products" use-input
                         emit-value map-options
                         input-debounce="800" :options="productList" @filter="getProducts"
-                        :label="`${$trp('ui.label.product')}`"
+                        :label="`${$trp('isite.cms.label.product')}`"
                         multiple use-chips
                         style="width: 100%"
                         :hint="`${$tr('qcommerce.layout.form.productHint')}`"
@@ -63,7 +63,7 @@
                 <template v-slot:no-option>
                   <q-item>
                     <q-item-section class="text-grey">
-                      {{ $tr('ui.message.searchNotFound') }}
+                      {{ $tr('isite.cms.message.searchNotFound') }}
                     </q-item-section>
                   </q-item>
                 </template>
@@ -79,15 +79,15 @@
           <!-- Right Form -->
           <div class="col-md-4 ">
             <q-select outlined dense bg-color="white" v-model="form.status"
-                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                      :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
                       :label="`${$tr('qcommerce.layout.form.status')}*`" style="width: 100%;"
                       emit-value map-options :options="[
-                        {label: this.$tr('ui.label.enabled'), value: '1'},
-                        {label: this.$tr('ui.label.disabled'), value: '2'},
+                        {label: this.$tr('isite.cms.label.enabled'), value: '1'},
+                        {label: this.$tr('isite.cms.label.disabled'), value: '2'},
                       ]"/>
 
             <q-input dense mask="date" bg-color="white" v-model="form.dateStart" color="primary"
-                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                     :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
                      :label="`${$tr('qcommerce.layout.form.dateStart')}*`"
                      outlined placeholder="YYYY/MM/DD">
               <template v-slot:append>
@@ -99,7 +99,7 @@
             </q-input>
 
             <q-input dense mask="date" bg-color="white" v-model="form.dateEnd" color="primary"
-                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                     :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
                      :label="`${$tr('qcommerce.layout.form.dateEnd')}*`"
                      outlined placeholder="YYYY/MM/DD">
               <template v-slot:append>
@@ -113,10 +113,10 @@
             <q-select outlined dense bg-color="white" v-model="form.shipping"
                       :label="`${$tr('qcommerce.layout.form.freeShipping')}*`" style="width: 100%;"
                       emit-value map-options :options="[
-                        {label: this.$tr('ui.label.yes'), value: '1'},
-                        {label: this.$tr('ui.label.no'), value: '0'},
+                        {label: this.$tr('isite.cms.label.yes'), value: '1'},
+                        {label: this.$tr('isite.cms.label.no'), value: '0'},
                       ]"
-                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                      :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
                       v-if="false"
             />
 
@@ -124,10 +124,10 @@
             <q-select outlined dense bg-color="white" v-model="form.logged"
                       :label="`${$tr('qcommerce.layout.form.logged')}*`" style="width: 100%;"
                       emit-value map-options :options="[
-                        {label: this.$tr('ui.label.yes'), value: '1'},
-                        {label: this.$tr('ui.label.no'), value: '0'},
+                        {label: this.$tr('isite.cms.label.yes'), value: '1'},
+                        {label: this.$tr('isite.cms.label.no'), value: '0'},
                       ]"
-                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                      :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
             />
 
             <dynamic-field :field="dynamicFields.includeDepartments" v-model="form.includeDepartments" />
@@ -138,10 +138,10 @@
             :offset="[18, 18]">
             <!--Update button-->
             <q-btn v-if="$route.params.id" color="green" :loading="loading"
-                   icon="fas fa-edit" :label="$tr('ui.label.update')" type="submit"/>
+                   icon="fas fa-edit" :label="$tr('isite.cms.label.update')" type="submit"/>
             <!--Save button-->
             <q-btn v-else color="green" :loading="loading" icon="fas fa-edit"
-                   :label="$tr('ui.label.create')" type="submit"/>
+                   :label="$tr('isite.cms.label.create')" type="submit"/>
           </q-page-sticky>
         </q-form>
         <inner-loading :visible="loading"/>
@@ -195,7 +195,7 @@
             props : {
               clearable: true,
               multiple: true,
-              label: `${this.$trp('ui.label.category')}`,
+              label: `${this.$trp('isite.cms.label.category')}`,
             }
           },
           manufacturers: {
@@ -283,7 +283,7 @@
             }, 1000)
           }).catch(error => {
           console.error(error)
-          this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
+          this.$alert.error({ message: this.$tr('isite.cms.message.errorRequest'), pos: 'bottom' })
           this.loading = false
         })
       },
@@ -321,11 +321,11 @@
           .then(response => {
             this.loading = false
             this.$router.push({ name: 'qcommerce.admin.coupons.index' })
-            this.$alert.success({ message: `${this.$tr('ui.message.recordCreated')} ID: ${response.data.id}` })
+            this.$alert.success({ message: `${this.$tr('isite.cms.message.recordCreated')} ID: ${response.data.id}` })
           })
           .catch(error => {
             this.loading = false
-            this.$alert.error({ message: this.$tr('ui.message.recordNoCreatde'), pos: 'bottom' })
+            this.$alert.error({ message: this.$tr('isite.cms.message.recordNoCreatde'), pos: 'bottom' })
           })
       },
       updateItem () {
@@ -334,12 +334,12 @@
           .then(response => {
             this.loading = false
             this.$router.push({ name: 'qcommerce.admin.coupons.index' })
-            this.$alert.success({ message: `${this.$tr('ui.message.recordUpdated')}` })
+            this.$alert.success({ message: `${this.$tr('isite.cms.message.recordUpdated')}` })
             this.initForm()
           })
           .catch(error => {
             this.loading = false
-            this.$alert.error({ message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom' })
+            this.$alert.error({ message: this.$tr('isite.cms.message.recordNoUpdated'), pos: 'bottom' })
           })
       },
       generateCoupon () {

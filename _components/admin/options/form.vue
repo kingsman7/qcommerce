@@ -7,12 +7,12 @@
 
     <!--Form-->
     <q-form autocorrect="off" autocomplete="off" ref="formContent" class="full-width q-my-sm" v-if="locale.success"
-            @submit="updateItem()" @validation-error="$alert.error($tr('ui.message.formInvalid'))">
+            @submit="updateItem()" @validation-error="$alert.error($tr('isite.cms.message.formInvalid'))">
       <q-input outlined dense v-model="locale.formTemplate.description"
-               :label="`${$tr('ui.form.description')} (${locale.language})*`"
-               :rules="[val => !!val || this.$tr('ui.message.fieldRequired')]"/>
+               :label="`${$tr('isite.cms.form.description')} (${locale.language})*`"
+               :rules="[val => !!val || this.$tr('isite.cms.message.fieldRequired')]"/>
 
-      <q-select :label="`${$tr('ui.form.type')} (${locale.language})`"
+      <q-select :label="`${$tr('isite.cms.form.type')} (${locale.language})`"
                 v-model="locale.formTemplate.type"
                 :options="[
                   /*{label: 'Text', value: 'text'},
@@ -24,7 +24,7 @@
                   {label: 'Color', value: 'color'},*/
                 ]" outlined dense emit-value map-options/>
       <q-btn class="float-right" v-if="itemId" color="green" :loading="loading"
-             icon="fas fa-save" :label="$tr('ui.label.save')" type="submit" rounded/>
+             icon="fas fa-save" :label="$tr('isite.cms.label.save')" type="submit" rounded/>
     </q-form>
     <inner-loading :visible="loading"/>
   </div>
@@ -93,7 +93,7 @@
               this.orderDataItemToLocale(response.data)
               resolve(true)//Resolve
             }).catch(error => {
-              this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+              this.$alert.error({message: this.$tr('isite.cms.message.errorRequest'), pos: 'bottom'})
               this.loading = false
               reject(false)//Resolve
             })
@@ -111,12 +111,12 @@
           this.loading = true
           let configName = 'apiRoutes.qcommerce.options'
           this.$crud.update(configName, this.itemId, this.getDataForm()).then(response => {
-            this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
+            this.$alert.success({message: `${this.$tr('isite.cms.message.recordUpdated')}`})
             //this.initForm()
             this.loading = false
           }).catch(error => {
             this.loading = false
-            this.$alert.error({message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom'})
+            this.$alert.error({message: this.$tr('isite.cms.message.recordNoUpdated'), pos: 'bottom'})
           })
         }
       },

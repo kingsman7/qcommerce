@@ -67,7 +67,7 @@
             //Default list
             let menu = [
               {
-                title: this.$tr('ui.label.all'),
+                title: this.$tr('isite.cms.label.all'),
                 name: 'products.index',
                 permission: null,
                 activated: true

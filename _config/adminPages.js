@@ -8,7 +8,7 @@ export default {
     crud: import('@imagina/qcommerce/_crud/products'),
     page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminProducts',
+    title: 'icommerce.cms.sidebar.adminProducts',
     icon: 'fas fa-boxes',
     authenticated: true,
     subHeader: {refresh: true}
@@ -21,7 +21,7 @@ export default {
     name: 'qcommerce.admin.products.create',
     page: () => import('@imagina/qcommerce/_pages/admin/products/form'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminProductCreate',
+    title: 'icommerce.cms.sidebar.adminProductCreate',
     icon: 'fas fa-boxes',
     authenticated: true,
     subHeader: {
@@ -40,7 +40,7 @@ export default {
     name: 'qcommerce.admin.products.edit',
     page: () => import('@imagina/qcommerce/_pages/admin/products/form'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminProductEdit',
+    title: 'icommerce.cms.sidebar.adminProductEdit',
     icon: 'fas fa-boxes',
     authenticated: true,
     subHeader: {
@@ -60,7 +60,7 @@ export default {
     crud: import('@imagina/qcommerce/_crud/productCategories'),
     page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminCategories',
+    title: 'icommerce.cms.sidebar.adminCategories',
     icon: 'fas fa-layer-group',
     authenticated: true,
     subHeader: {
@@ -77,7 +77,7 @@ export default {
     crud: import('@imagina/qcommerce/_crud/productOptions'),
     page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminOptions',
+    title: 'icommerce.cms.sidebar.adminOptions',
     icon: 'fas fa-cogs',
     authenticated: true,
     subHeader: {
@@ -92,7 +92,7 @@ export default {
     name: 'qcommerce.admin.options.edit',
     page: () => import('@imagina/qcommerce/_pages/admin/option/show'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminOptionsEdit',
+    title: 'icommerce.cms.sidebar.adminOptionsEdit',
     icon: 'fas fa-cogs',
     authenticated: true,
   },
@@ -104,7 +104,7 @@ export default {
     name: 'qcommerce.admin.options.values',
     page: () => import('@imagina/qcommerce/_pages/admin/optionValues/index'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminValues',
+    title: 'icommerce.cms.sidebar.adminValues',
     icon: 'fas fa-stream',
     authenticated: true,
     subHeader: {
@@ -119,7 +119,7 @@ export default {
     name: 'qcommerce.admin.optionValues.create',
     page: () => import('@imagina/qcommerce/_pages/admin/optionValues/form'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminValuesCreate',
+    title: 'icommerce.cms.sidebar.adminValuesCreate',
     icon: 'fas fa-stream',
     authenticated: true,
   },
@@ -130,7 +130,7 @@ export default {
     name: 'qcommerce.admin.optionValues.update',
     page: () => import('@imagina/qcommerce/_pages/admin/optionValues/form'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminValuesEdit',
+    title: 'icommerce.cms.sidebar.adminValuesEdit',
     icon: 'fas fa-stream',
     authenticated: true,
   },
@@ -143,7 +143,7 @@ export default {
     crud: import('@imagina/qcommerce/_crud/paymentMethods'),
     page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminPaymentMethods',
+    title: 'icommerce.cms.sidebar.adminPaymentMethods',
     icon: 'fas fa-money-bill-wave',
     authenticated: true,
     subHeader: {
@@ -159,7 +159,7 @@ export default {
     crud: import('@imagina/qcommerce/_crud/shippingMethods'),
     page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminShippingMethods',
+    title: 'icommerce.cms.sidebar.adminShippingMethods',
     icon: 'fas fa-shipping-fast',
     authenticated: true,
     subHeader: {
@@ -174,7 +174,7 @@ export default {
     crud: import('@imagina/qcommerce/_crud/orders'),
     page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminOrders',
+    title: 'icommerce.cms.sidebar.adminOrders',
     icon: 'fas fa-box-open',
     authenticated: true,
     subHeader: {
@@ -188,7 +188,7 @@ export default {
     name: 'qcommerce.shipping.orders.show',
     page: () => import('@imagina/qcommerce/_pages/admin/order/show'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.orderIndex',
+    title: 'icommerce.cms.sidebar.orderIndex',
     icon: 'fas fa-box-open',
     authenticated: true,
     subHeader: {
@@ -204,7 +204,7 @@ export default {
     name: 'qcommerce.admin.stores',
     page: () => import('@imagina/qcommerce/_pages/admin/store/index'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminStores',
+    title: 'icommerce.cms.sidebar.adminStores',
     icon: 'fas fa-store',
     authenticated: true,
     subHeader: {
@@ -220,7 +220,7 @@ export default {
     crud: import('@imagina/qcommerce/_crud/manufacturers'),
     page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminManufacturers',
+    title: 'icommerce.cms.sidebar.adminManufacturers',
     icon: 'fas fa-industry',
     authenticated: true,
     subHeader: {refresh: true}
@@ -233,7 +233,7 @@ export default {
     name: 'qcommerce.admin.taxClasses',
     page: () => import('@imagina/qcommerce/_pages/admin/taxClass/index'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminTaxes',
+    title: 'icommerce.cms.sidebar.adminTaxes',
     icon: 'fas fa-percentage',
     authenticated: true,
     subHeader: {
@@ -248,7 +248,7 @@ export default {
     name: 'qcommerce.admin.taxClasses.create',
     page: () => import('@imagina/qcommerce/_pages/admin/taxClass/form'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminTaxClassesCreate',
+    title: 'icommerce.cms.sidebar.adminTaxClassesCreate',
     icon: 'fas fa-percentage',
     authenticated: true,
   },
@@ -260,7 +260,7 @@ export default {
     name: 'qcommerce.admin.taxClasses.edit',
     page: () => import('@imagina/qcommerce/_pages/admin/taxClass/form'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminTaxClassesEdit',
+    title: 'icommerce.cms.sidebar.adminTaxClassesEdit',
     icon: 'fas fa-percentage',
     authenticated: true,
     subHeader: {
@@ -275,7 +275,7 @@ export default {
     name: 'qcommerce.admin.taxRates',
     page: () => import('@imagina/qcommerce/_pages/admin/taxRate/index'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminTaxRates',
+    title: 'icommerce.cms.sidebar.adminTaxRates',
     icon: 'fas fa-percentage',
     authenticated: true,
     subHeader: {
@@ -289,7 +289,7 @@ export default {
     name: 'qcommerce.admin.coupons.index',
     page: () => import('@imagina/qcommerce/_pages/admin/coupons/index'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminCoupons',
+    title: 'icommerce.cms.sidebar.adminCoupons',
     icon: 'fas fa-ticket-alt',
     authenticated: true,
     subHeader: {
@@ -303,7 +303,7 @@ export default {
     name: 'qcommerce.admin.coupons.create',
     page: () => import('@imagina/qcommerce/_pages/admin/coupons/form'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.createCoupons',
+    title: 'icommerce.cms.sidebar.createCoupons',
     icon: 'fas fa-ticket-alt',
     authenticated: true,
     subHeader: {
@@ -318,7 +318,7 @@ export default {
     name: 'qcommerce.admin.coupons.edit',
     page: () => import('@imagina/qcommerce/_pages/admin/coupons/form'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.editCoupons',
+    title: 'icommerce.cms.sidebar.editCoupons',
     icon: 'fas fa-ticket-alt',
     authenticated: true,
     subHeader: {
@@ -334,7 +334,7 @@ export default {
     crud: import('@imagina/qcommerce/_crud/priceLists'),
     page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminPriceLists',
+    title: 'icommerce.cms.sidebar.adminPriceLists',
     icon: 'fas fa-dollar-sign',
     authenticated: true,
     subHeader: {refresh: true}
@@ -347,7 +347,7 @@ export default {
     crud: import('@imagina/qcommerce/_crud/itemTypes'),
     page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminItemTypes',
+    title: 'icommerce.cms.sidebar.adminItemTypes',
     icon: 'fas fa-list',
     authenticated: true,
     subHeader: {refresh: true}
@@ -361,7 +361,7 @@ export default {
     crud: import('@imagina/qcommerce/_crud/currencies'),
     page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.currencies',
+    title: 'icommerce.cms.sidebar.currencies',
     icon: 'fas fa-donate',
     authenticated: true,
     subHeader: {refresh: true}
@@ -375,7 +375,7 @@ export default {
     crud: import('@imagina/qcommerce/_crud/quotes'),
     page: () => import('@imagina/qcrud/_pages/admin/crudPage'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminQuotes',
+    title: 'icommerce.cms.sidebar.adminQuotes',
     icon: 'fas fa-file-invoice-dollar',
     authenticated: true,
     subHeader: {refresh: true}
@@ -388,7 +388,7 @@ export default {
     name: 'qcommerce.admin.quotes.create',
     page: () => import('@imagina/qcommerce/_pages/admin/quotes/form'),
     layout: () => import('@imagina/qsite/_layouts/master.vue'),
-    title: 'qcommerce.sidebar.adminQuoteCreate',
+    title: 'icommerce.cms.sidebar.adminQuoteCreate',
     icon: 'fas fa-file-invoice-dollar',
     authenticated: true,
     subHeader: {

@@ -10,12 +10,12 @@
 
         <!--Form-->
         <q-form autocorrect="off" autocomplete="off" ref="formContent" class="full-width q-my-sm" v-if="locale.success"
-                @submit="itemId?updateItem():createItem()" @validation-error="$alert.error($tr('ui.message.formInvalid'))">
+                @submit="itemId?updateItem():createItem()" @validation-error="$alert.error($tr('isite.cms.message.formInvalid'))">
           <q-input outlined dense v-model="locale.formTemplate.name"
-                   :label="`${$tr('ui.form.name')} (${locale.language})*`"
-                   :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
-          <div class="input-title">{{`${$tr('ui.form.description')} (${locale.language})*`}}</div>
-          <q-field borderless v-model="locale.formTemplate.description" :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
+                   :label="`${$tr('isite.cms.form.name')} (${locale.language})*`"
+                   :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"/>
+          <div class="input-title">{{`${$tr('isite.cms.form.description')} (${locale.language})*`}}</div>
+          <q-field borderless v-model="locale.formTemplate.description" :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]">
             <q-editor class="full-width" v-model="locale.formTemplate.description" />
           </q-field>
           <div class="row">
@@ -23,7 +23,7 @@
               <q-btn color="green" :loading="loading" @click="locale.formTemplate.rates.push(defaultRate)"
                      icon="fas fa-plus">
                 <q-tooltip>
-                  {{ $tr('qcommerce.layout.newTaxRate') }}
+                  {{ $tr('icommerce.cms.newTaxRate') }}
                 </q-tooltip>
               </q-btn>
             </div>
@@ -31,19 +31,19 @@
               <div class="row q-col-gutter-sm">
                 <div class="col-4">
                   <!--<q-select outlined dense bg-color="white" v-model="rate.taxRateId"
-                            :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                            :label="`${$tr('qcommerce.layout.form.taxRate')}*`" style="width: 100%;"
+                            :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
+                            :label="`${$tr('icommerce.cms.form.taxRate')}*`" style="width: 100%;"
                             emit-value map-options :options="optionsRate"
                   />-->
                   <!--Crud tax rate-->
                   <crud :crud-data="import('@imagina/qcommerce/_crud/taxRates')"
-                        type="select" :crud-props="{label:`${$tr('qcommerce.layout.form.taxRate')}*`}"
+                        type="select" :crud-props="{label:`${$tr('icommerce.cms.form.taxRate')}*`}"
                         v-model="rate.taxRateId" :config="{options: {label: 'name', value: 'id'}}"
                   />
                 </div>
                 <div class="col-4">
                   <q-select outlined dense bg-color="white" v-model="rate.based"
-                            :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                            :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
                             :label="`${$tr('qcommerce.layout.form.taxBased')}*`" style="width: 100%;"
                             emit-value map-options :options="optionsBased"
                   />
@@ -51,7 +51,7 @@
                 <div class="col-2 col-sm-3">
                   <q-input type="number" outlined dense v-model="rate.priority"
                            :label="`${$tr('qcommerce.layout.form.priority')}`"
-                           :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+                           :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"/>
                 </div>
                 <div class="col-2 col-sm-1 text-right">
                   <q-btn color="red" :loading="loading" @click="deleteRateItem(i)"
@@ -65,10 +65,10 @@
                   :offset="[18, 18]">
             <!--Update button-->
             <q-btn v-if="$route.params.id" color="green" :loading="loading"
-                   icon="fas fa-edit" :label="$tr('ui.label.update')" type="submit"/>
+                   icon="fas fa-edit" :label="$tr('isite.cms.label.update')" type="submit"/>
             <!--Save button-->
             <q-btn v-else color="green" :loading="loading" icon="fas fa-edit"
-                   :label="$tr('ui.label.create')" type="submit"/>
+                   :label="$tr('isite.cms.label.create')" type="submit"/>
           </q-page-sticky>
         </q-form>
       </div>
@@ -165,7 +165,7 @@
               this.orderDataItemToLocale(response.data)
               resolve(true)//Resolve
             }).catch(error => {
-              this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+              this.$alert.error({message: this.$tr('isite.cms.message.errorRequest'), pos: 'bottom'})
               this.loading = false
               reject(false)//Resolve
             })
@@ -189,13 +189,13 @@
           this.loading = true
           let configName = 'apiRoutes.qcommerce.taxClasses'
           this.$crud.update(configName, this.itemId, this.getDataForm()).then(response => {
-            this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
+            this.$alert.success({message: `${this.$tr('isite.cms.message.recordUpdated')}`})
             this.$router.push({name: 'qcommerce.admin.taxClasses'})
             //this.initForm()
             this.loading = false
           }).catch(error => {
             this.loading = false
-            this.$alert.error({message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom'})
+            this.$alert.error({message: this.$tr('isite.cms.message.recordNoUpdated'), pos: 'bottom'})
           })
         }
       },
@@ -204,13 +204,13 @@
           this.loading = true
           let configName = 'apiRoutes.qcommerce.taxClasses'
           this.$crud.create(configName, this.getDataForm()).then(response => {
-            this.$alert.success({message: `${this.$tr('ui.message.recordCreated')}`})
+            this.$alert.success({message: `${this.$tr('isite.cms.message.recordCreated')}`})
             this.$router.push({name: 'qcommerce.admin.taxClasses'})
             //this.initForm()
             this.loading = false
           }).catch(error => {
             this.loading = false
-            this.$alert.error({message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom'})
+            this.$alert.error({message: this.$tr('isite.cms.message.recordNoUpdated'), pos: 'bottom'})
           })
         }
       },

@@ -15,7 +15,7 @@ export default {
         permission: 'icommerce.currencies',
         extraFormFields: 'Icommerce.crud-fields.currencies',
         create: {
-          title: this.$tr('qcommerce.sidebar.newCurrencies'),
+          title: this.$tr('icommerce.cms.sidebar.newCurrencies'),
         },
         computed: {
           isValid() {
@@ -24,40 +24,40 @@ export default {
         },
         read: {
           columns: [
-            {name: 'id', label: this.$tr('ui.form.id'), field: 'id', style: 'width: 50px'},
-            {name: 'name', label: this.$tr('ui.form.name'), field: 'name', align: 'left'},
+            {name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', style: 'width: 50px'},
+            {name: 'name', label: this.$tr('isite.cms.form.name'), field: 'name', align: 'left'},
             {
-              name: 'code', label: this.$tr('ui.label.code'), field: 'code', style: 'width: 50px',
+              name: 'code', label: this.$tr('isite.cms.label.code'), field: 'code', style: 'width: 50px',
               align: 'left',
             },
             {
-              name: 'symbol_left', label: this.$tr('qcommerce.layout.form.symbolLeft'), field: 'symbolLeft',
+              name: 'symbol_left', label: this.$tr('icommerce.cms.form.symbolLeft'), field: 'symbolLeft',
               align: 'left', maxLength: 1
             },
             {
-              name: 'symbol_right', label: this.$tr('qcommerce.layout.form.symbolRight'), field: 'symbolRight',
+              name: 'symbol_right', label: this.$tr('icommerce.cms.form.symbolRight'), field: 'symbolRight',
               align: 'left', maxLength: 1
             },
-            {name: 'status', label: this.$tr('ui.form.status'), field: 'status', align: 'left'},
+            {name: 'status', label: this.$tr('isite.cms.form.status'), field: 'status', align: 'left'},
             {
-              name: 'decimal_place', label: this.$tr('ui.label.decimal'), field: 'decimalPlace',
+              name: 'decimal_place', label: this.$tr('isite.cms.label.decimal'), field: 'decimalPlace',
               align: 'right'
             },
-            {name: 'value', label: this.$tr('ui.label.value'), field: 'value', align: 'right'},
+            {name: 'value', label: this.$tr('isite.cms.label.value'), field: 'value', align: 'right'},
             {
-              name: 'default_currency', label: this.$tr('ui.form.default'),
+              name: 'default_currency', label: this.$tr('isite.cms.form.default'),
               field: 'defaultCurrency', align: 'right',
-              format: val => (val == 1) ? this.$tr('ui.label.yes') : this.$tr('ui.label.no')
+              format: val => (val == 1) ? this.$tr('isite.cms.label.yes') : this.$tr('isite.cms.label.no')
             },
             //Action
-            {name: 'actions', label: this.$tr('ui.form.actions'), align: 'left'},
+            {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left'},
           ],
           requestParams: {},
           filters: {},
           actions: []
         },
         update: {
-          title: this.$tr('qcommerce.sidebar.updateCurrency'),
+          title: this.$tr('icommerce.cms.sidebar.updateCurrency'),
           requestParams: {}
         },
         delete: true,
@@ -69,9 +69,9 @@ export default {
             value: '',
             type: 'input',
             props: {
-              label: `${this.$tr('ui.form.name')}*`,
+              label: `${this.$tr('isite.cms.form.name')}*`,
               rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired'),
+                val => !!val || this.$tr('isite.cms.message.fieldRequired'),
               ],
             },
           },
@@ -79,10 +79,10 @@ export default {
             value: '',
             type: 'input',
             props: {
-              label: `${this.$tr('ui.label.code')}*`,
+              label: `${this.$tr('isite.cms.label.code')}*`,
               rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired'),
-                val => !val || val.length >= 3 || this.$tr('ui.message.fieldMinLeng', {num: 3})
+                val => !!val || this.$tr('isite.cms.message.fieldRequired'),
+                val => !val || val.length >= 3 || this.$tr('isite.cms.message.fieldMinLeng', {num: 3})
               ],
             },
           },
@@ -90,9 +90,9 @@ export default {
             value: '',
             type: 'input',
             props: {
-              label: `${this.$tr('qcommerce.layout.form.symbolLeft')}*`,
+              label: `${this.$tr('icommerce.cms.form.symbolLeft')}*`,
               rules: [
-                val => !val || val.length == 1 || this.$tr('ui.message.fieldMaxLeng', {num: 1})
+                val => !val || val.length == 1 || this.$tr('isite.cms.message.fieldMaxLeng', {num: 1})
               ],
             },
           },
@@ -100,9 +100,9 @@ export default {
             value: '',
             type: 'input',
             props: {
-              label: `${this.$tr('qcommerce.layout.form.symbolRight')}*`,
+              label: `${this.$tr('icommerce.cms.form.symbolRight')}*`,
               rules: [
-                val => !val || val.length == 1 || this.$tr('ui.message.fieldMaxLeng', {num: 1})
+                val => !val || val.length == 1 || this.$tr('isite.cms.message.fieldMaxLeng', {num: 1})
               ],
             },
           },
@@ -111,9 +111,9 @@ export default {
             type: 'input',
             props: {
               type: 'number',
-              label: `${this.$tr('ui.label.decimal')}*`,
+              label: `${this.$tr('isite.cms.label.decimal')}*`,
               rules: [
-                val => !val || val.length == 1 || this.$tr('ui.message.fieldMaxLeng', {num: 1})
+                val => !val || val.length == 1 || this.$tr('isite.cms.message.fieldMaxLeng', {num: 1})
               ],
             },
           },
@@ -122,9 +122,9 @@ export default {
             type: 'input',
             props: {
               type: 'number',
-              label: `${this.$tr('ui.label.value')}*`,
+              label: `${this.$tr('isite.cms.label.value')}*`,
               rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired')
+                val => !!val || this.$tr('isite.cms.message.fieldRequired')
               ],
             },
           },
@@ -133,13 +133,13 @@ export default {
             type: 'select',
             isTranslatable: false,
             props: {
-              label: `${this.$tr('ui.form.status')}*`,
+              label: `${this.$tr('isite.cms.form.status')}*`,
               options: [
-                {label: this.$tr('ui.label.enabled'), value: '1'},
-                {label: this.$tr('ui.label.disabled'), value: '0'}
+                {label: this.$tr('isite.cms.label.enabled'), value: '1'},
+                {label: this.$tr('isite.cms.label.disabled'), value: '0'}
               ],
               rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired')
+                val => !!val || this.$tr('isite.cms.message.fieldRequired')
               ],
             }
           },
@@ -148,13 +148,13 @@ export default {
             type: 'select',
             isTranslatable: false,
             props: {
-              label: `${this.$tr('ui.form.default')}*`,
+              label: `${this.$tr('isite.cms.form.default')}*`,
               options: [
-                {label: this.$tr('ui.label.yes'), value: 1},
-                {label: this.$tr('ui.label.no'), value: 0}
+                {label: this.$tr('isite.cms.label.yes'), value: 1},
+                {label: this.$tr('isite.cms.label.no'), value: 0}
               ],
               rules: [
-                val => !!val || this.$tr('ui.message.fieldRequired')
+                val => !!val || this.$tr('isite.cms.message.fieldRequired')
               ],
             }
           },

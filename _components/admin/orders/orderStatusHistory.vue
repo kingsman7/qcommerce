@@ -28,11 +28,11 @@
     data() {
       return {
         columns: [
-          {name: 'title', label: this.$tr('ui.form.status'), field: row => row.status.title, align: 'left'},
-          {name: 'comment', label: this.$tr('ui.form.comment'), field: row => row.comment || '-', align: 'left'},
+          {name: 'title', label: this.$tr('isite.cms.form.status'), field: row => row.status.title, align: 'left'},
+          {name: 'comment', label: this.$tr('isite.cms.form.comment'), field: row => row.comment || '-', align: 'left'},
           {
             name: 'created_at',
-            label: this.$trp('ui.form.createdAt'),
+            label: this.$trp('isite.cms.form.createdAt'),
             field: 'created_at',
             format: val => val ? this.$d(this.$moment(val, "YYYY-MM-DD HH:mm").toDate(), 'long') : "-",
             align: 'left'

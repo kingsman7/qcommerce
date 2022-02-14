@@ -4,8 +4,8 @@ export default {
   data() {
     return {
       types: {
-        0: this.$tr('ui.label.no'),
-        1: this.$tr('ui.label.yes'),
+        0: this.$tr('isite.cms.label.no'),
+        1: this.$tr('isite.cms.label.yes'),
       }
     }
   },
@@ -17,47 +17,47 @@ export default {
         permission: 'icommerce.coupons',
         extraFormFields: 'Icommerce.crud-fields.coupons',
         create: {
-          title: this.$tr('qcommerce.layout.newCoupon'),
+          title: this.$tr('icommerce.cms.newCoupon'),
           to: {name: 'qcommerce.admin.coupons.create'}
         },
         read: {
           columns: [
-            {name: 'id', label: this.$tr('ui.form.id'), field: 'id', align: 'left'},
-            {name: 'code', label: this.$tr('qcommerce.layout.form.code'), field: 'code', align: 'left'},
+            {name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', align: 'left'},
+            {name: 'code', label: this.$tr('icommerce.cms.form.code'), field: 'code', align: 'left'},
             {
               name: 'quantityTotal',
-              label: this.$tr('qcommerce.layout.form.quantityTotal'),
+              label: this.$tr('icommerce.cms.form.quantityTotal'),
               field: 'quantityTotal',
               align: 'left'
             },
             {
-              name: 'discount', label: this.$tr('qcommerce.layout.form.discount'), field: 'discount', align: 'left',
+              name: 'discount', label: this.$tr('icommerce.cms.form.discount'), field: 'discount', align: 'left',
               format: (val, row) => val ? row.criteria == 'percentage' ? this.$n(val / 100, 'percent') : this.$trc(val) : '-',
             },
-            {name: 'dateStart', label: this.$tr('qcommerce.layout.form.dateStart'), field: 'dateStart', align: 'left'},
-            {name: 'dateEnd', label: this.$tr('qcommerce.layout.form.dateEnd'), field: 'dateEnd', align: 'left'},
+            {name: 'dateStart', label: this.$tr('icommerce.cms.form.dateStart'), field: 'dateStart', align: 'left'},
+            {name: 'dateEnd', label: this.$tr('icommerce.cms.form.dateEnd'), field: 'dateEnd', align: 'left'},
             {
-              name: 'running', label: this.$tr('ui.form.status'), field: 'running', align: 'left',
-              format: val => val ? this.$tr('ui.label.enabled') : this.$tr('ui.label.disabled'),
+              name: 'running', label: this.$tr('isite.cms.form.status'), field: 'running', align: 'left',
+              format: val => val ? this.$tr('isite.cms.label.enabled') : this.$tr('isite.cms.label.disabled'),
             },
             {
-              name: 'finished', label: this.$tr('ui.label.finished'), field: 'finished', align: 'left',
-              format: val => val ? this.$tr('ui.label.yes') : this.$tr('ui.label.no'),
+              name: 'finished', label: this.$tr('isite.cms.label.finished'), field: 'finished', align: 'left',
+              format: val => val ? this.$tr('isite.cms.label.yes') : this.$tr('isite.cms.label.no'),
             },
             {
               name: 'quantityTotalCustomer',
-              label: this.$tr('qcommerce.layout.form.quantityTotalCustomer'),
+              label: this.$tr('icommerce.cms.form.quantityTotalCustomer'),
               field: 'quantityTotalCustomer',
               align: 'left'
             },
             {
               name: 'type',
-              label: this.$tr('qcommerce.layout.form.allOrder'),
+              label: this.$tr('icommerce.cms.form.allOrder'),
               field: 'type',
               align: 'left',
               format: val => this.types[val ?? 0]
             },
-            {name: 'actions', label: this.$tr('ui.form.actions'), align: 'right'},
+            {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'right'},
           ],
           requestParams: {},
           filters: {},

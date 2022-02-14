@@ -21,7 +21,7 @@
                              @delete="deleteOption(template.currentOption)"/>
           <!--Add new option-->
           <div class="text-right q-mt-md">
-            <q-btn :label="$tr('ui.label.add')" rounded unelevated color="green" @click="modal.show = true"/>
+            <q-btn :label="$tr('isite.cms.label.add')" rounded unelevated color="green" @click="modal.show = true"/>
           </div>
         </div>
       </div>
@@ -36,13 +36,13 @@
         <div v-else>
           <!--Option Name-->
           <div class="inline-block">
-            <div class="input-title capitalize">{{ $tr('ui.form.option') }}</div>
+            <div class="input-title capitalize">{{ $tr('isite.cms.form.option') }}</div>
             <q-icon color="primary" name="fas fa-caret-right"></q-icon>
             {{ findOption(template.form.id).description }}
           </div>
           <!--Type-->
           <div class="inline-block q-ml-lg">
-            <div class="input-title capitalize">{{ $tr('ui.form.type') }}</div>
+            <div class="input-title capitalize">{{ $tr('isite.cms.form.type') }}</div>
             <q-icon color="primary" name="fas fa-caret-right"></q-icon>
             {{ findOption(template.form.id).type }}
           </div>
@@ -54,7 +54,7 @@
           </div>
           <!--Required-->
           <div class="inline-block q-ml-lg">
-            <div class="input-title capitalize">{{ $tr('ui.form.required') }}</div>
+            <div class="input-title capitalize">{{ $tr('isite.cms.form.required') }}</div>
             <q-toggle v-model="template.form.required" @input="updateProductOption()"/>
           </div>
           <!--Form-->
@@ -110,11 +110,11 @@
           <!--Options-->
           <div class="input-title">Option *</div>
           <crud :crud-data="import('@imagina/qcommerce/_crud/productOptions')" v-model="modal.optionSelected"
-                type="select" @created="getOptions" :crud-props="{label : `${$tr('ui.form.option')} *`}"
+                type="select" @created="getOptions" :crud-props="{label : `${$tr('isite.cms.form.option')} *`}"
                 :config="{options : {label : 'description', value : 'id'}}"/>
           <!--btn dave option-->
           <div class="text-right q-mt-md">
-            <q-btn :label="$tr('ui.label.save')" color="green" rounded unelevated @click="createProductOption()"/>
+            <q-btn :label="$tr('isite.cms.label.save')" color="green" rounded unelevated @click="createProductOption()"/>
           </div>
           <!--Loading-->
           <inner-loading :visible="modal.loading"/>
@@ -195,7 +195,7 @@ export default {
           resolve(true)
         }).catch(error => {
           this.loading = false
-          this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+          this.$alert.error({message: this.$tr('isite.cms.message.errorRequest'), pos: 'bottom'})
           reject(false)
         })
       })
@@ -213,7 +213,7 @@ export default {
         this.loading = false
       }).catch(error => {
         this.loading = false
-        this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+        this.$alert.error({message: this.$tr('isite.cms.message.errorRequest'), pos: 'bottom'})
       })
     },
     //Add to list option no added
@@ -236,7 +236,7 @@ export default {
 
         //Request
         this.$crud.create(configName, dataOption).then(async response => {
-          this.$alert.success({message: this.$tr('ui.message.recordCreated'), pos: 'bottom'})
+          this.$alert.success({message: this.$tr('isite.cms.message.recordCreated'), pos: 'bottom'})
           await this.getData()//Get data again
           this.modal.optionSelected = null//Reset option of select options
           //Get last option create
@@ -249,7 +249,7 @@ export default {
           this.modal.loading = false
           this.modal.show = false
         }).catch(error => {
-          this.$alert.error({message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom'})
+          this.$alert.error({message: this.$tr('isite.cms.message.recordNoCreated'), pos: 'bottom'})
           this.modal.show = false
           this.modal.loading = false
           this.modal.optionSelected = null//Reset option of select options
@@ -266,11 +266,11 @@ export default {
 
       //Request
       this.$crud.update(configName, form.id, form).then(response => {
-        this.$alert.success({message: this.$tr('ui.message.recordUpdated'), pos: 'bottom'})
+        this.$alert.success({message: this.$tr('isite.cms.message.recordUpdated'), pos: 'bottom'})
         this.setDataOption()
         this.loading = false
       }).catch(error => {
-        this.$alert.error({message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom'})
+        this.$alert.error({message: this.$tr('isite.cms.message.recordNoUpdated'), pos: 'bottom'})
         this.loading = false
       })
     },
@@ -282,22 +282,22 @@ export default {
         this.$q.dialog({
           title: option.keyDescription,
           preventClose: true,
-          message: this.$tr('ui.message.deleteRecord'),
+          message: this.$tr('isite.cms.message.deleteRecord'),
           color: 'red',
-          ok: this.$tr('ui.label.delete'),
-          cancel: this.$tr('ui.label.cancel'),
+          ok: this.$tr('isite.cms.label.delete'),
+          cancel: this.$tr('isite.cms.label.cancel'),
         }).onOk(response => {//If comfirn delete action
           this.loading = true
           let configName = 'apiRoutes.qcommerce.productOptions'
           //Request
           this.$crud.delete(configName, optionId, {params: {}}).then(async response => {
             this.template.currentOption = null//Set null current option
-            this.$alert.success({message: this.$tr('ui.message.recordDeleted'), pos: 'bottom'})
+            this.$alert.success({message: this.$tr('isite.cms.message.recordDeleted'), pos: 'bottom'})
             await this.getData()//Get data
             this.$refs.optionList.vRefresh()//Refresh List options
             this.loading = false
           }).catch((error) => {
-            this.$alert.error({message: this.$tr('ui.message.recordNoDeleted'), pos: 'bottom'})
+            this.$alert.error({message: this.$tr('isite.cms.message.recordNoDeleted'), pos: 'bottom'})
             this.loading = false
           })
         }).onCancel(response => {
@@ -313,7 +313,7 @@ export default {
       if (option)//If exist option, show message to fedbak
         this.$q.dialog({
           message: this.$tr('qcommerce.layout.message.noDeleteOption', {name: option.keyDescription}),
-          title: this.$tr('ui.label.warning'),
+          title: this.$tr('isite.cms.label.warning'),
           color: 'red',
         }).then(data => {
           return false//Response
@@ -382,7 +382,7 @@ export default {
         this.template.options = this.$clone(options)
         this.loadingOptions = false
       }).catch(error => {
-        this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+        this.$alert.error({message: this.$tr('isite.cms.message.errorRequest'), pos: 'bottom'})
         this.loadingOptions = false
       })
     },
@@ -406,11 +406,11 @@ export default {
       this.$crud.create('apiRoutes.qcommerce.productOptionOrder', {options: newdata})
           .then(response => {
             this.loading = false
-            this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
+            this.$alert.success({message: `${this.$tr('isite.cms.message.recordUpdated')}`})
           })
           .catch(error => {
             this.loading = false
-            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+            this.$alert.error({message: this.$tr('isite.cms.message.errorRequest'), pos: 'bottom'})
           })
     },
     arrayToTree(elements, parentId = 0) {

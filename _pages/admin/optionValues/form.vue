@@ -7,17 +7,17 @@
         </div>
         <q-form @submit="itemId ? updateItem() : createItem()"
                 ref="formContent" class="row q-col-gutter-x-sm full-width" autocomplete="off"
-                @validation-error="$alert.error($tr('ui.message.formInvalid'))">
+                @validation-error="$alert.error($tr('isite.cms.message.formInvalid'))">
           <!--Form left-->
           <div class="col-12" v-if="locale.success">
             <div class="row q-col-gutter-md">
               <div class="col-12">
                 <q-input outlined dense v-model="locale.formTemplate.description"
-                         :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                         :label="`${$tr('ui.form.description')} (${locale.language})*`"/>
+                         :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
+                         :label="`${$tr('isite.cms.form.description')} (${locale.language})*`"/>
                 <q-select outlined dense v-model="locale.formTemplate.options.type"
-                          :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                          :label="`${$tr('ui.form.type')} *`"
+                          :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
+                          :label="`${$tr('isite.cms.form.type')} *`"
                           :options="typeOptions"
                           map-options
                           emit-value
@@ -26,7 +26,7 @@
                   <div class="col-8 col-md-10">
                     <q-input outlined dense v-model="locale.formTemplate.options.color"
                              :rules="['anyColor']"
-                             :label="`${$tr('qcommerce.layout.form.color')} *`">
+                             :label="`${$tr('icommerce.cms.form.color')} *`">
                       <template v-slot:append>
                         <q-icon name="colorize" class="cursor-pointer">
                           <q-popup-proxy transition-show="scale" transition-hide="scale">
@@ -42,7 +42,7 @@
                   </div>
                 </div>
                 <div v-if="locale.form.options.type == 2" class="relative-position">
-                  <div class="input-title">{{$tr('ui.form.image')}}</div>
+                  <div class="input-title">{{$tr('isite.cms.form.image')}}</div>
                   <upload-media
                     v-model="locale.formTemplate.mediasSingle"
                     entity="Modules\Icommerce\Entities\OptionValue"
@@ -56,7 +56,7 @@
           <!--Button Actions-->
           <div class="col-12 text-right">
             <q-btn color="green" :loading="loading" icon="fas fa-edit"
-                   :label="itemId ? $tr('ui.label.update') : $tr('ui.label.create') " type="submit" rounded/>
+                   :label="itemId ? $tr('isite.cms.label.update') : $tr('isite.cms.label.create') " type="submit" rounded/>
           </div>
         </q-form>
       </div>
@@ -99,8 +99,8 @@
         optionValues: [],
         pages: [],
         typeOptions: [
-          {label: this.$tr('ui.label.text'), value: 1},
-          {label: this.$tr('ui.label.image'), value: 2},
+          {label: this.$tr('isite.cms.label.text'), value: 1},
+          {label: this.$tr('isite.cms.label.image'), value: 2},
           {label: this.$tr('qcommerce.layout.form.color'), value: 3},
         ]
       }
@@ -166,7 +166,7 @@
               this.orderDataItemToLocale(response.data)
               resolve(true)//Resolve
             }).catch(error => {
-              this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+              this.$alert.error({message: this.$tr('isite.cms.message.errorRequest'), pos: 'bottom'})
               this.loading = false
               reject(false)//Resolve
             })
@@ -184,14 +184,14 @@
           this.loading = true
           let configName = 'apiRoutes.qcommerce.optionValues'
           this.$crud.create(configName, this.getDataForm()).then(response => {
-            this.$alert.success({message: `${this.$tr('ui.message.recordCreated')} ID: ${response.data.id}`})
+            this.$alert.success({message: `${this.$tr('isite.cms.message.recordCreated')} ID: ${response.data.id}`})
             if (this.$route.params.optionId) {
               this.$router.push({name: 'qcommerce.admin.options.edit', params: {id: this.$route.params.optionId}})
             }
             this.$emit('updated')
           }).catch(error => {
             this.loading = false
-            this.$alert.error({message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom'})
+            this.$alert.error({message: this.$tr('isite.cms.message.recordNoCreated'), pos: 'bottom'})
           })
         }
       },
@@ -201,12 +201,12 @@
           let configName = 'apiRoutes.qcommerce.optionValues'
           this.$crud.update(configName, this.itemId, this.getDataForm()).then(response => {
             this.$emit('updated')
-            this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
+            this.$alert.success({message: `${this.$tr('isite.cms.message.recordUpdated')}`})
             //this.initForm()
             this.loading = false
           }).catch(error => {
             this.loading = false
-            this.$alert.error({message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom'})
+            this.$alert.error({message: this.$tr('isite.cms.message.recordNoUpdated'), pos: 'bottom'})
           })
         }
       },

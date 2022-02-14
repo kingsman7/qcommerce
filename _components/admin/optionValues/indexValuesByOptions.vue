@@ -9,7 +9,7 @@
         <q-btn @click="getItems(true)" icon="fas fa-sync-alt" color="info" class="q-ml-xs"
                rounded unelevated>
           <q-tooltip :delay="300">
-            {{$tr('ui.label.refresh')}}
+            {{$tr('isite.cms.label.refresh')}}
           </q-tooltip>
         </q-btn>
       </div>
@@ -20,7 +20,7 @@
     </div>
 
     <div class="col-12 text-right q-mt-sm">
-      <q-btn v-if="optionValues.length" @click="updateOrder" icon="fas fa-save" :label="$tr('ui.label.save')"
+      <q-btn v-if="optionValues.length" @click="updateOrder" icon="fas fa-save" :label="$tr('isite.cms.label.save')"
              color="positive" class="q-ml-xs" rounded unelevated/>
     </div>
 
@@ -30,7 +30,7 @@
           <q-avatar>
             <q-icon name="fa fa-stream"/>
           </q-avatar>
-          <q-toolbar-title><span class="text-weight-bold">{{ this.id > 0?$tr('qcommerce.sidebar.adminValuesEdit'):$tr('qcommerce.sidebar.adminValuesCreate') }}</span>
+          <q-toolbar-title><span class="text-weight-bold">{{ this.id > 0?$tr('icommerce.cms.sidebar.adminValuesEdit'):$tr('icommerce.cms.sidebar.adminValuesCreate') }}</span>
           </q-toolbar-title>
           <q-btn flat round dense icon="close" v-close-popup/>
         </q-toolbar>
@@ -94,7 +94,7 @@
           this.optionValues = response.data
           this.loading = false
         }).catch(error => {
-          this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+          this.$alert.error({message: this.$tr('isite.cms.message.errorRequest'), pos: 'bottom'})
           this.loading = false
         })
       },
@@ -106,11 +106,11 @@
           .then(response => {
             this.loading = false
             this.getItems(true)
-            this.$alert.success({message: `${this.$tr('ui.message.recordUpdated')}`})
+            this.$alert.success({message: `${this.$tr('isite.cms.message.recordUpdated')}`})
           })
           .catch(error => {
             this.loading = false
-            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+            this.$alert.error({message: this.$tr('isite.cms.message.errorRequest'), pos: 'bottom'})
           })
       },
       arrayToTree(elements, parentId = 0) {

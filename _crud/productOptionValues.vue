@@ -15,24 +15,24 @@
           permission: 'icommerce.optionvalues',
           extraFormFields: 'Icommerce.crud-fields.productOptionsValues',
           create: {
-            title: this.$tr('qcommerce.layout.newOptionValue'),
+            title: this.$tr('icommerce.cms.newOptionValue'),
           },
           read: {
             columns: [
-              { name: 'id', label: this.$tr('ui.form.id'), field: 'id', style: 'width: 50px' },
+              { name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', style: 'width: 50px' },
               {
-                name: 'description', label: this.$tr('ui.form.description'),
+                name: 'description', label: this.$tr('isite.cms.form.description'),
                 field: 'description', align: 'rigth'
               },
               {
-                name: 'option', label: this.$tr('ui.form.option'), field: 'option',
+                name: 'option', label: this.$tr('isite.cms.form.option'), field: 'option',
                 format: val => val && val.description || '-', align: 'left'
               },
               {
-                name: 'created_at', label: this.$tr('ui.form.createdAt'), field: 'createdAt', align: 'left',
+                name: 'created_at', label: this.$tr('isite.cms.form.createdAt'), field: 'createdAt', align: 'left',
                 format: val => val ? this.$trd(val) : '-'
               },
-              { name: 'actions', label: this.$tr('ui.form.actions'), align: 'left' },
+              { name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left' },
             ],
             requestParams: { include: 'option' },
             filters: {
@@ -40,9 +40,9 @@
                 value: '0',
                 type: 'select',
                 props : {
-                  label: `${this.$tr('ui.form.option')}:`,
+                  label: `${this.$tr('isite.cms.form.option')}:`,
                   options: [
-                    { label: this.$tr('ui.label.all'), value: '0' }
+                    { label: this.$tr('isite.cms.label.all'), value: '0' }
                   ],
                 },
                 loadOptions: {
@@ -53,7 +53,7 @@
             }
           },
           update: {
-            title: this.$tr('qcommerce.layout.updateOptionValue'),
+            title: this.$tr('icommerce.cms.updateOptionValue'),
             requestParams: { include: '' }
           },
           delete: true,
@@ -65,9 +65,9 @@
               type: 'input',
               isTranslatable: true,
               props : {
-                label: `${this.$tr('ui.form.description')}*`,
+                label: `${this.$tr('isite.cms.form.description')}*`,
                 rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
+                  val => !!val || this.$tr('isite.cms.message.fieldRequired')
                 ],
               }
             },
@@ -77,7 +77,7 @@
               isTranslatable: false,
               props : {
                 type : 'number',
-                label: this.$tr('ui.form.sort'),
+                label: this.$tr('isite.cms.form.sort'),
               }
             },
             mediasSingle: {
@@ -85,7 +85,7 @@
               value: {},
               type: 'media',
               props : {
-                label: this.$tr('ui.form.firstImage'),
+                label: this.$tr('isite.cms.form.firstImage'),
                 zone: 'mainimage',
                 entity: 'Modules\\Icommerce\\Entities\\OptionValue',
                 enitityId: null

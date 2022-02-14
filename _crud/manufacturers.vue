@@ -16,25 +16,25 @@
           permission: 'icommerce.manufacturers',
           extraFormFields: 'Icommerce.crud-fields.manufacturers',
           create: {
-            title: this.$tr('qcommerce.layout.newManufacturer'),
+            title: this.$tr('icommerce.cms.newManufacturer'),
           },
           read: {
             columns: [
-              {name: 'id', label: this.$tr('ui.form.id'), field: 'id', style: 'width: 50px'},
-              {name: 'name', label: this.$tr('ui.form.name'), field: 'name', align: 'left'},
+              {name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', style: 'width: 50px'},
+              {name: 'name', label: this.$tr('isite.cms.form.name'), field: 'name', align: 'left'},
               {
-                name: 'status', label: this.$tr('ui.form.status'), field: 'status'
+                name: 'status', label: this.$tr('isite.cms.form.status'), field: 'status'
               },
               {
-                name: 'created_at', label: this.$tr('ui.form.createdAt'), field: 'createdAt', align: 'left',
+                name: 'created_at', label: this.$tr('isite.cms.form.createdAt'), field: 'createdAt', align: 'left',
                 format: val => val ? this.$trd(val) : '-',
               },
-              {name: 'actions', label: this.$tr('ui.form.actions'), align: 'left'},
+              {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left'},
             ],
             //requestParams: {include: 'parent'}
           },
           update: {
-            title: this.$tr('qcommerce.layout.updateManufacturer'),
+            title: this.$tr('icommerce.cms.updateManufacturer'),
             //requestParams: {include: 'parent'}
           },
           delete: true,
@@ -46,7 +46,7 @@
               type: 'input',
               isTranslatable: true,
               props : {
-                label: `${this.$tr('ui.form.name')}*`,
+                label: `${this.$tr('isite.cms.form.name')}*`,
               }
             },
             slug: {
@@ -54,9 +54,9 @@
               type: 'input',
               isTranslatable: true,
               props: {
-                label: `${this.$tr('ui.form.slug')}*`,
+                label: `${this.$tr('isite.cms.form.slug')}*`,
                 rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
+                  val => !!val || this.$tr('isite.cms.message.fieldRequired')
                 ],
               }
             },
@@ -65,9 +65,9 @@
               type: 'html',
               isTranslatable: true,
               props: {
-                label: `${this.$tr('ui.form.description')}*`,
+                label: `${this.$tr('isite.cms.form.description')}*`,
                 rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
+                  val => !!val || this.$tr('isite.cms.message.fieldRequired')
                 ],
               }
             },
@@ -76,7 +76,7 @@
               type: 'input',
               isTranslatable: true,
               props: {
-                label: this.$tr('ui.form.metaTitle'),
+                label: this.$tr('isite.cms.form.metaTitle'),
               }
             },
             metaDescription: {
@@ -84,7 +84,7 @@
               type: 'input',
               isTranslatable: true,
               props: {
-                label: this.$tr('ui.form.metaDescription'),
+                label: this.$tr('isite.cms.form.metaDescription'),
               }
             },
           },
@@ -94,13 +94,13 @@
               type: 'select',
               isTranslatable: false,
               props : {
-                label: `${this.$tr('ui.form.status')}*`,
+                label: `${this.$tr('isite.cms.form.status')}*`,
                 options : [
-                  {label: this.$tr('ui.label.enabled'), value: '1'},
-                  {label: this.$tr('ui.label.disabled'), value: '0'}
+                  {label: this.$tr('isite.cms.label.enabled'), value: '1'},
+                  {label: this.$tr('isite.cms.label.disabled'), value: '0'}
                 ],
                 rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
+                  val => !!val || this.$tr('isite.cms.message.fieldRequired')
                 ],
               }
             },
@@ -108,7 +108,7 @@
               value: '0',
               type: 'input',
               props: {
-                label: this.$tr('qcommerce.layout.form.sortOrder'),
+                label: this.$tr('icommerce.cms.form.sortOrder'),
                 type: 'number'
               }
             },
@@ -118,7 +118,7 @@
               value: {},
               type: 'media',
               props: {
-                label: this.$tr('ui.form.firstImage'),
+                label: this.$tr('isite.cms.form.firstImage'),
                 zone: 'mainimage',
                 entity: "Modules\\Icommerce\\Entities\\Manufacturer",
                 enitityId: null
@@ -130,7 +130,7 @@
               value: {},
               type: 'media',
               props: {
-                label: this.$tr('ui.form.secondaryImage'),
+                label: this.$tr('isite.cms.form.secondaryImage'),
                 zone: 'secondaryimage',
                 entity: "Modules\\Icommerce\\Entities\\Manufacturer",
                 enitityId: null

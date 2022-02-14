@@ -1,5 +1,5 @@
 <template>
-  <master-modal id="selectProductConfig" v-model="modal" :title="$tr('qcommerce.layout.message.productSetup')"
+  <master-modal id="selectProductConfig" v-model="modal" :title="$tr('icommerce.cms.message.productSetup')"
                 :loading="loading" :actions="modalActions">
     <!--Summary-->
     <div v-if="productData" class="box q-mb-md box-auto-height">
@@ -9,10 +9,10 @@
       <!--Prices-->
       <div class="row">
         <!--Product price-->
-        <div class="col-6 text-blue-grey">{{ $tr('ui.label.price') }}:</div>
+        <div class="col-6 text-blue-grey">{{ $tr('isite.cms.label.price') }}:</div>
         <div class="col-6 text-right">${{ $trn(productData.price || 0) }}</div>
         <!--Options price-->
-        <div class="col-6 text-blue-grey">{{ $trp('ui.label.option') }}:</div>
+        <div class="col-6 text-blue-grey">{{ $trp('isite.cms.label.option') }}:</div>
         <div class="col-6 text-right">${{ $trn(priceOptions) }}</div>
         <!--Total-->
         <div class="col-6 text-blue-grey">Total:</div>
@@ -22,7 +22,7 @@
     <!--Options-->
     <div v-if="productData" class="box">
       <!--Title-->
-      <div class="box-title">{{ $trp('ui.label.option') }}</div>
+      <div class="box-title">{{ $trp('isite.cms.label.option') }}</div>
       <q-separator class="q-mt-sm"/>
       <!--List-->
       <q-list class="q-pa-none">
@@ -70,7 +70,7 @@ export default {
       return [
         {
           props: {
-            label: this.params.actionLabel || this.$tr('ui.label.save'),
+            label: this.params.actionLabel || this.$tr('isite.cms.label.save'),
             color: 'green'
           },
           action: () => this.emitProductConfig()

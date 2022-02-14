@@ -41,7 +41,7 @@ export default {
           text2: {field: 'name'},
           text3: {
             field: 'quantity',
-            format: val => val ? `${this.$tr('ui.label.quantity')}: ${val}` : ''
+            format: val => val ? `${this.$tr('isite.cms.label.quantity')}: ${val}` : ''
           },
         },
         actionTo: 'qcommerce.admin.products.index',

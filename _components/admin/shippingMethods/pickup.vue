@@ -12,7 +12,7 @@
       <!--Content-->
       <div class="relative-position q-pa-md">
         <q-form @submit="updateItem" class="row q-col-gutter-x-md" ref="formContent" autocomplete="off"
-                @validation-error="$alert.error($tr('ui.message.formInvalid'))">
+                @validation-error="$alert.error($tr('isite.cms.message.formInvalid'))">
           <!--Language-->
           <div class="col-12 q-mb-md">
             <locales v-model="locale" ref="localeComponent" :form="$refs.formContent"/>
@@ -21,13 +21,13 @@
           <div class="col-12 col-md-8" v-if="locale.success">
             <!--Title-->
             <q-input v-model="locale.formTemplate.title" outlined dense
-                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                     :label="`${$tr('ui.form.title')} (${locale.language})*`"/>
+                     :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
+                     :label="`${$tr('isite.cms.form.title')} (${locale.language})*`"/>
 
             <!--Description-->
             <q-input v-model="locale.formTemplate.description" outlined dense
-                     :label="`${$tr('ui.form.description')} (${locale.language})*`"
-                     type="textarea" rows="3" :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+                     :label="`${$tr('isite.cms.form.description')} (${locale.language})*`"
+                     type="textarea" rows="3" :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"/>
           </div>
           <!--Form right-->
           <div class="col-12 col-md-4" v-if="locale.success">
@@ -35,14 +35,14 @@
             <q-select v-model="locale.formTemplate.status"
                       emit-value map-options
                       :options="[
-                        {label:$tr('ui.label.enabled'),value:true},
-                        {label:$tr('ui.label.disabled'),value:false}
+                        {label:$tr('isite.cms.label.enabled'),value:true},
+                        {label:$tr('isite.cms.label.disabled'),value:false}
                       ]"
                       outlined dense
-                      :label="$tr('ui.form.status')"/>
+                      :label="$tr('isite.cms.form.status')"/>
             <!--Main Image-->
             <div class="input-title">
-              {{$tr('ui.form.image')}}
+              {{$tr('isite.cms.form.image')}}
             </div>
             <upload-img
               v-model="locale.formTemplate.mediasSingle"
@@ -60,7 +60,7 @@
       <q-toolbar color="white">
         <q-toolbar-title></q-toolbar-title>
         <!--Button Update-->
-        <q-btn :label="$tr('ui.label.update')" icon="fas fa-pen" color="green"
+        <q-btn :label="$tr('isite.cms.label.update')" icon="fas fa-pen" color="green"
                :loading="loading" @click="$refs.formContent.submit()"/>
       </q-toolbar>
     </q-card>
@@ -147,12 +147,12 @@
           }
           //Request
           this.$crud.update('apiRoutes.qcommerce.shippingMethods', this.item.id, data).then(response => {
-            this.$alert.success({message: this.$tr('ui.message.recordUpdated')})
+            this.$alert.success({message: this.$tr('isite.cms.message.recordUpdated')})
             this.$emit('updated')
             this.loading = false
             this.show = false
           }).catch(error => {
-            this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
+            this.$alert.error({message: this.$tr('isite.cms.message.recordNoUpdated')})
             this.loading = false
           })
         }

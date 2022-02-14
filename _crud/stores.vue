@@ -16,24 +16,24 @@
           extraFormFields: 'Icommerce.crud-fields.stores',
           //permission: 'icommerce.stores',
           create: {
-            title: this.$tr('qcommerce.layout.newStore'),
+            title: this.$tr('icommerce.cms.newStore'),
           },
           read: {
             columns: [
-              {name: 'id', label: this.$tr('ui.form.id'), field: 'id', style: 'width: 50px'},
-              {name: 'name', label: this.$tr('ui.form.name'), field: 'name', align: 'left'},
-              {name: 'address', label: this.$tr('ui.form.address'), field: 'address', align: 'left'},
-              {name: 'phone', label: this.$tr('ui.form.phone'), field: 'phone', align: 'left'},
+              {name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', style: 'width: 50px'},
+              {name: 'name', label: this.$tr('isite.cms.form.name'), field: 'name', align: 'left'},
+              {name: 'address', label: this.$tr('isite.cms.form.address'), field: 'address', align: 'left'},
+              {name: 'phone', label: this.$tr('isite.cms.form.phone'), field: 'phone', align: 'left'},
               {
-                name: 'created_at', label: this.$tr('ui.form.createdAt'), field: 'createdAt', align: 'left',
+                name: 'created_at', label: this.$tr('isite.cms.form.createdAt'), field: 'createdAt', align: 'left',
                 format: val => val ? this.$trd(val) : '-',
               },
-              {name: 'actions', label: this.$tr('ui.form.actions'), align: 'left'},
+              {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left'},
             ],
             //requestParams: {include: 'parent'}
           },
           update: {
-            title: this.$tr('qcommerce.layout.updateStore'),
+            title: this.$tr('icommerce.cms.updateStore'),
             //requestParams: {include: 'parent'}
           },
           delete: true,
@@ -45,9 +45,9 @@
               type: 'input',
               isTranslatable: false,
               props : {
-                label: `${this.$tr('ui.form.name')}*`,
+                label: `${this.$tr('isite.cms.form.name')}*`,
                 rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
+                  val => !!val || this.$tr('isite.cms.message.fieldRequired')
                 ],
               }
             },
@@ -56,9 +56,9 @@
               type: 'input',
               isTranslatable: false,
               props : {
-                label: `${this.$tr('ui.form.address')}*`,
+                label: `${this.$tr('isite.cms.form.address')}*`,
                 rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
+                  val => !!val || this.$tr('isite.cms.message.fieldRequired')
                 ],
               }
             },
@@ -67,9 +67,9 @@
               type: 'input',
               isTranslatable: false,
               props : {
-                  label: `${this.$tr('ui.form.phone')}*`,
+                  label: `${this.$tr('isite.cms.form.phone')}*`,
                   rules: [
-                      val => !!val || this.$tr('ui.message.fieldRequired')
+                      val => !!val || this.$tr('isite.cms.message.fieldRequired')
                   ],
               }
             },
@@ -80,7 +80,7 @@
               value: {},
               type: 'media',
               props : {
-                label: this.$tr('ui.form.firstImage'),
+                label: this.$tr('isite.cms.form.firstImage'),
                 zone: 'mainimage',
                 entity: "Modules\\Icommerce\\Entities\\Store",
                 enitityId: null

@@ -11,33 +11,33 @@ export default {
         create: false,
         read: {
           columns: [
-            {name: 'id', label: this.$tr('ui.form.id'), field: 'id'},
+            {name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id'},
             {
               name: 'customer',
-              label: this.$tr('ui.form.name'),
+              label: this.$tr('isite.cms.form.name'),
               field: 'customer',
               format: val => val ? val.fullName : '-',
               align: 'left'
             },
             {
               name: 'total',
-              label: this.$tr('qcommerce.layout.form.total'),
+              label: this.$tr('icommerce.cms.form.total'),
               field: 'total',
               format: val => val ? `$${this.$trn(val)}` : ''
             },
-            {name: 'statusName', label: this.$tr('ui.form.status'), field: 'statusName'},
-            //{name: 'paymentCity', label: this.$tr('qcommerce.layout.form.city'), field: 'paymentCity'},
-            //{name: 'paymentCountry', label: this.$tr('qcommerce.layout.form.country'), field: 'paymentCountry'},
-            {name: 'shippingMethod', label: this.$tr('qcommerce.layout.form.shippingMethod'), field: 'shippingMethod'},
+            {name: 'statusName', label: this.$tr('isite.cms.form.status'), field: 'statusName'},
+            //{name: 'paymentCity', label: this.$tr('icommerce.cms.form.city'), field: 'paymentCity'},
+            //{name: 'paymentCountry', label: this.$tr('icommerce.cms.form.country'), field: 'paymentCountry'},
+            {name: 'shippingMethod', label: this.$tr('icommerce.cms.form.shippingMethod'), field: 'shippingMethod'},
             {
-              name: 'created_at', label: this.$tr('ui.form.createdAt'), field: 'createdAt', align: 'right',
+              name: 'created_at', label: this.$tr('isite.cms.form.createdAt'), field: 'createdAt', align: 'right',
               format: val => val ? this.$trd(val) : '-',
             },
             {
-              name: 'updated_at', label: this.$tr('ui.form.updatedAt'), field: 'updatedAt', align: 'right',
+              name: 'updated_at', label: this.$tr('isite.cms.form.updatedAt'), field: 'updatedAt', align: 'right',
               format: val => val ? this.$trd(val) : '-',
             },
-            {name: 'actions', label: this.$tr('ui.form.actions'), align: 'right'},
+            {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'right'},
           ],
           requestParams: {
             filter: {
@@ -49,13 +49,13 @@ export default {
           },
           filters: {
             status: {
-              label: `${this.$tr('ui.form.status')}:`,
+              label: `${this.$tr('isite.cms.form.status')}:`,
               value: null,
               type: 'select',
               isRequired: true,
               isTranslatable: false,
               props: {
-                label: `${this.$tr('ui.form.status')}:`,
+                label: `${this.$tr('isite.cms.form.status')}:`,
                 clearable: true
               },
               loadOptions: {

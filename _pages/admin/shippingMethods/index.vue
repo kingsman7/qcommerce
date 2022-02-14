@@ -16,7 +16,7 @@
         <template slot="top-left" slot-scope="props">
           <!--Search-->
           <q-input clearable v-model="table.filter.search" dense outlined debounce="800"
-                   :placeholder="`${$tr('ui.label.search',{capitalize : true})}...`"
+                   :placeholder="`${$tr('isite.cms.label.search',{capitalize : true})}...`"
                    @input="getDataTable">
             <template v-slot:append>
               <q-icon name="search"/>
@@ -28,7 +28,7 @@
           <!--Button refresh data-->
           <q-btn icon="fas fa-sync-alt" color="info" class="q-ml-xs"
                  @click="getDataTable(true)">
-            <q-tooltip :delay="300">{{$tr('ui.label.refresh')}}</q-tooltip>
+            <q-tooltip :delay="300">{{$tr('isite.cms.label.refresh')}}</q-tooltip>
           </q-btn>
         </template>
 
@@ -38,11 +38,11 @@
           <q-btn color="green" icon="fas fa-pen" size="sm"
                  v-if="$auth.hasAccess('icommerce.payment-methods.edit')"
                  @click="itemToEdit = props.row; formItemShow = true">
-            <q-tooltip :delay="300">{{$tr('ui.label.edit')}}</q-tooltip>
+            <q-tooltip :delay="300">{{$tr('isite.cms.label.edit')}}</q-tooltip>
           </q-btn>
           <!--status button-->
           <q-toggle color="green" v-model="props.row.status" class="q-px-xs" @input="update(props.row)">
-            <q-tooltip :delay="300">{{`${$tr('ui.label.enabled')}/${$tr('ui.label.disabled')}`}}</q-tooltip>
+            <q-tooltip :delay="300">{{`${$tr('isite.cms.label.enabled')}/${$tr('isite.cms.label.disabled')}`}}</q-tooltip>
           </q-toggle>
         </q-td>
       </q-table>
@@ -138,7 +138,7 @@
           this.table.pagination.rowsPerPage = pagination.rowsPerPage
           this.loading = false
         }).catch(error => {
-          this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+          this.$alert.error({message: this.$tr('isite.cms.message.errorRequest'), pos: 'bottom'})
           this.loading = false
         })
 
@@ -149,10 +149,10 @@
         this.loading = true
         //Request
         this.$crud.update('apiRoutes.qcommerce.shippingMethods', data.id, data).then(response => {
-          this.$alert.success({message: this.$tr('ui.message.recordUpdated')})
+          this.$alert.success({message: this.$tr('isite.cms.message.recordUpdated')})
           this.loading = false
         }).catch(error => {
-          this.$alert.error({message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom'})
+          this.$alert.error({message: this.$tr('isite.cms.message.recordNoUpdated'), pos: 'bottom'})
           this.loading = false
         })
 

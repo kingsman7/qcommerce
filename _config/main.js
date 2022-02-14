@@ -1,6 +1,6 @@
 export default {
   moduleName : 'icommerce',
-  moduleTitle: 'qcommerce.sidebar.adminGroup',
+  moduleTitle: 'icommerce.cms.sidebar.adminGroup',
   //Entities
   entityNames: {
     coupon: 'coupon',

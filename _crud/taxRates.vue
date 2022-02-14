@@ -16,24 +16,24 @@
           //permission: 'icommerce.manufacturers',
           extraFormFields: 'Icommerce.crud-fields.taxRates',
           create: {
-            title: this.$tr('qcommerce.layout.newTaxRate'),
+            title: this.$tr('icommerce.cms.newTaxRate'),
             //to: {name: 'qcommerce.admin.taxRates.create'}
           },
           read: {
             columns: [
-              {name: 'id', label: this.$tr('ui.form.id'), field: 'id', style: 'width: 50px'},
-              {name: 'name', label: this.$tr('ui.form.name'), field: 'name', align: 'left'},
-              {name: 'rate', label: this.$tr('qcommerce.layout.form.rate'), field: 'rate', align: 'left'},
+              {name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', style: 'width: 50px'},
+              {name: 'name', label: this.$tr('isite.cms.form.name'), field: 'name', align: 'left'},
+              {name: 'rate', label: this.$tr('icommerce.cms.form.rate'), field: 'rate', align: 'left'},
               {
-                name: 'created_at', label: this.$tr('ui.form.createdAt'), field: 'createdAt', align: 'left',
+                name: 'created_at', label: this.$tr('isite.cms.form.createdAt'), field: 'createdAt', align: 'left',
                 format: val => val ? this.$trd(val) : '-',
               },
-              {name: 'actions', label: this.$tr('ui.form.actions'), align: 'left'},
+              {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left'},
             ],
             //requestParams: {include: 'parent'}
           },
           update: {
-            title: this.$tr('qcommerce.layout.updateTaxRate'),
+            title: this.$tr('icommerce.cms.updateTaxRate'),
             //to: 'qcommerce.admin.taxRates.edit'
             //requestParams: {include: 'parent'}
           },
@@ -51,9 +51,9 @@
               type: 'input',
               isTranslatable: true,
               props : {
-                label: `${this.$tr('ui.form.name')}*`,
+                label: `${this.$tr('isite.cms.form.name')}*`,
                 rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
+                  val => !!val || this.$tr('isite.cms.message.fieldRequired')
                 ],
               }
             },
@@ -62,10 +62,10 @@
               type: 'input',
               isTranslatable: false,
               props : {
-                label: `${this.$tr('qcommerce.layout.form.rate')}*`,
+                label: `${this.$tr('icommerce.cms.form.rate')}*`,
                 type: 'number',
                 rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
+                  val => !!val || this.$tr('isite.cms.message.fieldRequired')
                 ],
               }
             },
@@ -74,13 +74,13 @@
               type: 'select',
               isTranslatable: false,
               props : {
-                label: `${this.$tr('ui.form.type')}*`,
+                label: `${this.$tr('isite.cms.form.type')}*`,
                 options: [
-                  {label: this.$tr('qcommerce.layout.options.fixedValue'), value: '0'},
-                  {label: this.$tr('qcommerce.layout.options.percentage'), value: '1'},
+                  {label: this.$tr('icommerce.cms.options.fixedValue'), value: '0'},
+                  {label: this.$tr('icommerce.cms.options.percentage'), value: '1'},
                 ],
                 rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
+                  val => !!val || this.$tr('isite.cms.message.fieldRequired')
                 ],
               }
             },
@@ -103,7 +103,7 @@
               value: {},
               type: 'media',
               props : {
-                label: this.$tr('ui.form.firstImage'),
+                label: this.$tr('isite.cms.form.firstImage'),
                 zone: 'mainimage',
                 entity: "Modules\\Icommerce\\Entities\\Store",
                 enitityId: null

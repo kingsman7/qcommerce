@@ -59,22 +59,22 @@ export default {
       return {
         hidePagination: true,
         columns: [
-          {name: 'title', label: this.$tr('ui.label.payOut'), field: 'title', align: 'left'},
-          {name: 'account', label: this.$tr('ui.label.account'), field: 'account', align: 'left'},
-          {name: 'actions', label: this.$trp('ui.label.action'), field: 'actions'},
+          {name: 'title', label: this.$tr('isite.cms.label.payOut'), field: 'title', align: 'left'},
+          {name: 'account', label: this.$tr('isite.cms.label.account'), field: 'account', align: 'left'},
+          {name: 'actions', label: this.$trp('isite.cms.label.action'), field: 'actions'},
         ],
         data: [
           {
             title: 'Stripe',
-            account: !this.account ? this.$tr('ui.message.noRegistered') :
+            account: !this.account ? this.$tr('isite.cms.message.noRegistered') :
                 (this.account.payoutsEnabled ? this.account.email : this.account.urlPanelMsj),
             actions: [
               {
-                label: this.$tr('ui.label.configuration'),
+                label: this.$tr('isite.cms.label.configuration'),
                 icon: 'fas fa-cog',
                 action: (item) => {
                   this.modal.show = true
-                  this.modal.title = `${this.$tr('ui.label.payOut')} | Stripe`
+                  this.modal.title = `${this.$tr('isite.cms.label.payOut')} | Stripe`
                 }
               },
               {
@@ -143,9 +143,9 @@ export default {
           //Show dialog to finish register
           this.$alert.info({
             mode: 'modal',
-            message: this.$tr('ui.message.finishRegister'),
+            message: this.$tr('isite.cms.message.finishRegister'),
             actions: [{
-              label: this.$tr('ui.label.next'),
+              label: this.$tr('isite.cms.label.next'),
               color: 'green',
               handler: () => {
                 this.$helper.openExternalURL(response.data.accountRegisterLink)

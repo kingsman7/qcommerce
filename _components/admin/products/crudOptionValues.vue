@@ -4,11 +4,11 @@
     <q-table :data="table.data" :columns="columns" row-key="name">
       <!--Header-->
       <div slot="top-left">
-        <span class="input-title">{{ $tr('qcommerce.layout.form.productOptionValues') }}</span>
+        <span class="input-title">{{ $tr('icommerce.cms.form.productOptionValues') }}</span>
       </div>
       <div slot="top-right">
         <!--Button new record-->
-        <q-btn icon="fas fa-edit" color="green" :label="$tr('qcommerce.layout.newOptionValue')"
+        <q-btn icon="fas fa-edit" color="green" :label="$tr('icommerce.cms.newOptionValue')"
                @click="modal.itemId = false; modal.show = true" class="btn-small" unelevated rounded/>
       </div>
 
@@ -17,12 +17,12 @@
         <!--Edit button-->
         <q-btn color="green" icon="fas fa-pen" size="sm"
                @click="modal.itemId = props.row.id; setItemUpdate()">
-          <q-tooltip :delay="300">{{ $tr('ui.label.edit') }}</q-tooltip>
+          <q-tooltip :delay="300">{{ $tr('isite.cms.label.edit') }}</q-tooltip>
         </q-btn>
         <!--Delete button-->
         <q-btn color="red" icon="fas fa-trash-alt" size="sm" class="q-ml-xs"
                @click="deleteItem(props.row.id)">
-          <q-tooltip :delay="300">{{ $tr('ui.label.delete') }}</q-tooltip>
+          <q-tooltip :delay="300">{{ $tr('isite.cms.label.delete') }}</q-tooltip>
         </q-btn>
       </q-td>
     </q-table>
@@ -34,31 +34,31 @@
         <!--Header-->
         <q-toolbar class="bg-primary text-white">
           <q-toolbar-title v-if="!modal.itemId">
-            {{ $tr('qcommerce.layout.newProductOptionValue') }}
+            {{ $tr('icommerce.cms.newProductOptionValue') }}
           </q-toolbar-title>
           <q-toolbar-title v-else>
-            {{ `${$tr('qcommerce.layout.updateProductOptionValue')} ID: ${modal.itemId}` }}
+            {{ `${$tr('icommerce.cms.updateProductOptionValue')} ID: ${modal.itemId}` }}
           </q-toolbar-title>
           <q-btn flat v-close-popup icon="fas fa-times"/>
         </q-toolbar>
 
         <!--Content-->
         <q-form @submit="modal.itemId ? updateItem() : createItem()" ref="formContent"
-                @validation-error="$alert.error($tr('ui.message.formInvalid'))"
+                @validation-error="$alert.error($tr('isite.cms.message.formInvalid'))"
                 class="q-pa-md" autocomplete="off">
           <div class="row q-col-gutter-x-md">
             <!--Form left-->
             <div class="col-12 col-md-6">
               <!--Option Value-->
               <div class="input-title relative-position q-mb-md">
-                {{ `${$tr('qcommerce.layout.form.optionValue')} *` }}
+                {{ `${$tr('icommerce.cms.form.optionValue')} *` }}
                 <!--Crud Option Value-->
                 <crud :crud-data="import('@imagina/qcommerce/_crud/productOptionValues')"
                       type="button-create" @created="getOptionValues" class="absolute-right"
                       :custom-data="{read: {requestParams: {filter: {optionId: form.optionId} } }, formLeft: { optionId: { value: form.optionId } } }"/>
               </div>
               <q-field v-model="form.optionValueId" borderless
-                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
+                       :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]">
                 <tree-select
                     :clearable="false"
                     :options="options.values"
@@ -75,23 +75,23 @@
                   type : 'select',
                   required : true,
                   props : {
-                    label : `${$tr('qcommerce.layout.form.parentOptionValue')} *`,
+                    label : `${$tr('icommerce.cms.form.parentOptionValue')} *`,
                     options : options.parentValues
                   }
                 }"/>
               </div>
               <!--Quantity-->
               <q-input v-model="form.quantity" type="number" outlined dense
-                       :label="`${$tr('ui.form.quantity')} *`"
-                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
-              <div class="input-title">{{ $tr('ui.form.stock') }}</div>
+                       :label="`${$tr('isite.cms.form.quantity')} *`"
+                       :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"/>
+              <div class="input-title">{{ $tr('isite.cms.form.stock') }}</div>
               <tree-select
                   data-testid="stockStatus"
                   :clearable="false"
                   :append-to-body="true"
                   :options="[
-                  {label: this.$tr('ui.label.available'), id: 1},
-                  {label: this.$tr('ui.label.soldOut'), id: 0}
+                  {label: this.$tr('isite.cms.label.available'), id: 1},
+                  {label: this.$tr('isite.cms.label.soldOut'), id: 0}
                 ]"
                   value-consists-of="BRANCH_PRIORITY"
                   v-model="form.stockStatus"
@@ -99,7 +99,7 @@
               />
               <!--Subtrack-->
               <div class="input-title">
-                {{ `${$tr('qcommerce.layout.form.subtractFromStock')}` }}
+                {{ `${$tr('icommerce.cms.form.subtractFromStock')}` }}
               </div>
               <q-field v-model="form.subtract" borderless>
                 <tree-select
@@ -116,7 +116,7 @@
             <div class="col-12 col-md-6">
               <!--Price-->
               <div class="content-prefix row">
-                <div class="input-title col-12">{{ `${$tr('ui.form.price')} *` }}</div>
+                <div class="input-title col-12">{{ `${$tr('isite.cms.form.price')} *` }}</div>
                 <div class="col-2"><!--Prefix-->
                   <tree-select
                       :clearable="false"
@@ -126,12 +126,12 @@
                 </div>
                 <div class="col-10 q-pl-sm"><!--Input-->
                   <q-input v-model="form.price" style="padding: 0px" outlined dense type="number"
-                           :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+                           :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"/>
                 </div>
               </div>
               <!--Points-->
               <div class="content-prefix row">
-                <div class="input-title col-12">{{ `${$trp('ui.form.point')} *` }}</div>
+                <div class="input-title col-12">{{ `${$trp('isite.cms.form.point')} *` }}</div>
                 <div class="col-2"><!--Prefix-->
                   <tree-select
                       :clearable="false"
@@ -141,12 +141,12 @@
                 </div>
                 <div class="col-10 q-pl-sm"><!--Input-->
                   <q-input v-model="form.points" style="padding: 0px" outlined dense type="number"
-                           :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+                           :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"/>
                 </div>
               </div>
               <!--weight-->
               <div class="content-prefix row">
-                <div class="input-title col-12">{{ `${$tr('ui.form.weight')} *` }}</div>
+                <div class="input-title col-12">{{ `${$tr('isite.cms.form.weight')} *` }}</div>
                 <div class="col-2"><!--Prefix-->
                   <tree-select
                       :clearable="false"
@@ -156,7 +156,7 @@
                 </div>
                 <div class="col-10 q-pl-sm"><!--Input-->
                   <q-input v-model="form.weight" style="padding: 0px" outlined dense type="number"
-                           :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+                           :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"/>
                 </div>
               </div>
             </div>
@@ -170,10 +170,10 @@
           <q-toolbar-title></q-toolbar-title>
           <!--Button Save-->
           <q-btn icon="fas fa-save" color="green"
-                 v-if="!modal.itemId" :label="$tr('ui.label.save')"
+                 v-if="!modal.itemId" :label="$tr('isite.cms.label.save')"
                  :loading="loading" @click="$refs.formContent.submit()"/>
           <!--Button Update-->
-          <q-btn :label="$tr('ui.label.update')" icon="fas fa-pen" color="green"
+          <q-btn :label="$tr('isite.cms.label.update')" icon="fas fa-pen" color="green"
                  :loading="loading" @click="$refs.formContent.submit()" v-else/>
         </q-toolbar>
       </q-card>
@@ -250,8 +250,8 @@ export default {
         values: [],
         parentValues: [],
         subtract: [
-          {label: this.$tr('ui.label.yes'), id: 1},
-          {label: this.$tr('ui.label.no'), id: 0},
+          {label: this.$tr('isite.cms.label.yes'), id: 1},
+          {label: this.$tr('isite.cms.label.no'), id: 0},
         ],
         prefix: [
           {label: '+', id: '+'},
@@ -262,20 +262,20 @@ export default {
     //Columns translatables
     columns() {
       return [
-        {name: 'id', label: this.$tr('ui.form.id'), field: 'id'},
+        {name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id'},
         {
-          name: 'optionValue', label: this.$tr('qcommerce.layout.form.optionValue'),
+          name: 'optionValue', label: this.$tr('icommerce.cms.form.optionValue'),
           field: 'optionValue', align: 'left'
         },
         {
-          name: 'parentOptionValue', label: this.$tr('qcommerce.layout.form.parentOptionValue'),
+          name: 'parentOptionValue', label: this.$tr('icommerce.cms.form.parentOptionValue'),
           field: 'parentOptionValue', align: 'left'
         },
-        {name: 'quantity', label: this.$tr('ui.form.quantity'), field: 'quantity'},
-        {name: 'price', label: this.$tr('ui.form.price'), field: 'price'},
-        {name: 'points', label: this.$trp('ui.form.point'), field: 'points'},
-        {name: 'weight', label: this.$trp('ui.form.weight'), field: 'weight'},
-        {name: 'actions', label: this.$trp('ui.form.actions')},
+        {name: 'quantity', label: this.$tr('isite.cms.form.quantity'), field: 'quantity'},
+        {name: 'price', label: this.$tr('isite.cms.form.price'), field: 'price'},
+        {name: 'points', label: this.$trp('isite.cms.form.point'), field: 'points'},
+        {name: 'weight', label: this.$trp('isite.cms.form.weight'), field: 'weight'},
+        {name: 'actions', label: this.$trp('isite.cms.form.actions')},
       ]
     }
   },
@@ -315,7 +315,7 @@ export default {
           resolve(true)
         }).catch(error => {
           this.loading = false
-          this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+          this.$alert.error({message: this.$tr('isite.cms.message.errorRequest'), pos: 'bottom'})
           reject(error)
         })
       })
@@ -333,11 +333,11 @@ export default {
       this.loading = true
       let configName = 'apiRoutes.qcommerce.productOptionValues'
       this.$crud.create(configName, formData).then(response => {
-        this.$alert.success({message: this.$tr('ui.message.recordCreated'), pos: 'bottom'})
+        this.$alert.success({message: this.$tr('isite.cms.message.recordCreated'), pos: 'bottom'})
         this.initForm()
         this.loading = false
       }).catch(error => {
-        this.$alert.error({message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom'})
+        this.$alert.error({message: this.$tr('isite.cms.message.recordNoCreated'), pos: 'bottom'})
         this.loading = false
       })
     },
@@ -346,11 +346,11 @@ export default {
       this.loading = true
       let configname = 'apiRoutes.qcommerce.productOptionValues'
       this.$crud.update(configname, this.modal.itemId, this.form).then(response => {
-        this.$alert.success({message: this.$tr('ui.message.recordUpdated'), pos: 'bottom'})
+        this.$alert.success({message: this.$tr('isite.cms.message.recordUpdated'), pos: 'bottom'})
         this.initForm()
         this.loading = false
       }).catch(error => {
-        this.$alert.error({message: this.$tr('ui.message.recordNoUpdated'), pos: 'bottom'})
+        this.$alert.error({message: this.$tr('isite.cms.message.recordNoUpdated'), pos: 'bottom'})
         this.loading = false
       })
     },
@@ -359,11 +359,11 @@ export default {
       this.loading = true
       let configName = 'apiRoutes.qcommerce.productOptionValues'
       this.$crud.delete(configName, itemId).then(response => {
-        this.$alert.success({message: this.$tr('ui.message.recordDeleted'), pos: 'bottom'})
+        this.$alert.success({message: this.$tr('isite.cms.message.recordDeleted'), pos: 'bottom'})
         this.initForm()
         this.loading = false
       }).catch(error => {
-        this.$alert.error({message: this.$tr('ui.message.recordNoDeleted'), pos: 'bottom'})
+        this.$alert.error({message: this.$tr('isite.cms.message.recordNoDeleted'), pos: 'bottom'})
         this.loading = false
       })
     },

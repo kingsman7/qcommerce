@@ -9,23 +9,23 @@
           permission: 'icommerce.itemtypes',
           extraFormFields: 'Icommerce.crud-fields.itemTypes',
           create: {
-            title: this.$tr('qcommerce.layout.newItemType'),
+            title: this.$tr('icommerce.cms.newItemType'),
           },
           read: {
             columns: [
-              {name: 'id', label: this.$tr('ui.form.id'), field: 'id', align: 'left'},
-              {name: 'title', label: this.$tr('ui.form.title'), field: 'title', align: 'left'},
+              {name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', align: 'left'},
+              {name: 'title', label: this.$tr('isite.cms.form.title'), field: 'title', align: 'left'},
               {
-                name: 'createdAt', label: this.$tr('ui.form.createdAt'), field: 'createdAt', align: 'left',
+                name: 'createdAt', label: this.$tr('isite.cms.form.createdAt'), field: 'createdAt', align: 'left',
                 format: val => val ? this.$trd(val) : '-',
               },
-              {name: 'actions', label: this.$tr('ui.form.actions'), align: 'right'},
+              {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'right'},
             ],
             requestParams: {},
             filters: {},
           },
           update: {
-            title: this.$tr('qcommerce.layout.updateItemType'),
+            title: this.$tr('icommerce.cms.updateItemType'),
           },
           delete: true,
           formLeft: {
@@ -34,9 +34,9 @@
               value: '',
               type: 'input',
               props : {
-                label: `${this.$tr('ui.form.title')}*`,
+                label: `${this.$tr('isite.cms.form.title')}*`,
                 rules: [
-                  val => !!val || this.$tr('ui.message.fieldRequired')
+                  val => !!val || this.$tr('isite.cms.message.fieldRequired')
                 ],
               }
             },
