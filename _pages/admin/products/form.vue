@@ -732,7 +732,7 @@ export default {
       this.productId = this.$route.params.id//Update param from route
       if (this.locale.success) this.$refs.localeComponent.vReset()//Reset locale
       await this.getData()//Get Data Item
-      await this.getCategories()//Get categories
+      //await this.getCategories()//Get categories
       if (this.priceListEnable)
         await this.getPriceLists()//Get Price lists
       this.success = true//Activate status of page
