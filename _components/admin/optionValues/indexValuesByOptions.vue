@@ -5,7 +5,7 @@
         <q-btn :to="{name: 'qcommerce.admin.options'}" icon="fas fa-arrow-alt-circle-left"
                color="primary" class="q-ml-xs" round unelevated/>
         <q-btn @click="id = -1,dialogNewValue=true" icon="fas fa-edit" rounded unelevated
-               :label="$tr('qcommerce.layout.newOptionValue')" color="positive" class="q-ml-xs"/>
+               :label="$tr('icommerce.cms.newOptionValue')" color="positive" class="q-ml-xs"/>
         <q-btn @click="getItems(true)" icon="fas fa-sync-alt" color="info" class="q-ml-xs"
                rounded unelevated>
           <q-tooltip :delay="300">

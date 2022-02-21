@@ -97,7 +97,7 @@
                   </div>
                 </div>
               </q-expansion-item>
-              <q-expansion-item icon="fas fa-info-circle" :label="$tr('qcommerce.layout.form.data')"
+              <q-expansion-item icon="fas fa-info-circle" :label="$tr('icommerce.cms.form.data')"
                                 class="box-collapse q-mb-md" header-class="header-container" group="gpProdExpansion">
                 <div class="row q-col-gutter-md q-pa-md">
                   <!--Left-->
@@ -115,7 +115,7 @@
                     <div class="full-width" v-if="priceListEnable">
                       <div class="row q-py-sm">
                         <div class="col-8">
-                          {{ $tr('qcommerce.layout.form.priceLists') }}
+                          {{ $tr('icommerce.cms.form.priceLists') }}
                         </div>
                         <div class="col-4 text-right">
                           <q-btn icon="fas fa-plus" color="green" size="sm"
@@ -152,7 +152,7 @@
                     <q-input data-testid="quantity" outlined dense v-model="locale.formTemplate.quantity"
                              :label="$tr('isite.cms.form.quantity')" type="number"/>
                     <!--minimum-->
-                    <q-input data-testid="minimumOrder" :label="$tr('qcommerce.layout.form.minimumOrder')"
+                    <q-input data-testid="minimumOrder" :label="$tr('icommerce.cms.form.minimumOrder')"
                              outlined dense
                              type="number" v-model="locale.formTemplate.minimum"/>
                     <!--Status-->
@@ -167,7 +167,7 @@
                         class="q-mb-md"
                     />
                     <!--sortOrder-->
-                    <q-input data-testid="sortOrder" :label="$tr('qcommerce.layout.form.sortOrder')"
+                    <q-input data-testid="sortOrder" :label="$tr('icommerce.cms.form.sortOrder')"
                              outlined dense
                              type="number" v-model="locale.formTemplate.sortOrder"/>
                   </div>
@@ -176,7 +176,7 @@
                     <!--availability date-->
                     <q-input data-testid="dateAvailable" dense mask="date"
                              v-model="locale.formTemplate.dateAvailable" color="primary"
-                             unmasked-value :label="$tr('qcommerce.layout.form.availableDate')"
+                             unmasked-value :label="$tr('icommerce.cms.form.availableDate')"
                              outlined placeholder="YYYY/MM/DD">
                       <template v-slot:append>
                         <q-icon name="fas fa-calendar-day"/>
@@ -215,7 +215,7 @@
                              :label="$tr('isite.cms.form.weight')"
                              outlined dense type="number"/>
                     <!--Order Weight-->
-                    <q-input data-testid="orderWeight" :label="$tr('qcommerce.layout.form.orderWeight')" outlined
+                    <q-input data-testid="orderWeight" :label="$tr('icommerce.cms.form.orderWeight')" outlined
                              dense
                              v-model="locale.formTemplate.orderWeight"/>
                     <!--Requires shipping-->
@@ -224,7 +224,7 @@
                         v-model="locale.formTemplate.shipping"
                         :true-value="true"
                         :false-value="false"
-                        :label="$tr('qcommerce.layout.form.requriedShipping')"
+                        :label="$tr('icommerce.cms.form.requriedShipping')"
                         color="primary"
                     />
                     <br>
@@ -234,7 +234,7 @@
                         v-model="locale.formTemplate.freeshipping"
                         :true-value="true"
                         :false-value="false"
-                        :label="$tr('qcommerce.layout.form.freeShipping')"
+                        :label="$tr('icommerce.cms.form.freeShipping')"
                         color="primary"
                     />
                     <br>
@@ -244,7 +244,7 @@
                         v-model="locale.formTemplate.subtract"
                         :true-value="true"
                         :false-value="false"
-                        :label="$tr('qcommerce.layout.form.subtractFromStock')"
+                        :label="$tr('icommerce.cms.form.subtractFromStock')"
                         color="primary"
                     />
                     <br>
@@ -254,7 +254,7 @@
                         v-model="locale.formTemplate.featured"
                         true-value="1"
                         false-value="0"
-                        :label="$tr('qcommerce.layout.form.featured')"
+                        :label="$tr('icommerce.cms.form.featured')"
                         color="primary"
                     />
                     <br/>
@@ -264,13 +264,13 @@
                         v-model="locale.formTemplate.isCall"
                         true-value="1"
                         false-value="0"
-                        :label="$tr('qcommerce.layout.form.isCall')"
+                        :label="$tr('icommerce.cms.form.isCall')"
                         color="primary"
                     />
                   </div>
                 </div>
               </q-expansion-item>
-              <q-expansion-item icon="fas fa-link" :label="$tr('qcommerce.layout.form.link')"
+              <q-expansion-item icon="fas fa-link" :label="$tr('icommerce.cms.form.link')"
                                 class="box-collapse q-mb-md" header-class="header-container" group="gpProdExpansion">
                 <div class="q-pa-md">
                   <!--Record Master-->
@@ -293,7 +293,7 @@
                   <!--Crud item types-->
                   <crud :crud-data="import('@imagina/qcommerce/_crud/itemTypes')"
                         type="select"
-                        :crud-props="{label:`${$tr('qcommerce.layout.form.itemType')}`, 'data-testid': 'itemTypeId'}"
+                        :crud-props="{label:`${$tr('icommerce.cms.form.itemType')}`, 'data-testid': 'itemTypeId'}"
                         v-model="locale.formTemplate.itemTypeId"
                         :config="{options: {label: 'title', value: 'id'}}"
                         v-if="false"
@@ -301,7 +301,7 @@
                   <!--Crud manufacturer-->
                   <crud :crud-data="import('@imagina/qcommerce/_crud/taxClasses')"
                         type="select"
-                        :crud-props="{label:`${$tr('qcommerce.layout.form.taxClass')}`, 'data-testid': 'taxClassId'}"
+                        :crud-props="{label:`${$tr('icommerce.cms.form.taxClass')}`, 'data-testid': 'taxClassId'}"
                         v-model="locale.formTemplate.taxClassId"
                         :config="{options: {label: 'name', value: 'id'}}"
                         v-if="$auth.hasAccess('icommerce.taxclasses.manage')"
@@ -309,7 +309,7 @@
                   <!--Crud manufacturer-->
                   <crud :crud-data="import('@imagina/qcommerce/_crud/manufacturers')"
                         type="select"
-                        :crud-props="{label:`${$tr('qcommerce.layout.form.manufacturer')}`,'data-testid': 'manufacturerId'}"
+                        :crud-props="{label:`${$tr('icommerce.cms.form.manufacturer')}`,'data-testid': 'manufacturerId'}"
                         v-model="locale.formTemplate.manufacturerId"
                         :config="{options: {label: 'name', value: 'id'}}"
                   />
@@ -340,7 +340,7 @@
                    <recursive-list v-model="locale.formTemplate.categories"
                                    :items="optionsTemplate.categories"/>-->
                   <!--Related Products-->
-                  <div class="input-title">{{ $tr('qcommerce.layout.form.relatedProducts') }}</div>
+                  <div class="input-title">{{ $tr('icommerce.cms.form.relatedProducts') }}</div>
                   <tree-select
                       data-testid="relatedProducts"
                       v-model="locale.formTemplate.relatedProducts"
@@ -375,7 +375,7 @@
                       <div v-else class="text-center">
                         <div class="q-my-md">
                           <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
-                          {{ `${$tr('qcommerce.layout.message.warnAddOpt')}...` }}
+                          {{ `${$tr('icommerce.cms.message.warnAddOpt')}...` }}
                         </div>
                         <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit" rounded unelevated
                                @click="buttonActions.value = 4, createItem()" color="green"/>
@@ -384,7 +384,7 @@
                   </q-card-section>
                 </q-card>
               </q-expansion-item>
-              <q-expansion-item icon="fas fa-gift" :label="$trp('qcommerce.layout.form.discount')"
+              <q-expansion-item icon="fas fa-gift" :label="$trp('icommerce.cms.form.discount')"
                                 class="box-collapse q-mb-md" header-class="header-container" group="gpProdExpansion">
                 <q-card>
                   <q-card-section class="q-pa-sm">
@@ -401,7 +401,7 @@
                       <div v-else class="text-center q-pa-sm">
                         <div class="q-my-md">
                           <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
-                          {{ `${$tr('qcommerce.layout.message.warnAddDiscount')}...` }}
+                          {{ `${$tr('icommerce.cms.message.warnAddDiscount')}...` }}
                         </div>
                         <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit" rounded unelevated
                                @click="buttonActions.value = 4, createItem()" color="green"/>
@@ -647,7 +647,7 @@ export default {
           type: 'select',
           testId: 'discounts',
           props: {
-            label: this.$tr('qcommerce.layout.form.discount') + '*',
+            label: this.$tr('icommerce.cms.form.discount') + '*',
             rules: [val => !!val || this.$tr('isite.cms.message.fieldRequired')],
             clearable: true,
             multiple: true,
@@ -662,7 +662,7 @@ export default {
           type: 'select',
           testId: 'priceLists',
           props: {
-            label: this.$tr('qcommerce.layout.form.priceLists') + '*',
+            label: this.$tr('icommerce.cms.form.priceLists') + '*',
             rules: [val => !!val || this.$tr('isite.cms.message.fieldRequired')],
           },
           loadOptions: {

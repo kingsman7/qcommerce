@@ -28,21 +28,21 @@
 
             <q-input v-model="form.discount" type="number" outlined dense
                      :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
-                     :label="`${$tr('qcommerce.layout.form.discount')} *`"/>
+                     :label="`${$tr('icommerce.cms.form.discount')} *`"/>
 
             <q-input v-model="form.quantityTotal" type="number" outlined dense
                      :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
-                     :label="`${$tr('qcommerce.layout.form.quantityTotal')} *`"/>
+                     :label="`${$tr('icommerce.cms.form.quantityTotal')} *`"/>
 
             <q-input v-model="form.quantityTotalCustomer" type="number" outlined dense
                      :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
-                     :label="`${$tr('qcommerce.layout.form.quantityTotalCustomer')} *`"/>
+                     :label="`${$tr('icommerce.cms.form.quantityTotalCustomer')} *`"/>
 
             <q-input v-model="form.minimumOrderAmount" type="number" outlined dense
-                     :label="`${$tr('qcommerce.layout.form.minimumOrderAmount')} *`" v-if="false" />
+                     :label="`${$tr('icommerce.cms.form.minimumOrderAmount')} *`" v-if="false" />
 
             <q-select outlined dense bg-color="white" v-model="form.type"
-                      :label="`${$tr('qcommerce.layout.form.allOrder')}*`" style="width: 100%;"
+                      :label="`${$tr('icommerce.cms.form.allOrder')}*`" style="width: 100%;"
                       emit-value map-options :options="[
                         {label: this.$tr('isite.cms.label.no'), value: '0'},
                         {label: this.$tr('isite.cms.label.yes'), value: '1'},
@@ -58,7 +58,7 @@
                         :label="`${$trp('isite.cms.label.product')}`"
                         multiple use-chips
                         style="width: 100%"
-                        :hint="`${$tr('qcommerce.layout.form.productHint')}`"
+                        :hint="`${$tr('icommerce.cms.form.productHint')}`"
               >
                 <template v-slot:no-option>
                   <q-item>
@@ -80,7 +80,7 @@
           <div class="col-md-4 ">
             <q-select outlined dense bg-color="white" v-model="form.status"
                       :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
-                      :label="`${$tr('qcommerce.layout.form.status')}*`" style="width: 100%;"
+                      :label="`${$tr('icommerce.cms.form.status')}*`" style="width: 100%;"
                       emit-value map-options :options="[
                         {label: this.$tr('isite.cms.label.enabled'), value: '1'},
                         {label: this.$tr('isite.cms.label.disabled'), value: '2'},
@@ -88,7 +88,7 @@
 
             <q-input dense mask="date" bg-color="white" v-model="form.dateStart" color="primary"
                      :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
-                     :label="`${$tr('qcommerce.layout.form.dateStart')}*`"
+                     :label="`${$tr('icommerce.cms.form.dateStart')}*`"
                      outlined placeholder="YYYY/MM/DD">
               <template v-slot:append>
                 <q-icon name="fas fa-calendar-day"/>
@@ -100,7 +100,7 @@
 
             <q-input dense mask="date" bg-color="white" v-model="form.dateEnd" color="primary"
                      :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
-                     :label="`${$tr('qcommerce.layout.form.dateEnd')}*`"
+                     :label="`${$tr('icommerce.cms.form.dateEnd')}*`"
                      outlined placeholder="YYYY/MM/DD">
               <template v-slot:append>
                 <q-icon name="fas fa-calendar-day"/>
@@ -111,7 +111,7 @@
             </q-input>
 
             <q-select outlined dense bg-color="white" v-model="form.shipping"
-                      :label="`${$tr('qcommerce.layout.form.freeShipping')}*`" style="width: 100%;"
+                      :label="`${$tr('icommerce.cms.form.freeShipping')}*`" style="width: 100%;"
                       emit-value map-options :options="[
                         {label: this.$tr('isite.cms.label.yes'), value: '1'},
                         {label: this.$tr('isite.cms.label.no'), value: '0'},
@@ -122,7 +122,7 @@
 
 
             <q-select outlined dense bg-color="white" v-model="form.logged"
-                      :label="`${$tr('qcommerce.layout.form.logged')}*`" style="width: 100%;"
+                      :label="`${$tr('icommerce.cms.form.logged')}*`" style="width: 100%;"
                       emit-value map-options :options="[
                         {label: this.$tr('isite.cms.label.yes'), value: '1'},
                         {label: this.$tr('isite.cms.label.no'), value: '0'},
@@ -166,7 +166,7 @@
             props : {
               clearable: true,
               multiple: true,
-              label: `${this.$tr('qcommerce.layout.form.customerGroup')}*`,
+              label: `${this.$tr('icommerce.cms.form.customerGroup')}*`,
               options:[{
                 label: 'All', value: 0
               }],
@@ -182,7 +182,7 @@
             props : {
               clearable: true,
               multiple: true,
-              label: `${this.$tr('qcommerce.layout.form.customerGroupExclude')}`,
+              label: `${this.$tr('icommerce.cms.form.customerGroupExclude')}`,
             }
           },
           categories: {
@@ -209,7 +209,7 @@
               clearable: true,
               multiple: true,
               useChips: true,
-              label: `${this.$trp('qcommerce.layout.form.manufacturer')}`,
+              label: `${this.$trp('icommerce.cms.form.manufacturer')}`,
             }
           },
         }

@@ -101,7 +101,7 @@
         typeOptions: [
           {label: this.$tr('isite.cms.label.text'), value: 1},
           {label: this.$tr('isite.cms.label.image'), value: 2},
-          {label: this.$tr('qcommerce.layout.form.color'), value: 3},
+          {label: this.$tr('icommerce.cms.form.color'), value: 3},
         ]
       }
     },

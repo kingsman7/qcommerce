@@ -4,7 +4,7 @@
       <!--Header-->
       <q-toolbar class="bg-primary text-white">
         <q-toolbar-title>
-          {{`${$tr('qcommerce.layout.updateShippingMethod')}: ${item.title}`}}
+          {{`${$tr('icommerce.cms.updateShippingMethod')}: ${item.title}`}}
         </q-toolbar-title>
         <q-btn flat v-close-popup icon="fas fa-times"/>
       </q-toolbar>
@@ -31,11 +31,11 @@
 
             <!--Access Key-->
             <q-input v-model="locale.formTemplate.accesskey" outlined dense
-                     :label="$tr('qcommerce.layout.form.accessKey')"/>
+                     :label="$tr('icommerce.cms.form.accessKey')"/>
 
             <!--User ID-->
             <q-input v-model="locale.formTemplate.userid" outlined dense
-                     :label="$tr('qcommerce.layout.form.userId')"/>
+                     :label="$tr('icommerce.cms.form.userId')"/>
 
             <!--password-->
             <q-input type="password" v-model="locale.formTemplate.password" outlined dense
@@ -43,15 +43,15 @@
 
             <!--shipper postal code-->
             <q-input v-model="locale.formTemplate.shipperpostalcode" outlined dense
-                     :label="$tr('qcommerce.layout.form.shipperPostalCode')"/>
+                     :label="$tr('icommerce.cms.form.shipperPostalCode')"/>
 
             <!--Shipper State Code-->
             <q-input v-model="locale.formTemplate.shipperstatecode" outlined dense
-                     :label="$tr('qcommerce.layout.form.shipperStateCode')"/>
+                     :label="$tr('icommerce.cms.form.shipperStateCode')"/>
 
             <!--Shipper Country Code-->
             <q-input v-model="locale.formTemplate.shippercountrycode" outlined dense
-                     :label="$tr('qcommerce.layout.form.shipperCountryCode')"/>
+                     :label="$tr('icommerce.cms.form.shipperCountryCode')"/>
           </div>
           <!--Form right-->
           <div class="col-12 col-md-4" v-if="locale.success">

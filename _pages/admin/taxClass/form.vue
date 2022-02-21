@@ -44,13 +44,13 @@
                 <div class="col-4">
                   <q-select outlined dense bg-color="white" v-model="rate.based"
                             :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"
-                            :label="`${$tr('qcommerce.layout.form.taxBased')}*`" style="width: 100%;"
+                            :label="`${$tr('icommerce.cms.form.taxBased')}*`" style="width: 100%;"
                             emit-value map-options :options="optionsBased"
                   />
                 </div>
                 <div class="col-2 col-sm-3">
                   <q-input type="number" outlined dense v-model="rate.priority"
-                           :label="`${$tr('qcommerce.layout.form.priority')}`"
+                           :label="`${$tr('icommerce.cms.form.priority')}`"
                            :rules="[val => !!val || $tr('isite.cms.message.fieldRequired')]"/>
                 </div>
                 <div class="col-2 col-sm-1 text-right">
@@ -103,15 +103,15 @@
         optionsBased: [
           {
             value: '1',
-            label: this.$tr('qcommerce.layout.options.taxRateBased.shippingAddress'),
+            label: this.$tr('icommerce.cms.options.taxRateBased.shippingAddress'),
           },
           {
             value: '2',
-            label: this.$tr('qcommerce.layout.options.taxRateBased.paymentAddress'),
+            label: this.$tr('icommerce.cms.options.taxRateBased.paymentAddress'),
           },
           {
             value: '3',
-            label: this.$tr('qcommerce.layout.options.taxRateBased.storeAddress'),
+            label: this.$tr('icommerce.cms.options.taxRateBased.storeAddress'),
           }
         ]
       }

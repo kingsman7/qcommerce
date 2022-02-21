@@ -23,7 +23,7 @@ export default {
     quickCardParams() {
       return {
         type : 'list-v',
-        title: this.$tr('qcommerce.layout.quickCard.productsToSoldOut'),
+        title: this.$tr('icommerce.cms.quickCard.productsToSoldOut'),
         icon: 'fas fa-cash-register',
         apiRoute: 'apiRoutes.qcommerce.products',
         requestParams: {

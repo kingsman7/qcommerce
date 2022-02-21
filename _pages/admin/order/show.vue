@@ -76,7 +76,7 @@
         <!--Form status-->
         <div class="box q-mt-md" v-if="canEditOrder">
           <div class="box-title">
-            {{ $tr('qcommerce.layout.newStatus') }}
+            {{ $tr('icommerce.cms.newStatus') }}
           </div>
           <q-separator class="q-mt-sm q-mb-md"/>
           <dynamic-form v-bind="form.status" @sent="init()"/>
@@ -155,15 +155,15 @@ export default {
         title: 'Total',
         values: [
           {
-            label: this.$tr('qcommerce.layout.subtotal'),
+            label: this.$tr('icommerce.cms.subtotal'),
             value: `$${this.$n(this.order.total - this.order.shippingAmount)}`
           },
           {
-            label: this.$tr('qcommerce.layout.shipping'),
+            label: this.$tr('icommerce.cms.shipping'),
             value: `$${this.$n(this.order.shippingAmount)}`
           },
           {
-            label: this.$tr('qcommerce.layout.form.total'),
+            label: this.$tr('icommerce.cms.form.total'),
             value: `$${this.$n(this.order.total)}`
           }
         ]

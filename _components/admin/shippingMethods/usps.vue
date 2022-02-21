@@ -4,7 +4,7 @@
       <!--Header-->
       <q-toolbar class="bg-primary text-white">
         <q-toolbar-title>
-          {{`${$tr('qcommerce.layout.updateShippingMethod')}: ${item.title}`}}
+          {{`${$tr('icommerce.cms.updateShippingMethod')}: ${item.title}`}}
         </q-toolbar-title>
         <q-btn flat v-close-popup icon="fas fa-times"/>
       </q-toolbar>
@@ -31,19 +31,19 @@
 
             <!--User ID-->
             <q-input v-model="locale.formTemplate.userid" outlined dense
-                     :label="$tr('qcommerce.layout.form.userId')"/>
+                     :label="$tr('icommerce.cms.form.userId')"/>
 
             <!--Zip Origin-->
             <q-input v-model="locale.formTemplate.ziporigin" outlined dense
-                     :label="$tr('qcommerce.layout.form.zipCode')"/>
+                     :label="$tr('icommerce.cms.form.zipCode')"/>
 
             <!--shipping rates-->
             <q-input v-model="locale.formTemplate.shippingrates" outlined dense
-                     :label="$tr('qcommerce.layout.form.shippingRates')"/>
+                     :label="$tr('icommerce.cms.form.shippingRates')"/>
 
             <!--machinable-->
             <q-input v-model="locale.formTemplate.machinable" outlined dense
-                     :label="$tr('qcommerce.layout.form.machinable')"/>
+                     :label="$tr('icommerce.cms.form.machinable')"/>
           </div>
           <!--Form right-->
           <div class="col-12 col-md-4" v-if="locale.success">

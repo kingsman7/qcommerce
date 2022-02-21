@@ -1,7 +1,7 @@
 <template>
   <div class="q-mt-lg">
     <p>
-      <b>{{ $tr('qcommerce.layout.newStatus') }}</b>
+      <b>{{ $tr('icommerce.cms.newStatus') }}</b>
     </p>
     <div class="q-py-xs">
       <tree-select v-model="form.status" :options="statuses" :placeholder="$tr('isite.cms.form.status')"/>

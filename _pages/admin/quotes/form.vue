@@ -160,7 +160,7 @@ export default {
                 value: null,
                 type: 'select',
                 props: {
-                  label: `${this.$tr('qcommerce.layout.form.manufacturer')}:`,
+                  label: `${this.$tr('icommerce.cms.form.manufacturer')}:`,
                   clearable: true,
                 },
                 loadOptions: {

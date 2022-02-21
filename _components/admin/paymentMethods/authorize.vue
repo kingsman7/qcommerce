@@ -5,7 +5,7 @@
       <!--Header-->
       <q-toolbar class="bg-primary text-white">
         <q-toolbar-title>
-          {{`${$tr('qcommerce.layout.updatePaymentMethod')}: ${item.title}`}}
+          {{`${$tr('icommerce.cms.updatePaymentMethod')}: ${item.title}`}}
         </q-toolbar-title>
         <q-btn flat v-close-popup icon="fas fa-times"/>
       </q-toolbar>
@@ -34,15 +34,15 @@
 
             <!--Api Login-->
             <q-input v-model="locale.formTemplate.apiLogin" outlined dense
-                     :label="$tr('qcommerce.layout.form.apilogin')"/>
+                     :label="$tr('icommerce.cms.form.apilogin')"/>
 
             <!--Transaction Key-->
             <q-input v-model="locale.formTemplate.transactionKey" outlined dense
-                     :label="$tr('qcommerce.layout.form.transactionKey')"/>
+                     :label="$tr('icommerce.cms.form.transactionKey')"/>
 
             <!--Client Key-->
             <q-input v-model="locale.formTemplate.clientKey" outlined dense
-                     :label="$tr('qcommerce.layout.form.clientKey')"/>
+                     :label="$tr('icommerce.cms.form.clientKey')"/>
           </div>
           <!--Form right-->
           <div class="col-12 col-md-4" v-if="locale.success">
@@ -53,7 +53,7 @@
                         {label:'LIVE',value:'live'}
                         ]"
                       outlined dense emit-value
-                      :label="$tr('qcommerce.layout.form.mode')"/>
+                      :label="$tr('icommerce.cms.form.mode')"/>
             <!--Status-->
             <q-select v-model="locale.formTemplate.status"
                       :options="[

@@ -5,7 +5,7 @@
       <!--Header-->
       <q-toolbar class="bg-primary text-white">
         <q-toolbar-title>
-          {{`${$tr('qcommerce.layout.updatePaymentMethod')}: ${item.title}`}}
+          {{`${$tr('icommerce.cms.updatePaymentMethod')}: ${item.title}`}}
         </q-toolbar-title>
         <q-btn flat v-close-popup icon="fas fa-times"/>
       </q-toolbar>

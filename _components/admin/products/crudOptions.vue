@@ -8,11 +8,11 @@
           <!--Header-->
           <div class="q-mb-sm">
             <!--Title-->
-            <div class="q-py-sm">{{ $tr('qcommerce.layout.productOptions') }}</div>
+            <div class="q-py-sm">{{ $tr('icommerce.cms.productOptions') }}</div>
           </div>
           <!--Message not option selected-->
           <div v-if="!productOptions.length" class="text-grey-8">
-            {{ `${$tr('qcommerce.layout.message.noOptions')}...` }}
+            {{ `${$tr('icommerce.cms.message.noOptions')}...` }}
           </div>
           <!--Options-->
           <recursive-options v-model="template.currentOption" :list-items="productOptions"
@@ -30,7 +30,7 @@
         <!--Message to select a option-->
         <div v-if="template.currentOption == null" class="q-pa-lg">
           <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
-          {{ `${$tr('qcommerce.layout.message.selectProduct')}...` }}
+          {{ `${$tr('icommerce.cms.message.selectProduct')}...` }}
         </div>
         <!--Form-->
         <div v-else>
@@ -62,7 +62,7 @@
             <!--Option value parent-->
             <div class="col-12 col-md-4"
                  v-if="showFieldForm && parseInt(template.form.parentId) && template.parentValues.length">
-              <div class="input-title">{{ `${$tr('qcommerce.layout.form.parentOptionValue')} *` }}</div>
+              <div class="input-title">{{ `${$tr('icommerce.cms.form.parentOptionValue')} *` }}</div>
               <tree-select
                   v-model="template.form.parentOptionValueId"
                   :clearable="false"
@@ -74,7 +74,7 @@
             </div>
             <!--Option Value-->
             <div class="col-12 col-md-4" v-if="showFieldForm">
-              <q-input v-model="template.form.value" :label="`${$tr('qcommerce.layout.form.optionValue')} *`"
+              <q-input v-model="template.form.value" :label="`${$tr('icommerce.cms.form.optionValue')} *`"
                        @blur="updateProductOption()"/>
             </div>
             <!--Option Values-->
@@ -312,7 +312,7 @@ export default {
       const option = this.findOption(optionId, 'parentId')//Find option to check
       if (option)//If exist option, show message to fedbak
         this.$q.dialog({
-          message: this.$tr('qcommerce.layout.message.noDeleteOption', {name: option.keyDescription}),
+          message: this.$tr('icommerce.cms.message.noDeleteOption', {name: option.keyDescription}),
           title: this.$tr('isite.cms.label.warning'),
           color: 'red',
         }).then(data => {

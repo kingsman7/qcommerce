@@ -4,7 +4,7 @@
       <!--Header-->
       <q-toolbar class="bg-primary text-white">
         <q-toolbar-title>
-          {{`${$tr('qcommerce.layout.updateShippingMethod')}: ${item.title}`}}
+          {{`${$tr('icommerce.cms.updateShippingMethod')}: ${item.title}`}}
         </q-toolbar-title>
         <q-btn flat v-close-popup icon="fas fa-times"/>
       </q-toolbar>
@@ -31,7 +31,7 @@
 
             <!--Minimum-->
             <q-input v-model="locale.formTemplate.minimum" outlined dense
-                     :label="$tr('qcommerce.layout.form.minimum')"/>
+                     :label="$tr('icommerce.cms.form.minimum')"/>
           </div>
           <!--Form right-->
           <div class="col-12 col-md-4" v-if="locale.success">

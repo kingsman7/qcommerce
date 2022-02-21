@@ -5,7 +5,7 @@
       <!--Header-->
       <q-toolbar class="bg-primary text-white">
         <q-toolbar-title>
-          {{`${$tr('qcommerce.layout.updatePaymentMethod')}: ${item.title}`}}
+          {{`${$tr('icommerce.cms.updatePaymentMethod')}: ${item.title}`}}
         </q-toolbar-title>
         <q-btn flat v-close-popup icon="fas fa-times"/>
       </q-toolbar>
@@ -30,7 +30,7 @@
 
             <!--Merchant ID-->
             <q-input v-model="locale.formTemplate.options.merchantId" outlined dense
-                     :label="$tr('qcommerce.layout.form.merchantId')"/>
+                     :label="$tr('icommerce.cms.form.merchantId')"/>
 
             <!--User-->
             <q-input v-model="locale.formTemplate.options.user" outlined dense
@@ -51,7 +51,7 @@
                       outlined dense
                       map-options
                       emit-value
-                      :label="$tr('qcommerce.layout.form.mode')"/>
+                      :label="$tr('icommerce.cms.form.mode')"/>
             <!--Status-->
             <q-select v-model="locale.formTemplate.status"
                       :options="[

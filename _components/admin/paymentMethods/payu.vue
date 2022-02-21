@@ -5,7 +5,7 @@
       <!--Header-->
       <q-toolbar class="bg-primary text-white">
         <q-toolbar-title>
-          {{`${$tr('qcommerce.layout.updatePaymentMethod')}: ${item.title}`}}
+          {{`${$tr('icommerce.cms.updatePaymentMethod')}: ${item.title}`}}
         </q-toolbar-title>
         <q-btn flat v-close-popup icon="fas fa-times"/>
       </q-toolbar>
@@ -31,19 +31,19 @@
 
             <!--Merchant ID-->
             <q-input v-model="locale.formTemplate.merchantId" outlined dense
-                     :label="$tr('qcommerce.layout.form.merchantId')"/>
+                     :label="$tr('icommerce.cms.form.merchantId')"/>
 
             <!--API login-->
             <q-input v-model="locale.formTemplate.apiLogin" outlined dense
-                     :label="$tr('qcommerce.layout.form.apiLogin')"/>
+                     :label="$tr('icommerce.cms.form.apiLogin')"/>
 
             <!--API Key-->
             <q-input v-model="locale.formTemplate.apiKey" outlined dense
-                     :label="$tr('qcommerce.layout.form.apiKey')"/>
+                     :label="$tr('icommerce.cms.form.apiKey')"/>
 
             <!--Account ID-->
             <q-input v-model="locale.formTemplate.accountId" outlined dense
-                     :label="$tr('qcommerce.layout.form.accountId')"/>
+                     :label="$tr('icommerce.cms.form.accountId')"/>
           </div>
           <!--Form right-->
           <div class="col-12 col-md-4" v-if="locale.success">
@@ -55,7 +55,7 @@
                         ]"
                       emit-value
                       outlined dense
-                      :label="$tr('qcommerce.layout.form.mode')"/>
+                      :label="$tr('icommerce.cms.form.mode')"/>
             <!--Status-->
             <q-select v-model="locale.formTemplate.status"
                       :options="[
@@ -74,7 +74,7 @@
                       ]"
                       outlined dense
                       emit-value
-                      :label="$tr('qcommerce.layout.form.allowTestCreditCard')"/>
+                      :label="$tr('icommerce.cms.form.allowTestCreditCard')"/>
             <!--Main Image-->
             <div class="input-title">
               {{$tr('isite.cms.form.image')}}

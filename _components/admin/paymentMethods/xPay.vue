@@ -5,7 +5,7 @@
       <!--Header-->
       <q-toolbar class="bg-primary text-white">
         <q-toolbar-title>
-          {{`${$tr('qcommerce.layout.updatePaymentMethod')}: ${item.title}`}}
+          {{`${$tr('icommerce.cms.updatePaymentMethod')}: ${item.title}`}}
         </q-toolbar-title>
         <q-btn flat v-close-popup icon="fas fa-times"/>
       </q-toolbar>
@@ -59,7 +59,7 @@
                         ]"
                       emit-value
                       outlined dense
-                      :label="$tr('qcommerce.layout.form.mode')"/>
+                      :label="$tr('icommerce.cms.form.mode')"/>
             <!--Main Image-->
             <div class="input-title">
               {{$tr('isite.cms.form.image')}}

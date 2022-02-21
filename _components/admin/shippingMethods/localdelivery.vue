@@ -4,7 +4,7 @@
       <!--Header-->
       <q-toolbar class="bg-primary text-white">
         <q-toolbar-title>
-          {{`${$tr('qcommerce.layout.updateShippingMethod')}: ${item.title}`}}
+          {{`${$tr('icommerce.cms.updateShippingMethod')}: ${item.title}`}}
         </q-toolbar-title>
         <q-btn flat v-close-popup icon="fas fa-times"/>
       </q-toolbar>
@@ -37,11 +37,11 @@
                         {label:'Percentage of Cart Total',value:'percentage_cart'},
                         {label:'Fixed Amount per Product',value:'fixed_amount_product'}
                         ]" outlined dense
-                      :label="$tr('qcommerce.layout.form.mode')"/>
+                      :label="$tr('icommerce.cms.form.mode')"/>
 
             <!--Delivery Fee-->
             <q-input v-model="locale.formTemplate.deliveryfee" type="number" outlined dense
-                     :label="$tr('qcommerce.layout.form.deliveryFee')"/>
+                     :label="$tr('icommerce.cms.form.deliveryFee')"/>
           </div>
           <!--Form right-->
           <div class="col-12 col-md-4" v-if="locale.success">
