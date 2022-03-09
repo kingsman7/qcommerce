@@ -5,7 +5,7 @@
       <div class="col-12 col-lg-10 offset-lg-1 relative-position">
         <!--Page Actions-->
         <div class="box box-auto-height q-mb-md">
-          <page-actions :title="$tr($route.meta.title)"/>
+          <page-actions :title="$route.meta.title"/>
         </div>
         <!--Data-->
         <q-form autocorrect="off" autocomplete="off" ref="formContent"
