@@ -1,0 +1,69 @@
+{
+  "crudId": "icommerce-crud-taxRates",
+  "entityName": "taxRates",
+  "apiRoute": "/icommerce/v3/tax-rates",
+  "permission": "",
+  "extraFormFields": "Icommerce.crud-fields.taxRates",
+  "create": {
+    "title": "icommerce.cms.newTaxClass"
+  },
+  "read": {
+    "columns": [
+      {
+        "name": "id",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.id"
+        },
+        "field": "id",
+        "style": "width: 50px",
+        "sortable": false
+      },
+      {
+        "name": "name",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.name"
+        },
+        "field": "name",
+        "align": "rigth",
+        "sortable": true
+      },
+      {
+        "name": "rate",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.rate"
+        },
+        "field": "rate",
+        "align": "rigth",
+        "sortable": true
+      },
+      {
+        "name": "create_at",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.createdAt"
+        },
+        "field": "createdAt",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "actions",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.actions"
+        },
+        "align": "right"
+      }
+    ]
+  },
+  "update": {
+    "title": "icommerce.cms.updateTaxRate"
+  },
+  "delete": true
+}

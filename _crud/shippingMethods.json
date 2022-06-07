@@ -1,0 +1,81 @@
+{
+  "crudId": "icommerce-crud-shippingMethod",
+  "entityName": "product",
+  "apiRoute": "/icommerce/v3/shipping-methods",
+  "permission": "icommerce.shipping-methods",
+  "extraFormFields": "Icommerce.crud-fields.shippingMethods",
+  "create": false,
+  "read": {
+    "columns": [
+      {
+        "name": "id",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.id"
+        },
+        "field": "id",
+        "style": "width: 50px",
+        "sortable": false
+      },
+      {
+        "name": "title",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.title"
+        },
+        "field": "title",
+        "style": "",
+        "align": "left",
+        "sortable": true
+      },
+      {
+        "name": "status",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.status"
+        },
+        "field": "status",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "create_at",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.createdAt"
+        },
+        "field": "createdAt",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "updated_at",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.updatedAt"
+        },
+        "field": "updatedAt",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "actions",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.actions"
+        },
+        "align": "right"
+      }
+    ]
+  },
+  "update": {
+    "title": "icommerce.cms.updateShippingMethod"
+  },
+  "delete": false
+}

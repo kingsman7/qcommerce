@@ -1,0 +1,158 @@
+{
+  "crudId": "icommerce-crud-coupons",
+  "entityName": "coupon",
+  "apiRoute": "/icommerce/v3/coupons",
+  "permission": "icommerce.coupons",
+  "extraFormFields": "iad.crud-fields.category",
+  "create": {
+     "title": "icommerce.cms.newCoupon",
+     "to":{
+       "name": "qcommerce.admin.coupons.create"
+      }
+  },
+  "read": {
+    "columns": [
+      {
+        "name": "id",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.id"
+        },
+        "field": "id",
+        "sortable": false
+      },
+      {
+        "name": "code",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.code"
+        },
+        "field": "code",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "quantityTotal",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.quantityTotal"
+        },
+        "field": "quantityTotal",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "discount",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.discount"
+        },
+        "field": "discount",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"percentage",
+          "params":"row",
+          "child":["criteria"]
+        }
+      },
+      {
+        "name": "dateStart",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.dateStart"
+        },
+        "field": "dateStart",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "dateEnd",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.dateEnd"
+        },
+        "field": "dateEnd",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "running",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.status"
+        },
+        "field": "running",
+        "align": "left",
+        "sortable": false,
+        "format": {
+          "type": "conditional",
+          "isVal": {
+            "method": "",
+            "value": "val",
+            "yes":"isite.cms.label.enabled",
+            "no":"isite.cms.label.disabled"
+          }
+        }
+      },
+      {
+        "name": "finished",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.label.finished"
+        },
+        "field": "finished",
+        "align": "left",
+        "sortable": false,
+        "format": {
+          "type": "conditional",
+          "isVal": {
+            "method": "",
+            "value": "val",
+            "yes":"isite.cms.label.yes",
+            "no":"isite.cms.label.no"
+          }
+        }
+      },
+      {
+        "name": "quantityTotalCustomer",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.quantityTotalCustomer"
+        },
+        "field": "quantityTotalCustomer",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "type",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.allOrder"
+        },
+        "field": "type",
+        "align": "left",
+        "sortable": false,
+        "format": {
+          "type": "conditional",
+          "isVal": {
+            "yes":"isite.cms.label.yes",
+            "no":"isite.cms.label.no"
+          }
+        }
+      },
+      {
+        "name": "actions",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.actions"
+        },
+        "align": "right"
+      }
+    ]
+  },
+  "update": {
+    "to": "qcommerce.admin.coupons.edit"
+  },
+  "delete": true
+}

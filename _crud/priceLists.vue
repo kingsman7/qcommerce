@@ -1,10 +1,18 @@
-<template></template>
+<template>
+  <config-crud ref="configCrud" />
+</template>
 <script>
+import configCrud from "@imagina/qcrud/_config/CrudConfig"
+import Json from "@imagina/qcommerce/_crud/priceLists.json"
   export default {
+    components:{
+      configCrud
+    },
     computed: {
       crudData() {
         return {
-          entityName: config("main.qcommerce.entityNames.priceList"),
+          ...this.$refs.configCrud.getData(Json),
+          /*entityName: config("main.qcommerce.entityNames.priceList"),
           apiRoute: 'apiRoutes.qcommerce.priceLists',
           permission: 'icommercepricelist.pricelists',
           extraFormFields: 'Icommercepricelist.crud-fields.priceLists',
@@ -26,7 +34,7 @@
           update: {
             title: this.$tr('icommerce.cms.updatePriceList'),
           },
-          delete: true,
+          delete: true,*/
           formLeft: {
             name: {
               isTranslatable: true,

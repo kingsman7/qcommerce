@@ -1,7 +1,14 @@
-<template></template>
+<template>
+  <config-crud ref="configCrud" />
+</template>
 
 <script>
+import configCrud from "@imagina/qcrud/_config/CrudConfig"
+import Json from "@imagina/qcommerce/_crud/productDiscounts.json"
 export default {
+  components:{
+    configCrud
+  },
   data() {
     return {
       crudId: this.$uid(),
@@ -14,7 +21,8 @@ export default {
   computed: {
     crudData() {
       return {
-        crudId: this.crudId,
+        ...this.$refs.configCrud.getData(Json),
+        /*crudId: this.crudId,
         entityName: config("main.qcommerce.entityNames.productDiscount"),
         apiRoute: 'apiRoutes.qcommerce.productDiscounts',
         //permission: 'icommerce.manufacturers',
@@ -24,16 +32,20 @@ export default {
         },
         read: {
           columns: [
-            {name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', style: 'width: 50px'},
-            {name: 'quantity', label: this.$tr('isite.cms.form.quantity'), field: 'quantity', align: 'left'},
+            {name: 'id', label: this.$tr('isite.cms.form.id'), 
+            field: 'id', style: 'width: 50px'},
+            {name: 'quantity', label: this.$tr('isite.cms.form.quantity'), 
+            field: 'quantity', align: 'left'},
 
             {
-              name: 'discount', label: this.$tr('icommerce.cms.form.discount'), field: 'discount', align: 'left',
+              name: 'discount', label: this.$tr('icommerce.cms.form.discount'), 
+              field: 'discount', align: 'left',
               format: (val, row) => val ? row.criteria == 'percentage' ? this.$n(val / 100, 'percent') : this.$trc(val) : '-',
             },
 
             {
-              name: 'criteria', label: this.$tr('icommerce.cms.form.discountType'), field: 'criteria', align: 'left',
+              name: 'criteria', label: this.$tr('icommerce.cms.form.discountType'), 
+              field: 'criteria', align: 'left',
               format: val => val ? this.$tr('icommerce.cms.options.' + val) : '-',
             },
             {
@@ -44,18 +56,22 @@ export default {
               format: val => val ? val.title : 'All',
             },
 
-            {name: 'priority', label: this.$tr('icommerce.cms.form.priority'), field: 'priority', align: 'left'},
+            {name: 'priority', label: this.$tr('icommerce.cms.form.priority'), 
+            field: 'priority', align: 'left'},
             {
-              name: 'date_start', label: this.$tr('icommerce.cms.form.dateStart'), field: 'dateStart', align: 'left',
+              name: 'date_start', label: this.$tr('icommerce.cms.form.dateStart'), 
+              field: 'dateStart', align: 'left',
               format: val => val ? this.$trd(val) : '-',
             },
             {
-              name: 'date_end', label: this.$tr('icommerce.cms.form.dateEnd'), field: 'dateEnd', align: 'left',
+              name: 'date_end', label: this.$tr('icommerce.cms.form.dateEnd'), 
+              field: 'dateEnd', align: 'left',
               format: val => val ? this.$trd(val) : '-',
             },
 
             {
-              name: 'created_at', label: this.$tr('isite.cms.form.createdAt'), field: 'createdAt', align: 'left',
+              name: 'created_at', label: this.$tr('isite.cms.form.createdAt'), 
+              field: 'createdAt', align: 'left',
               format: val => val ? this.$trd(val) : '-',
             },
             {
@@ -63,7 +79,8 @@ export default {
               format: val => val ? this.$tr('isite.cms.label.enabled') : this.$tr('isite.cms.label.disabled'),
             },
             {
-              name: 'finished', label: this.$tr('isite.cms.label.finished'), field: 'finished', align: 'left',
+              name: 'finished', label: this.$tr('isite.cms.label.finished'), 
+              field: 'finished', align: 'left',
               format: val => val ? this.$tr('isite.cms.label.yes') : this.$tr('isite.cms.label.no'),
             },
             {
@@ -82,7 +99,7 @@ export default {
           //to: 'qcommerce.admin.taxClasses.edit'
           //requestParams: {include: 'department'}
         },
-        delete: true,
+        delete: true,*/
         formLeft: {
           id: {value: ''},
           includeDepartments: {

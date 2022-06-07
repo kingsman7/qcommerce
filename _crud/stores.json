@@ -1,0 +1,84 @@
+{
+  "crudId": "icommerce-crud-store",
+  "entityName": "stores",
+  "apiRoute": "/icommerce/v3/stores",
+  "permission": "",
+  "extraFormFields": "Icommerce.crud-fields.stores",
+  "create": {
+    "title": "icommerce.cms.newStore"
+  },
+  "read": {
+    "columns": [
+      {
+        "name": "id",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.id"
+        },
+        "field": "id",
+        "style": "width: 50px",
+        "sortable": false
+      },
+      {
+        "name": "name",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.name"
+        },
+        "field": "name",
+        "style": "width: 50px",
+        "align": "rigth",
+        "sortable": true
+      },
+      {
+        "name": "address",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.address"
+        },
+        "field": "address",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "phone",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.phone"
+        },
+        "field": "phone",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"str",
+          "child":["title"]
+        }
+      },
+      {
+        "name": "create_at",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.createdAt"
+        },
+        "field": "createdAt",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "actions",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.actions"
+        },
+        "align": "right"
+      }
+    ]
+  },
+  "update": {
+    "to": "icommerce.cms.updateStore"
+  },
+  "delete": true
+}

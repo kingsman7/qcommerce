@@ -1,0 +1,69 @@
+{
+  "crudId": "icommerce-crud-manufacturers",
+  "entityName": "manufacturers",
+  "apiRoute": "/icommerce/v3/manufacturers",
+  "permission": "icommerce.manufacturers",
+  "extraFormFields": "Icommerce.crud-fields.manufacturers",
+  "create": {
+    "title": "icommerce.cms.newManufacturers"
+  },
+  "read": {
+    "columns": [
+      {
+        "name": "id",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.id"
+        },
+        "field": "id",
+        "align":"center",
+        "sortable": false
+      },
+      {
+        "name": "name",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.name"
+        },
+        "field": "name",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "status",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.status"
+        },
+        "field": "status",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "createdAt",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.createdAt"
+        },
+        "field": "createdAt",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "actions",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.actions"
+        },
+        "align": "right"
+      }
+    ]
+  },
+  "update": {
+    "title": "icommerce.cms.updateManufacturer"
+  },
+  "delete": true
+}

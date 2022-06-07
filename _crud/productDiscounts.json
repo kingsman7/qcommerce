@@ -1,0 +1,192 @@
+{
+  "crudId": "icommerce-crud-productDiscount",
+  "entityName": "productDiscount",
+  "apiRoute": "/icommerce/v3/product-discounts",
+  "permission": "",
+  "extraFormFields": "Icommerce.crud-fields.productDiscounts",
+  "create": {
+    "title": "icommerce.cms.newProductDiscount"
+  },
+  "read": {
+    "columns": [
+      {
+        "name": "id",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.id"
+        },
+        "field": "id",
+        "style": "width: 50px",
+        "sortable": false
+      },
+      {
+        "name": "quantity",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.quantity"
+        },
+        "field": "quantity",
+        "align": "rigth",
+        "sortable": false
+      },
+      {
+        "name": "discount",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.discount"
+        },
+        "field": "discount",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"percentage",
+          "params":"row",
+          "child":["criteria"]
+        }
+      },
+      {
+        "name": "criteria",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.discountType"
+        },
+        "field": "criteria",
+        "align": "",
+        "sortable": false,
+        "format":{
+          "type":"concat",
+          "label": {
+            "isTranslatable": "singular",
+            "value": "icommerce.cms.options."
+          }
+        }
+      },
+      {
+        "name": "department",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.usersGroup"
+        },
+        "field": "department",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"conditional",
+          "isVal": {
+            "value": "val",
+            "yes":{
+              "child":["title"]
+            },
+            "no":"all"
+          }
+        }
+      },
+      {
+        "name": "priority",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.priority"
+        },
+        "field": "priority",
+        "align": "left",
+        "sortable": false,
+        "format":{}
+      },
+      {
+        "name": "date_start",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.dateStart"
+        },
+        "field": "dateStart",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "date_end",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.dateEnd"
+        },
+        "field": "dateEnd",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "create_at",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.createdAt"
+        },
+        "field": "createdAt",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "running",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.status"
+        },
+        "field": "running",
+        "align": "left",
+        "sortable": false,
+        "format": {
+          "type": "conditional",
+          "isVal": {
+            "yes":"isite.cms.label.enabled",
+            "no":"isite.cms.label.disabled"
+          }
+        }
+      },
+      {
+        "name": "finished",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.finished"
+        },
+        "field": "finished",
+        "align": "left",
+        "sortable": false,
+        "format": {
+          "type": "conditional",
+          "isVal": {
+            "yes":"isite.cms.label.yes",
+            "no":"isite.cms.label.no"
+          }
+        }
+      },
+      {
+        "name": "quantitySold",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "commerce.cms.form.quantitySold"
+        },
+        "field": "quantitySold",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "actions",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.actions"
+        },
+        "align": "right"
+      }
+    ]
+  },
+  "update": {
+    "title": "icommerce.cms.updateProductDiscount"
+  },
+  "delete": true
+}

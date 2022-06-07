@@ -1,10 +1,18 @@
-<template></template>
+<template>
+  <config-crud ref="configCrud" />
+</template>
 <script>
+import configCrud from "@imagina/qcrud/_config/CrudConfig"
+import Json from "@imagina/qcommerce/_crud/orders.json"
 export default {
+  components:{
+    configCrud
+  },
   computed: {
     crudData() {
       return {
-        entityName: config("main.qcommerce.entityNames.order"),
+        ...this.$refs.configCrud.getData(Json),
+        /*entityName: config("main.qcommerce.entityNames.order"),
         apiRoute: 'apiRoutes.qcommerce.orders',
         permission: 'icommerce.orders',
         extraFormFields: 'Icommerce.crud-fields.orders',
@@ -67,7 +75,7 @@ export default {
         update: {
           to: 'qcommerce.shipping.orders.show'
         },
-        delete: false,
+        delete: false,*/
         formLeft: {},
       }
     }

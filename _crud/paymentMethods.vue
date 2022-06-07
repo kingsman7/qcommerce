@@ -1,7 +1,14 @@
-<template></template>
+<template>
+  <config-crud ref="configCrud" />
+</template>
 
 <script>
+import configCrud from "@imagina/qcrud/_config/CrudConfig"
+import Json from "@imagina/qcommerce/_crud/coupons.json"
 export default {
+  components:{
+    configCrud
+  },
   data() {
     return {
       crudId: this.$uid()
@@ -10,7 +17,8 @@ export default {
   computed: {
     crudData() {
       return {
-        crudId: this.crudId,
+        ...this.$refs.configCrud.getData(Json),
+        /*crudId: this.crudId,
         entityName: config("main.qcommerce.entityNames.paymentMethod"),
         apiRoute: 'apiRoutes.qcommerce.paymentMethods',
         permission: 'icommerce.payment-methods',
@@ -39,7 +47,7 @@ export default {
         update: {
           title: this.$tr('icommerce.cms.updatePaymentMethod')
         },
-        delete: false,
+        delete: false,*/
         formLeft: {
           id: {value: ''},
           parentName: {value: 'icommercecheckmo'},

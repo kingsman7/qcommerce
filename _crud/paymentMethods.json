@@ -1,0 +1,84 @@
+{
+  "crudId": "icommerce-crud-paymentMethods",
+  "entityName": "paymentMethod",
+  "apiRoute": "/icommerce/v3/payment-methods",
+  "permission": "icommerce.payment-methods",
+  "extraFormFields": "Icommerce.crud-fields.paymentMethods",
+  "create": {
+    "title": "icommerce.cms.newPaymentMethod"
+  },
+  "read": {
+    "columns": [
+      {
+        "name": "id",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.id"
+        },
+        "field": "id",
+        "style": "width: 50px",
+        "sortable": false
+      },
+      {
+        "name": "title",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.title"
+        },
+        "field": "title",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "status",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.status"
+        },
+        "field": "status",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "createdAt",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.createdAt"
+        },
+        "field": "createdAt",
+        "align": "right",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "updated_at",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.updatedAt"
+        },
+        "field": "updatedAt",
+        "align": "right",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "actions",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.actions"
+        },
+        "align": "right"
+      }
+    ],
+    "requestParams": {},
+    "filters": []
+  },
+  "update": {
+    "title": "icommerce.cms.updatePaymentMethod"
+  },
+  "delete": false
+}

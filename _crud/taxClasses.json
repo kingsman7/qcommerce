@@ -1,0 +1,61 @@
+{
+  "crudId": "icommerce-crud-taxClasses",
+  "entityName": "taxClass",
+  "apiRoute": "/icommerce/v3/tax-classes",
+  "permission": "",
+  "extraFormFields": "Icommerce.crud-fields.taxClass",
+  "create": {
+    "title": "icommerce.cms.newTaxClass",
+    "to": {"name": "qcommerce.admin.taxClass.create"}
+  },
+  "read": {
+    "columns": [
+      {
+        "name": "id",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.id"
+        },
+        "field": "id",
+        "style": "width: 50px",
+        "sortable": false
+      },
+      {
+        "name": "name",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.name"
+        },
+        "field": "name",
+        "align": "rigth",
+        "sortable": true
+      },
+      {
+        "name": "create_at",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.createdAt"
+        },
+        "field": "createdAt",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "actions",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.actions"
+        },
+        "align": "right"
+      }
+    ]
+  },
+  "update": {
+    "title": "icommerce.cms.updateTaxClass",
+    "to": "qcommerce.admin.taxClasses.edit"
+  },
+  "delete": true
+}

@@ -1,0 +1,259 @@
+{
+  "crudId": "",
+  "entityName": "",
+  "apiRoute": "",
+  "permission": "",
+  "extraFormFields": "",
+  "create": {
+     "title": "",
+     "to":{
+       "name":""
+     },
+     "toExternalUrl": {
+      "useStore": true,
+      "domine": "",
+      "path": ""
+    },
+    "validatioAppMode": {
+      "mode":"",
+      "ref": {
+        "name":"",
+        "method": ""
+      },
+      "modalProps":{
+        "title": ""
+      },
+      "method": "create",
+      "emitEvent": true
+    }
+  },
+  "computed": {
+    "method":"isValid",
+    "params":"",
+    "child":"model",
+    "proptype": "length"
+  },
+  "read": {
+    "title": {
+      "isTranslatable": {
+        "type": "singular",
+        "value": "iad.cms.edit.ad"
+      }
+    },
+    "icon": "fas fa-map-marker-alt",
+    "search": false,
+    "hideHeader": true,
+    "showAs":{
+      "type": "conditional",
+      "isVal": {
+        "validatioAppMode": {
+          "mode": "ipanel"
+        },
+        "yes": "grid",
+        "no": "table"
+      }
+    }, 
+    "grid": {
+      "component": "@imagina/qappointment/_components/crud/appointmentCard"
+    },
+    "allowToggleView": false,
+    "columns": [
+      {
+        "name": "",
+        "label": {
+          "validationAppMode":"",
+          "isTranslatable": "",
+          "value": "",
+          "include":"(h: m : s)"
+        },
+        "field": {
+          "type":"conditional",
+          "isVal": {
+            "params":"row",
+            "method": "parseInt",
+            "value": "checkinBy",
+            "yes":"checkinBy.fullName",
+            "no":"-"
+          }
+        },
+        "sortable": false,
+        "align": "left",
+        "style": "",
+        "classes": {
+          "value": "text-weight-bold",
+          "child": "status"
+        },
+        "maxLength": 1,
+        "asStatus": true,
+        "format":{
+          "validationAppMode":"iadmin - ipanel",
+          "type":"str - date - concat - array - number - conditional - fulltime - geo - obj - percentage",
+          "isVal": {
+            "params":"row",
+            "validationAppMode":"iadmin - ipanel",
+            "method": "parseInt",
+            "value": "val",
+            "yes":"isite.cms.label.yes",
+            "no":"isite.cms.label.no"
+          },
+          "symbol":"$",
+          "params":"row",
+          "child":["fullName"],
+          "firtsLevel": ["customer"],
+          "secondLevel": ["firstName","lastName"],
+          "method":["map","join"],
+          "join":", ",
+          "label": {
+            "isTranslatable": "plural",
+            "value": "isite.cms.label.minute"
+          },
+          "includes": {
+            "type":"long"
+          }
+        }
+      }
+    ],
+    "requestParams": {
+      "include": "categories,user",
+      "filter": {
+        "value":"str",
+        "noTranslate":true,
+        "allTranslations": true,
+        "filter": {
+          "hook":"$route",
+          "child":["params"],
+          "filterName":"order",
+          "field": "id",
+          "way": "desc"
+        }
+      },
+      "params": {
+        "validatioAppMode": {
+          "mode":"iadmin"
+        },
+        "providerId": {
+          "store": "quserAuth.userId"
+        }
+      }
+    },
+    "filters":[
+      {
+        "filterName": "status",
+        "label": {
+          "isTranslatable": {
+            "type": "singular",
+            "value": "isite.cms.form.status"
+          }
+        },
+        "isRequired": true,
+        "isTranslatable": false,
+        "value": null,
+        "type": "treeSelect",
+        "props": {
+          "label": {
+            "isTranslatable": {
+              "type": "singular",
+              "value": "isite.cms.form.parent"
+            },
+            "options": [
+              {
+                "label": "isite.cms.label.disabled", 
+                "value": "0"
+              }
+            ],
+            "loadOptions": {
+              "apiRoute": "/iauctions/v1/status-bid",
+              "requestParams": {
+                "filter": {
+                  "status": 1
+                }
+              },
+              "select": {"label": "name", "id": "value"}
+            }
+          },
+          "clearable": true
+        },
+        "loadOptions": {
+          "apiRoute": "/ipin/v1/categories",
+          "requestParams": {
+            "filter": {
+              "status": 1
+            }
+          },
+          "select": {
+            "label": "fullName", 
+            "id": "id"
+          },
+          "filterByQuery": true
+        }
+      }
+    ],
+    "actions": [
+      {
+        "name":"show",
+        "icon":"fas fa-eye",
+        "color":"info",
+        "route": "qform.admin.fields.index",
+        "tooltip":"isite.cms.label.view",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.actions"
+        },
+        "action": {
+          "type":"exteralUrl - ref - method - helper - modal",
+          "useStore": true,
+          "domine":"qsiteApp.baseUrl",
+          "value":"item.slug", 
+          "method": "showAuctionData",
+          "externalUrl": "/anuncios/${item.slug}",
+          "params":[
+            {
+              "name":"auctionId",
+              "param":"id",
+              "modalProps":{
+                "title": "iauctions.cms.newBid"
+              }
+            }
+          ]
+        },
+        "format": {
+          "type": "str - conditional",
+          "validationAppMode": {
+            "mode":"iadmin"
+          },
+          "value":1,
+          "child":"status",
+          "yes":{
+            "vIf": false
+          }
+           ,
+          "no": {
+            "vIf": false
+          }
+        }
+      }
+    ]
+  },
+  "update": {
+    "title": {
+      "isTranslatable": {
+        "type": "singular",
+        "value": "iad.cms.edit.ad"
+      }
+    },
+    "requestParams": {
+      "include": "parent",
+      "filter": "customParams"
+    },
+    "to":"qad.ads.edit",
+    "emitEvent": true
+  },
+  "delete":{
+    "title": {
+      "isTranslatable": {
+        "type": "singular",
+        "value": "isite.cms.updateRecommendation"
+      }
+    }
+  }
+}

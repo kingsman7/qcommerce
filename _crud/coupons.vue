@@ -1,6 +1,13 @@
-<template></template>
+<template>
+  <config-crud ref="configCrud" />
+</template>
 <script>
+import configCrud from "@imagina/qcrud/_config/CrudConfig"
+import Json from "@imagina/qcommerce/_crud/coupons.json"
 export default {
+  components:{
+    configCrud
+  },
   data() {
     return {
       types: {
@@ -12,7 +19,8 @@ export default {
   computed: {
     crudData() {
       return {
-        entityName: config("main.qcommerce.entityNames.coupon"),
+        ...this.$refs.configCrud.getData(Json),
+        /*entityName: config("main.qcommerce.entityNames.coupon"),
         apiRoute: 'apiRoutes.qcommerce.coupons',
         permission: 'icommerce.coupons',
         extraFormFields: 'Icommerce.crud-fields.coupons',
@@ -32,7 +40,7 @@ export default {
             },
             {
               name: 'discount', label: this.$tr('icommerce.cms.form.discount'), field: 'discount', align: 'left',
-              format: (val, row) => val ? row.criteria == 'percentage' ? this.$n(val / 100, 'percent') : this.$trc(val) : '-',
+              format: (val, row) => val ? row.criteria == 'percentage' ? this.$n(val / 100, 'percent') : this.$trc(val) : '-'
             },
             {name: 'dateStart', label: this.$tr('icommerce.cms.form.dateStart'), field: 'dateStart', align: 'left'},
             {name: 'dateEnd', label: this.$tr('icommerce.cms.form.dateEnd'), field: 'dateEnd', align: 'left'},
@@ -58,14 +66,12 @@ export default {
               format: val => this.types[val ?? 0]
             },
             {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'right'},
-          ],
-          requestParams: {},
-          filters: {},
+          ]
         },
         update: {
           to: 'qcommerce.admin.coupons.edit'
         },
-        delete: true,
+        delete: true,*/
         formLeft: {},
       }
     },

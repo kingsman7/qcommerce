@@ -1,0 +1,110 @@
+{
+  "crudId": "icommerce-crud-productOptionValue",
+  "entityName": "optionValues",
+  "apiRoute": "/icommerce/v3/option-values",
+  "permission": "icommerce.optionValues",
+  "extraFormFields": "Icommerce.crud-fields.productOptionsValues",
+  "create": {
+    "title": "icommerce.cms.newOptionValue"
+  },
+  "read": {
+    "columns": [
+      {
+        "name": "id",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.id"
+        },
+        "field": "id",
+        "style": "width: 50px",
+        "sortable": false
+      },
+      {
+        "name": "description",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.description"
+        },
+        "field": "description",
+        "align": "rigth",
+        "sortable": false
+      },
+      {
+        "name": "option",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.option"
+        },
+        "field": "option",
+        "align": "left",
+        "sortable": false,
+        "format": {
+          "type": "conditional",
+          "isVal": {
+            "yes":{
+              "child":["description"]
+            },
+            "no":"-"
+          }
+        }
+      },
+      {
+        "name": "create_at",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.createdAt"
+        },
+        "field": "createdAt",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "actions",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.actions"
+        },
+        "align": "right"
+      }
+    ],
+    "requestParams": {
+      "include":"option"
+    },
+    "filters":[
+      {
+        "filterName": "optionId",
+        "value": null,
+        "type": "select",
+        "props": {
+          "label": {
+            "isTranslatable": {
+              "type": "singular",
+              "value": "isite.cms.form.option"
+            },
+            "options": [
+              {
+                "label": "isite.cms.label.all", 
+                "value": "0"
+              }
+            ]
+          }
+        },
+        "loadOptions": {
+          "apiRoute": "/icommerce/v3/options",
+          "select": {
+            "label": "description", 
+            "id": "id"
+          }
+        }
+      }
+    ]
+  },
+  "update": {
+    "title": "icommerce.cms.updateOptionValue",
+    "requestParams": {"include": ""}
+  },
+  "delete": true
+}

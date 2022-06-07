@@ -1,0 +1,96 @@
+{
+  "crudId": "icommerce-crud-product",
+  "apiRoute": "/icommerce/v3/orders",
+  "permission": "icommerce.quotes",
+  "extraFormFields": "",
+  "create": {
+    "to": {"name": "qcommerce.admin.quotes.create"}
+  },
+  "read": {
+    "columns": [
+      {
+        "name": "id",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.id"
+        },
+        "field": "id",
+        "style": "",
+        "sortable": false
+      },
+      {
+        "name": "customer",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.name"
+        },
+        "field": "customer",
+        "style": "",
+        "align": "left",
+        "sortable": true,
+        "format":{
+          "type":"concat",
+          "child": ["firstName","lastName"],
+          "params":"row"
+        }
+      },
+      {
+        "name": "total",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.total"
+        },
+        "field": "total",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"number",
+          "symbol":"$"
+        }
+      },
+      {
+        "name": "statusName",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.status"
+        },
+        "field": "statusName",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "create_at",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.createdAt"
+        },
+        "field": "createdAt",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "updated_at",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.updatedAt"
+        },
+        "field": "updatedAt",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      }
+    ],
+    "requestParams": {
+      "filter": {"type": "quote"}
+    },
+    "filters":[],
+    "actions": []
+  },
+  "update": false,
+  "delete": false
+}

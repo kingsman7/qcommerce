@@ -1,0 +1,86 @@
+{
+  "crudId": "icommerce-crud-priceList",
+  "entityName": "priceList",
+  "apiRoute": "/icommerce/pricelist/v3/price-lists",
+  "permission": "icommercepricelist.pricelists",
+  "extraFormFields": "Icommercepricelist.crud-fields.priceLists",
+  "create": {
+    "title": "icommerce.cms.newPriceList"
+  },
+  "read": {
+    "columns": [
+      {
+        "name": "id",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.id"
+        },
+        "field": "id",
+        "style": "",
+        "sortable": false
+      },
+      {
+        "name": "name",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.name"
+        },
+        "field": "name",
+        "align": "",
+        "sortable": false
+      },
+      {
+        "name": "criteria",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.type"
+        },
+        "field": "criteria",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"concat",
+          "label": {
+            "isTranslatable": "plural",
+            "value": "icommerce.cms.options."
+          }
+        }
+      },
+      {
+        "name": "status",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.status"
+        },
+        "field": "status",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "value",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.value"
+        },
+        "field": "value",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"number"
+        }
+      },
+      {
+        "name": "actions",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.actions"
+        },
+        "align": "right"
+      }
+    ]
+  },
+  "update": {
+    "title": "icommerce.cms.updatePriceList"
+  },
+  "delete": true
+}

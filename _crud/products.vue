@@ -1,6 +1,13 @@
-<template></template>
+<template>
+  <config-crud ref="configCrud" />
+</template>
 <script>
+import configCrud from "@imagina/qcrud/_config/CrudConfig"
+import Json from "@imagina/qcommerce/_crud/products.json"
 export default {
+  components:{
+    configCrud
+  },
   data() {
     return {
       crudId: this.$uid()
@@ -9,7 +16,8 @@ export default {
   computed: {
     crudData() {
       return {
-        crudId: this.crudId,
+        ...this.$refs.configCrud.getData(Json),
+        /*crudId: this.crudId,
         entityName: config("main.qcommerce.entityNames.product"),
         apiRoute: 'apiRoutes.qcommerce.products',
         permission: 'icommerce.products',
@@ -31,29 +39,43 @@ export default {
             },
             {name: 'sku', label: this.$tr('isite.cms.form.sku'), field: 'sku', align: 'left'},
             {
-              name: 'category', label: this.$tr('isite.cms.form.category'), field: 'category', align: 'left',
+              name: 'category', label: this.$tr('isite.cms.form.category'), 
+              field: 'category', align: 'left',
               format: val => (val && val.title) ? val.title : ''
             },
             {
-              name: 'status', label: this.$tr('isite.cms.form.status'), field: 'status', align: 'left'
+              name: 'status', label: this.$tr('isite.cms.form.status'), 
+              field: 'status', align: 'left'
             },
             {
-              name: 'quantity', label: this.$tr('isite.cms.form.stock'), field: 'quantity', align: 'left',
+              name: 'quantity', label: this.$tr('isite.cms.form.stock'), 
+              field: 'quantity', align: 'left',
               format: val => !val ? this.$tr('isite.cms.label.soldOut') :
-                  `${this.$tr('isite.cms.label.available')} (${(val <= 100) ? val : '100+'})`
+                  `${this.$tr('isite.cms.label.available')} (${(val <= 100) ? 
+                  val : '100+'})`
             },
-            {name: 'slug', label: this.$tr('isite.cms.form.slug'), field: 'slug', align: 'left'},
+            {name: 'slug', label: this.$tr('isite.cms.form.slug'), 
+            field: 'slug', align: 'left'},
             {
-              name: 'price', label: this.$tr('isite.cms.form.price'), field: 'price', align: 'left',
+              name: 'price', label: this.$tr('isite.cms.form.price'), 
+              field: 'price', align: 'left',
               format: val => this.$trc(val || 0)
             },
             {
-              name: 'createdAt', label: this.$tr('isite.cms.form.createdAt'), field: 'createdAt', align: 'left',
+              name: 'createdAt', label: this.$tr('isite.cms.form.createdAt'), 
+              field: 'createdAt', align: 'left',
               format: val => val ? this.$trd(val) : '-',
             },
             {name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left'},
           ],
-          requestParams: {include: 'category', filter: {order: {field: 'id', way: 'desc'}}},
+          requestParams: {include: 'category', 
+          filter: {
+            order: {
+              field: 'id', 
+              way: 'desc'
+              }
+            }
+          },
           filters: {
             categories: {
               value: null,
@@ -131,7 +153,7 @@ export default {
         update: {
           to: 'qcommerce.admin.products.edit'
         },
-        delete: true
+        delete: true*/
       }
     }
   }

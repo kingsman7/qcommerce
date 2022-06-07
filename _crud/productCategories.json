@@ -1,0 +1,133 @@
+{
+  "crudId": "icommerce-crud-productCategory",
+  "entityName": "productCategory",
+  "apiRoute": "/icommerce/v3/categories",
+  "permission": "icommerce.categories",
+  "extraFormFields": "Icommerce.crud-fields.productCategories",
+  "create": {
+    "title": "icommerce.cms.newCategory"
+  },
+  "read": {
+    "columns": [
+      {
+        "name": "id",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.id"
+        },
+        "field": "id",
+        "style": "",
+        "sortable": false
+      },
+      {
+        "name": "name",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.name"
+        },
+        "field": "title",
+        "align": "rigth",
+        "sortable": false
+      },
+      {
+        "name": "slug",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.slug"
+        },
+        "field": "slug",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "status",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.status"
+        },
+        "field": "status",
+        "align": "",
+        "sortable": false
+      },
+      {
+        "name": "parent",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.parent"
+        },
+        "field": "parent",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"str",
+          "child":["title"]
+        }
+      },
+      {
+        "name": "create_at",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.createdAt"
+        },
+        "field": "createdAt",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "actions",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.actions"
+        },
+        "align": "right"
+      }
+    ],
+    "requestParams": {
+      "inlude":"parent",
+      "filter": {
+        "filter": {
+          "filterName":"order",
+          "field": "created_at",
+          "way": "desc"
+        }
+      }
+    },
+    "filters": [
+      {
+        "filterName": "parentId",
+        "label": {},
+        "isRequired": false,
+        "isTranslatable": false,
+        "value": null,
+        "type": "treeSelect",
+        "props": {
+          "label": {
+            "isTranslatable": {
+              "type": "singular",
+              "value": "isite.cms.form.parent"
+            },
+            "clearable": true
+          }
+        },
+        "loadOptions": {
+          "apiRoute": "/icommerce/v3/categories",
+          "select": {
+            "label": "title", 
+            "id": "id"
+          },
+          "filterByQuery": true
+        }
+      }
+    ]
+  },
+  "update": {
+    "title": "icommerce.cms.updateCategory",
+    "requestParams": {
+      "include": "parent"
+    }
+  },
+  "delete": true
+}

@@ -1,6 +1,13 @@
-<template></template>
+<template>
+  <config-crud ref="configCrud" />
+</template>
 <script>
+import configCrud from "@imagina/qcrud/_config/CrudConfig"
+import Json from "@imagina/qcommerce/_crud/productOptionValues.json"
   export default {
+    components:{
+      configCrud
+    },
     data() {
       return {
         crudId: this.$uid()
@@ -9,7 +16,8 @@
     computed: {
       crudData () {
         return {
-          crudId: this.crudId,
+          ...this.$refs.configCrud.getData(Json),
+          /*crudId: this.crudId,
           entityName: config("main.qcommerce.entityNames.productOptionValue"),
           apiRoute: 'apiRoutes.qcommerce.optionValues',
           permission: 'icommerce.optionvalues',
@@ -19,17 +27,20 @@
           },
           read: {
             columns: [
-              { name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', style: 'width: 50px' },
+              { name: 'id', label: this.$tr('isite.cms.form.id'), 
+              field: 'id', style: 'width: 50px' },
               {
                 name: 'description', label: this.$tr('isite.cms.form.description'),
                 field: 'description', align: 'rigth'
               },
               {
-                name: 'option', label: this.$tr('isite.cms.form.option'), field: 'option',
+                name: 'option', label: this.$tr('isite.cms.form.option'), 
+                field: 'option',
                 format: val => val && val.description || '-', align: 'left'
               },
               {
-                name: 'created_at', label: this.$tr('isite.cms.form.createdAt'), field: 'createdAt', align: 'left',
+                name: 'created_at', label: this.$tr('isite.cms.form.createdAt'), 
+                field: 'createdAt', align: 'left',
                 format: val => val ? this.$trd(val) : '-'
               },
               { name: 'actions', label: this.$tr('isite.cms.form.actions'), align: 'left' },
@@ -56,7 +67,7 @@
             title: this.$tr('icommerce.cms.updateOptionValue'),
             requestParams: { include: '' }
           },
-          delete: true,
+          delete: true,*/
           formLeft: {
             id: { value: '' },
             userId: { value: this.$store.state.quserAuth.userId },

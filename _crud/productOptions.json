@@ -1,0 +1,73 @@
+{
+  "crudId": "icommerce-crud-productOption",
+  "entityName": "options",
+  "apiRoute": "/icommerce/v3/options",
+  "permission": "icommerce.options",
+  "extraFormFields": "Icommerce.crud-fields.productOptions",
+  "create": {
+    "title": "icommerce.cms.newOption"
+  },
+  "read": {
+    "columns": [
+      {
+        "name": "id",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.id"
+        },
+        "field": "id",
+        "style": "width: 50px",
+        "sortable": false
+      },
+      {
+        "name": "description",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.description"
+        },
+        "field": "description",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "type",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.type"
+        },
+        "field": "type",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "create_at",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.createdAt"
+        },
+        "field": "createdAt",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "actions",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.actions"
+        },
+        "align": "right"
+      }
+    ],
+    "requestParams": {"include": ""},
+    "filters": []
+  },
+  "update": {
+    "title": "icommerce.cms.updateOption",
+    "requestParams": {"include": ""},
+    "to" : "qcommerce.admin.options.edit"
+  },
+  "delete": true
+}

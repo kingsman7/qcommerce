@@ -1,7 +1,14 @@
-<template></template>
+<template>
+  <config-crud ref="configCrud" />
+</template>
 
 <script>
+import configCrud from "@imagina/qcrud/_config/CrudConfig"
+import Json from "@imagina/qcommerce/_crud/quotes.json"
 export default {
+  components:{
+    configCrud
+  },
   data() {
     return {
       crudId: this.$uid()
@@ -10,7 +17,8 @@ export default {
   computed: {
     crudData() {
       return {
-        crudId: this.crudId,
+        ...this.$refs.configCrud.getData(Json),
+        /*crudId: this.crudId,
         //entityName: config("main.qcommerce.entityNames.productCategory"),
         apiRoute: 'apiRoutes.qcommerce.orders',
         permission: 'icommerce.quotes',
@@ -47,7 +55,7 @@ export default {
           }
         },
         update: false,
-        delete: false
+        delete: false*/
       }
     },
     //Crud info

@@ -1,6 +1,13 @@
-<template></template>
+<template>
+  <config-crud ref="configCrud" />
+</template>
 <script>
+import configCrud from "@imagina/qcrud/_config/CrudConfig"
+import Json from "@imagina/qcommerce/_crud/currencies.json"
 export default {
+  components:{
+    configCrud
+  },
   data() {
     return {
       crudId: this.$uid()
@@ -9,7 +16,8 @@ export default {
   computed: {
     crudData() {
       return {
-        crudId: this.crudId,
+        ...this.$refs.configCrud.getData(Json),
+        /*crudId: this.crudId,
         entityName: config("main.qcommerce.entityNames.currencies"),
         apiRoute: 'apiRoutes.qcommerce.currencies',
         permission: 'icommerce.currencies',
@@ -24,26 +32,34 @@ export default {
         },
         read: {
           columns: [
-            {name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', style: 'width: 50px'},
-            {name: 'name', label: this.$tr('isite.cms.form.name'), field: 'name', align: 'left'},
+            {name: 'id', label: this.$tr('isite.cms.form.id'), 
+            field: 'id', style: 'width: 50px'},
+            {name: 'name', label: this.$tr('isite.cms.form.name'), 
+            field: 'name', align: 'left'},
             {
-              name: 'code', label: this.$tr('isite.cms.label.code'), field: 'code', style: 'width: 50px',
+              name: 'code', label: this.$tr('isite.cms.label.code'), 
+              field: 'code', style: 'width: 50px',
               align: 'left',
             },
             {
-              name: 'symbol_left', label: this.$tr('icommerce.cms.form.symbolLeft'), field: 'symbolLeft',
+              name: 'symbol_left', label: this.$tr('icommerce.cms.form.symbolLeft'), 
+              field: 'symbolLeft',
               align: 'left', maxLength: 1
             },
             {
-              name: 'symbol_right', label: this.$tr('icommerce.cms.form.symbolRight'), field: 'symbolRight',
+              name: 'symbol_right', label: this.$tr('icommerce.cms.form.symbolRight'), 
+              field: 'symbolRight',
               align: 'left', maxLength: 1
             },
-            {name: 'status', label: this.$tr('isite.cms.form.status'), field: 'status', align: 'left'},
+            {name: 'status', label: this.$tr('isite.cms.form.status'), 
+            field: 'status', align: 'left'},
             {
-              name: 'decimal_place', label: this.$tr('isite.cms.label.decimal'), field: 'decimalPlace',
+              name: 'decimal_place', label: this.$tr('isite.cms.label.decimal'), 
+              field: 'decimalPlace',
               align: 'right'
             },
-            {name: 'value', label: this.$tr('isite.cms.label.value'), field: 'value', align: 'right'},
+            {name: 'value', label: this.$tr('isite.cms.label.value'), 
+            field: 'value', align: 'right'},
             {
               name: 'default_currency', label: this.$tr('isite.cms.form.default'),
               field: 'defaultCurrency', align: 'right',
@@ -60,7 +76,7 @@ export default {
           title: this.$tr('icommerce.cms.sidebar.updateCurrency'),
           requestParams: {}
         },
-        delete: true,
+        delete: true,*/
         //Form
         formLeft: {
           id: {value: ''},

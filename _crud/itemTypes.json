@@ -1,0 +1,58 @@
+{
+  "crudId": "icommerce-crud-itemType",
+  "entityName": "itemType",
+  "apiRoute": "/icommerce/v3/item-types",
+  "permission": "icommerce.itemtypes",
+  "extraFormFields": "Icommerce.crud-fields.itemTypes",
+  "create": {
+    "title": "icommerce.cms.newItemType"
+  },
+  "read": {
+    "columns": [
+      {
+        "name": "id",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.id"
+        },
+        "field": "id",
+        "sortable": false
+      },
+      {
+        "name": "title",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.title"
+        },
+        "field": "title",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "createdAt",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.createdAt"
+        },
+        "field": "createdAt",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "actions",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.actions"
+        },
+        "align": "right"
+      }
+    ]
+  },
+  "update": {
+    "title": "icommerce.cms.updateItemType"
+  },
+  "delete": true
+}

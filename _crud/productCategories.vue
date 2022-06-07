@@ -1,7 +1,14 @@
-<template></template>
+<template>
+  <config-crud ref="configCrud" />
+</template>
 
 <script>
+  import configCrud from "@imagina/qcrud/_config/CrudConfig"
+  import Json from "@imagina/qcommerce/_crud/productCategories.json"
   export default {
+    components:{
+      configCrud
+    },
     data() {
       return {
         crudId: this.$uid()
@@ -10,7 +17,8 @@
     computed: {
       crudData() {
         return {
-          crudId: this.crudId,
+          ...this.$refs.configCrud.getData(Json),
+          /*crudId: this.crudId,
           entityName: config("main.qcommerce.entityNames.productCategory"),
           apiRoute: 'apiRoutes.qcommerce.categories',
           permission: 'icommerce.categories',
@@ -64,7 +72,7 @@
             title: this.$tr('icommerce.cms.updateCategory'),
             requestParams: {include: 'parent'}
           },
-          delete: true,
+          delete: true,*/
           formLeft: {
             id: {value: ''},
             userId: {value: this.$store.state.quserAuth.userId},

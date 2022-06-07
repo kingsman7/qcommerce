@@ -1,0 +1,138 @@
+{
+  "crudId": "icommerce-crud-order",
+  "entityName": "order",
+  "apiRoute": "/icommerce/v3/orders",
+  "permission": "icommerce.orders",
+  "extraFormFields": "Icommerce.crud-fields.orders",
+  "create": false,
+  "read": {
+    "columns": [
+      {
+        "name": "id",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.id"
+        },
+        "field": "id",
+        "sortable": false
+      },
+      {
+        "name": "customer",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.name"
+        },
+        "field": "customer",
+        "align": "left",
+        "sortable": false,
+        "format":{
+          "type":"str",
+          "child":["fullname"]
+        }
+      },
+      {
+        "name": "total",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.total"
+        },
+        "field": "total",
+        "align": "",
+        "sortable": false,
+        "format":{
+          "type":"number",
+          "symbol":"$"
+        }
+      },
+      {
+        "name": "statusName",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.status"
+        },
+        "field": "statusName",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "createdAt",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.createdAt"
+        },
+        "field": "createdAt",
+        "align": "right",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "updated_at",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.updatedAt"
+        },
+        "field": "updatedAt",
+        "align": "right",
+        "sortable": false,
+        "format":{
+          "type":"date"
+        }
+      },
+      {
+        "name": "actions",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.actions"
+        },
+        "align": "right"
+      }
+    ],
+    "requestParams": {
+      "filter": {
+        "filter": {
+          "filterName":"order",
+          "field": "id",
+          "way": "desc"
+        }
+      }
+    },
+    "filters": [
+      {
+        "filterName": "status",
+        "label": {
+          "isTranslatable": {
+            "type": "singular",
+            "value": "isite.cms.form.status"
+          }
+        },
+        "isRequired": true,
+        "isTranslatable": false,
+        "value": null,
+        "type": "treeSelect",
+        "props": {
+          "label": {
+            "isTranslatable": {
+              "type": "singular",
+              "value": "isite.cms.form.status"
+            },
+            "options": [],
+            "loadOptions": {},
+            "clearable": true
+          }
+        },
+        "loadOptions": {
+          "apiRoute": "/icommerce/v3/order-statuses",
+          "requestParams": {},
+          "select": {},
+          "filterByQuery": false
+        }
+      }
+    ]
+  },
+  "update": {
+    "to": "qcommerce.shipping.orders.show"
+  },
+  "delete": false
+}

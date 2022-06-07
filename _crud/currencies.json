@@ -1,0 +1,130 @@
+{
+  "crudId": "icommerce-crud-currencies",
+  "entityName": "currencies",
+  "apiRoute": "/icommerce/v3/currencies",
+  "permission": "icommerce.currencies",
+  "extraFormFields": "icommerce.crud-fields.currencies",
+  "create": {
+    "title": "icommerce.cms.sidebar.newCurrencies"
+  },
+  "computed": {
+    "method":"isValid",
+    "child":"model",
+    "proptype": "length"
+  },
+  "read": {
+    "columns": [
+      {
+        "name": "id",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.id"
+        },
+        "field": "id",
+        "sortable": false
+      },
+      {
+        "name": "name",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.name"
+        },
+        "field": "name",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "code",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.label.code"
+        },
+        "field": "code",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "symbol_left",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.symbolLeft"
+        },
+        "field": "symbolLeft",
+        "align": "left",
+        "sortable": false,
+        "maxLength": 1
+      },
+      {
+        "name": "symbol_right",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "icommerce.cms.form.symbolRight"
+        },
+        "field": "symbolRight",
+        "align": "left",
+        "sortable": false,
+        "maxLength": 1
+      },
+      {
+        "name": "status",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.status"
+        },
+        "field": "status",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "decimal_place",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.label.decimal"
+        },
+        "field": "decimalPlace",
+        "align": "right",
+        "sortable": false
+      },
+      {
+        "name": "value",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.label.value"
+        },
+        "field": "value",
+        "align": "left",
+        "sortable": false
+      },
+      {
+        "name": "default_currency",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.default"
+        },
+        "field": "defaultCurrency",
+        "align": "left",
+        "sortable": false,
+        "format": {
+          "type": "conditional",
+          "isVal": {
+            "value": 1,
+            "yes":"isite.cms.label.yes",
+            "no":"isite.cms.label.no"
+          }
+        }
+      },
+      {
+        "name": "actions",
+        "label": {
+          "isTranslatable": "singular",
+          "value": "isite.cms.form.actions"
+        },
+        "align": "right"
+      }
+    ]
+  },
+  "update": {
+    "title": "icommerce.cms.sidebar.updateCurrency"
+  },
+  "delete": true
+}

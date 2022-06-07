@@ -1,10 +1,18 @@
-<template></template>
+<template>
+  <config-crud ref="configCrud" />
+</template>
 <script>
+import configCrud from "@imagina/qcrud/_config/CrudConfig"
+import Json from "@imagina/qcommerce/_crud/itemTypes.json"
   export default {
+    components:{
+      configCrud
+    },
     computed: {
       crudData() {
         return {
-          entityName: config("main.qcommerce.entityNames.itemTypes"),
+          ...this.$refs.configCrud.getData(Json),
+          /*entityName: config("main.qcommerce.entityNames.itemTypes"),
           apiRoute: 'apiRoutes.qcommerce.itemTypes',
           permission: 'icommerce.itemtypes',
           extraFormFields: 'Icommerce.crud-fields.itemTypes',
@@ -14,7 +22,8 @@
           read: {
             columns: [
               {name: 'id', label: this.$tr('isite.cms.form.id'), field: 'id', align: 'left'},
-              {name: 'title', label: this.$tr('isite.cms.form.title'), field: 'title', align: 'left'},
+              {name: 'title', label: this.$tr('isite.cms.form.title'), 
+              field: 'title', align: 'left'},
               {
                 name: 'createdAt', label: this.$tr('isite.cms.form.createdAt'), field: 'createdAt', align: 'left',
                 format: val => val ? this.$trd(val) : '-',
@@ -27,7 +36,7 @@
           update: {
             title: this.$tr('icommerce.cms.updateItemType'),
           },
-          delete: true,
+          delete: true,*/
           formLeft: {
             title: {
               isTranslatable: true,
